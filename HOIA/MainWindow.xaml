@@ -1,0 +1,81 @@
+﻿<Window x:Class="HOIA.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HOIA"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="900" Width="1500">
+
+    <Grid>
+        <DockPanel>
+            <Menu DockPanel.Dock="Top">
+                <MenuItem Header="Stammdaten">
+                    <!--<MenuItem Header="HO Werte" Click="MenuItem_HOWerte_Click" />-->
+
+
+                    <MenuItem Header="IA Werte" Click="MenuItem_IAWerte_Click" />
+                    <Separator />
+
+                </MenuItem>
+            </Menu>
+            <TextBox AcceptsReturn="True" />
+        </DockPanel>
+
+        <TreeView x:Name="treeView" HorizontalAlignment="Left" Height="725" Margin="14,30,0,0" VerticalAlignment="Top" Width="179">
+            <TreeViewItem Header="Aufträge" Selected="Auftrags_Zuordnung_Selected"></TreeViewItem>
+            <TreeViewItem Header="Haubenofen" >
+                <TreeViewItem Header="Technologie Vorlage" Selected="TechnologieVorlage_Selected" >
+
+                </TreeViewItem>
+                <TreeViewItem Header="Aufträge" >
+                    <TreeViewItem Header="Zuordnen" Selected="H_Zuordnen_Selected"  >
+
+                    </TreeViewItem>
+                    <TreeViewItem Header="Auftrag" >
+
+                    </TreeViewItem>
+                    <TreeViewItem Header="Kurven" >
+
+                    </TreeViewItem>
+                    <TreeViewItem Header="Belegungsplan" >
+
+                    </TreeViewItem>
+                    <TreeViewItem Header="Störungen" >
+
+                    </TreeViewItem>
+                </TreeViewItem>
+                <TreeViewItem Header="Glühungen"></TreeViewItem>
+                <TreeViewItem Header="Technische Werte"></TreeViewItem>
+            </TreeViewItem>
+
+            <TreeViewItem Header="Induktionsanlage">
+                <TreeViewItem Header="Verfahren" Selected="IA_Verfahren_Selected" >
+
+                </TreeViewItem>
+                <TreeViewItem Header="Aufträge" >
+                    <TreeViewItem Header="Zuordnen" >
+
+                    </TreeViewItem>
+                    <TreeViewItem Header="Auftrag" >
+
+                    </TreeViewItem>
+                    <TreeViewItem Header="Kurven" >
+
+                    </TreeViewItem>
+                    <TreeViewItem Header="Belegungsplan" >
+
+                    </TreeViewItem>
+                    <TreeViewItem Header="Störungen" >
+
+                    </TreeViewItem>
+                </TreeViewItem>
+                <TreeViewItem Header="Glühungen"></TreeViewItem>
+                <TreeViewItem Header="Technische Werte"></TreeViewItem>
+
+            </TreeViewItem>
+        </TreeView>
+        <Frame x:Name="frame" Content="" HorizontalAlignment="Left" Height="1300" Margin="197,30,0,0" VerticalAlignment="Top" Width="1280" NavigationUIVisibility="Hidden" />
+
+    </Grid>
+</Window>

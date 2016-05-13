@@ -1,0 +1,48 @@
+﻿<Page x:Class="HOIA.Haubenofen.TVorlagen"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:HOIA.Haubenofen"
+      mc:Ignorable="d" 
+      d:DesignHeight="725" d:DesignWidth="1083"
+      Title="TVorlagen">
+
+    <Grid Background="White">
+
+        <GroupBox x:Name="groupBox" Header="Details" HorizontalAlignment="Left" Margin="280,20,0,0" VerticalAlignment="Top" Height="680" Width="780">
+            <Grid Margin="0,-5,0,5">
+                <Label x:Name="label" Content="Name:" HorizontalAlignment="Left" Margin="40,25,0,0" VerticalAlignment="Top"/>
+                <Label x:Name="label1" Content="Beschreibung:" HorizontalAlignment="Left" Margin="39,63,0,0" VerticalAlignment="Top"/>
+                <TextBox x:Name="textBox_Name" HorizontalAlignment="Left" Height="23" Margin="134,24,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="600" IsEnabled="False"/>
+                <TextBox x:Name="textBox_Beschreibung" HorizontalAlignment="Left" Height="125" Margin="134,64,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="600" IsEnabled="False"/>
+
+                <Button x:Name="button_TV_Neu" Content="Neu" HorizontalAlignment="Left" VerticalAlignment="Top" Width="125" RenderTransformOrigin="0.133,0.227"  Height="29" Margin="134,209,0,0" IsEnabled="False" Click="button_TV_Neu_Click"/>
+                <Button x:Name="button_TV_Bearbeiten" Content="Bearbeiten" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="125" Height="29" Margin="289,209,0,0" IsEnabled="False" Click="button_TV_Bearbeiten_Click"/>
+                <Button x:Name="button_TV_Speichern" Content="Speichern" HorizontalAlignment="Left" VerticalAlignment="Top" Width="125"  Height="29" Margin="449,210,0,0" IsEnabled="False" Click="button_TV_Speichern_Click"/>
+                <Button x:Name="button_TV_Löschen" Content="Löschen" HorizontalAlignment="Left" VerticalAlignment="Top" Width="125"  Height="29" Margin="609,210,0,0" IsEnabled="False" Click="button_TV_Löschen_Click"/>
+                <DataGrid x:Name="dataGrid_Funktionen" AutoGeneratingColumn="dataGrid_Funktionen_AutoGeneratingColumn" HorizontalAlignment="Left" VerticalAlignment="Top" Height="340" Width="380" Margin="134,289,0,0" IsEnabled="False" SelectionChanged="dataGrid_Funktionen_SelectionChanged"/>
+                <GroupBox x:Name="groupBox1" Header="Teilschritt" HorizontalAlignment="Left" Margin="564,289,0,0" VerticalAlignment="Top" Height="355" Width="170">
+
+                    <Grid>
+
+                        <Label x:Name="label2" Content="Funktion" HorizontalAlignment="Left" VerticalAlignment="Top" Height="29" Width="79" Margin="15,5,0,0"/>
+                        <ComboBox x:Name="comboBox_Funktion" HorizontalAlignment="Left" Margin="14,27,0,0" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
+                        <Label x:Name="label3" Content="Delta" HorizontalAlignment="Left" Margin="16,49,0,0" VerticalAlignment="Top"/>
+                        <Label x:Name="label4" Content="Zieltemperatur" HorizontalAlignment="Left" Margin="16,93,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.263,0.385"/>
+                        <TextBox x:Name="textBox_Delta" HorizontalAlignment="Left" Height="23" Margin="14,69,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
+                        <TextBox x:Name="textBox_Zieltemperatur" HorizontalAlignment="Left" Height="23" Margin="14,114,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
+                        <Button x:Name="button_Funktion_Neu" Content="Neu" HorizontalAlignment="Left" Margin="14,164,0,0" VerticalAlignment="Top" Width="125" RenderTransformOrigin="0.133,0.227"  Height="29" IsEnabled="False" Click="button_Funktion_Neu_Click"/>
+                        <Button x:Name="button_Funktion_Bearbeiten" Content="Bearbeiten" HorizontalAlignment="Left" Margin="14,204,0,0" VerticalAlignment="Top" Width="125" Height="29" IsEnabled="False" Click="button_Funktion_Bearbeiten_Click"/>
+                        <Button x:Name="button_Funktion_Speichern" Content="Speichern" HorizontalAlignment="Left" Margin="14,244,0,0" VerticalAlignment="Top" Width="125"  Height="29" IsEnabled="False" Click="button_Funktion_Speichern_Click"/>
+                        <Button x:Name="button_Funktion_Löschen" Content="Löschen" HorizontalAlignment="Left" Margin="14,284,0,0" VerticalAlignment="Top" Width="125"  Height="29" IsEnabled="False" Click="button_Funktion_Löschen_Click"/>
+                    </Grid>
+                </GroupBox>
+
+            </Grid>
+
+        </GroupBox>
+        <TreeView x:Name="treeView_TVorlagen" HorizontalAlignment="Left" Height="670" Margin="40,30,0,0" VerticalAlignment="Top" Width="220" FontSize="16" SelectedItemChanged="treeView_TVorlagen_SelectedItemChanged"/>
+
+    </Grid>
+</Page>

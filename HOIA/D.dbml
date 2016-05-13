@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="ioDB" Class="DDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=HES-ESW-PLS\OFEN_DB;Initial Catalog=ioDB;Integrated Security=True" SettingsObjectName="HOIA.Properties.Settings" SettingsPropertyName="ioDBConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Bestimmungsort" Member="Bestimmungsort">
+    <Type Name="Bestimmungsort">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Anschrift" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="PLZ" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Stadt" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Land" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Association Name="Bestimmungsort_Auftrag" Member="Auftrag" ThisKey="Id" OtherKey="Id_Bestimmungsort" Type="Auftrag" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Kunde" Member="Kunde">
+    <Type Name="Kunde">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Anschrift" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="PLZ" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Stadt" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Land" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Association Name="Kunde_Auftrag" Member="Auftrag" ThisKey="Id" OtherKey="Id_Kunde" Type="Auftrag" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Teilschritt" Member="Teilschritt">
+    <Type Name="Teilschritt">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Zieltemperatur" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Delta" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Funktion" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Id_Verfahren" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Verfahren_Teilschritt" Member="Verfahren" ThisKey="Id_Verfahren" OtherKey="Id" Type="Verfahren" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Auftrag" Member="Auftrag">
+    <Type Name="Auftrag">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ODL" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="Art" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Verarbeitung" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Status" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="Walzung" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="Auftragsdatum" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Liefertermin" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="TechnischeAnmerkungen" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Bemerkungen" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="SägeProgramm" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Anlasstemparartur" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Id_Kunde" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Id_Bestimmungsort" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Auftrag_MN_VerfahrenAuftrag" Member="MN_VerfahrenAuftrag" ThisKey="Id" OtherKey="Id_Auftrag" Type="MN_VerfahrenAuftrag" />
+      <Association Name="Bestimmungsort_Auftrag" Member="Bestimmungsort" ThisKey="Id_Bestimmungsort" OtherKey="Id" Type="Bestimmungsort" IsForeignKey="true" />
+      <Association Name="Kunde_Auftrag" Member="Kunde" ThisKey="Id_Kunde" OtherKey="Id" Type="Kunde" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MN_VerfahrenAuftrag" Member="MN_VerfahrenAuftrag">
+    <Type Name="MN_VerfahrenAuftrag">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Id_Verfahren" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Id_Auftrag" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Schritt" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Auftrag_MN_VerfahrenAuftrag" Member="Auftrag" ThisKey="Id_Auftrag" OtherKey="Id" Type="Auftrag" IsForeignKey="true" />
+      <Association Name="Verfahren_MN_VerfahrenAuftrag" Member="Verfahren" ThisKey="Id_Verfahren" OtherKey="Id" Type="Verfahren" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Verfahren" Member="Verfahren">
+    <Type Name="Verfahren">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Beschreibung" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Art" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Association Name="Verfahren_Teilschritt" Member="Teilschritt" ThisKey="Id" OtherKey="Id_Verfahren" Type="Teilschritt" />
+      <Association Name="Verfahren_MN_VerfahrenAuftrag" Member="MN_VerfahrenAuftrag" ThisKey="Id" OtherKey="Id_Verfahren" Type="MN_VerfahrenAuftrag" />
+    </Type>
+  </Table>
+</Database>
