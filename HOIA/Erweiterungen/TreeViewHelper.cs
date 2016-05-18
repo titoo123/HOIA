@@ -29,7 +29,7 @@ namespace HOIA.Erweiterungen
         {
             foreach (TreeViewItem tre in t.Items)
             {
-                if ((String)tre.Header == s)
+                if (((String)tre.Header).Contains(s))
                 {
                     return tre;
                 }
@@ -46,7 +46,7 @@ namespace HOIA.Erweiterungen
         }
         private static TreeViewItem GetNode_ByText(TreeViewItem t, string s)
         {
-            if ((string)t.Header == s)
+            if (((String)t.Header).Contains(s))
             {
                 return t;
             }
@@ -55,7 +55,7 @@ namespace HOIA.Erweiterungen
             {
                 if (t != null)
                 {
-                    if ((String)tre.Header == s)
+                    if (((String)tre.Header).Contains(s))
                     {
                         return tre;
                     }
@@ -77,7 +77,7 @@ namespace HOIA.Erweiterungen
         {
             foreach (var item in hoa)
             {
-                CreateChild(i, TreeViewHelper.CleanUp(item.ToString()));
+                CreateChild(i, TreeViewHelper.CleanUp4List(item.ToString()));
             }
         }
         internal static void CreateChilds(TreeView t, IQueryable<object> hoa, string v)
@@ -260,7 +260,7 @@ namespace HOIA.Erweiterungen
             //MessageBox.Show(indexOfSelectedNode.ToString());
             return indexOfSelectedNode;
         }
-        public static string CleanUp(string s)
+        public static string CleanUp4List(string s)
         {
             s = s.Replace("{ Name = ", "");
             s = s.Replace(" }", "");
@@ -283,14 +283,7 @@ namespace HOIA.Erweiterungen
 
             return parent as ItemsControl;
         }
-
-        public static void AddContextMenu(TreeViewItem t) {
-            MenuItem i = new MenuItem();
-            i.Header = "Freigeben";
-
-            ContextMenu c = new ContextMenu();
-            c.Items.Add(i);
-        }
+        
     }
 
 

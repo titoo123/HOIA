@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace HOIA.Erweiterungen
 {
-    partial class Extended_TreeView : TreeView
+    public class Extended_TreeView : TreeView
     {
         public static void CreateChild(TreeViewItem t, string s)
         {
@@ -28,24 +29,24 @@ namespace HOIA.Erweiterungen
         {
             foreach (TreeViewItem tre in this.Items)
             {
-                if ((String)tre.Header == s)
-                {
-                    return tre;
-                }
-                if (tre.HasItems)
-                {
-                    TreeViewItem t1 = GetNode_ByText(tre, s);
-                    if (t1 != null)
+                    if (((String)tre.Header).Contains(s))
                     {
-                        return t1;
+                        return tre;
                     }
-                }
+                    if (tre.HasItems)
+                    {
+                        TreeViewItem t1 = GetNode_ByText(tre, s);
+                        if (t1 != null)
+                        {
+                            return t1;
+                        }
+                    }
             }
             return null;
         }
         private static TreeViewItem GetNode_ByText(TreeViewItem t, string s)
         {
-            if ((string)t.Header == s)
+            if (((String)t.Header).Contains(s))
             {
                 return t;
             }
@@ -54,7 +55,7 @@ namespace HOIA.Erweiterungen
             {
                 if (t != null)
                 {
-                    if ((String)tre.Header == s)
+                    if (((String)tre.Header).Contains(s))
                     {
                         return tre;
                     }
@@ -76,7 +77,7 @@ namespace HOIA.Erweiterungen
         {
             foreach (var item in hoa)
             {
-                CreateChild(i, TreeViewHelper.CleanUp(item.ToString()));
+                CreateChild(i, TreeViewHelper.CleanUp4List(item.ToString()));
             }
         }
         internal void CreateChilds( IQueryable<object> hoa, string v)
@@ -111,7 +112,6 @@ namespace HOIA.Erweiterungen
 
         internal string HitTreeView( MouseButtonEventArgs e)
         {
-
             DependencyObject uie = this.InputHitTest(e.GetPosition(this)) as DependencyObject;
             TextBlock b = uie as TextBlock;
             string s = String.Empty;
@@ -142,38 +142,36 @@ namespace HOIA.Erweiterungen
             return ti;
 
         }
-        //internal static void CloseAll(TreeView t, TreeViewItem i, int v)
-        //{
-        //    if (GetNodeLevel(t, i) != v)
-        //    {
-        //        foreach (TreeViewItem item in t.Items)
-        //        {
-        //            if (item.Header != i.Header && (string)item.Header != Helper.FREIEAUFTRÄGE_STRING)
-        //            {
-        //                item.IsExpanded = false;
-        //            }
-        //            else
-        //            {
-        //                item.IsExpanded = true;
-        //            }
-        //        }
-        //    }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="i">Item</param>
+        /// <param name="v">Level</param>
+        /// <param name="a">Ausnahme</param>
+        internal void CloseAllInLevel(TreeViewItem i, int v, string a)
+        {
+            if (GetNodeLevel(i) != v)
+            {
+                foreach (TreeViewItem item in this.Items)
+                {
+                    if (item.Header != i.Header && (string)item.Header != a)
+                    {
+                        item.IsExpanded = false;
+                    }
+                    else
+                    {
+                        item.IsExpanded = true;
+                    }
+                }
+            }
 
-        //}
-
-        //public static void ExpandAll(TreeView t, bool expand)
-        //{
-        //    foreach (TreeViewItem i in t.Items)
-        //    {
-        //        if ((string)i.Header != Helper.FREIEAUFTRÄGE_STRING)
-        //        {
-        //            i.IsExpanded = expand;
-        //        }
-
-
-        //    }
-        //}
-        public void ExpandOrCloseAll( bool expand)
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="expand">Bool Wahlvariable</param>
+        /// <param name="a">Ausnahme</param>
+        public void ExpandOrCloseAll( bool expand, string a)
         {
                 foreach (TreeViewItem item in this.Items)
                 {
@@ -181,110 +179,100 @@ namespace HOIA.Erweiterungen
                 }
 
         }
-        //public static DependencyObject VisualUpwardSearch<T>(DependencyObject source)
-        //{
-        //    while (source != null && source.GetType() != typeof(T))
-        //        source = VisualTreeHelper.GetParent(source);
+        public DependencyObject VisualUpwardSearch<T>(DependencyObject source)
+        {
+            while (source != null && source.GetType() != typeof(T))
+                source = VisualTreeHelper.GetParent(source);
 
-        //    return source;
-        //}
-        //public static int GetNodeLevel(TreeView t, TreeViewItem i)
-        //{
+            return source;
+        }
+        public int GetNodeLevel( TreeViewItem i)
+        {
 
-        //    int index = 0;
-        //    int indexOfSelectedNode = 0;
+            int index = 0;
+            int indexOfSelectedNode = 0;
 
-        //    if (t.Items.Count >= 0)
-        //    {
-        //        if (i != null)
-        //        {
-        //            index++;
+            if (this.Items.Count >= 0)
+            {
+                if (i != null)
+                {
+                    index++;
 
-        //            TreeViewItem item = i;
+                    TreeViewItem item = i;
 
-        //            ItemsControl parent = ItemsControl.ItemsControlFromItemContainer(item);
+                    ItemsControl parent = ItemsControl.ItemsControlFromItemContainer(item);
 
-        //            while (parent != null && parent.GetType() == typeof(TreeViewItem))
-        //            {
-        //                index++;
+                    while (parent != null && parent.GetType() == typeof(TreeViewItem))
+                    {
+                        index++;
 
-        //                parent = ItemsControl.ItemsControlFromItemContainer(parent);
+                        parent = ItemsControl.ItemsControlFromItemContainer(parent);
 
-        //            }
+                    }
 
-        //            indexOfSelectedNode = index;
+                    indexOfSelectedNode = index;
 
-        //        }
+                }
 
-        //    }
+            }
 
-        //    return index;
-        //}
-        //public static int GetTreeLevel(TreeView t)
-        //{
-        //    int index = 0;
-        //    int indexOfSelectedNode = 0;
+            return index;
+        }
+        public int GetTreeLevel()
+        {
+            int index = 0;
+            int indexOfSelectedNode = 0;
 
-        //    if (t.Items.Count >= 0)
+            if (this.Items.Count >= 0)
 
-        //    {
-        //        if (t.SelectedValue != null)
-        //        {
-        //            index++;
+            {
+                if (this.SelectedValue != null)
+                {
+                    index++;
 
-        //            TreeViewItem item = t.SelectedItem as TreeViewItem;
+                    TreeViewItem item = this.SelectedItem as TreeViewItem;
 
-        //            ItemsControl parent = ItemsControl.ItemsControlFromItemContainer(item);
+                    ItemsControl parent = ItemsControl.ItemsControlFromItemContainer(item);
 
-        //            while (parent != null && parent.GetType() == typeof(TreeViewItem))
-        //            {
-        //                index++;
+                    while (parent != null && parent.GetType() == typeof(TreeViewItem))
+                    {
+                        index++;
 
-        //                parent = ItemsControl.ItemsControlFromItemContainer(parent);
+                        parent = ItemsControl.ItemsControlFromItemContainer(parent);
 
-        //            }
+                    }
 
-        //            indexOfSelectedNode = index;
+                    indexOfSelectedNode = index;
 
-        //        }
+                }
 
-        //    }
+            }
+            return indexOfSelectedNode;
+        }
+        public static string CleanUp(string s)
+        {
+            s = s.Replace("{ Name = ", "");
+            s = s.Replace(" }", "");
+            return s;
+        }
 
-        //    //MessageBox.Show(indexOfSelectedNode.ToString());
-        //    return indexOfSelectedNode;
-        //}
-        //public static string CleanUp(string s)
-        //{
-        //    s = s.Replace("{ Name = ", "");
-        //    s = s.Replace(" }", "");
-        //    return s;
-        //}
+        public static TreeViewItem GetParent(TreeViewItem t)
+        {
+            ItemsControl parent = GetSelectedTreeViewItemParent(t);
+            TreeViewItem t_parent = parent as TreeViewItem;
+            return t_parent;
+        }
 
-        //public static TreeViewItem GetParent(TreeViewItem t)
-        //{
-        //    ItemsControl parent = GetSelectedTreeViewItemParent(t);
-        //    TreeViewItem t_parent = parent as TreeViewItem;
-        //    return t_parent;
-        //}
+        public static ItemsControl GetSelectedTreeViewItemParent(TreeViewItem item)
+        {
+            DependencyObject parent = VisualTreeHelper.GetParent(item);
+            while (!(parent is TreeViewItem || parent is TreeView))
+            {
+                parent = VisualTreeHelper.GetParent(parent);
+            }
 
-        //public static ItemsControl GetSelectedTreeViewItemParent(TreeViewItem item)
-        //{
-        //    DependencyObject parent = VisualTreeHelper.GetParent(item);
-        //    while (!(parent is TreeViewItem || parent is TreeView))
-        //    {
-        //        parent = VisualTreeHelper.GetParent(parent);
-        //    }
+            return parent as ItemsControl;
+        }
 
-        //    return parent as ItemsControl;
-        //}
-
-        //public static void AddContextMenu(TreeViewItem t)
-        //{
-        //    MenuItem i = new MenuItem();
-        //    i.Header = "Freigeben";
-
-        //    ContextMenu c = new ContextMenu();
-        //    c.Items.Add(i);
-        //}
     }
 }

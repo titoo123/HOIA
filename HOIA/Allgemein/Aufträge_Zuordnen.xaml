@@ -4,16 +4,23 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:HOIA.Allgemein"
+      xmlns:src="clr-namespace:HOIA.Erweiterungen"
       mc:Ignorable="d" 
       d:DesignHeight="825" d:DesignWidth="1280"
       Title="Aufträge">
 
     <Grid Background="White">
-        <GroupBox  Header="Auftragszuordnung" Margin="0,0,740,5">
+        <GroupBox  Header="Auftragszuordnung">
             <Grid >
-                <TreeView x:Name="treeView_H_Zuordnen_HOWerte" MouseUp="treeView_H_Zuordnen_HOWerte_MouseUp" MouseMove="treeView_H_Zuordnen_HOWerte_MouseMove"  HorizontalAlignment="Left"  Margin="14,4,0,0" VerticalAlignment="Top" Width="160" FontSize="16">
-                </TreeView>
-                <ListView Margin="194,4,14,19"  Name="ListView_Aufträge" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="250" />
+                    <ColumnDefinition Width="320"/>
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <src:Extended_TreeView  x:Name="treeView_H_Zuordnen_HOWerte" MouseUp="treeView_H_Zuordnen_HOWerte_MouseUp" MouseMove="treeView_H_Zuordnen_HOWerte_MouseMove"  Grid.Column="0" VerticalAlignment="Top"   BorderThickness="1,0,0,0"></src:Extended_TreeView>
+                <!--<TreeView x:Name="treeView_H_Zuordnen_HOWerte" MouseUp="treeView_H_Zuordnen_HOWerte_MouseUp" MouseMove="treeView_H_Zuordnen_HOWerte_MouseMove"  Grid.Column="0" VerticalAlignment="Top"  FontSize="16" BorderThickness="1,0,0,0">
+                </TreeView>-->
+                <ListView Grid.Column="1" Name="ListView_Aufträge" >
                     <ListView.View>
                         <GridView>
                             <GridViewColumn Header="Maschine"
@@ -28,190 +35,185 @@
                         </GridView>
                     </ListView.View>
                 </ListView>
+                <GroupBox x:Name="groupBox" Header="Auftragsdetails" Grid.Column="2">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="30" />
+                        </Grid.RowDefinitions>
+                        <GroupBox x:Name="groupBox4" Header="Daten"  Grid.Row="0"  VerticalAlignment="Top" Grid.ColumnSpan="2" >
+                            <Grid >
+                                <Grid.RowDefinitions>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+
+                                <Label x:Name="label_ODL" Content="ODL "  Grid.Column="0"  Grid.Row="0" />
+                                <Label x:Name="label_Status" Content="Status"  Grid.Column="0"  Grid.Row="1"  />
+                                <Label x:Name="label_Auftragsdatum" Content="Auftragsdatum" Grid.Column="2"  Grid.Row="0"  />
+                                <Label x:Name="label_Liefertermin" Content="Liefertermin" Grid.Column="2"  Grid.Row="1"  />
+
+                                <TextBox x:Name="textBox4" Height="23"  Grid.Column="1"  Grid.Row="0" IsReadOnly="True"/>
+                                <TextBox x:Name="textBox5" Height="23"  Grid.Column="1"  Grid.Row="1" IsReadOnly="True"/>
+                                <TextBox x:Name="textBox6" Height="23"  Grid.Column="3"  Grid.Row="0" IsReadOnly="True"/>
+                                <TextBox x:Name="textBox7" Height="23"  Grid.Column="3"  Grid.Row="1" IsReadOnly="True"/>
+                            </Grid>
+                        </GroupBox>
+                        <GroupBox x:Name="groupBox1" Header="Kunde"  Grid.Row="1" VerticalAlignment="Top" Grid.Column="0">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                </Grid.RowDefinitions>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Label x:Name="label_Kunden_Name" Content="Name:" Grid.Column="0"  Grid.Row="0" />
+                                <Label x:Name="label_Kunde_Anschrift" Content="Anschrift"  Grid.Column="0"  Grid.Row="1" />
+                                <Label x:Name="label_Kunde_PLZ" Content="PLZ:"  Grid.Column="0"  Grid.Row="2" />
+                                <Label x:Name="label_Kunde_Stadt" Content="Stadt:" Grid.Column="0"  Grid.Row="3" />
+                                <Label x:Name="label_Kunde_Land" Content="Land:"  Grid.Column="0"  Grid.Row="4" />
+
+                            </Grid>
+
+                        </GroupBox>
+                        <GroupBox x:Name="groupBox2" Header="Bestimmungsort" Grid.Row="1"   Grid.Column="1">
+                            <Grid >
+                                <Grid.RowDefinitions>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                </Grid.RowDefinitions>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Label x:Name="label_Bestimmungsort_Name" Content="Name:"  Grid.Column="0"  Grid.Row="0" />
+                                <Label x:Name="label_Bestimmungsort_Anschrift" Content="Anschrift:"  Grid.Column="0"  Grid.Row="1" />
+                                <Label x:Name="label_Bestimmungsort_PLZ" Content="PLZ:"  Grid.Column="0"  Grid.Row="2" />
+                                <Label x:Name="label_Bestimmungsort_Stadt" Content="Stadt:"  Grid.Column="0"  Grid.Row="3" />
+                                <Label x:Name="label_Bestimmungsort_Land" Content="Land:"  Grid.Column="0"  Grid.Row="4" />
+                            </Grid>
+                        </GroupBox>
+                        <GroupBox x:Name="groupBox3" Header="Beschreibung der Materials" Grid.Row="2"  Grid.ColumnSpan="2">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+
+                                <Label x:Name="label_Walzung" Content="Walzung:" Grid.Column="0"  Grid.Row="0" />
+                                <Label x:Name="label_Verarbeitung" Content="Verarbeitung:" Grid.Column="0"  Grid.Row="1"/>
+                                <Label x:Name="label5" Content="Art:" Grid.Column="2"  Grid.Row="0"/>
+                                <TextBox x:Name="textBox8" Height="23" Grid.Column="1"  Grid.Row="0" IsReadOnly="True"/>
+                                <TextBox x:Name="textBox9" Height="23" Grid.Column="1"  Grid.Row="1" IsReadOnly="True"/>
+                                <TextBox x:Name="textBox10" Height="23" Grid.Column="3"  Grid.Row="0" IsReadOnly="True"/>
+                            </Grid>
+                        </GroupBox>
+                        <GroupBox x:Name="groupBox5" Header="Sonstige Informationen" Grid.Row="3"  VerticalAlignment="Top" Grid.ColumnSpan="2" >
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+
+                                <Label x:Name="label4" Content="Charge:" Grid.Column="0"  Grid.Row="0"/>
+                                <Label x:Name="label2" Content="Position:" Grid.Column="0"  Grid.Row="1"/>
+                                <Label x:Name="label3" Content="Lagerort:" Grid.Column="0"  Grid.Row="2"/>
+                                <Label x:Name="label1" Content="Auftrag Nr:" Grid.Column="2"  Grid.Row="0"/>
+                                <Label x:Name="label" Content="Stahlsorte:" Grid.Column="2"  Grid.Row="1"/>
+                                <TextBox x:Name="textBox11" Height="23" Grid.Column="1"  Grid.Row="0" IsReadOnly="True"/>
+                                <TextBox x:Name="textBox12" Height="23" Grid.Column="1"  Grid.Row="1" IsReadOnly="True"/>
+                                <TextBox x:Name="textBox13" Height="23" Grid.Column="1"  Grid.Row="2" IsReadOnly="True"/>
+                                <TextBox x:Name="textBox14" Height="23" Grid.Column="3"  Grid.Row="0" IsReadOnly="True"/>
+                                <TextBox x:Name="textBox15" Height="23" Grid.Column="3"  Grid.Row="1" IsReadOnly="True"/>
+
+                            </Grid>
+                        </GroupBox>
+                        <GroupBox x:Name="groupBox6" Header="Ergänzungen" Grid.Row="4"  VerticalAlignment="Top" Grid.ColumnSpan="2" >
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="60"></RowDefinition>
+                                    <RowDefinition Height="60"></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Label x:Name="label9" Content="Anlasstemparatur:" Grid.Column="2"  Grid.Row="2" />
+                                <TextBox x:Name="textBox2"  Grid.Column="1" Grid.RowSpan="2" Grid.Row="0" HorizontalAlignment="Stretch"   AcceptsReturn="True" VerticalScrollBarVisibility="Auto"/>
+                                <Label x:Name="label_technischeAnmerkungen" Content="Tech. Anmerkungen:" Grid.Column="0"  Grid.Row="0"/>
+                                <TextBox x:Name="textBox3" Grid.Column="3" Grid.RowSpan="2" Grid.Row="0"  HorizontalAlignment="Stretch"  AcceptsReturn="True" VerticalScrollBarVisibility="Auto"/>
+                                <Label x:Name="label7" Content="Int. Anmerkungen:" Grid.Column="2"  Grid.Row="0" />
+                                <TextBox x:Name="textBox" Grid.Column="1"  Grid.Row="2" />
+                                <Label x:Name="label8" Content="Sägeprogramm:" Grid.Column="0"  Grid.Row="2"/>
+                                <TextBox x:Name="textBox1" Height="23" Grid.Column="3"  Grid.Row="2"/>
+
+
+                                <Label Grid.Column="0"  Grid.Row="3">Status</Label>
+                                <StackPanel Grid.Column="1"  Grid.Row="3" >
+
+
+                                    <RadioButton GroupName="status" Foreground="Green" >Frei</RadioButton>
+                                    <RadioButton GroupName="status" Foreground="DarkOrange">Warten</RadioButton>
+                                    <RadioButton GroupName="status" Foreground="Red" IsChecked="True">Gesperrt</RadioButton>
+
+
+                                </StackPanel>
+
+
+                            </Grid>
+                        </GroupBox>
+                        <Button Grid.Row="5" Grid.Column="1" Width="120" HorizontalAlignment="Left" VerticalAlignment="Bottom" Content="Wichtig!" />
+                        <Button Grid.Row="5" Grid.Column="0" Width="120" HorizontalAlignment="Left" VerticalAlignment="Bottom" Content="Speichern"/>
+
+
+                    </Grid>
+
+                </GroupBox>
             </Grid>
         </GroupBox>
-        <GroupBox x:Name="groupBox" Header="Auftragsdetails" HorizontalAlignment="Left" Margin="560,0,0,0" VerticalAlignment="Top" Width="720">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
-
-                <Grid.RowDefinitions>
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition Height="30" />
-                </Grid.RowDefinitions>
-
-                <GroupBox x:Name="groupBox1" Header="Kunde" HorizontalAlignment="Left" Grid.Row="1" VerticalAlignment="Top"  Width="349" Grid.Column="0">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition></RowDefinition>
-                            <RowDefinition></RowDefinition>
-                            <RowDefinition></RowDefinition>
-                            <RowDefinition></RowDefinition>
-                            <RowDefinition></RowDefinition>
-                        </Grid.RowDefinitions>
-
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-                        <Label x:Name="label_Kunden_Name" Content="Name:" Grid.Column="0"  Grid.Row="0" />
-                        <Label x:Name="label_Kunde_Anschrift" Content="Anschrift"  Grid.Column="0"  Grid.Row="1" />
-                        <Label x:Name="label_Kunde_PLZ" Content="PLZ:"  Grid.Column="0"  Grid.Row="2" />
-                        <Label x:Name="label_Kunde_Stadt" Content="Stadt:" Grid.Column="0"  Grid.Row="3" />
-                        <Label x:Name="label_Kunde_Land" Content="Land:"  Grid.Column="0"  Grid.Row="4" />
-
-                    </Grid>
-
-                </GroupBox>
-                <GroupBox x:Name="groupBox2" Header="Bestimmungsort" HorizontalAlignment="Left" Grid.Row="1"  VerticalAlignment="Top" Width="349" Grid.Column="1">
-                    <Grid >
-                        <Grid.RowDefinitions>
-                            <RowDefinition></RowDefinition>
-                            <RowDefinition></RowDefinition>
-                            <RowDefinition></RowDefinition>
-                            <RowDefinition></RowDefinition>
-                            <RowDefinition></RowDefinition>
-                        </Grid.RowDefinitions>
-
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-                        <Label x:Name="label_Bestimmungsort_Name" Content="Name:"  Grid.Column="0"  Grid.Row="0" />
-                        <Label x:Name="label_Bestimmungsort_Anschrift" Content="Anschrift:"  Grid.Column="0"  Grid.Row="1" />
-                        <Label x:Name="label_Bestimmungsort_PLZ" Content="PLZ:"  Grid.Column="0"  Grid.Row="2" />
-                        <Label x:Name="label_Bestimmungsort_Stadt" Content="Stadt:"  Grid.Column="0"  Grid.Row="3" />
-                        <Label x:Name="label_Bestimmungsort_Land" Content="Land:"  Grid.Column="0"  Grid.Row="4" />
-                    </Grid>
-                </GroupBox>
-                <GroupBox x:Name="groupBox4" Header="Daten" HorizontalAlignment="Left" Grid.Row="0"  VerticalAlignment="Top" Grid.ColumnSpan="2" Width="700">
-                    <Grid >
-                        <Grid.RowDefinitions>
-                            <RowDefinition></RowDefinition>
-                            <RowDefinition></RowDefinition>
-
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-
-                        <Label x:Name="label_ODL" Content="ODL "  Grid.Column="0"  Grid.Row="0" />
-                        <Label x:Name="label_Status" Content="Status"  Grid.Column="0"  Grid.Row="1"  />
-                        <Label x:Name="label_Auftragsdatum" Content="Auftragsdatum" Grid.Column="2"  Grid.Row="0"  />
-                        <Label x:Name="label_Liefertermin" Content="Liefertermin" Grid.Column="2"  Grid.Row="1"  />
-
-                        <TextBox x:Name="textBox4" Height="23"  Grid.Column="1"  Grid.Row="0" IsReadOnly="True"/>
-                        <TextBox x:Name="textBox5" Height="23"  Grid.Column="1"  Grid.Row="1" IsReadOnly="True"/>
-                        <TextBox x:Name="textBox6" Height="23"  Grid.Column="3"  Grid.Row="0" IsReadOnly="True"/>
-                        <TextBox x:Name="textBox7" Height="23"  Grid.Column="3"  Grid.Row="1" IsReadOnly="True"/>
-                    </Grid>
-                </GroupBox>
-                <GroupBox x:Name="groupBox3" Header="Beschreibung der Materials" Grid.Row="2"  HorizontalAlignment="Left" VerticalAlignment="Top" Width="700" Grid.ColumnSpan="2">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition></RowDefinition>
-                            <RowDefinition></RowDefinition>
-
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-
-                        <Label x:Name="label_Walzung" Content="Walzung:" Grid.Column="0"  Grid.Row="0" />
-                        <Label x:Name="label_Verarbeitung" Content="Verarbeitung:" Grid.Column="0"  Grid.Row="1"/>
-                        <Label x:Name="label5" Content="Art:" Grid.Column="2"  Grid.Row="0"/>
-                        <TextBox x:Name="textBox8" Height="23" Grid.Column="1"  Grid.Row="0" IsReadOnly="True"/>
-                        <TextBox x:Name="textBox9" Height="23" Grid.Column="1"  Grid.Row="1" IsReadOnly="True"/>
-                        <TextBox x:Name="textBox10" Height="23" Grid.Column="3"  Grid.Row="0" IsReadOnly="True"/>
-                    </Grid>
-                </GroupBox>
-                <GroupBox x:Name="groupBox5" Header="Sonstige Informationen" Grid.Row="3"  HorizontalAlignment="Left" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="700" >
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition></RowDefinition>
-                            <RowDefinition></RowDefinition>
-                            <RowDefinition></RowDefinition>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-
-                        <Label x:Name="label4" Content="Charge:" Grid.Column="0"  Grid.Row="0"/>
-                        <Label x:Name="label2" Content="Position:" Grid.Column="0"  Grid.Row="1"/>
-                        <Label x:Name="label3" Content="Lagerort:" Grid.Column="0"  Grid.Row="2"/>
-                        <Label x:Name="label1" Content="Auftrag Nr:" Grid.Column="2"  Grid.Row="0"/>
-                        <Label x:Name="label" Content="Stahlsorte:" Grid.Column="2"  Grid.Row="1"/>
-                        <TextBox x:Name="textBox11" Height="23" Grid.Column="1"  Grid.Row="0" IsReadOnly="True"/>
-                        <TextBox x:Name="textBox12" Height="23" Grid.Column="1"  Grid.Row="1" IsReadOnly="True"/>
-                        <TextBox x:Name="textBox13" Height="23" Grid.Column="1"  Grid.Row="2" IsReadOnly="True"/>
-                        <TextBox x:Name="textBox14" Height="23" Grid.Column="3"  Grid.Row="0" IsReadOnly="True"/>
-                        <TextBox x:Name="textBox15" Height="23" Grid.Column="3"  Grid.Row="1" IsReadOnly="True"/>
-
-                    </Grid>
-                </GroupBox>
-                <GroupBox x:Name="groupBox6" Header="Ergänzungen" HorizontalAlignment="Left" Grid.Row="4"   VerticalAlignment="Top" Height="220" Width="700"  Grid.ColumnSpan="2" >
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition></RowDefinition>
-                            <RowDefinition></RowDefinition>
-                            <RowDefinition></RowDefinition>
-                            <RowDefinition></RowDefinition>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-                        <Label x:Name="label9" Content="Anlasstemparatur:" Grid.Column="2"  Grid.Row="2" />
-                        <TextBox x:Name="textBox2"  Grid.Column="1" Grid.RowSpan="2" Grid.Row="0" HorizontalAlignment="Stretch"   AcceptsReturn="True" VerticalScrollBarVisibility="Auto"/>
-                        <Label x:Name="label_technischeAnmerkungen" Content="Tech. Anmerkungen:" Grid.Column="0"  Grid.Row="0"/>
-                        <TextBox x:Name="textBox3" Grid.Column="3" Grid.RowSpan="2" Grid.Row="0"  HorizontalAlignment="Stretch"  AcceptsReturn="True" VerticalScrollBarVisibility="Auto"/>
-                        <Label x:Name="label7" Content="Int. Anmerkungen:" Grid.Column="2"  Grid.Row="0" />
-                        <TextBox x:Name="textBox" Grid.Column="1"  Grid.Row="2" />
-                        <Label x:Name="label8" Content="Sägeprogramm:" Grid.Column="0"  Grid.Row="2"/>
-                        <TextBox x:Name="textBox1" Height="23" Grid.Column="3"  Grid.Row="2"/>
-
-
-                        <Label Grid.Column="0"  Grid.Row="3">Status</Label>
-                        <StackPanel Grid.Column="1"  Grid.Row="3" >
-
-
-                            <RadioButton GroupName="status" Foreground="Green" >Frei</RadioButton>
-                            <RadioButton GroupName="status" Foreground="DarkOrange">Warten</RadioButton>
-                            <RadioButton GroupName="status" Foreground="Red" IsChecked="True">Gesperrt</RadioButton>
-
-
-                        </StackPanel>
-
-
-                    </Grid>
-                </GroupBox>
-                <Button Grid.Row="5" Grid.Column="1" Width="120" HorizontalAlignment="Left" VerticalAlignment="Bottom" Content="Wichtig!" />
-                <Button Grid.Row="5" Grid.Column="0" Width="120" HorizontalAlignment="Left" VerticalAlignment="Bottom" Content="Speichern"/>
-
-
-            </Grid>
-
-        </GroupBox>
-
-
-
-
     </Grid>
 </Page>

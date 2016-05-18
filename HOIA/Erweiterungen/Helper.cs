@@ -40,6 +40,17 @@ namespace HOIA.Erweiterungen
             return Convert.ToDouble(GetStringFromDataGrid(l, g));
         }
 
+        public static string AddString(string s,string k,int a) {
+            return s + "( "+ k +": " + a + " ) ";
+        }
+        public static string CleanUpString(string s)
+        {
+            return s.Split('(').First();
+        }
 
+        internal static string AddString(string s, string k, int a, string n)
+        {
+            return s + " ( " + k + ": " + a + " "+ n + " ) ";
+        }
     }
 }

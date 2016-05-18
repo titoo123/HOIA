@@ -16,6 +16,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 
+
 namespace HOIA.Allgemein
 {
     /// <summary>
@@ -31,9 +32,13 @@ namespace HOIA.Allgemein
         public Aufträge_Zuordnen()
         {
             InitializeComponent();
+
             TreeView_H_Zuordnen_HOWerte_Refresh();
+
             treeView_H_Zuordnen_HOWerte.AddHandler(TreeViewItem.PreviewMouseLeftButtonDownEvent, new MouseButtonEventHandler(treeView_Item_MouseLeftButtonDown));
-            treeView_H_Zuordnen_HOWerte.AddHandler(TreeViewItem.PreviewMouseRightButtonDownEvent, new MouseButtonEventHandler(treeView_Item_MouseRightButtonDown));
+            //treeView_H_Zuordnen_HOWerte.AddHandler(TreeViewItem.PreviewMouseRightButtonDownEvent, new MouseButtonEventHandler(treeView_Item_MouseRightButtonDown));
+            treeView_H_Zuordnen_HOWerte.AddHandler(TreeViewItem.PreviewMouseDoubleClickEvent, new MouseButtonEventHandler(treeViewItem_MouseDoubleClick));
+            AddHeaderContent();
 
         }
         private void TreeView_H_Zuordnen_HOWerte_Refresh()
@@ -102,15 +107,20 @@ namespace HOIA.Allgemein
                     //Level 1 und 2
                     foreach (TreeViewItem i in item.Items)
                     {
-                        if (header == i.Header.ToString())
+                        if (((string)header).Contains(Helper.CleanUpString( i.Header.ToString())))
                         {
-                            if ((TreeViewHelper.GetNodeLevel(treeView_H_Zuordnen_HOWerte, i) == 2 
-                             && (item.Header.ToString() == Helper.FREIEAUFTRÄGE_STRING || item.Header.ToString() == Helper.RM_STRING)))
+                            if (
+                             (TreeViewHelper.GetNodeLevel(treeView_H_Zuordnen_HOWerte, i) == 2 
+                             && (
+                             ((string)item.Header).Contains(Helper.FREIEAUFTRÄGE_STRING) 
+                             || 
+                             ((string)item.Header).Contains(Helper.RM_STRING)
+                             ))
+                             )
                             {
                                 lMousePressed = true;
                                 treeViewItem = i;
                                 treeViewItem_Click(i);
-                               // DragDropEffects d = DragDrop.DoDragDrop(i,)
                             }
                         }
                         //Level 3
@@ -181,14 +191,16 @@ namespace HOIA.Allgemein
 
 
         }
+
+        private void treeViewItem_MouseDoubleClick(object sender, MouseButtonEventArgs e) { }
         private void treeView_H_Zuordnen_HOWerte_MouseUp(object sender, MouseButtonEventArgs e)
         {   
             lMousePressed = false;
             TreeViewItem t = TreeViewHelper.VisualUpwardSearch<TreeViewItem>(e.OriginalSource as DependencyObject) as TreeViewItem;
             if (treeViewItem != null)
             {
-                if ((TreeViewHelper.GetNodeLevel(treeView_H_Zuordnen_HOWerte, t) == 1 && (t.Header.ToString() == Helper.FREIEAUFTRÄGE_STRING || t.Header.ToString() == Helper.RM_STRING)
-                    || TreeViewHelper.GetNodeLevel(treeView_H_Zuordnen_HOWerte, t) == 2 && (t.Header.ToString() == Helper.FREIEAUFTRÄGE_STRING || t.Header.ToString() == Helper.RM_STRING))
+                if ((TreeViewHelper.GetNodeLevel(treeView_H_Zuordnen_HOWerte, t) == 1 && (((string)t.Header).Contains(Helper.FREIEAUFTRÄGE_STRING) || ((string)t.Header).Contains(Helper.RM_STRING))
+                    || TreeViewHelper.GetNodeLevel(treeView_H_Zuordnen_HOWerte, t) == 2 && (((string)t.Header).Contains(Helper.FREIEAUFTRÄGE_STRING) || ((string)t.Header).Contains(Helper.RM_STRING)))
                     || TreeViewHelper.InDb(t)
                     && t.Header != treeViewItem.Header)
                 {
@@ -277,6 +289,54 @@ namespace HOIA.Allgemein
 
         }
 
+        void AddHeaderContent() {
+
+            DDataContext d = new DDataContext();
+            var ver = from z in d.Verfahren
+                      select z.Name;
+
+            foreach (TreeViewItem t in treeView_H_Zuordnen_HOWerte.Items)
+            {
+                string s = (string)t.Header;
+                if (s.Contains(Helper.FREIEAUFTRÄGE_STRING))
+                {
+                    t.Header = Helper.AddString((string)t.Header, "Anzahl", 3);
+                }
+                if (s.Contains(Helper.EL1_STRING))
+                {
+                    t.Header = Helper.AddString((string)t.Header, "Gewicht", 3, "Kg");
+                }
+                if (s.Contains(Helper.EL2_STRING))
+                {
+                    t.Header = Helper.AddString((string)t.Header, "Gewicht", 3, "Kg");
+                }
+                if (s.Contains(Helper.HGO1_STRING))
+                {
+                    t.Header = Helper.AddString((string)t.Header, "Gewicht", 3, "Kg");
+                }
+                if (s.Contains(Helper.HGO2_STRING))
+                {
+                    t.Header = Helper.AddString((string)t.Header, "Gewicht", 3, "Kg");
+                }
+                if (s.Contains(Helper.RM_STRING))
+                {
+                    t.Header = Helper.AddString((string)t.Header, "Gewicht", 3, "Kg");
+                }
+
+                //Teile Gewichte für die einzelnen Verfahren hinzu
+                foreach (TreeViewItem c in t.Items)
+                {
+                    if (ver.Contains((string)c.Header))
+                    {
+                        c.Header = Helper.AddString((string)c.Header, "Gewicht", 3, "Kg");
+                    }
+                }
+
+
+
+            }
+
+        }
 
     }
 }
