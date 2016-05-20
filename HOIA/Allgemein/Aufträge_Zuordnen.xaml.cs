@@ -26,8 +26,9 @@ namespace HOIA.Allgemein
     {
         private TreeViewItem treeViewItem;
         private bool lMousePressed = false;
-        Erweiterungen.Tuple a = new Erweiterungen.Tuple();
+        //Erweiterungen.Tuple a = new Erweiterungen.Tuple();
 
+        List<Maschine> mList = new List<Maschine>();
 
         public Aufträge_Zuordnen()
         {
@@ -38,7 +39,7 @@ namespace HOIA.Allgemein
             treeView_H_Zuordnen_HOWerte.AddHandler(TreeViewItem.PreviewMouseLeftButtonDownEvent, new MouseButtonEventHandler(treeView_Item_MouseLeftButtonDown));
             //treeView_H_Zuordnen_HOWerte.AddHandler(TreeViewItem.PreviewMouseRightButtonDownEvent, new MouseButtonEventHandler(treeView_Item_MouseRightButtonDown));
             treeView_H_Zuordnen_HOWerte.AddHandler(TreeViewItem.PreviewMouseDoubleClickEvent, new MouseButtonEventHandler(treeViewItem_MouseDoubleClick));
-            AddHeaderContent();
+            //AddHeaderContent();
 
         }
         private void TreeView_H_Zuordnen_HOWerte_Refresh()
@@ -48,66 +49,43 @@ namespace HOIA.Allgemein
             //Haubenofen
             var hoa = from r in d.Verfahren
                       where r.Art == Helper.HAUBENOFEN_ART
-                      select new { r.Name };
+                      select r.Name;
             //Induktionsanlagen
             var iaa = from r in d.Verfahren
                       where r.Art == Helper.INDUKTIONSANLAGEN_ART
-                      select new { r.Name };
+                      select r.Name;
             //Freie Aufträge
             var fre = from f in d.Auftrag
                       where f.Status == Helper.AUFTRAG_OFFEN_STRING
                       select f.ODL;
-
-            FillTreeView(treeView_H_Zuordnen_HOWerte);
-            
-            TreeViewHelper.CreateChilds(treeView_H_Zuordnen_HOWerte, fre, Helper.FREIEAUFTRÄGE_STRING);
-
-            TreeViewHelper.CreateChilds(treeView_H_Zuordnen_HOWerte, iaa, Helper.EL1_STRING);
-            TreeViewHelper.CreateChilds(treeView_H_Zuordnen_HOWerte, iaa, Helper.EL2_STRING);
-
-            TreeViewHelper.CreateChilds(treeView_H_Zuordnen_HOWerte, hoa, Helper.HGO1_STRING);
-            TreeViewHelper.CreateChilds(treeView_H_Zuordnen_HOWerte, hoa, Helper.HGO2_STRING);
-
-            TreeViewItem i = TreeViewHelper.TreeViewGetNode_ByText(treeView_H_Zuordnen_HOWerte, Helper.FREIEAUFTRÄGE_STRING);
-            i.IsExpanded = true;
-            // Helper.ExpandAll(treeView_H_Zuordnen_HOWerte, true);
-
-        }
-        private void FillTreeView(TreeView treeView_H_Zuordnen_HOWerte)
-        {
-            List<string> l = new List<string>();
-
-            l.Add(Helper.FREIEAUFTRÄGE_STRING);
-
-            l.Add(Helper.EL1_STRING);
-            l.Add(Helper.EL2_STRING);
-            l.Add(Helper.HGO1_STRING);
-            l.Add(Helper.HGO2_STRING);
-            l.Add(Helper.RM_STRING);
-
-            treeView_H_Zuordnen_HOWerte.ItemsSource = TreeViewHelper.CreateChilds(l);
+            mList.Add(new Maschine(treeView_H_Zuordnen_HOWerte, Helper.FREIEAUFTRÄGE_STRING, false, fre));
+            mList.Add(new Maschine(treeView_H_Zuordnen_HOWerte, Helper.EL1_STRING, true, iaa));
+            mList.Add(new Maschine(treeView_H_Zuordnen_HOWerte, Helper.EL2_STRING, true, iaa));
+            mList.Add(new Maschine(treeView_H_Zuordnen_HOWerte, Helper.HGO1_STRING, true, hoa));
+            mList.Add(new Maschine(treeView_H_Zuordnen_HOWerte, Helper.HGO2_STRING, true, hoa));
+            mList.Add(new Maschine(treeView_H_Zuordnen_HOWerte, Helper.RM_STRING, false));
 
         }
 
         private void treeView_Item_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
 
-            string header = TreeViewHelper.HitTreeView(treeView_H_Zuordnen_HOWerte, e);
+            string tag = TreeViewHelper.HitTreeView(treeView_H_Zuordnen_HOWerte, e);
 
             
-            if (TreeViewHelper.GetNodeLevel(treeView_H_Zuordnen_HOWerte, TreeViewHelper.TreeViewGetNode_ByText(treeView_H_Zuordnen_HOWerte, header)) == 1 )
+            if (TreeViewHelper.GetNodeLevel(treeView_H_Zuordnen_HOWerte, TreeViewHelper.TreeViewGetNode_ByTag(treeView_H_Zuordnen_HOWerte, tag)) == 1 )
             {
                 TreeViewHelper.ExpandAll(treeView_H_Zuordnen_HOWerte, false);
             }
 
-            if (header != null)
+            if (tag != null)
             {
                 foreach (TreeViewItem item in treeView_H_Zuordnen_HOWerte.Items)
                 {
                     //Level 1 und 2
                     foreach (TreeViewItem i in item.Items)
                     {
-                        if (((string)header).Contains(Helper.CleanUpString( i.Header.ToString())))
+                        if (tag.Contains(Helper.CleanUpString( i.Header.ToString())))
                         {
                             if (
                              (TreeViewHelper.GetNodeLevel(treeView_H_Zuordnen_HOWerte, i) == 2 
@@ -126,7 +104,7 @@ namespace HOIA.Allgemein
                         //Level 3
                         foreach (TreeViewItem a in i.Items)
                         {
-                            if (header == a.Header.ToString())
+                            if (tag.Contains(a.Header.ToString()))
                             {
                                 if (TreeViewHelper.GetNodeLevel(treeView_H_Zuordnen_HOWerte, a) == 3)
                                 {
@@ -150,12 +128,12 @@ namespace HOIA.Allgemein
             if (header != null)
             {
                 TreeViewItem selectedItem = TreeViewHelper.TreeViewGetNode_ByText(treeView_H_Zuordnen_HOWerte, header);
-                ContextMenu contextMenu = new ContextMenu();
+                //ContextMenu contextMenu = new ContextMenu();
 
                 MenuItem m = new MenuItem();
                 m.Header = "Freigeben";
 
-                m.Click += OptionClick;
+                //m.Click += Move;
                 if (selectedItem != null)
                 {
                     if (selectedItem.Focus())
@@ -178,10 +156,10 @@ namespace HOIA.Allgemein
                             )
                         {
 
-                            selectedItem.ContextMenu = contextMenu;
+                            //selectedItem.ContextMenu = contextMenu;
 
-                            contextMenu.Items.Add(m);
-                            selectedItem.ContextMenu.IsOpen = true;
+                            //contextMenu.Items.Add(m);
+                            //selectedItem.ContextMenu.IsOpen = true;
 
 
                         }
@@ -192,46 +170,60 @@ namespace HOIA.Allgemein
 
         }
 
-        private void treeViewItem_MouseDoubleClick(object sender, MouseButtonEventArgs e) { }
+        private void treeViewItem_MouseDoubleClick(object sender, MouseButtonEventArgs e) {
+            MessageBox.Show("","");
+            treeView_H_Zuordnen_HOWerte.Move(ListView_Aufträge);
+
+        }
         private void treeView_H_Zuordnen_HOWerte_MouseUp(object sender, MouseButtonEventArgs e)
         {   
             lMousePressed = false;
             TreeViewItem t = TreeViewHelper.VisualUpwardSearch<TreeViewItem>(e.OriginalSource as DependencyObject) as TreeViewItem;
-            if (treeViewItem != null)
+
+            if (t != null)
             {
-                if ((TreeViewHelper.GetNodeLevel(treeView_H_Zuordnen_HOWerte, t) == 1 && (((string)t.Header).Contains(Helper.FREIEAUFTRÄGE_STRING) || ((string)t.Header).Contains(Helper.RM_STRING))
-                    || TreeViewHelper.GetNodeLevel(treeView_H_Zuordnen_HOWerte, t) == 2 && (((string)t.Header).Contains(Helper.FREIEAUFTRÄGE_STRING) || ((string)t.Header).Contains(Helper.RM_STRING)))
-                    || TreeViewHelper.InDb(t)
-                    && t.Header != treeViewItem.Header)
+                string h = t.Tag.ToString();
+                Extended_TreeView tv = treeView_H_Zuordnen_HOWerte;
+
+                if (treeViewItem != null)
                 {
-                    TreeViewItem t_parent = TreeViewHelper.GetParent(t);
-                    
-                    //Fügt Knoten hinzu
-                    t.Items.Add(new TreeViewItem() { Header = treeViewItem.Header });
-                    //Öffnet Knoten
-                    TreeViewHelper.ExpandAll(t, true);
-                    //Löscht knoten aus Liste
-                    if (treeViewItem.Parent is TreeViewItem)
+                    if (
+                        (
+                        TreeViewHelper.GetNodeLevel(tv, t) == 1 && (h.Contains(Helper.FREIEAUFTRÄGE_STRING) || h.Contains(Helper.RM_STRING))
+                        ||
+                        TreeViewHelper.GetNodeLevel(tv, t) == 2 && (h.Contains(Helper.FREIEAUFTRÄGE_STRING) || h.Contains(Helper.RM_STRING))
+                        )
+                        ||
+                        TreeViewHelper.InDb(h)
+                        &&
+                        h != treeViewItem.Tag.ToString()
+                        )
                     {
-                        (treeViewItem.Parent as TreeViewItem).Items.Remove(treeViewItem);
-                        a.Remove(treeViewItem);
-                    }
-                    //Fügt Daten für Liste hinzu
-                    if (t_parent != null)
-                    {
-                        a.Add(t_parent, t, treeViewItem);
-                    }
-                    else
-                    {
-                        a.Add(t, treeViewItem);
+                        TreeViewItem t_parent = TreeViewHelper.GetParent(t);
+
+                        //Fügt Knoten hinzu
+                        t.Items.Add(new TreeViewItem() { Header = treeViewItem.Header , Tag = treeViewItem.Tag });
+                        //Öffnet Knoten
+                        TreeViewHelper.ExpandAll(t, true);
+                        //Löscht knoten aus Liste
+                        if (treeViewItem.Parent is TreeViewItem)
+                        {
+                            (treeViewItem.Parent as TreeViewItem).Items.Remove(treeViewItem);
+                            //a.Remove(treeViewItem);
+                        }
+
+                        foreach (Maschine m in mList)
+                        {
+                            m.RefreshInformation();
+                        }
                     }
 
                 }
+                treeViewItem = null;
 
+                e.Handled = true;
             }
-            treeViewItem = null;
 
-            e.Handled = true;
         }
 
         
@@ -268,26 +260,7 @@ namespace HOIA.Allgemein
 
         }
 
-        void OptionClick(object sender, RoutedEventArgs e)
-        {
-            TreeViewItem newChild = new TreeViewItem();
-            TreeViewItem selected = new TreeViewItem();
-            // Unboxing
-            MenuItem menuItem = sender as MenuItem;
-            newChild.Header = menuItem.Header;
-
-            selected = (TreeViewItem)treeView_H_Zuordnen_HOWerte.SelectedItem;
-
-            foreach (var item in a.Get(selected))
-            {
-                if ( !ListView_Aufträge.Items.Contains(item) )
-                {
-                    ListView_Aufträge.Items.Add(item);
-                }
-
-            }
-
-        }
+  
 
         void AddHeaderContent() {
 

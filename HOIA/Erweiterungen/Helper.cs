@@ -45,7 +45,10 @@ namespace HOIA.Erweiterungen
         }
         public static string CleanUpString(string s)
         {
-            return s.Split('(').First();
+            return CutFreeString( s.Split('(').First());
+        }
+        public static string CutFreeString( string s) {
+            return s.Replace(" ", "");
         }
 
         internal static string AddString(string s, string k, int a, string n)

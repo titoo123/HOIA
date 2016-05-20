@@ -14,14 +14,14 @@ namespace HOIA.Erweiterungen
     {
         public static void CreateChild(TreeViewItem t, string s)
         {
-            t.Items.Add(new TreeViewItem() { Header = s });
+            t.Items.Add(new TreeViewItem() { Header = s, Tag = s });
         }
         public static List<TreeViewItem> CreateChilds(List<string> l)
         {
             List<TreeViewItem> t = new List<TreeViewItem>();
             foreach (var i in l)
             {
-                t.Add(new TreeViewItem() { Header = i });
+                t.Add(new TreeViewItem() { Header = i, Tag = i });
             }
             return t;
         }
@@ -249,7 +249,7 @@ namespace HOIA.Erweiterungen
             }
             return indexOfSelectedNode;
         }
-        public static string CleanUp(string s)
+        public static string CleanUp4List(string s)
         {
             s = s.Replace("{ Name = ", "");
             s = s.Replace(" }", "");
@@ -274,5 +274,32 @@ namespace HOIA.Erweiterungen
             return parent as ItemsControl;
         }
 
+        public void Move(ListView l)
+        {
+            TreeViewItem t = SelectedItem as TreeViewItem;
+            if (t != null)
+            {
+                l.Items.Add((string)t.Header);
+            }
+
+
+
+            //TreeViewItem newChild = new TreeViewItem();
+            //TreeViewItem selected = new TreeViewItem();
+            //// Unboxing
+            //MenuItem menuItem = sender as MenuItem;
+            //newChild.Header = menuItem.Header;
+
+            //selected = (TreeViewItem)this.SelectedItem;
+
+            //foreach (var item in a.Get(selected))
+            //{
+            //    if (!l.Items.Contains(item))
+            //    {
+            //        l.Items.Add(item);
+            //    }
+
+            //}
+        }
     }
 }

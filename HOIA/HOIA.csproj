@@ -98,7 +98,8 @@
     <Compile Include="Daten\TVorlagen.xaml.cs">
       <DependentUpon>TVorlagen.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Erweiterungen\TreeViewExtension.cs" />
+    <Compile Include="Erweiterungen\Extended_TreeView.cs" />
+    <Compile Include="Erweiterungen\Maschine.cs" />
     <Compile Include="Erweiterungen\TreeViewHelper.cs" />
     <Compile Include="Erweiterungen\Tuple.cs" />
     <Compile Include="MainWindow.xaml.cs">

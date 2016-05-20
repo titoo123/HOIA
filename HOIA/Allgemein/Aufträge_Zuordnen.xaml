@@ -23,15 +23,15 @@
                 <ListView Grid.Column="1" Name="ListView_Aufträge" >
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn Header="Maschine"
+                            <!--<GridViewColumn Header="Maschine"
 				    DisplayMemberBinding="{Binding Item1}"
-				    Width="100"/>
-                            <GridViewColumn Header="Verarbeitung"
+				    Width="100"/>-->
+                            <!--<GridViewColumn Header="Verarbeitung"
 				    DisplayMemberBinding="{Binding Item2}"
 				    Width="100"/>
                             <GridViewColumn Header="ODL"
 				    DisplayMemberBinding="{Binding Item3}"
-				    Width="100"/>
+				    Width="100"/>-->
                         </GridView>
                     </ListView.View>
                 </ListView>

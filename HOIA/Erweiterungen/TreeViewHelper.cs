@@ -25,6 +25,54 @@ namespace HOIA.Erweiterungen
             }
             return t;
         }
+        public static TreeViewItem TreeViewGetNode_ByTag(TreeView t, string s)
+        {
+            foreach (TreeViewItem tre in t.Items)
+            {
+                if (((String)tre.Tag).Contains(s))
+                {
+                    return tre;
+                }
+                if (tre.HasItems)
+                {
+                    TreeViewItem t1 = GetNode_ByTag(tre, s);
+                    if (t1 != null)
+                    {
+                        return t1;
+                    }
+                }
+            }
+            return null;
+        }
+        private static TreeViewItem GetNode_ByTag(TreeViewItem t, string s)
+        {
+            if (((String)t.Tag).Contains(s))
+            {
+                return t;
+            }
+
+            foreach (TreeViewItem tre in t.Items)
+            {
+                if (t != null)
+                {
+                    if (((String)tre.Tag).Contains(s))
+                    {
+                        return tre;
+                    }
+                    if (tre.HasItems)
+                    {
+                        TreeViewItem t1 = GetNode_ByTag(tre, s);
+                        if (t1 != null)
+                        {
+                            return t1;
+                        }
+
+                    }
+                }
+
+            }
+            return null;
+        }
         public static TreeViewItem TreeViewGetNode_ByText(TreeView t, string s)
         {
             foreach (TreeViewItem tre in t.Items)
@@ -101,6 +149,27 @@ namespace HOIA.Erweiterungen
                 foreach (var item in kjh)
                 {
                     if ((string)i.Header == item.Name)
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+        internal static bool InDb(string j)
+        {
+            string i = Helper.CleanUpString (j);
+            DDataContext d = new DDataContext();
+
+            var kjh = from l in d.Verfahren
+                      select l;
+
+            if (i != null)
+            {
+                foreach (var item in kjh)
+                {
+                    if (i == item.Name)
                     {
                         return true;
                     }
