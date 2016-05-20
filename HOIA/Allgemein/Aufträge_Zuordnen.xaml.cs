@@ -90,9 +90,9 @@ namespace HOIA.Allgemein
                             if (
                              (TreeViewHelper.GetNodeLevel(treeView_H_Zuordnen_HOWerte, i) == 2 
                              && (
-                             ((string)item.Header).Contains(Helper.FREIEAUFTRÄGE_STRING) 
+                             ((string)item.Tag).Contains(Helper.FREIEAUFTRÄGE_STRING) 
                              || 
-                             ((string)item.Header).Contains(Helper.RM_STRING)
+                             ((string)item.Tag).Contains(Helper.RM_STRING)
                              ))
                              )
                             {
@@ -104,7 +104,7 @@ namespace HOIA.Allgemein
                         //Level 3
                         foreach (TreeViewItem a in i.Items)
                         {
-                            if (tag.Contains(a.Header.ToString()))
+                            if (tag.Contains(a.Tag.ToString()))
                             {
                                 if (TreeViewHelper.GetNodeLevel(treeView_H_Zuordnen_HOWerte, a) == 3)
                                 {

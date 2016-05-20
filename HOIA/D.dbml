@@ -49,6 +49,7 @@
       <Column Name="Id_Kunde" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Id_Bestimmungsort" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="Auftrag_MN_VerfahrenAuftrag" Member="MN_VerfahrenAuftrag" ThisKey="Id" OtherKey="Id_Auftrag" Type="MN_VerfahrenAuftrag" />
+      <Association Name="Auftrag_Material" Member="Material" ThisKey="Id" OtherKey="Id_Auftrag" Type="Material" />
       <Association Name="Bestimmungsort_Auftrag" Member="Bestimmungsort" ThisKey="Id_Bestimmungsort" OtherKey="Id" Type="Bestimmungsort" IsForeignKey="true" />
       <Association Name="Kunde_Auftrag" Member="Kunde" ThisKey="Id_Kunde" OtherKey="Id" Type="Kunde" IsForeignKey="true" />
     </Type>
@@ -71,6 +72,22 @@
       <Column Name="Art" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
       <Association Name="Verfahren_Teilschritt" Member="Teilschritt" ThisKey="Id" OtherKey="Id_Verfahren" Type="Teilschritt" />
       <Association Name="Verfahren_MN_VerfahrenAuftrag" Member="MN_VerfahrenAuftrag" ThisKey="Id" OtherKey="Id_Verfahren" Type="MN_VerfahrenAuftrag" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Material" Member="Material">
+    <Type Name="Material">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Position" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="AuftragsNr" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="Stahlsorte" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Charge" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Abmessung" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Anzahl" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Gewicht" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Bemerkung" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Id_Glühung" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Id_Auftrag" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Auftrag_Material" Member="Auftrag" ThisKey="Id_Auftrag" OtherKey="Id" Type="Auftrag" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>
