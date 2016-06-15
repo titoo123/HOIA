@@ -18,7 +18,7 @@ namespace HOIA.Erweiterungen
         TreeViewItem item;
         Extended_TreeView t;
 
-        List<string> a;
+        StringTuple2D a;
 
         public string Tag
         {
@@ -62,8 +62,6 @@ namespace HOIA.Erweiterungen
             this.name = name;
             this.sublevel = sublevel;
 
-            a = new List<string>();
-
             t.Items.Add(new TreeViewItem() { Header = name, Tag = name });
 
             Item = t.TreeViewGetNode_ByText(name);
@@ -79,13 +77,11 @@ namespace HOIA.Erweiterungen
             this.name = name;
             this.sublevel = sublevel;
 
-            a = new List<string>();
-
             t.Items.Add(new TreeViewItem() { Header = name, Tag = name });
 
             Item = t.TreeViewGetNode_ByText(name);
             t.CreateChilds(fre, name);
-            //RefreshInformation();
+
             RefreshValue();
             t.TreeViewGetNode_ByText(Helper.FREIEAUFTRÄGE_STRING).IsExpanded = true;
         }
@@ -118,7 +114,6 @@ namespace HOIA.Erweiterungen
                     j.Header = Helper.CleanUpString((string)j.Header) + " ( " + gewicht + " Kg )";
                 }
 
-                //item.Header = Helper.CleanUpString((string)item.Header) + " ( " + gewicht + " Kg )";
             }
             else
             {   //Anzahl freie Aufträge
@@ -159,14 +154,11 @@ namespace HOIA.Erweiterungen
             }
         }
 
-        internal void AddJobToList(string s)
+        internal void AddJobToList(string s,string z)
         {
-            this.a.Add(s);
+            this.a.Add(s,z);
         }
-        internal List<string> GetJobList()
-        {
-            return this.a;
-        }
+
         public ListView ReplaceListViewItems(ListView l, string _tag)
         {
             if (_tag != null)
@@ -182,8 +174,7 @@ namespace HOIA.Erweiterungen
                     {
                         if (_tag.Contains(this.Tag))
                         {
-
-                            foreach (string j in this.a)
+                            foreach (var j in a.Items)
                             {
                                 if (!l.Items.Contains(j))
                                 {

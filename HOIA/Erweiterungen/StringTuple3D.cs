@@ -7,7 +7,7 @@ using System.Windows.Controls;
 
 namespace HOIA.Erweiterungen
 {
-    public class Tuple3D
+    public class StringTuple3D
     {
         List<Tuple<string, string, string>> a = new List<Tuple<string, string, string>>();
 
