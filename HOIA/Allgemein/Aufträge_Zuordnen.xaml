@@ -20,9 +20,9 @@
                 <src:Extended_TreeView  x:Name="treeView_H_Zuordnen_HOWerte" MouseUp="treeView_H_Zuordnen_HOWerte_MouseUp" MouseMove="treeView_H_Zuordnen_HOWerte_MouseMove"  Grid.Column="0" VerticalAlignment="Top"   BorderThickness="1,0,0,0"></src:Extended_TreeView>
                 <!--<TreeView x:Name="treeView_H_Zuordnen_HOWerte" MouseUp="treeView_H_Zuordnen_HOWerte_MouseUp" MouseMove="treeView_H_Zuordnen_HOWerte_MouseMove"  Grid.Column="0" VerticalAlignment="Top"  FontSize="16" BorderThickness="1,0,0,0">
                 </TreeView>-->
-                <ListView Grid.Column="1" Name="ListView_Aufträge" >
-                    <ListView.View>
-                        <GridView>
+                <ListView Grid.Column="1" Name="ListView_Aufträge" Margin="0,24,0,0" >
+                    <!--<ListView.View>-->
+                        <!--<GridView>-->
                             <!--<GridViewColumn Header="Maschine"
 				    DisplayMemberBinding="{Binding Item1}"
 				    Width="100"/>-->
@@ -32,8 +32,8 @@
                             <GridViewColumn Header="ODL"
 				    DisplayMemberBinding="{Binding Item3}"
 				    Width="100"/>-->
-                        </GridView>
-                    </ListView.View>
+                        <!--</GridView>-->
+                    <!--</ListView.View>-->
                 </ListView>
                 <GroupBox x:Name="groupBox" Header="Auftragsdetails" Grid.Column="2">
                     <Grid>
@@ -213,6 +213,7 @@
                     </Grid>
 
                 </GroupBox>
+                <Label x:Name="label_maschine" Content="Maschine:" Grid.Column="1" HorizontalAlignment="Left" Margin="4,-1,0,0" VerticalAlignment="Top" Width="315"/>
             </Grid>
         </GroupBox>
     </Grid>

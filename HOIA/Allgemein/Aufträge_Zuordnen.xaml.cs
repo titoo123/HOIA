@@ -70,18 +70,27 @@ namespace HOIA.Allgemein
         private void treeView_Item_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
 
+            //Tag des angeklickenten Elements
             string tag = TreeViewHelper.HitTreeView(treeView_H_Zuordnen_HOWerte, e);
 
-            
+            //Leert Liste 
+            ListView_Aufträge.Items.Clear();
+            //Öffnet Knoten
             if (TreeViewHelper.GetNodeLevel(treeView_H_Zuordnen_HOWerte, TreeViewHelper.TreeViewGetNode_ByTag(treeView_H_Zuordnen_HOWerte, tag)) == 1 )
             {
                 TreeViewHelper.ExpandAll(treeView_H_Zuordnen_HOWerte, false);
+            }
+
+            foreach (var m in mList)
+            {
+                m.ReplaceListViewItems(ListView_Aufträge, tag);
             }
 
             if (tag != null)
             {
                 foreach (TreeViewItem item in treeView_H_Zuordnen_HOWerte.Items)
                 {
+                   
                     //Level 1 und 2
                     foreach (TreeViewItem i in item.Items)
                     {
@@ -171,8 +180,71 @@ namespace HOIA.Allgemein
         }
 
         private void treeViewItem_MouseDoubleClick(object sender, MouseButtonEventArgs e) {
-            MessageBox.Show("","");
-            treeView_H_Zuordnen_HOWerte.Move(ListView_Aufträge);
+
+            string header = TreeViewHelper.HitTreeView(treeView_H_Zuordnen_HOWerte, e);
+            if (header != null)
+            {
+                TreeViewItem selectedItem = TreeViewHelper.TreeViewGetNode_ByText(treeView_H_Zuordnen_HOWerte, header);
+                TreeViewItem selectedItemParent = TreeViewHelper.GetParent(selectedItem);
+                //TreeViewItem selectedItemGrandParent = TreeViewHelper.GetParent(selectedItemParent);
+
+                if (selectedItem != null)
+                {
+                    if (selectedItem.Focus())
+                    {
+                        if (selectedItem.Header == null)
+                            return;
+
+                        if (
+                            (
+
+                            TreeViewHelper.GetNodeLevel(treeView_H_Zuordnen_HOWerte, selectedItem) == 2
+                            &&
+                            (
+                            (string)selectedItemParent.Tag != Helper.FREIEAUFTRÄGE_STRING
+                            &&
+                            (string)selectedItemParent.Tag != Helper.RM_STRING)
+                            )
+
+                            || (TreeViewHelper.GetNodeLevel(treeView_H_Zuordnen_HOWerte, selectedItem) == 1
+                            && (string)selectedItem.Tag == Helper.RM_STRING)
+                            )
+                        {
+                            
+                            if (MessageBox.Show("Wollen sie wirklich die "+ selectedItem.Items.Count +" Aufträge von " + selectedItem.Tag + " in die Liste verschieben?", "Verschieben?",MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                            {
+                                foreach (var m in mList)
+                                {
+                                    if (m.Tag == (string)selectedItem.Tag)
+                                    {
+                                        foreach (TreeViewItem n in selectedItem.Items)
+                                        {
+                                            m.AddJobToList((string)n.Tag);
+                                        }
+
+                                    }
+                                    if (selectedItemParent != null)
+                                    {
+                                        if (m.Tag == (string)selectedItemParent.Tag)
+                                        {
+                                            foreach (TreeViewItem n in selectedItem.Items)
+                                            {
+                                                m.AddJobToList((string)n.Tag);
+                                            }
+
+                                        }
+                                    }
+
+
+                                }
+                            }
+
+                        }
+                    }
+                }
+            }
+
+            //treeView_H_Zuordnen_HOWerte.Move(ListView_Aufträge);
 
         }
         private void treeView_H_Zuordnen_HOWerte_MouseUp(object sender, MouseButtonEventArgs e)
@@ -214,7 +286,7 @@ namespace HOIA.Allgemein
 
                         foreach (Maschine m in mList)
                         {
-                            m.RefreshInformation();
+                            m.RefreshValue();
                         }
                     }
 

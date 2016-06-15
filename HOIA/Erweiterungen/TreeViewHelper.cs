@@ -337,9 +337,18 @@ namespace HOIA.Erweiterungen
         }
 
         public static TreeViewItem GetParent(TreeViewItem t) {
-            ItemsControl parent = GetSelectedTreeViewItemParent(t);
-            TreeViewItem t_parent = parent as TreeViewItem;
-            return t_parent;
+
+            try
+            {
+                ItemsControl parent = GetSelectedTreeViewItemParent(t);
+                TreeViewItem t_parent = parent as TreeViewItem;
+                return t_parent;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+
         }
 
         public static ItemsControl GetSelectedTreeViewItemParent(TreeViewItem item)

@@ -101,7 +101,8 @@
     <Compile Include="Erweiterungen\Extended_TreeView.cs" />
     <Compile Include="Erweiterungen\Maschine.cs" />
     <Compile Include="Erweiterungen\TreeViewHelper.cs" />
-    <Compile Include="Erweiterungen\Tuple.cs" />
+    <Compile Include="Erweiterungen\Tuple2D.cs" />
+    <Compile Include="Erweiterungen\Tuple3D.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
