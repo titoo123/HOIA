@@ -55,6 +55,20 @@ namespace HOIA.Erweiterungen
             }
 
         }
+        public static string CleanUpTheFuckingListViewItem(string s)
+        {
+            if (s.Contains("("))
+            {
+                string z = s.Split('(')[1];
+                z = z.Split(',').First();
+                return z;
+            }
+            else
+            {
+                return s;
+            }
+
+        }
         public static string CutFreeString( string s) {
             return s.Replace(" ", "");
         }

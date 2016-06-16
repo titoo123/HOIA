@@ -26,9 +26,7 @@ namespace HOIA.Allgemein
     {
         private TreeViewItem treeViewItem;
         private bool lMousePressed = false;
-        //Erweiterungen.Tuple a = new Erweiterungen.Tuple();
-
-        List<Maschine> mList = new List<Maschine>();
+        private List<Maschine> mList = new List<Maschine>();
 
         public Aufträge_Zuordnen()
         {
@@ -37,9 +35,8 @@ namespace HOIA.Allgemein
             TreeView_H_Zuordnen_HOWerte_Refresh();
 
             treeView_H_Zuordnen_HOWerte.AddHandler(TreeViewItem.PreviewMouseLeftButtonDownEvent, new MouseButtonEventHandler(treeView_Item_MouseLeftButtonDown));
-            //treeView_H_Zuordnen_HOWerte.AddHandler(TreeViewItem.PreviewMouseRightButtonDownEvent, new MouseButtonEventHandler(treeView_Item_MouseRightButtonDown));
             treeView_H_Zuordnen_HOWerte.AddHandler(TreeViewItem.PreviewMouseDoubleClickEvent, new MouseButtonEventHandler(treeViewItem_MouseDoubleClick));
-            //AddHeaderContent();
+
 
         }
         private void TreeView_H_Zuordnen_HOWerte_Refresh()
@@ -107,7 +104,7 @@ namespace HOIA.Allgemein
                             {
                                 lMousePressed = true;
                                 treeViewItem = i;
-                                treeViewItem_Click(i);
+                                item_Click(i);
                             }
                         }
                         //Level 3
@@ -119,7 +116,7 @@ namespace HOIA.Allgemein
                                 {
                                     lMousePressed = true;
                                     treeViewItem = a;
-                                    treeViewItem_Click(a);
+                                    item_Click(a);
                                 }
                             }
                         }
@@ -219,7 +216,7 @@ namespace HOIA.Allgemein
                                     {
                                         foreach (TreeViewItem n in selectedItem.Items)
                                         {
-                                            m.AddJobToList((string)n.Tag);
+                                            m.AddJobToList((string)n.Tag,(string)TreeViewHelper.GetParent(n).Tag);
                                         }
 
                                     }
@@ -229,7 +226,7 @@ namespace HOIA.Allgemein
                                         {
                                             foreach (TreeViewItem n in selectedItem.Items)
                                             {
-                                                m.AddJobToList((string)n.Tag);
+                                                m.AddJobToList((string)n.Tag, (string)TreeViewHelper.GetParent(n).Tag);
                                             }
 
                                         }
@@ -281,7 +278,6 @@ namespace HOIA.Allgemein
                         if (treeViewItem.Parent is TreeViewItem)
                         {
                             (treeViewItem.Parent as TreeViewItem).Items.Remove(treeViewItem);
-                            //a.Remove(treeViewItem);
                         }
 
                         foreach (Maschine m in mList)
@@ -298,14 +294,12 @@ namespace HOIA.Allgemein
 
         }
 
-        
-        private void treeViewItem_Click(TreeViewItem ti)
-        {
+        private void item_Click(TreeViewItem i) {
 
             DDataContext d = new DDataContext();
 
             var drt = from h in d.Auftrag
-                      where h.ODL == ti.Header.ToString()
+                      where h.ODL == i.Header.ToString()
                       select h;
             if (drt.Count() > 0)
             {
@@ -313,9 +307,23 @@ namespace HOIA.Allgemein
 
                 label_ODL.Content = "ODL: \t" + a.ODL;
             }
-
         }
-   
+        private void item_Click(string i)
+        {
+
+            DDataContext d = new DDataContext();
+
+            var drt = from h in d.Auftrag
+                      where h.ODL == i
+                      select h;
+            if (drt.Count() > 0)
+            {
+                Auftrag a = drt.First();
+
+                label_ODL.Content = "ODL: \t" + a.ODL;
+            }
+        }
+
         private void treeView_H_Zuordnen_HOWerte_MouseMove(object sender, MouseEventArgs e)
         {
             
@@ -332,56 +340,13 @@ namespace HOIA.Allgemein
 
         }
 
-  
-
-        void AddHeaderContent() {
-
-            DDataContext d = new DDataContext();
-            var ver = from z in d.Verfahren
-                      select z.Name;
-
-            foreach (TreeViewItem t in treeView_H_Zuordnen_HOWerte.Items)
+ 
+        private void ListView_Aufträge_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (ListView_Aufträge.SelectedIndex != -1)
             {
-                string s = (string)t.Header;
-                if (s.Contains(Helper.FREIEAUFTRÄGE_STRING))
-                {
-                    t.Header = Helper.AddString((string)t.Header, "Anzahl", 3);
-                }
-                if (s.Contains(Helper.EL1_STRING))
-                {
-                    t.Header = Helper.AddString((string)t.Header, "Gewicht", 3, "Kg");
-                }
-                if (s.Contains(Helper.EL2_STRING))
-                {
-                    t.Header = Helper.AddString((string)t.Header, "Gewicht", 3, "Kg");
-                }
-                if (s.Contains(Helper.HGO1_STRING))
-                {
-                    t.Header = Helper.AddString((string)t.Header, "Gewicht", 3, "Kg");
-                }
-                if (s.Contains(Helper.HGO2_STRING))
-                {
-                    t.Header = Helper.AddString((string)t.Header, "Gewicht", 3, "Kg");
-                }
-                if (s.Contains(Helper.RM_STRING))
-                {
-                    t.Header = Helper.AddString((string)t.Header, "Gewicht", 3, "Kg");
-                }
-
-                //Teile Gewichte für die einzelnen Verfahren hinzu
-                foreach (TreeViewItem c in t.Items)
-                {
-                    if (ver.Contains((string)c.Header))
-                    {
-                        c.Header = Helper.AddString((string)c.Header, "Gewicht", 3, "Kg");
-                    }
-                }
-
-
-
+                item_Click(Helper.CleanUpTheFuckingListViewItem( ListView_Aufträge.SelectedItem.ToString()));
             }
-
         }
-
     }
 }

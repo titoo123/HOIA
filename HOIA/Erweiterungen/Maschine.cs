@@ -18,7 +18,7 @@ namespace HOIA.Erweiterungen
         TreeViewItem item;
         Extended_TreeView t;
 
-        StringTuple2D a;
+        StringTuple2D a = new StringTuple2D();
 
         public string Tag
         {
@@ -156,7 +156,7 @@ namespace HOIA.Erweiterungen
 
         internal void AddJobToList(string s,string z)
         {
-            this.a.Add(s,z);
+            a.Add(s,z);
         }
 
         public ListView ReplaceListViewItems(ListView l, string _tag)
@@ -165,23 +165,27 @@ namespace HOIA.Erweiterungen
             {
                 //Leert Liste 
                 //l.Items.Clear();
-                foreach (TreeViewItem item in t.Items)
+                foreach (TreeViewItem i in t.Items)
                 {
                     //Level 1
                     //Fügt Maschinenjobs/Aufträge in Liste
                     //Beim Linksklicken auf die Maschinen
-                    if (_tag == (string)item.Tag || _tag.Contains("RM"))
+                    if (_tag == (string)i.Tag || _tag.Contains("RM"))
                     {
                         if (_tag.Contains(this.Tag))
                         {
-                            foreach (var j in a.Items)
+                            if (a.Items != null)
                             {
-                                if (!l.Items.Contains(j))
+                                foreach (var j in a.Items)
                                 {
-                                    l.Items.Add(j);
-                                }
+                                    if (!l.Items.Contains(j))
+                                    {
+                                        l.Items.Add(j);
+                                    }
 
+                                }
                             }
+
 
                         }
                     }
