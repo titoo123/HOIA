@@ -55,7 +55,7 @@
                                 <Grid.RowDefinitions>
                                     <RowDefinition></RowDefinition>
                                     <RowDefinition></RowDefinition>
-
+                                    <RowDefinition></RowDefinition>
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition></ColumnDefinition>
@@ -63,20 +63,25 @@
                                     <ColumnDefinition></ColumnDefinition>
                                     <ColumnDefinition></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
+                                
+                                <Label x:Name="label_Verarbeitung" Content="Verarbeitung:" Grid.Column="0"  Grid.Row="0"/>
+                                <Label x:Name="label1" Content="Auftrag Nr:" Grid.Column="2"  Grid.Row="0"/>
+                                <Label x:Name="label_ODL" Content="ODL: "  Grid.Column="0"  Grid.Row="1" />
+                                <Label x:Name="label_Status" Content="Status:"  Grid.Column="0"  Grid.Row="2"  />
+                                <Label x:Name="label_Auftragsdatum" Content="Auftragsdatum:" Grid.Column="2"  Grid.Row="1"  />
+                                <Label x:Name="label_Liefertermin" Content="Liefertermin:" Grid.Column="2"  Grid.Row="2"  />
 
-                                <Label x:Name="label_ODL" Content="ODL "  Grid.Column="0"  Grid.Row="0" />
-                                <Label x:Name="label_Status" Content="Status"  Grid.Column="0"  Grid.Row="1"  />
-                                <Label x:Name="label_Auftragsdatum" Content="Auftragsdatum" Grid.Column="2"  Grid.Row="0"  />
-                                <Label x:Name="label_Liefertermin" Content="Liefertermin" Grid.Column="2"  Grid.Row="1"  />
-
-                                <TextBox x:Name="textBox4" Height="23"  Grid.Column="1"  Grid.Row="0" IsReadOnly="True"/>
-                                <TextBox x:Name="textBox5" Height="23"  Grid.Column="1"  Grid.Row="1" IsReadOnly="True"/>
-                                <TextBox x:Name="textBox6" Height="23"  Grid.Column="3"  Grid.Row="0" IsReadOnly="True"/>
-                                <TextBox x:Name="textBox7" Height="23"  Grid.Column="3"  Grid.Row="1" IsReadOnly="True"/>
+                                <TextBox x:Name="textBox_Verarbeitung" Height="23"  Grid.Column="1"  Grid.Row="0" IsReadOnly="True"/>
+                                <TextBox x:Name="textBox_Auftrag" Height="23"  Grid.Column="3"  Grid.Row="0" IsReadOnly="True"/>
+                                <TextBox x:Name="textBox_ODL" Height="23"  Grid.Column="1"  Grid.Row="1" IsReadOnly="True"/>
+                                <TextBox x:Name="textBox_ADatum" Height="23"  Grid.Column="3"  Grid.Row="1" IsReadOnly="True"/>
+                                <TextBox x:Name="textBox_Status" Height="23"  Grid.Column="1"  Grid.Row="2" IsReadOnly="True"/>
+                                <TextBox x:Name="textBox_LTermin" Height="23"  Grid.Column="3"  Grid.Row="2" IsReadOnly="True"/>
                             </Grid>
                         </GroupBox>
-                        <GroupBox x:Name="groupBox1" Header="Kunde"  Grid.Row="1" VerticalAlignment="Top" Grid.Column="0">
-                            <Grid>
+                        <!--<GroupBox x:Name="groupBox1" Header="Kunde"  Grid.Row="1" VerticalAlignment="Top" Grid.Column="0">-->
+                           
+                            <!--<Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition></RowDefinition>
                                     <RowDefinition></RowDefinition>
@@ -95,10 +100,10 @@
                                 <Label x:Name="label_Kunde_Stadt" Content="Stadt:" Grid.Column="0"  Grid.Row="3" />
                                 <Label x:Name="label_Kunde_Land" Content="Land:"  Grid.Column="0"  Grid.Row="4" />
 
-                            </Grid>
+                            </Grid>-->
 
-                        </GroupBox>
-                        <GroupBox x:Name="groupBox2" Header="Bestimmungsort" Grid.Row="1"   Grid.Column="1">
+                        <!--</GroupBox>-->
+                        <!--<GroupBox x:Name="groupBox2" Header="Bestimmungsort" Grid.Row="1"   Grid.Column="1">
                             <Grid >
                                 <Grid.RowDefinitions>
                                     <RowDefinition></RowDefinition>
@@ -117,33 +122,12 @@
                                 <Label x:Name="label_Bestimmungsort_PLZ" Content="PLZ:"  Grid.Column="0"  Grid.Row="2" />
                                 <Label x:Name="label_Bestimmungsort_Stadt" Content="Stadt:"  Grid.Column="0"  Grid.Row="3" />
                                 <Label x:Name="label_Bestimmungsort_Land" Content="Land:"  Grid.Column="0"  Grid.Row="4" />
-                            </Grid>
-                        </GroupBox>
-                        <GroupBox x:Name="groupBox3" Header="Beschreibung der Materials" Grid.Row="2"  Grid.ColumnSpan="2">
+                            </Grid>-->
+                        <!--</GroupBox>-->
+                        <GroupBox x:Name="groupBox3" Header="Beschreibung der Materials" Grid.Row="1"  Grid.ColumnSpan="2">
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition></RowDefinition>
-                                    <RowDefinition></RowDefinition>
-
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition></ColumnDefinition>
-                                    <ColumnDefinition></ColumnDefinition>
-                                    <ColumnDefinition></ColumnDefinition>
-                                    <ColumnDefinition></ColumnDefinition>
-                                </Grid.ColumnDefinitions>
-
-                                <Label x:Name="label_Walzung" Content="Walzung:" Grid.Column="0"  Grid.Row="0" />
-                                <Label x:Name="label_Verarbeitung" Content="Verarbeitung:" Grid.Column="0"  Grid.Row="1"/>
-                                <Label x:Name="label5" Content="Art:" Grid.Column="2"  Grid.Row="0"/>
-                                <TextBox x:Name="textBox8" Height="23" Grid.Column="1"  Grid.Row="0" IsReadOnly="True"/>
-                                <TextBox x:Name="textBox9" Height="23" Grid.Column="1"  Grid.Row="1" IsReadOnly="True"/>
-                                <TextBox x:Name="textBox10" Height="23" Grid.Column="3"  Grid.Row="0" IsReadOnly="True"/>
-                            </Grid>
-                        </GroupBox>
-                        <GroupBox x:Name="groupBox5" Header="Sonstige Informationen" Grid.Row="3"  VerticalAlignment="Top" Grid.ColumnSpan="2" >
-                            <Grid>
-                                <Grid.RowDefinitions>
                                     <RowDefinition></RowDefinition>
                                     <RowDefinition></RowDefinition>
                                     <RowDefinition></RowDefinition>
@@ -155,24 +139,59 @@
                                     <ColumnDefinition></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
 
-                                <Label x:Name="label4" Content="Charge:" Grid.Column="0"  Grid.Row="0"/>
-                                <Label x:Name="label2" Content="Position:" Grid.Column="0"  Grid.Row="1"/>
-                                <Label x:Name="label3" Content="Lagerort:" Grid.Column="0"  Grid.Row="2"/>
-                                <Label x:Name="label1" Content="Auftrag Nr:" Grid.Column="2"  Grid.Row="0"/>
+                                <!--<Label x:Name="label_Walzung" Content="Walzung:" Grid.Column="0"  Grid.Row="0" />-->
+                                <Label x:Name="label_Abm1" Content="Abmessung 1:" Grid.Column="0"  Grid.Row="0"/>
+                                <Label x:Name="label_Abm2" Content="Abmessung 2:" Grid.Column="2"  Grid.Row="0"/>
+                                <Label x:Name="label5" Content="Art:" Grid.Column="0"  Grid.Row="1"/>
                                 <Label x:Name="label" Content="Stahlsorte:" Grid.Column="2"  Grid.Row="1"/>
-                                <TextBox x:Name="textBox11" Height="23" Grid.Column="1"  Grid.Row="0" IsReadOnly="True"/>
-                                <TextBox x:Name="textBox12" Height="23" Grid.Column="1"  Grid.Row="1" IsReadOnly="True"/>
-                                <TextBox x:Name="textBox13" Height="23" Grid.Column="1"  Grid.Row="2" IsReadOnly="True"/>
-                                <TextBox x:Name="textBox14" Height="23" Grid.Column="3"  Grid.Row="0" IsReadOnly="True"/>
-                                <TextBox x:Name="textBox15" Height="23" Grid.Column="3"  Grid.Row="1" IsReadOnly="True"/>
+                                <Label x:Name="label123" Content="W. Länge:" Grid.Column="2"  Grid.Row="2"/>
+                                <Label x:Name="label433" Content="F. Länge:" Grid.Column="0"  Grid.Row="2"/>
+                                <Label x:Name="label4" Content="Charge:" Grid.Column="0"  Grid.Row="3"/>
+                                <Label x:Name="label423" Content="Gesamtmenge:" Grid.Column="2"  Grid.Row="3"/>
 
+                                <TextBox x:Name="textBox_Abm1" Height="23" Grid.Column="1"  Grid.Row="0" IsReadOnly="True"/>
+                                <TextBox x:Name="textBox_Abm2" Height="23" Grid.Column="3"  Grid.Row="0" IsReadOnly="True"/>
+                                <TextBox x:Name="textBox_Art" Height="23" Grid.Column="1"  Grid.Row="1" IsReadOnly="True"/>
+
+                                <TextBox x:Name="textBox_Stahlsorte" Height="23" Grid.Column="3"  Grid.Row="1" IsReadOnly="True"/>
+                                <TextBox x:Name="textBox_FLänge" Height="23" Grid.Column="1"  Grid.Row="2" IsReadOnly="True"/>
+                                <TextBox x:Name="textBox_WLänge" Height="23" Grid.Column="3"  Grid.Row="2" IsReadOnly="True"/>
+                                <TextBox x:Name="textBox_Charge" Height="23" Grid.Column="1"  Grid.Row="3" IsReadOnly="True"/>
+                                <TextBox x:Name="textBox_Gesamtmenge" Height="23" Grid.Column="3"  Grid.Row="3" IsReadOnly="True"/>
                             </Grid>
+                        </GroupBox>
+                        <GroupBox Header="Material" Grid.Row="3" Grid.ColumnSpan="2">
+                            <ListView Grid.Column="1" Name="ListView_Material" Margin="0,-1,0,0" SelectionChanged="ListView_Aufträge_SelectionChanged" Height="160" >
+                                <ListView.View>
+                                    <GridView>
+                                        <GridViewColumn Header="Datum"
+				                        DisplayMemberBinding="{Binding Datum}"
+				                        Width="150"/>
+                                        <GridViewColumn Header="Bunde"
+				                        DisplayMemberBinding="{Binding Bunde}"
+				                        Width="100"/>
+                                        <GridViewColumn Header="Charge"
+				                        DisplayMemberBinding="{Binding Charge}"
+				                        Width="100"/>
+                                        <GridViewColumn Header="Stahlsorte"
+				                        DisplayMemberBinding="{Binding Stahlsorte}"
+				                        Width="190"/>
+                                        <GridViewColumn Header="Gewicht"
+				                        DisplayMemberBinding="{Binding Gewicht, StringFormat=( {0} Kg )}"
+
+				                        Width="120"/>
+                                    </GridView>
+                                </ListView.View>
+                            </ListView>
                         </GroupBox>
                         <GroupBox x:Name="groupBox6" Header="Ergänzungen" Grid.Row="4"  VerticalAlignment="Top" Grid.ColumnSpan="2" >
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="60"></RowDefinition>
                                     <RowDefinition Height="60"></RowDefinition>
+                                    <RowDefinition Height="60"></RowDefinition>
+                                    <RowDefinition Height="60" ></RowDefinition>
+                                    <RowDefinition></RowDefinition>
                                     <RowDefinition></RowDefinition>
                                     <RowDefinition></RowDefinition>
                                 </Grid.RowDefinitions>
@@ -182,23 +201,24 @@
                                     <ColumnDefinition></ColumnDefinition>
                                     <ColumnDefinition></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
-                                <Label x:Name="label9" Content="Anlasstemparatur:" Grid.Column="2"  Grid.Row="2" />
-                                <TextBox x:Name="textBox2"  Grid.Column="1" Grid.RowSpan="2" Grid.Row="0" HorizontalAlignment="Stretch"   AcceptsReturn="True" VerticalScrollBarVisibility="Auto"/>
+
+                                <TextBox x:Name="textBox_TecAnmerkungen"  Grid.Column="1" Grid.RowSpan="2" Grid.ColumnSpan="3" Grid.Row="0" HorizontalAlignment="Stretch"   AcceptsReturn="True" VerticalScrollBarVisibility="Auto"/>
                                 <Label x:Name="label_technischeAnmerkungen" Content="Tech. Anmerkungen:" Grid.Column="0"  Grid.Row="0"/>
-                                <TextBox x:Name="textBox3" Grid.Column="3" Grid.RowSpan="2" Grid.Row="0"  HorizontalAlignment="Stretch"  AcceptsReturn="True" VerticalScrollBarVisibility="Auto"/>
-                                <Label x:Name="label7" Content="Int. Anmerkungen:" Grid.Column="2"  Grid.Row="0" />
-                                <TextBox x:Name="textBox" Grid.Column="1"  Grid.Row="2" />
-                                <Label x:Name="label8" Content="Sägeprogramm:" Grid.Column="0"  Grid.Row="2"/>
-                                <TextBox x:Name="textBox1" Height="23" Grid.Column="3"  Grid.Row="2"/>
+                                <TextBox x:Name="textBox_IntAnmerkungen" Grid.Column="1" Grid.RowSpan="2" Grid.ColumnSpan="3"  Grid.Row="2" HorizontalAlignment="Stretch"  AcceptsReturn="True" VerticalScrollBarVisibility="Auto"/>
+                                <Label x:Name="label7" Content="Int. Anmerkungen:" Grid.Column="0"  Grid.Row="2" />
+                                <Label x:Name="label9" Content="Anlasstemparatur:" Grid.Column="2"  Grid.Row="4" />
+                                <TextBox x:Name="textBox_Sägeprogramm" Grid.Column="1"  Grid.Row="4" />
+                                <Label x:Name="label8" Content="Sägeprogramm:" Grid.Column="0"  Grid.Row="4"/>
+                                <TextBox x:Name="textBox_Anlasstemp"  Grid.Column="3"  Grid.Row="4"/>
 
 
-                                <Label Grid.Column="0"  Grid.Row="3">Status</Label>
-                                <StackPanel Grid.Column="1"  Grid.Row="3" >
+                                <Label Grid.Column="0"  Grid.Row="5">Status</Label>
+                                <StackPanel Grid.Column="1"  Grid.Row="5" >
 
 
-                                    <RadioButton GroupName="status" Foreground="Green" >Frei</RadioButton>
-                                    <RadioButton GroupName="status" Foreground="DarkOrange">Warten</RadioButton>
-                                    <RadioButton GroupName="status" Foreground="Red" IsChecked="True">Gesperrt</RadioButton>
+                                    <RadioButton Name="radiobutton_Frei" GroupName="status" Foreground="Green" Checked="RadioButton_Checked" >Frei</RadioButton>
+                                    <RadioButton Name="radiobutton_Warten" GroupName="status" Foreground="DarkOrange" Checked="RadioButton_Checked">Warten</RadioButton>
+                                    <RadioButton Name="radiobutton_Gesperrt" GroupName="status" Foreground="Red" Checked="RadioButton_Checked">Gesperrt</RadioButton>
 
 
                                 </StackPanel>

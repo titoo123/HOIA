@@ -20,39 +20,12 @@
         <elementListCompartment Id="130d6e79-579e-4b27-9547-3ca6513f5bd7" absoluteBounds="6.8900000000000006, 10.085, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="7694bf3d-2c64-4849-a502-4c81ece921ea" absoluteBounds="4, 3.875, 2, 3.5016097005208326">
-      <DataClassMoniker Name="/DDataContext/Auftrag" />
-      <nestedChildShapes>
-        <elementListCompartment Id="3cce1530-e702-44ef-a2b7-2bd373f906e6" absoluteBounds="4.015, 4.335, 1.9700000000000002, 2.941609700520833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <associationConnector edgePoints="[(5.75 : 3.2131982421875); (5.75 : 3.875)]" fixedFrom="NotFixed" fixedTo="NotFixed">
-      <AssociationMoniker Name="/DDataContext/Bestimmungsort/Bestimmungsort_Auftrag" />
-      <nodes>
-        <classShapeMoniker Id="c79435de-5dde-4c1f-8e6a-65584d7f05d0" />
-        <classShapeMoniker Id="7694bf3d-2c64-4849-a502-4c81ece921ea" />
-      </nodes>
-    </associationConnector>
-    <associationConnector edgePoints="[(4.4375 : 3.2131982421875); (4.4375 : 3.875)]" fixedFrom="NotFixed" fixedTo="NotFixed">
-      <AssociationMoniker Name="/DDataContext/Kunde/Kunde_Auftrag" />
-      <nodes>
-        <classShapeMoniker Id="9b259905-ca5b-46c3-994d-465d70e3c998" />
-        <classShapeMoniker Id="7694bf3d-2c64-4849-a502-4c81ece921ea" />
-      </nodes>
-    </associationConnector>
     <classShape Id="9cf39b5a-55ed-4df1-8bf9-d6a2f8891deb" absoluteBounds="6.875, 5.875, 2, 1.5785953776041666">
       <DataClassMoniker Name="/DDataContext/MN_VerfahrenAuftrag" />
       <nestedChildShapes>
         <elementListCompartment Id="cb24152e-e7dc-489e-be07-a1915c40936b" absoluteBounds="6.89, 6.335, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(6 : 6.62580485026042); (6.875 : 6.62580485026042)]" fixedFrom="NotFixed" fixedTo="NotFixed">
-      <AssociationMoniker Name="/DDataContext/Auftrag/Auftrag_MN_VerfahrenAuftrag" />
-      <nodes>
-        <classShapeMoniker Id="7694bf3d-2c64-4849-a502-4c81ece921ea" />
-        <classShapeMoniker Id="9cf39b5a-55ed-4df1-8bf9-d6a2f8891deb" />
-      </nodes>
-    </associationConnector>
     <classShape Id="a9bc3382-c53b-47cb-af46-01492631be52" absoluteBounds="6.875, 7.75, 2, 1.5785953776041666">
       <DataClassMoniker Name="/DDataContext/Verfahren" />
       <nestedChildShapes>
@@ -73,17 +46,44 @@
         <classShapeMoniker Id="9cf39b5a-55ed-4df1-8bf9-d6a2f8891deb" />
       </nodes>
     </associationConnector>
-    <classShape Id="d0d1da6b-938a-4034-9161-fbe504e7a628" absoluteBounds="1, 5.875, 2, 2.9247054036458331">
+    <classShape Id="8db83ed5-d31d-435e-aa8d-61c66739d184" absoluteBounds="1, 5.5, 2, 2.5401025390625">
       <DataClassMoniker Name="/DDataContext/Material" />
       <nestedChildShapes>
-        <elementListCompartment Id="8da1f437-c986-4b95-90a3-3dabae878195" absoluteBounds="1.0150000000000001, 6.335, 1.9700000000000002, 2.364705403645833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="927de252-c634-4a4a-a0d4-a0bbc40f9ff0" absoluteBounds="1.0150000000000001, 5.96, 1.9700000000000002, 1.9801025390625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(4 : 6.62580485026042); (3 : 6.62580485026042)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <classShape Id="b968780e-3efa-4739-9e2c-1b70e13c0595" absoluteBounds="3.875, 4.25, 2, 5.2323225911458326">
+      <DataClassMoniker Name="/DDataContext/Auftrag" />
+      <nestedChildShapes>
+        <elementListCompartment Id="34affbb4-453f-4997-9674-e8603d270698" absoluteBounds="3.8899999999999997, 4.71, 1.9700000000000002, 4.672322591145833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(5.875 : 6.66429768880208); (6.875 : 6.66429768880208)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/DDataContext/Auftrag/Auftrag_MN_VerfahrenAuftrag" />
+      <nodes>
+        <classShapeMoniker Id="b968780e-3efa-4739-9e2c-1b70e13c0595" />
+        <classShapeMoniker Id="9cf39b5a-55ed-4df1-8bf9-d6a2f8891deb" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(3.875 : 6.77005126953125); (3 : 6.77005126953125)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/DDataContext/Auftrag/Auftrag_Material" />
       <nodes>
-        <classShapeMoniker Id="7694bf3d-2c64-4849-a502-4c81ece921ea" />
-        <classShapeMoniker Id="d0d1da6b-938a-4034-9161-fbe504e7a628" />
+        <classShapeMoniker Id="b968780e-3efa-4739-9e2c-1b70e13c0595" />
+        <classShapeMoniker Id="8db83ed5-d31d-435e-aa8d-61c66739d184" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(6.3750025 : 3.2131982421875); (6.3750025 : 5.03125); (5.875 : 5.03125)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/DDataContext/Bestimmungsort/Bestimmungsort_Auftrag" />
+      <nodes>
+        <classShapeMoniker Id="c79435de-5dde-4c1f-8e6a-65584d7f05d0" />
+        <classShapeMoniker Id="b968780e-3efa-4739-9e2c-1b70e13c0595" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(4.375 : 3.2131982421875); (4.375 : 4.25)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/DDataContext/Kunde/Kunde_Auftrag" />
+      <nodes>
+        <classShapeMoniker Id="9b259905-ca5b-46c3-994d-465d70e3c998" />
+        <classShapeMoniker Id="b968780e-3efa-4739-9e2c-1b70e13c0595" />
       </nodes>
     </associationConnector>
   </nestedChildShapes>

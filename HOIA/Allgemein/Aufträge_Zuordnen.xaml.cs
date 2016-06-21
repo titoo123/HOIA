@@ -28,6 +28,9 @@ namespace HOIA.Allgemein
         private bool lMousePressed = false;
         private List<Maschine> mList = new List<Maschine>();
 
+        /// <summary>
+        /// Konstruktor Klasse
+        /// </summary>
         public Aufträge_Zuordnen()
         {
             InitializeComponent();
@@ -39,6 +42,9 @@ namespace HOIA.Allgemein
 
 
         }
+        /// <summary>
+        /// Läd Werte
+        /// </summary>
         private void TreeView_H_Zuordnen_HOWerte_Refresh()
         {
             DDataContext d = new DDataContext();
@@ -56,14 +62,19 @@ namespace HOIA.Allgemein
                       where f.Status == Helper.AUFTRAG_OFFEN_STRING
                       select f.ODL;
             mList.Add(new Maschine(treeView_H_Zuordnen_HOWerte, Helper.FREIEAUFTRÄGE_STRING, false, fre));
+
             mList.Add(new Maschine(treeView_H_Zuordnen_HOWerte, Helper.EL1_STRING, true, iaa));
             mList.Add(new Maschine(treeView_H_Zuordnen_HOWerte, Helper.EL2_STRING, true, iaa));
             mList.Add(new Maschine(treeView_H_Zuordnen_HOWerte, Helper.HGO1_STRING, true, hoa));
             mList.Add(new Maschine(treeView_H_Zuordnen_HOWerte, Helper.HGO2_STRING, true, hoa));
             mList.Add(new Maschine(treeView_H_Zuordnen_HOWerte, Helper.RM_STRING, false));
-
+            mList.Add(new Maschine(treeView_H_Zuordnen_HOWerte, Helper.FERTIGEAUFTRÄGE_STRING, false));
         }
-
+        /// <summary>
+        /// Linksklick
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void treeView_Item_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
 
@@ -128,6 +139,11 @@ namespace HOIA.Allgemein
             }
 
         }
+        /// <summary>
+        /// Rechtsklick
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void treeView_Item_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
             string header = TreeViewHelper.HitTreeView(treeView_H_Zuordnen_HOWerte, e);
@@ -175,7 +191,11 @@ namespace HOIA.Allgemein
 
 
         }
-
+        /// <summary>
+        /// Maus Doppelklick
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void treeViewItem_MouseDoubleClick(object sender, MouseButtonEventArgs e) {
 
             string header = TreeViewHelper.HitTreeView(treeView_H_Zuordnen_HOWerte, e);
@@ -212,11 +232,13 @@ namespace HOIA.Allgemein
                             {
                                 foreach (var m in mList)
                                 {
+                                    m.RefreshJobWeight();
                                     if (m.Tag == (string)selectedItem.Tag)
                                     {
                                         foreach (TreeViewItem n in selectedItem.Items)
                                         {
                                             m.AddJobToList((string)n.Tag,(string)TreeViewHelper.GetParent(n).Tag);
+
                                         }
 
                                     }
@@ -293,60 +315,121 @@ namespace HOIA.Allgemein
             }
 
         }
-
-        private void item_Click(TreeViewItem i) {
-
-            DDataContext d = new DDataContext();
-
-            var drt = from h in d.Auftrag
-                      where h.ODL == i.Header.ToString()
-                      select h;
-            if (drt.Count() > 0)
-            {
-                Auftrag a = drt.First();
-
-                label_ODL.Content = "ODL: \t" + a.ODL;
-            }
+        /// <summary>
+        /// Item wird angeklickt
+        /// </summary>
+        /// <param name="i"></param>
+        private void item_Click(TreeViewItem i)
+        {
+            Information_Loader(i.Header.ToString());
         }
         private void item_Click(string i)
         {
-
-            DDataContext d = new DDataContext();
-
-            var drt = from h in d.Auftrag
-                      where h.ODL == i
-                      select h;
-            if (drt.Count() > 0)
-            {
-                Auftrag a = drt.First();
-
-                label_ODL.Content = "ODL: \t" + a.ODL;
-            }
+            Information_Loader(i);
         }
-
+        /// <summary>
+        /// Maus bewegt sich
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void treeView_H_Zuordnen_HOWerte_MouseMove(object sender, MouseEventArgs e)
         {
-            
+
             if (lMousePressed)
             {
                 TreeViewItem i = TreeViewHelper.HitTreeView(treeView_H_Zuordnen_HOWerte, e);
-                if (i != null && TreeViewHelper.GetNodeLevel(treeView_H_Zuordnen_HOWerte,i) == 1)
+                if (i != null && TreeViewHelper.GetNodeLevel(treeView_H_Zuordnen_HOWerte, i) == 1)
                 {
                     i.IsExpanded = true;
-                    TreeViewHelper.CloseAll(treeView_H_Zuordnen_HOWerte,i, 2);
+                    TreeViewHelper.CloseAll(treeView_H_Zuordnen_HOWerte, i, 2);
                 }
 
             }
 
         }
-
- 
+        /// <summary>
+        /// auswahl Auftragsliste ändert sich
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ListView_Aufträge_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (ListView_Aufträge.SelectedIndex != -1)
             {
                 item_Click(Helper.CleanUpTheFuckingListViewItem( ListView_Aufträge.SelectedItem.ToString()));
             }
+        }
+
+        private void Information_Loader(string s) {
+            DDataContext d = new DDataContext();
+
+            var drt = from h in d.Auftrag
+                      where h.ODL == s
+                      select h;
+            if (drt.Count() > 0)
+            {
+                Auftrag a = drt.First();
+
+                //Allgemeine Daten
+                textBox_Verarbeitung.Text = a.Verarbeitung;
+                textBox_Auftrag.Text = a.AuftragsNr + "/" + a.Position;
+                textBox_ODL.Text = a.ODL;
+                textBox_ADatum.Text = String.Format("{0:dd/MM/yyyy}", Convert.ToDateTime( a.Auftragsdatum.ToString()));
+                textBox_Status.Text = a.Status;
+                textBox_LTermin.Text = String.Format("{0:dd/MM/yyyy}", Convert.ToDateTime(a.Liefertermin.ToString())); 
+
+                //Beschreibung Material
+                textBox_Abm1.Text = a.Abmessung1.ToString();
+                textBox_Abm2.Text = a.Abmessung2.ToString();
+                textBox_Art.Text = a.Art;
+                textBox_Stahlsorte.Text = a.Stahlsorte;
+                textBox_FLänge.Text = a.FLänge.ToString();
+                textBox_WLänge.Text = a.WLänge.ToString();
+                textBox_Charge.Text = a.Charge;
+                //Gesamtmenge berechnen
+                var ert = from l in d.Material
+                          where l.Id_Auftrag == drt.First().Id
+                          select l;
+                textBox_Gesamtmenge.Text = ert.Count().ToString();
+                //Zugehörige Materialien
+                var mat = from m in d.Material
+                          where m.Id_Auftrag == a.Id
+                          select m;
+                ListView_Material.ItemsSource = mat;
+                //Ergänzungen
+                textBox_TecAnmerkungen.Text = a.TechnischeAnmerkungen;
+                textBox_IntAnmerkungen.Text = a.Bemerkungen;
+                textBox_Sägeprogramm.Text = a.SägeProgramm.ToString();
+                textBox_Anlasstemp.Text = a.Anlasstemparartur.ToString();
+                //Status aktualisieren
+                switch (textBox_Status.Text)    
+                {
+                    case "Frei":
+                        radiobutton_Frei.IsChecked = true;
+                        break;
+                    case "Warten":
+                        radiobutton_Warten.IsChecked = true;
+                        break;
+                    case "Gesperrt":
+                        radiobutton_Gesperrt.IsChecked = true;
+                        break;
+                    default:
+                        break;
+                }
+
+            }
+        }
+
+        private void RadioButton_Checked(object sender, RoutedEventArgs e)
+        {
+            var button = sender as RadioButton;
+
+
+            if (button.Content != null)
+            {
+                textBox_Status.Text = button.Content.ToString();
+            }
+
         }
     }
 }

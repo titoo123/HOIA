@@ -32,36 +32,14 @@
       <Association Name="Verfahren_Teilschritt" Member="Verfahren" ThisKey="Id_Verfahren" OtherKey="Id" Type="Verfahren" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.Auftrag" Member="Auftrag">
-    <Type Name="Auftrag">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="ODL" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
-      <Column Name="Art" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="Verarbeitung" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="Status" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
-      <Column Name="Walzung" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
-      <Column Name="Auftragsdatum" Type="System.DateTime" DbType="Date" CanBeNull="true" />
-      <Column Name="Liefertermin" Type="System.DateTime" DbType="Date" CanBeNull="true" />
-      <Column Name="TechnischeAnmerkungen" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
-      <Column Name="Bemerkungen" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
-      <Column Name="SägeProgramm" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Anlasstemparartur" Type="System.Double" DbType="Float" CanBeNull="true" />
-      <Column Name="Id_Kunde" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Id_Bestimmungsort" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="Auftrag_MN_VerfahrenAuftrag" Member="MN_VerfahrenAuftrag" ThisKey="Id" OtherKey="Id_Auftrag" Type="MN_VerfahrenAuftrag" />
-      <Association Name="Auftrag_Material" Member="Material" ThisKey="Id" OtherKey="Id_Auftrag" Type="Material" />
-      <Association Name="Bestimmungsort_Auftrag" Member="Bestimmungsort" ThisKey="Id_Bestimmungsort" OtherKey="Id" Type="Bestimmungsort" IsForeignKey="true" />
-      <Association Name="Kunde_Auftrag" Member="Kunde" ThisKey="Id_Kunde" OtherKey="Id" Type="Kunde" IsForeignKey="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.MN_VerfahrenAuftrag" Member="MN_VerfahrenAuftrag">
     <Type Name="MN_VerfahrenAuftrag">
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Id_Verfahren" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Id_Auftrag" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Schritt" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="Auftrag_MN_VerfahrenAuftrag" Member="Auftrag" ThisKey="Id_Auftrag" OtherKey="Id" Type="Auftrag" IsForeignKey="true" />
       <Association Name="Verfahren_MN_VerfahrenAuftrag" Member="Verfahren" ThisKey="Id_Verfahren" OtherKey="Id" Type="Verfahren" IsForeignKey="true" />
+      <Association Name="Auftrag_MN_VerfahrenAuftrag" Member="Auftrag" ThisKey="Id_Auftrag" OtherKey="Id" Type="Auftrag" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Verfahren" Member="Verfahren">
@@ -77,17 +55,46 @@
   <Table Name="dbo.Material" Member="Material">
     <Type Name="Material">
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Position" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="AuftragsNr" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
-      <Column Name="Stahlsorte" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="Charge" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Abmessung" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Datum" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Bunde" Type="System.String" DbType="NChar(7)" CanBeNull="true" />
+      <Column Name="Stahlsorte" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="Charge" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
       <Column Name="Anzahl" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Gewicht" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Bemerkung" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
       <Column Name="Id_Glühung" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Id_Auftrag" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="Auftrag_Material" Member="Auftrag" ThisKey="Id_Auftrag" OtherKey="Id" Type="Auftrag" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Auftrag" Member="Auftrag">
+    <Type Name="Auftrag">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="AuftragsNr" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="ODL" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="Art" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Verarbeitung" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Position" Type="System.String" DbType="VarChar(5)" CanBeNull="true" />
+      <Column Name="Status" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="Abmessung1" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Abmessung2" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="FLänge" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="WLänge" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Charge" Type="System.String" DbType="VarChar(5)" CanBeNull="true" />
+      <Column Name="Stahlsorte" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="Walzung" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="Auftragsdatum" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Liefertermin" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="TechnischeAnmerkungen" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Bemerkungen" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="SägeProgramm" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Anlasstemparartur" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Wichtig" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Id_Kunde" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Id_Bestimmungsort" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Auftrag_MN_VerfahrenAuftrag" Member="MN_VerfahrenAuftrag" ThisKey="Id" OtherKey="Id_Auftrag" Type="MN_VerfahrenAuftrag" />
+      <Association Name="Auftrag_Material" Member="Material" ThisKey="Id" OtherKey="Id_Auftrag" Type="Material" />
+      <Association Name="Bestimmungsort_Auftrag" Member="Bestimmungsort" ThisKey="Id_Bestimmungsort" OtherKey="Id" Type="Bestimmungsort" IsForeignKey="true" />
+      <Association Name="Kunde_Auftrag" Member="Kunde" ThisKey="Id_Kunde" OtherKey="Id" Type="Kunde" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

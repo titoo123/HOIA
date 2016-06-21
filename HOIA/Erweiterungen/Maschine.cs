@@ -10,15 +10,19 @@ namespace HOIA.Erweiterungen
 {
     public class Maschine
     {
+        public static List<String> maschines = new List<string>();
+
         string name;
         string tag;
+
+        int jobWeight;
 
         bool sublevel;
 
         TreeViewItem item;
         Extended_TreeView t;
 
-        StringTuple2D a = new StringTuple2D();
+        StringTuple2D processingJobList = new StringTuple2D();
 
         public string Tag
         {
@@ -46,8 +50,6 @@ namespace HOIA.Erweiterungen
             }
         }
 
-        //Tuple l = new Tuple();
-
         /// <summary>
         /// 
         /// </summary>
@@ -63,6 +65,7 @@ namespace HOIA.Erweiterungen
             this.sublevel = sublevel;
 
             t.Items.Add(new TreeViewItem() { Header = name, Tag = name });
+            maschines.Add(name);
 
             Item = t.TreeViewGetNode_ByText(name);
             RefreshValue();
@@ -78,6 +81,7 @@ namespace HOIA.Erweiterungen
             this.sublevel = sublevel;
 
             t.Items.Add(new TreeViewItem() { Header = name, Tag = name });
+            maschines.Add(name);
 
             Item = t.TreeViewGetNode_ByText(name);
             t.CreateChilds(fre, name);
@@ -88,9 +92,9 @@ namespace HOIA.Erweiterungen
 
         internal void RefreshValue()
         {
-
             if (sublevel)
             {
+                //item.Header = Helper.CleanUpString((string)item.Header) + " ( " + GetJobWeight() + " Kg )";
 
                 DDataContext d = new DDataContext();
 
@@ -114,15 +118,16 @@ namespace HOIA.Erweiterungen
                     j.Header = Helper.CleanUpString((string)j.Header) + " ( " + gewicht + " Kg )";
                 }
 
+
+
+
             }
             else
             {   //Anzahl freie Aufträge
                 if ((string)Item.Tag == Helper.FREIEAUFTRÄGE_STRING)
                 {
                     Item.Header = Helper.CleanUpString((string)Item.Header) + " ( " + Item.Items.Count + " )";
-                }
-
-                if ((string)Item.Tag == Helper.RM_STRING)
+                }else if ((string)Item.Tag == Helper.RM_STRING)
                 {
                     //string gewicht = String.Empty;
                     int? gewicht = 0;
@@ -151,14 +156,53 @@ namespace HOIA.Erweiterungen
 
 
 
+
             }
         }
 
-        internal void AddJobToList(string s,string z)
+        internal void RefreshJobWeight()
         {
-            a.Add(s,z);
+            //if (!name.Contains(Helper.AUFTRAG_OFFEN_STRING) && !name.Contains(Helper.FERTIGEAUFTRÄGE_STRING))
+            //{
+            //    item.Header = Helper.CleanUpString((string)item.Header) + " ( " + jobWeight.ToString() + " Kg )";
+            //}
+
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="s">ODL</param>
+        /// <param name="z">Prozess</param>
+        internal void AddJobToList(string s,string z)
+        {
+            processingJobList.Add(s,z);
+
+            //Added Gewicht auf Hauptknoten
+            DDataContext d = new DDataContext();
+            int? gewicht = 0;
+          
+                var gew = from g in d.Auftrag
+                          where g.ODL == s
+                          select g;
+
+                foreach (var m in gew)
+                {
+                    int? mag = (from k in d.Material
+                                where k.Id_Auftrag == m.Id
+                                select k.Gewicht).Sum();
+                    gewicht = gewicht + mag;
+                }
+            
+            item.Header = Helper.CleanUpString((string)item.Header) + " ( " + gewicht + " Kg )";
+        }
+
+        /// <summary>
+        /// Fügt Elmente von Maschineenlist in Übersichtslist
+        /// </summary>
+        /// <param name="l">Listview</param>
+        /// <param name="_tag">Header des Treeviewitems</param>
+        /// <returns></returns>
         public ListView ReplaceListViewItems(ListView l, string _tag)
         {
             if (_tag != null)
@@ -170,13 +214,13 @@ namespace HOIA.Erweiterungen
                     //Level 1
                     //Fügt Maschinenjobs/Aufträge in Liste
                     //Beim Linksklicken auf die Maschinen
-                    if (_tag == (string)i.Tag || _tag.Contains("RM"))
+                    if (_tag.Contains((string)i.Tag) || _tag.Contains("RM"))
                     {
                         if (_tag.Contains(this.Tag))
                         {
-                            if (a.Items != null)
+                            if (processingJobList.Items != null)
                             {
-                                foreach (var j in a.Items)
+                                foreach (var j in processingJobList.Items)
                                 {
                                     if (!l.Items.Contains(j))
                                     {

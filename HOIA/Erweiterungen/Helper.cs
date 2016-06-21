@@ -19,7 +19,8 @@ namespace HOIA.Erweiterungen
         public static string HAUBENOFEN_ART = "ho";
         public static string INDUKTIONSANLAGEN_ART = "ia";
         public static string FREIEAUFTRÄGE_STRING = "Freie Aufträge";
-        public static string AUFTRAG_OFFEN_STRING = "offen";
+        public static string FERTIGEAUFTRÄGE_STRING = "Fertige Aufträge";
+        public static string AUFTRAG_OFFEN_STRING = "Frei";
 
         public static string EL1_STRING = "EL1";
         public static string EL2_STRING = "EL2";
@@ -70,6 +71,7 @@ namespace HOIA.Erweiterungen
 
         }
         public static string CutFreeString( string s) {
+
             return s.Replace(" ", "");
         }
 
