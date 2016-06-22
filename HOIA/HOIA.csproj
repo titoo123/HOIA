@@ -56,11 +56,25 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Allgemein\Bestimmungsort.xaml.cs">
+      <DependentUpon>Bestimmungsort.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Allgemein\Kunde.xaml.cs">
+      <DependentUpon>Kunde.xaml</DependentUpon>
+    </Compile>
     <Compile Include="D.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>D.dbml</DependentUpon>
     </Compile>
+    <Page Include="Allgemein\Bestimmungsort.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Allgemein\Kunde.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Daten\IA_Verfahren.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

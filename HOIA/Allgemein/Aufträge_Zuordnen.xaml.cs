@@ -431,5 +431,43 @@ namespace HOIA.Allgemein
             }
 
         }
+
+        private void button_kunde_Click(object sender, RoutedEventArgs e)
+        {
+            DDataContext d = new DDataContext();
+
+            var auf = from v in d.Auftrag
+                      where v.ODL == textBox_ODL.Text
+                     // && v.AuftragsNr == textBox_Auftrag.Text
+                      select v;
+            var kun = from s in d.Kunde
+                      where s.Id == auf.First().Id_Kunde
+                      select s;
+            if (auf.Count() > 0 && kun.Count() > 0)
+            {
+                Window wKunde = new Kunde(kun.First(), auf.First().AuftragsNr);
+                wKunde.Show();
+            }
+
+        }
+
+        private void button_Bestimmungsort_Click(object sender, RoutedEventArgs e)
+        {
+            DDataContext d = new DDataContext();
+
+            var auf = from v in d.Auftrag
+                      where v.ODL == textBox_ODL.Text
+                      // && v.AuftragsNr == textBox_Auftrag.Text
+                      select v;
+            var kun = from s in d.Bestimmungsort
+                      where s.Id == auf.First().Id_Bestimmungsort
+                      select s;
+            if (auf.Count() > 0 && kun.Count() > 0)
+            {
+                Window wBestimmungsort = new Bestimmungsort(kun.First(), auf.First().AuftragsNr);
+                wBestimmungsort.Show();
+            }
+
+        }
     }
 }
