@@ -56,12 +56,18 @@ namespace HOIA.Erweiterungen
             }
 
         }
-        public static string CleanUpTheFuckingListViewItem(string s)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="s"></param>
+        /// <param name="d">Was soll zurückgegeben werden? 0 oder 1</param>
+        /// <returns></returns>
+        public static string CleanUpTheFuckingListViewItem(string s, int d)
         {
             if (s.Contains("("))
             {
                 string z = s.Split('(')[1];
-                z = z.Split(',').First();
+                z = z.Split(',')[d];
                 return z;
             }
             else

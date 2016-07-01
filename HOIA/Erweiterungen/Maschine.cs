@@ -15,7 +15,7 @@ namespace HOIA.Erweiterungen
         string name;
         string tag;
 
-        int jobWeight;
+        //int jobWeight;
 
         bool sublevel;
 
@@ -51,7 +51,7 @@ namespace HOIA.Erweiterungen
         }
 
         /// <summary>
-        /// 
+        /// Konstruktor
         /// </summary>
         /// <param name="t">Parent Treeview</param>
         /// <param name="name">Name</param>
@@ -94,8 +94,6 @@ namespace HOIA.Erweiterungen
         {
             if (sublevel)
             {
-                //item.Header = Helper.CleanUpString((string)item.Header) + " ( " + GetJobWeight() + " Kg )";
-
                 DDataContext d = new DDataContext();
 
                 foreach (TreeViewItem j in Item.Items)
@@ -129,9 +127,7 @@ namespace HOIA.Erweiterungen
                     Item.Header = Helper.CleanUpString((string)Item.Header) + " ( " + Item.Items.Count + " )";
                 }else if ((string)Item.Tag == Helper.RM_STRING)
                 {
-                    //string gewicht = String.Empty;
                     int? gewicht = 0;
-                    //List<TreeViewItem> childs = new List<TreeViewItem>();
                     DDataContext d = new DDataContext();
 
                     foreach (TreeViewItem i in Item.Items)
@@ -160,17 +156,8 @@ namespace HOIA.Erweiterungen
             }
         }
 
-        internal void RefreshJobWeight()
-        {
-            //if (!name.Contains(Helper.AUFTRAG_OFFEN_STRING) && !name.Contains(Helper.FERTIGEAUFTRÄGE_STRING))
-            //{
-            //    item.Header = Helper.CleanUpString((string)item.Header) + " ( " + jobWeight.ToString() + " Kg )";
-            //}
-
-        }
-
         /// <summary>
-        /// 
+        /// Gewicht der Haupknoten für Elemente der List
         /// </summary>
         /// <param name="s">ODL</param>
         /// <param name="z">Prozess</param>
@@ -181,11 +168,13 @@ namespace HOIA.Erweiterungen
             //Added Gewicht auf Hauptknoten
             DDataContext d = new DDataContext();
             int? gewicht = 0;
-          
-                var gew = from g in d.Auftrag
-                          where g.ODL == s
-                          select g;
 
+            foreach (var a in processingJobList.Items)
+            {
+                var gew = from g in d.Auftrag
+                          where g.ODL == a.Item1
+                          select g;
+                //Sammelt gewicht der Materialen des Auftrags 
                 foreach (var m in gew)
                 {
                     int? mag = (from k in d.Material
@@ -193,12 +182,16 @@ namespace HOIA.Erweiterungen
                                 select k.Gewicht).Sum();
                     gewicht = gewicht + mag;
                 }
-            
+            }
+
             item.Header = Helper.CleanUpString((string)item.Header) + " ( " + gewicht + " Kg )";
         }
 
+        internal void DeleteJobFormList(string s) {
+            processingJobList.Remove(s);
+        }
         /// <summary>
-        /// Fügt Elmente von Maschineenlist in Übersichtslist
+        /// Fügt Elemente von Maschinenlist in Übersichtslist
         /// </summary>
         /// <param name="l">Listview</param>
         /// <param name="_tag">Header des Treeviewitems</param>

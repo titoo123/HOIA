@@ -46,11 +46,13 @@
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
                             <RowDefinition Height="30" />
                         </Grid.RowDefinitions>
                         <GroupBox x:Name="groupBox4" Header="Daten"  Grid.Row="0"  VerticalAlignment="Top" Grid.ColumnSpan="2" >
                             <Grid >
                                 <Grid.RowDefinitions>
+                                    <RowDefinition></RowDefinition>
                                     <RowDefinition></RowDefinition>
                                     <RowDefinition></RowDefinition>
                                     <RowDefinition></RowDefinition>
@@ -61,20 +63,25 @@
                                     <ColumnDefinition></ColumnDefinition>
                                     <ColumnDefinition></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
+                                
+                                <Label x:Name="label_Verarbeitung555" Content="Walzung:" Grid.Column="0"  Grid.Row="0"/>
+                                <Label x:Name="label1555" Content="Lagerort:" Grid.Column="2"  Grid.Row="0"/>
+                                <Label x:Name="label_Verarbeitung" Content="Verarbeitung:" Grid.Column="0"  Grid.Row="1"/>
+                                <Label x:Name="label1" Content="Auftrag Nr:" Grid.Column="2"  Grid.Row="1"/>
+                                <Label x:Name="label_ODL" Content="ODL: "  Grid.Column="0"  Grid.Row="2" />
+                                <Label x:Name="label_Status" Content="Status:"  Grid.Column="0"  Grid.Row="3"  />
+                                <Label x:Name="label_Auftragsdatum" Content="Auftragsdatum:" Grid.Column="2"  Grid.Row="2"  />
+                                <Label x:Name="label_Liefertermin" Content="Liefertermin:" Grid.Column="2"  Grid.Row="3"  />
 
-                                <Label x:Name="label_Verarbeitung" Content="Verarbeitung:" Grid.Column="0"  Grid.Row="0"/>
-                                <Label x:Name="label1" Content="Auftrag Nr:" Grid.Column="2"  Grid.Row="0"/>
-                                <Label x:Name="label_ODL" Content="ODL: "  Grid.Column="0"  Grid.Row="1" />
-                                <Label x:Name="label_Status" Content="Status:"  Grid.Column="0"  Grid.Row="2"  />
-                                <Label x:Name="label_Auftragsdatum" Content="Auftragsdatum:" Grid.Column="2"  Grid.Row="1"  />
-                                <Label x:Name="label_Liefertermin" Content="Liefertermin:" Grid.Column="2"  Grid.Row="2"  />
 
-                                <TextBox x:Name="textBox_Verarbeitung" Height="23"  Grid.Column="1"  Grid.Row="0" IsReadOnly="True"/>
-                                <TextBox x:Name="textBox_Auftrag" Height="23"  Grid.Column="3"  Grid.Row="0" IsReadOnly="True"/>
-                                <TextBox x:Name="textBox_ODL" Height="23"  Grid.Column="1"  Grid.Row="1" IsReadOnly="True"/>
-                                <TextBox x:Name="textBox_ADatum" Height="23"  Grid.Column="3"  Grid.Row="1" IsReadOnly="True"/>
-                                <TextBox x:Name="textBox_Status" Height="23"  Grid.Column="1"  Grid.Row="2" IsReadOnly="True"/>
-                                <TextBox x:Name="textBox_LTermin" Height="23"  Grid.Column="3"  Grid.Row="2" IsReadOnly="True"/>
+                                <TextBox x:Name="textBox_Walzung" Height="23"  Grid.Column="1"  Grid.Row="0" IsReadOnly="True"/>
+                                <TextBox x:Name="textBox_Lagerort" Height="23"  Grid.Column="3"  Grid.Row="0" IsReadOnly="True"/>
+                                <TextBox x:Name="textBox_Verarbeitung" Height="23"  Grid.Column="1"  Grid.Row="1" IsReadOnly="True"/>
+                                <TextBox x:Name="textBox_Auftrag" Height="23"  Grid.Column="3"  Grid.Row="1" IsReadOnly="True"/>
+                                <TextBox x:Name="textBox_ODL" Height="23"  Grid.Column="1"  Grid.Row="2" IsReadOnly="True"/>
+                                <TextBox x:Name="textBox_ADatum" Height="23"  Grid.Column="3"  Grid.Row="2" IsReadOnly="True"/>
+                                <TextBox x:Name="textBox_Status" Height="23"  Grid.Column="1"  Grid.Row="3" IsReadOnly="True"/>
+                                <TextBox x:Name="textBox_LTermin" Height="23"  Grid.Column="3"  Grid.Row="3" IsReadOnly="True"/>
                             </Grid>
                         </GroupBox>
                         <GroupBox x:Name="groupBox3" Header="Beschreibung der Materials" Grid.Row="1"  Grid.ColumnSpan="2">
@@ -113,7 +120,45 @@
                                 <TextBox x:Name="textBox_Gesamtmenge" Height="23" Grid.Column="3"  Grid.Row="3" IsReadOnly="True"/>
                             </Grid>
                         </GroupBox>
-                        <GroupBox Header="Material" Grid.Row="3" Grid.ColumnSpan="2">
+                        <GroupBox Header="Messwerte" Grid.Row="3" Grid.ColumnSpan="2">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+
+                                <Label x:Name="lll" Content="C" Grid.Column="0"  Grid.Row="0"/>
+                                <Label x:Name="llld" Content="Mn" Grid.Column="1"  Grid.Row="0"/>
+
+                                <Label x:Name="ll2l" Content="Si" Grid.Column="2"  Grid.Row="0"/>
+                                <Label x:Name="ll3ld" Content="P" Grid.Column="3"  Grid.Row="0"/>
+                                <Label x:Name="ll4l" Content="S" Grid.Column="4"  Grid.Row="0"/>
+                                <Label x:Name="ll5ld" Content="Cr" Grid.Column="5"  Grid.Row="0"/>
+                                <Label x:Name="l6ll" Content="Ni" Grid.Column="6"  Grid.Row="0"/>
+                                <Label x:Name="ll65ld" Content="Mo" Grid.Column="7"  Grid.Row="0"/>
+
+                                <TextBox x:Name="textBox_C" Height="23" Grid.Column="0"  Grid.Row="1" IsReadOnly="True"/>
+
+                                <TextBox x:Name="textBox_Mn" Height="23" Grid.Column="1"  Grid.Row="1" IsReadOnly="True"/>
+                                <TextBox x:Name="textBox_Si" Height="23" Grid.Column="2"  Grid.Row="1" IsReadOnly="True"/>
+                                <TextBox x:Name="textBox_P" Height="23" Grid.Column="3"  Grid.Row="1" IsReadOnly="True"/>
+                                <TextBox x:Name="textBox_S" Height="23" Grid.Column="4"  Grid.Row="1" IsReadOnly="True"/>
+                                <TextBox x:Name="textBox_Cr" Height="23" Grid.Column="5"  Grid.Row="1" IsReadOnly="True"/>
+                                <TextBox x:Name="textBox_Ni" Height="23" Grid.Column="6"  Grid.Row="1" IsReadOnly="True"/>
+                                <TextBox x:Name="textBox_Mo" Height="23" Grid.Column="7"  Grid.Row="1" IsReadOnly="True"/>
+                            </Grid>
+                        </GroupBox>
+                        <GroupBox Header="Material" Grid.Row="4" Grid.ColumnSpan="2">
                             <ListView Grid.Column="1" Name="ListView_Material" Margin="0,-1,0,0" SelectionChanged="ListView_Aufträge_SelectionChanged" Height="160" >
                                 <ListView.View>
                                     <GridView>
@@ -137,7 +182,7 @@
                                 </ListView.View>
                             </ListView>
                         </GroupBox>
-                        <GroupBox x:Name="groupBox6" Header="Ergänzungen" Grid.Row="4"  VerticalAlignment="Top" Grid.ColumnSpan="2" >
+                        <GroupBox x:Name="groupBox6" Header="Ergänzungen" Grid.Row="5"  VerticalAlignment="Top" Grid.ColumnSpan="2" >
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="60"></RowDefinition>
@@ -179,7 +224,7 @@
 
                             </Grid>
                         </GroupBox>
-                        <Grid Grid.Row="5" Grid.ColumnSpan="2">
+                        <Grid Grid.Row="6" Grid.ColumnSpan="2">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition />
                                 <ColumnDefinition />

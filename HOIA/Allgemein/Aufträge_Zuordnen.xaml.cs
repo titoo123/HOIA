@@ -34,13 +34,13 @@ namespace HOIA.Allgemein
         public Aufträge_Zuordnen()
         {
             InitializeComponent();
-
+            //Laden aller Maschinen
             TreeView_H_Zuordnen_HOWerte_Refresh();
-
+            //Eventzuordnung der TreeViewItems
             treeView_H_Zuordnen_HOWerte.AddHandler(TreeViewItem.PreviewMouseLeftButtonDownEvent, new MouseButtonEventHandler(treeView_Item_MouseLeftButtonDown));
             treeView_H_Zuordnen_HOWerte.AddHandler(TreeViewItem.PreviewMouseDoubleClickEvent, new MouseButtonEventHandler(treeViewItem_MouseDoubleClick));
-
-
+            //Eventzuordung der ListViewItems
+            ListView_Aufträge.AddHandler(ListViewItem.PreviewMouseDoubleClickEvent, new MouseButtonEventHandler(ListView_Aufträge_MouseDoubleClick));
         }
         /// <summary>
         /// Läd Werte
@@ -192,7 +192,7 @@ namespace HOIA.Allgemein
 
         }
         /// <summary>
-        /// Maus Doppelklick
+        /// Maus Doppelklick auf TreeViewItem
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -230,32 +230,38 @@ namespace HOIA.Allgemein
                             
                             if (MessageBox.Show("Wollen sie wirklich die "+ selectedItem.Items.Count +" Aufträge von " + selectedItem.Tag + " in die Liste verschieben?", "Verschieben?",MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                             {
+
                                 foreach (var m in mList)
                                 {
-                                    m.RefreshJobWeight();
                                     if (m.Tag == (string)selectedItem.Tag)
                                     {
                                         foreach (TreeViewItem n in selectedItem.Items)
-                                        {
-                                            m.AddJobToList((string)n.Tag,(string)TreeViewHelper.GetParent(n).Tag);
-
+                                        {   //Fügt Aufträge in Werteliste ein
+                                            m.AddJobToList((string)n.Tag,(string)TreeViewHelper.GetParent(n).Tag);   
                                         }
-
+                                        //Löscht Items aus der TreeView
+                                        selectedItem.Items.Clear();
                                     }
                                     if (selectedItemParent != null)
                                     {
                                         if (m.Tag == (string)selectedItemParent.Tag)
                                         {
                                             foreach (TreeViewItem n in selectedItem.Items)
-                                            {
+                                            {   //Fügt Aufträge in Werteliste ein
                                                 m.AddJobToList((string)n.Tag, (string)TreeViewHelper.GetParent(n).Tag);
-                                            }
+
+                                            }                                                
+                                            //Löscht Items aus der TreeView
+                                            selectedItem.Items.Clear();
 
                                         }
                                     }
 
-
                                 }
+
+
+
+
                             }
 
                         }
@@ -290,7 +296,7 @@ namespace HOIA.Allgemein
                         h != treeViewItem.Tag.ToString()
                         )
                     {
-                        TreeViewItem t_parent = TreeViewHelper.GetParent(t);
+                        //TreeViewItem t_parent = TreeViewHelper.GetParent(t);
 
                         //Fügt Knoten hinzu
                         t.Items.Add(new TreeViewItem() { Header = treeViewItem.Header , Tag = treeViewItem.Tag });
@@ -348,7 +354,7 @@ namespace HOIA.Allgemein
 
         }
         /// <summary>
-        /// auswahl Auftragsliste ändert sich
+        /// Auswahl Auftragsliste ändert sich
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -356,9 +362,47 @@ namespace HOIA.Allgemein
         {
             if (ListView_Aufträge.SelectedIndex != -1)
             {
-                item_Click(Helper.CleanUpTheFuckingListViewItem( ListView_Aufträge.SelectedItem.ToString()));
+                item_Click(Helper.CleanUpTheFuckingListViewItem( ListView_Aufträge.SelectedItem.ToString(),0));
             }
         }
+        private void ListView_Aufträge_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (ListView_Aufträge.Items.Count > 0)
+            {
+                var tmp = ListView_Aufträge.SelectedItems[0];
+                if (MessageBox.Show("Wollen sie wirklich diesen Auftrag: " + tmp.ToString() + " aus den aktiven Aufträgen entfernen?", "Entfernen?", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                {
+                    string s1 = Helper.CleanUpTheFuckingListViewItem(ListView_Aufträge.SelectedItem.ToString(), 0);
+                    string s2 = Helper.CleanUpTheFuckingListViewItem(ListView_Aufträge.SelectedItem.ToString(), 1);
+
+                    //Löscht Auftrag aus der Liste der Maschine
+                    foreach (var m in mList)
+                    {
+                        m.DeleteJobFormList(s1);
+                    }
+
+                    //Löscht Auftrag aus der eigentlichenListe
+                    ListView_Aufträge.Items.RemoveAt(ListView_Aufträge.SelectedIndex);
+
+                    //Sucht Parent damit Item an richtiger Stelle hinzugefügt wird
+                    TreeViewItem c = null;
+                    //foreach (TreeViewItem t in treeView_H_Zuordnen_HOWerte.Items)
+                    //{
+                    //    if (TreeViewHelper.TreeViewGetNode_ByTag(treeView_H_Zuordnen_HOWerte, s2) != null)
+                    //    {
+                    //        c = TreeViewHelper.TreeViewGetNode_ByTag(treeView_H_Zuordnen_HOWerte, s2);
+                    //        break;
+                    //    }
+                    //}
+                    
+                    TreeViewItem i = TreeViewHelper.GetParent(c);
+                    //Fügt Auftrag der Jobliste hinzu
+
+                    i.Items.Add(new TreeViewItem() { Header = s1, Tag = s1 });
+                }
+            }
+        }
+
 
         private void Information_Loader(string s) {
             DDataContext d = new DDataContext();
@@ -371,6 +415,8 @@ namespace HOIA.Allgemein
                 Auftrag a = drt.First();
 
                 //Allgemeine Daten
+                textBox_Walzung.Text = a.Walzung;
+                textBox_Lagerort.Text = a.Lagerort;
                 textBox_Verarbeitung.Text = a.Verarbeitung;
                 textBox_Auftrag.Text = a.AuftragsNr + "/" + a.Position;
                 textBox_ODL.Text = a.ODL;
@@ -396,6 +442,17 @@ namespace HOIA.Allgemein
                           where m.Id_Auftrag == a.Id
                           select m;
                 ListView_Material.ItemsSource = mat;
+
+                //Messwerte
+                textBox_C.Text = a.C.ToString();
+                textBox_Mn.Text = a.Mn.ToString();
+                textBox_Si.Text = a.Si.ToString();
+                textBox_P.Text = a.P.ToString();
+                textBox_S.Text = a.S.ToString();
+                textBox_Cr.Text = a.Cr.ToString();
+                textBox_Ni.Text = a.Ni.ToString();
+                textBox_Mo.Text = a.Mo.ToString();
+
                 //Ergänzungen
                 textBox_TecAnmerkungen.Text = a.TechnischeAnmerkungen;
                 textBox_IntAnmerkungen.Text = a.Bemerkungen;

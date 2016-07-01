@@ -1476,6 +1476,8 @@ namespace HOIA
 		
 		private string _Verarbeitung;
 		
+		private string _Lagerort;
+		
 		private string _Position;
 		
 		private string _Status;
@@ -1512,6 +1514,22 @@ namespace HOIA
 		
 		private System.Nullable<int> _Id_Bestimmungsort;
 		
+		private System.Nullable<double> _C;
+		
+		private System.Nullable<double> _Mn;
+		
+		private System.Nullable<double> _Si;
+		
+		private System.Nullable<double> _P;
+		
+		private System.Nullable<double> _S;
+		
+		private System.Nullable<double> _Cr;
+		
+		private System.Nullable<double> _Ni;
+		
+		private System.Nullable<double> _Mo;
+		
 		private EntitySet<MN_VerfahrenAuftrag> _MN_VerfahrenAuftrag;
 		
 		private EntitySet<Material> _Material;
@@ -1534,6 +1552,8 @@ namespace HOIA
     partial void OnArtChanged();
     partial void OnVerarbeitungChanging(string value);
     partial void OnVerarbeitungChanged();
+    partial void OnLagerortChanging(string value);
+    partial void OnLagerortChanged();
     partial void OnPositionChanging(string value);
     partial void OnPositionChanged();
     partial void OnStatusChanging(string value);
@@ -1570,6 +1590,22 @@ namespace HOIA
     partial void OnId_KundeChanged();
     partial void OnId_BestimmungsortChanging(System.Nullable<int> value);
     partial void OnId_BestimmungsortChanged();
+    partial void OnCChanging(System.Nullable<double> value);
+    partial void OnCChanged();
+    partial void OnMnChanging(System.Nullable<double> value);
+    partial void OnMnChanged();
+    partial void OnSiChanging(System.Nullable<double> value);
+    partial void OnSiChanged();
+    partial void OnPChanging(System.Nullable<double> value);
+    partial void OnPChanged();
+    partial void OnSChanging(System.Nullable<double> value);
+    partial void OnSChanged();
+    partial void OnCrChanging(System.Nullable<double> value);
+    partial void OnCrChanged();
+    partial void OnNiChanging(System.Nullable<double> value);
+    partial void OnNiChanged();
+    partial void OnMoChanging(System.Nullable<double> value);
+    partial void OnMoChanged();
     #endregion
 		
 		public Auftrag()
@@ -1677,6 +1713,26 @@ namespace HOIA
 					this._Verarbeitung = value;
 					this.SendPropertyChanged("Verarbeitung");
 					this.OnVerarbeitungChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Lagerort", DbType="VarChar(20)")]
+		public string Lagerort
+		{
+			get
+			{
+				return this._Lagerort;
+			}
+			set
+			{
+				if ((this._Lagerort != value))
+				{
+					this.OnLagerortChanging(value);
+					this.SendPropertyChanging();
+					this._Lagerort = value;
+					this.SendPropertyChanged("Lagerort");
+					this.OnLagerortChanged();
 				}
 			}
 		}
@@ -2045,6 +2101,166 @@ namespace HOIA
 					this._Id_Bestimmungsort = value;
 					this.SendPropertyChanged("Id_Bestimmungsort");
 					this.OnId_BestimmungsortChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_C", DbType="Float")]
+		public System.Nullable<double> C
+		{
+			get
+			{
+				return this._C;
+			}
+			set
+			{
+				if ((this._C != value))
+				{
+					this.OnCChanging(value);
+					this.SendPropertyChanging();
+					this._C = value;
+					this.SendPropertyChanged("C");
+					this.OnCChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Mn", DbType="Float")]
+		public System.Nullable<double> Mn
+		{
+			get
+			{
+				return this._Mn;
+			}
+			set
+			{
+				if ((this._Mn != value))
+				{
+					this.OnMnChanging(value);
+					this.SendPropertyChanging();
+					this._Mn = value;
+					this.SendPropertyChanged("Mn");
+					this.OnMnChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Si", DbType="Float")]
+		public System.Nullable<double> Si
+		{
+			get
+			{
+				return this._Si;
+			}
+			set
+			{
+				if ((this._Si != value))
+				{
+					this.OnSiChanging(value);
+					this.SendPropertyChanging();
+					this._Si = value;
+					this.SendPropertyChanged("Si");
+					this.OnSiChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_P", DbType="Float")]
+		public System.Nullable<double> P
+		{
+			get
+			{
+				return this._P;
+			}
+			set
+			{
+				if ((this._P != value))
+				{
+					this.OnPChanging(value);
+					this.SendPropertyChanging();
+					this._P = value;
+					this.SendPropertyChanged("P");
+					this.OnPChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_S", DbType="Float")]
+		public System.Nullable<double> S
+		{
+			get
+			{
+				return this._S;
+			}
+			set
+			{
+				if ((this._S != value))
+				{
+					this.OnSChanging(value);
+					this.SendPropertyChanging();
+					this._S = value;
+					this.SendPropertyChanged("S");
+					this.OnSChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Cr", DbType="Float")]
+		public System.Nullable<double> Cr
+		{
+			get
+			{
+				return this._Cr;
+			}
+			set
+			{
+				if ((this._Cr != value))
+				{
+					this.OnCrChanging(value);
+					this.SendPropertyChanging();
+					this._Cr = value;
+					this.SendPropertyChanged("Cr");
+					this.OnCrChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Ni", DbType="Float")]
+		public System.Nullable<double> Ni
+		{
+			get
+			{
+				return this._Ni;
+			}
+			set
+			{
+				if ((this._Ni != value))
+				{
+					this.OnNiChanging(value);
+					this.SendPropertyChanging();
+					this._Ni = value;
+					this.SendPropertyChanged("Ni");
+					this.OnNiChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Mo", DbType="Float")]
+		public System.Nullable<double> Mo
+		{
+			get
+			{
+				return this._Mo;
+			}
+			set
+			{
+				if ((this._Mo != value))
+				{
+					this.OnMoChanging(value);
+					this.SendPropertyChanging();
+					this._Mo = value;
+					this.SendPropertyChanged("Mo");
+					this.OnMoChanged();
 				}
 			}
 		}

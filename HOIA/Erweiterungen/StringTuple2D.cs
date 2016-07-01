@@ -38,11 +38,15 @@ namespace HOIA.Erweiterungen
         }
         internal void Remove(string i1)
         {
-            Items.RemoveAll(item => item.Item2 == i1);
+            Items.RemoveAll(item => item.Item1 == i1);
         }
+        //internal void Remove(string s1, string s2) {
+        //    items.RemoveAll(item => item.Item1 == s1 && item => item.Item2 == s2);
+        //}
+
         internal void Remove(TreeViewItem i1)
         {
-            Items.RemoveAll(item => item.Item2 == (string)i1.Header);
+            Items.RemoveAll(item => item.Item1 == (string)i1.Header);
         }
 
         //internal List<Tuple<string, string>> Get(TreeViewItem selected)
