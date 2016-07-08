@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -41,6 +42,7 @@ namespace HOIA.Allgemein
             treeView_H_Zuordnen_HOWerte.AddHandler(TreeViewItem.PreviewMouseDoubleClickEvent, new MouseButtonEventHandler(treeViewItem_MouseDoubleClick));
             //Eventzuordung der ListViewItems
             ListView_Aufträge.AddHandler(ListViewItem.PreviewMouseDoubleClickEvent, new MouseButtonEventHandler(ListView_Aufträge_MouseDoubleClick));
+            //ListView_Material.AlternationCount = ListView_Material.AlternationCount + 2;
         }
         /// <summary>
         /// Läd Werte
@@ -84,7 +86,7 @@ namespace HOIA.Allgemein
             //Leert Liste 
             ListView_Aufträge.Items.Clear();
             //Öffnet Knoten
-            if (TreeViewHelper.GetNodeLevel(treeView_H_Zuordnen_HOWerte, TreeViewHelper.TreeViewGetNode_ByTag(treeView_H_Zuordnen_HOWerte, tag)) == 1 )
+            if (TreeViewHelper.GetNodeLevel(treeView_H_Zuordnen_HOWerte, TreeViewHelper.TreeViewGetNode_ByTag(treeView_H_Zuordnen_HOWerte, tag)) == 1)
             {
                 TreeViewHelper.ExpandAll(treeView_H_Zuordnen_HOWerte, false);
             }
@@ -98,17 +100,17 @@ namespace HOIA.Allgemein
             {
                 foreach (TreeViewItem item in treeView_H_Zuordnen_HOWerte.Items)
                 {
-                   
+
                     //Level 1 und 2
                     foreach (TreeViewItem i in item.Items)
                     {
-                        if (tag.Contains(Helper.CleanUpString( i.Header.ToString())))
+                        if (tag.Contains(Helper.CleanUpString(i.Header.ToString())))
                         {
                             if (
-                             (TreeViewHelper.GetNodeLevel(treeView_H_Zuordnen_HOWerte, i) == 2 
+                             (TreeViewHelper.GetNodeLevel(treeView_H_Zuordnen_HOWerte, i) == 2
                              && (
-                             ((string)item.Tag).Contains(Helper.FREIEAUFTRÄGE_STRING) 
-                             || 
+                             ((string)item.Tag).Contains(Helper.FREIEAUFTRÄGE_STRING)
+                             ||
                              ((string)item.Tag).Contains(Helper.RM_STRING)
                              ))
                              )
@@ -166,9 +168,9 @@ namespace HOIA.Allgemein
                         if (
                             (
                             TreeViewHelper.GetNodeLevel(treeView_H_Zuordnen_HOWerte, selectedItem) == 2
-                            && 
+                            &&
                             (
-                            (string)TreeViewHelper.GetParent(selectedItem).Header != Helper.FREIEAUFTRÄGE_STRING 
+                            (string)TreeViewHelper.GetParent(selectedItem).Header != Helper.FREIEAUFTRÄGE_STRING
                             &&
                             (string)TreeViewHelper.GetParent(selectedItem).Header != Helper.RM_STRING)
                             )
@@ -196,7 +198,8 @@ namespace HOIA.Allgemein
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void treeViewItem_MouseDoubleClick(object sender, MouseButtonEventArgs e) {
+        private void treeViewItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
 
             string header = TreeViewHelper.HitTreeView(treeView_H_Zuordnen_HOWerte, e);
             if (header != null)
@@ -227,8 +230,8 @@ namespace HOIA.Allgemein
                             && (string)selectedItem.Tag == Helper.RM_STRING)
                             )
                         {
-                            
-                            if (MessageBox.Show("Wollen sie wirklich die "+ selectedItem.Items.Count +" Aufträge von " + selectedItem.Tag + " in die Liste verschieben?", "Verschieben?",MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+
+                            if (MessageBox.Show("Wollen sie wirklich die " + selectedItem.Items.Count + " Aufträge von " + selectedItem.Tag + " in die Liste verschieben?", "Verschieben?", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                             {
 
                                 foreach (var m in mList)
@@ -237,7 +240,7 @@ namespace HOIA.Allgemein
                                     {
                                         foreach (TreeViewItem n in selectedItem.Items)
                                         {   //Fügt Aufträge in Werteliste ein
-                                            m.AddJobToList((string)n.Tag,(string)TreeViewHelper.GetParent(n).Tag);   
+                                            m.AddJobToList((string)n.Tag, (string)TreeViewHelper.GetParent(n).Tag);
                                         }
                                         //Löscht Items aus der TreeView
                                         selectedItem.Items.Clear();
@@ -250,7 +253,7 @@ namespace HOIA.Allgemein
                                             {   //Fügt Aufträge in Werteliste ein
                                                 m.AddJobToList((string)n.Tag, (string)TreeViewHelper.GetParent(n).Tag);
 
-                                            }                                                
+                                            }
                                             //Löscht Items aus der TreeView
                                             selectedItem.Items.Clear();
 
@@ -273,7 +276,7 @@ namespace HOIA.Allgemein
 
         }
         private void treeView_H_Zuordnen_HOWerte_MouseUp(object sender, MouseButtonEventArgs e)
-        {   
+        {
             lMousePressed = false;
             TreeViewItem t = TreeViewHelper.VisualUpwardSearch<TreeViewItem>(e.OriginalSource as DependencyObject) as TreeViewItem;
 
@@ -299,7 +302,7 @@ namespace HOIA.Allgemein
                         //TreeViewItem t_parent = TreeViewHelper.GetParent(t);
 
                         //Fügt Knoten hinzu
-                        t.Items.Add(new TreeViewItem() { Header = treeViewItem.Header , Tag = treeViewItem.Tag });
+                        t.Items.Add(new TreeViewItem() { Header = treeViewItem.Header, Tag = treeViewItem.Tag });
                         //Öffnet Knoten
                         TreeViewHelper.ExpandAll(t, true);
                         //Löscht knoten aus Liste
@@ -362,7 +365,7 @@ namespace HOIA.Allgemein
         {
             if (ListView_Aufträge.SelectedIndex != -1)
             {
-                item_Click(Helper.CleanUpTheFuckingListViewItem( ListView_Aufträge.SelectedItem.ToString(),0));
+                item_Click(Helper.CleanUpTheFuckingListViewItem(ListView_Aufträge.SelectedItem.ToString(), 0));
             }
         }
         private void ListView_Aufträge_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -372,8 +375,12 @@ namespace HOIA.Allgemein
                 var tmp = ListView_Aufträge.SelectedItems[0];
                 if (MessageBox.Show("Wollen sie wirklich diesen Auftrag: " + tmp.ToString() + " aus den aktiven Aufträgen entfernen?", "Entfernen?", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 {
+                    //Auftrag
                     string s1 = Helper.CleanUpTheFuckingListViewItem(ListView_Aufträge.SelectedItem.ToString(), 0);
+                    //Kategorie
                     string s2 = Helper.CleanUpTheFuckingListViewItem(ListView_Aufträge.SelectedItem.ToString(), 1);
+                    //Ausgewähltes TreeViewItem
+                    TreeViewItem i = treeView_H_Zuordnen_HOWerte.SelectedItem as TreeViewItem;
 
                     //Löscht Auftrag aus der Liste der Maschine
                     foreach (var m in mList)
@@ -381,30 +388,27 @@ namespace HOIA.Allgemein
                         m.DeleteJobFormList(s1);
                     }
 
-                    //Löscht Auftrag aus der eigentlichenListe
+                    //Löscht Auftrag aus der eigentlichen Liste
                     ListView_Aufträge.Items.RemoveAt(ListView_Aufträge.SelectedIndex);
 
-                    //Sucht Parent damit Item an richtiger Stelle hinzugefügt wird
-                    TreeViewItem c = null;
-                    //foreach (TreeViewItem t in treeView_H_Zuordnen_HOWerte.Items)
-                    //{
-                    //    if (TreeViewHelper.TreeViewGetNode_ByTag(treeView_H_Zuordnen_HOWerte, s2) != null)
-                    //    {
-                    //        c = TreeViewHelper.TreeViewGetNode_ByTag(treeView_H_Zuordnen_HOWerte, s2);
-                    //        break;
-                    //    }
-                    //}
-                    
-                    TreeViewItem i = TreeViewHelper.GetParent(c);
-                    //Fügt Auftrag der Jobliste hinzu
+                    //Fügt Knoten wieder an der richtigen Stelle hinzu
+                    foreach (TreeViewItem t in i.Items)
+                    {
+                        if ((string)t.Tag == s2)
+                        {
+                            t.Items.Add(new TreeViewItem() { Header = s1, Tag = s1 });
+                        }
 
-                    i.Items.Add(new TreeViewItem() { Header = s1, Tag = s1 });
+                    }
+
                 }
             }
         }
 
 
-        private void Information_Loader(string s) {
+        private void Information_Loader(string s)
+        {
+
             DDataContext d = new DDataContext();
 
             var drt = from h in d.Auftrag
@@ -420,9 +424,9 @@ namespace HOIA.Allgemein
                 textBox_Verarbeitung.Text = a.Verarbeitung;
                 textBox_Auftrag.Text = a.AuftragsNr + "/" + a.Position;
                 textBox_ODL.Text = a.ODL;
-                textBox_ADatum.Text = String.Format("{0:dd/MM/yyyy}", Convert.ToDateTime( a.Auftragsdatum.ToString()));
+                textBox_ADatum.Text = String.Format("{0:dd/MM/yyyy}", Convert.ToDateTime(a.Auftragsdatum.ToString()));
                 textBox_Status.Text = a.Status;
-                textBox_LTermin.Text = String.Format("{0:dd/MM/yyyy}", Convert.ToDateTime(a.Liefertermin.ToString())); 
+                textBox_LTermin.Text = String.Format("{0:dd/MM/yyyy}", Convert.ToDateTime(a.Liefertermin.ToString()));
 
                 //Beschreibung Material
                 textBox_Abm1.Text = a.Abmessung1.ToString();
@@ -437,10 +441,20 @@ namespace HOIA.Allgemein
                           where l.Id_Auftrag == drt.First().Id
                           select l;
                 textBox_Gesamtmenge.Text = ert.Count().ToString();
+                //Gesamtgewicht berechnen
+                int? geg = (from m in d.Material
+                            where m.Id_Auftrag == a.Id
+                            select m.Gewicht).Sum();
+                textBox_Gesamtgewicht.Text = geg.ToString();
                 //Zugehörige Materialien
                 var mat = from m in d.Material
                           where m.Id_Auftrag == a.Id
                           select m;
+                int z = 1;
+                foreach (Material m in mat)
+                {
+                    m.Display_Position = z++; ;
+                }
                 ListView_Material.ItemsSource = mat;
 
                 //Messwerte
@@ -459,7 +473,7 @@ namespace HOIA.Allgemein
                 textBox_Sägeprogramm.Text = a.SägeProgramm.ToString();
                 textBox_Anlasstemp.Text = a.Anlasstemparartur.ToString();
                 //Status aktualisieren
-                switch (textBox_Status.Text)    
+                switch (textBox_Status.Text)
                 {
                     case "Frei":
                         radiobutton_Frei.IsChecked = true;
@@ -495,7 +509,7 @@ namespace HOIA.Allgemein
 
             var auf = from v in d.Auftrag
                       where v.ODL == textBox_ODL.Text
-                     // && v.AuftragsNr == textBox_Auftrag.Text
+                      // && v.AuftragsNr == textBox_Auftrag.Text
                       select v;
             var kun = from s in d.Kunde
                       where s.Id == auf.First().Id_Kunde
@@ -525,6 +539,82 @@ namespace HOIA.Allgemein
                 wBestimmungsort.Show();
             }
 
+        }
+
+        private void Button_Speichern_Click(object sender, RoutedEventArgs e)
+        {
+            if (textBox_ODL.Text.Length > 0)
+            {
+                DDataContext d = new DDataContext();
+                var auf = from v in d.Auftrag
+                          where v.ODL == textBox_ODL.Text
+                          select v;
+                Auftrag a = auf.First();
+
+                a.Status = textBox_Status.Text;
+                a.TechnischeAnmerkungen = textBox_TecAnmerkungen.Text;
+                a.Bemerkungen = textBox_IntAnmerkungen.Text;
+
+                int z;
+                if (Int32.TryParse(textBox_Anlasstemp.Text, out z))
+                {
+                    a.Anlasstemparartur = z;
+                }
+                else
+                {
+                    MessageBox.Show("Bitte überprüfen sie die Anlasstemperatur!\nSie ist keine Zahl!", "Fehler!");
+                }
+
+                int u;
+                if (Int32.TryParse(textBox_Sägeprogramm.Text, out u))
+                {
+                    a.SägeProgramm = u;
+                }
+                else
+                {
+                    MessageBox.Show("Bitte überprüfen sie das Sägeprogramm!\nEs ist keine Zahl!", "Fehler!");
+                }
+
+                try
+                {
+                    d.SubmitChanges();
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Auftrag konnte leider nicht bearbeitet werden!\nKeine Verbindung zur Datenbank!", "Fehler!");
+                }
+            }
+        }
+
+        private void button_Wichtig_Click(object sender, RoutedEventArgs e)
+        {
+            if (textBox_ODL.Text.Length > 0)
+            {
+                DDataContext d = new DDataContext();
+                var auf = from v in d.Auftrag
+                          where v.ODL == textBox_ODL.Text
+                          select v;
+                Auftrag a = auf.First();
+
+                if (!(a.Wichtig == null ))
+                {
+                    a.Wichtig = !a.Wichtig;
+                }
+                else
+                {
+                    a.Wichtig = true;
+                }
+
+
+                try
+                {
+                    d.SubmitChanges();
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Wichtigkeit des Auftrages konnte leider nicht bearbeitet werden!\nKeine Verbindung zur Datenbank!", "Fehler!");
+                }
+            }
         }
     }
 }

@@ -5,11 +5,17 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace HOIA.Erweiterungen
 {
+    /// <summary>
+    /// Diese Klasse stellt ein virtuelle Maschine dar, die mehrere Prozesse besitzt und verschiedene Jobs übergeben bekommen kann
+    /// </summary>
     public class Maschine
     {
+        //Stellt die Liste aller im Programm vorhandener Maschinen dar
+        //Ist hilfreich wenn Aufzählungen benötigt werden
         public static List<String> maschines = new List<string>();
 
         string name;
@@ -226,6 +232,7 @@ namespace HOIA.Erweiterungen
 
                         }
                     }
+                    
                 }
             }
 

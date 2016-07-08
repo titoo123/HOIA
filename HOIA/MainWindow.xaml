@@ -22,7 +22,7 @@
             <TextBox AcceptsReturn="True" />
         </DockPanel>
 
-        <TreeView x:Name="treeView" HorizontalAlignment="Left" Height="725" Margin="14,30,0,0" VerticalAlignment="Top" Width="179">
+        <TreeView x:Name="treeView" HorizontalAlignment="Left" Margin="14,30,0,0" VerticalAlignment="Top" Width="179" BorderThickness="1,0,0,0">
             <TreeViewItem Header="Aufträge" Selected="Auftrags_Zuordnung_Selected"></TreeViewItem>
             <TreeViewItem Header="Haubenofen" >
                 <TreeViewItem Header="Technologie Vorlage" Selected="TechnologieVorlage_Selected" >
