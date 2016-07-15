@@ -110,6 +110,23 @@ namespace HOIA.Erweiterungen
             return false;
         }
 
+        internal void CreateChilds(List<string> einträge, string name)
+        {
+            TreeViewItem i = TreeViewGetNode_ByText(name);
+            if (i != null)
+            {
+                CreateChilds(i, einträge);
+            }
+        }
+
+        private void CreateChilds(TreeViewItem i, List<string> einträge)
+        {
+            foreach (var item in einträge)
+            {
+                CreateChild(i, TreeViewHelper.CleanUp4List(item.ToString()));
+            }
+        }
+
         internal string HitTreeView( MouseButtonEventArgs e)
         {
             DependencyObject uie = this.InputHitTest(e.GetPosition(this)) as DependencyObject;

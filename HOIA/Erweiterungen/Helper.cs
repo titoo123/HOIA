@@ -20,7 +20,13 @@ namespace HOIA.Erweiterungen
         public static string INDUKTIONSANLAGEN_ART = "ia";
         public static string FREIEAUFTRÄGE_STRING = "Freie Aufträge";
         public static string FERTIGEAUFTRÄGE_STRING = "Bearbeitete Aufträge";
+
+        public static string WARTENDEAUFTRÄGE_STRING = "Wartende Aufträge";
+        public static string GESPERRTEAUFTRÄGE_STRING = "Gesperrte Aufträge";
+
         public static string AUFTRAG_OFFEN_STRING = "Frei";
+        public static string AUFTRAG_WARTEN_STRING = "Warte";
+        public static string AUFTRAG_GESPERRT_STRING = "Gesprrt";
 
         public static string EL1_STRING = "EL1";
         public static string EL2_STRING = "EL2";

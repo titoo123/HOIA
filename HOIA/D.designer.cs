@@ -45,12 +45,12 @@ namespace HOIA
     partial void InsertVerfahren(Verfahren instance);
     partial void UpdateVerfahren(Verfahren instance);
     partial void DeleteVerfahren(Verfahren instance);
-    partial void InsertMaterial(Material instance);
-    partial void UpdateMaterial(Material instance);
-    partial void DeleteMaterial(Material instance);
     partial void InsertAuftrag(Auftrag instance);
     partial void UpdateAuftrag(Auftrag instance);
     partial void DeleteAuftrag(Auftrag instance);
+    partial void InsertMaterial(Material instance);
+    partial void UpdateMaterial(Material instance);
+    partial void DeleteMaterial(Material instance);
     #endregion
 		
 		public DDataContext() : 
@@ -123,19 +123,19 @@ namespace HOIA
 			}
 		}
 		
-		public System.Data.Linq.Table<Material> Material
-		{
-			get
-			{
-				return this.GetTable<Material>();
-			}
-		}
-		
 		public System.Data.Linq.Table<Auftrag> Auftrag
 		{
 			get
 			{
 				return this.GetTable<Auftrag>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Material> Material
+		{
+			get
+			{
+				return this.GetTable<Material>();
 			}
 		}
 	}
@@ -1165,303 +1165,6 @@ namespace HOIA
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Material")]
-	public partial class Material : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Id;
-		
-		private System.Nullable<System.DateTime> _Datum;
-		
-		private string _Bunde;
-		
-		private string _Stahlsorte;
-		
-		private string _Charge;
-		
-		private System.Nullable<int> _Anzahl;
-		
-		private System.Nullable<int> _Gewicht;
-		
-		private System.Nullable<int> _Id_Glühung;
-		
-		private int _Id_Auftrag;
-		
-		private EntityRef<Auftrag> _Auftrag;
-		
-    #region Definitionen der Erweiterungsmethoden
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdChanging(int value);
-    partial void OnIdChanged();
-    partial void OnDatumChanging(System.Nullable<System.DateTime> value);
-    partial void OnDatumChanged();
-    partial void OnBundeChanging(string value);
-    partial void OnBundeChanged();
-    partial void OnStahlsorteChanging(string value);
-    partial void OnStahlsorteChanged();
-    partial void OnChargeChanging(string value);
-    partial void OnChargeChanged();
-    partial void OnAnzahlChanging(System.Nullable<int> value);
-    partial void OnAnzahlChanged();
-    partial void OnGewichtChanging(System.Nullable<int> value);
-    partial void OnGewichtChanged();
-    partial void OnId_GlühungChanging(System.Nullable<int> value);
-    partial void OnId_GlühungChanged();
-    partial void OnId_AuftragChanging(int value);
-    partial void OnId_AuftragChanged();
-    #endregion
-		
-		public Material()
-		{
-			this._Auftrag = default(EntityRef<Auftrag>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Id
-		{
-			get
-			{
-				return this._Id;
-			}
-			set
-			{
-				if ((this._Id != value))
-				{
-					this.OnIdChanging(value);
-					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Datum", DbType="DateTime")]
-		public System.Nullable<System.DateTime> Datum
-		{
-			get
-			{
-				return this._Datum;
-			}
-			set
-			{
-				if ((this._Datum != value))
-				{
-					this.OnDatumChanging(value);
-					this.SendPropertyChanging();
-					this._Datum = value;
-					this.SendPropertyChanged("Datum");
-					this.OnDatumChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Bunde", DbType="NChar(7)")]
-		public string Bunde
-		{
-			get
-			{
-				return this._Bunde;
-			}
-			set
-			{
-				if ((this._Bunde != value))
-				{
-					this.OnBundeChanging(value);
-					this.SendPropertyChanging();
-					this._Bunde = value;
-					this.SendPropertyChanged("Bunde");
-					this.OnBundeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Stahlsorte", DbType="VarChar(20)")]
-		public string Stahlsorte
-		{
-			get
-			{
-				return this._Stahlsorte;
-			}
-			set
-			{
-				if ((this._Stahlsorte != value))
-				{
-					this.OnStahlsorteChanging(value);
-					this.SendPropertyChanging();
-					this._Stahlsorte = value;
-					this.SendPropertyChanged("Stahlsorte");
-					this.OnStahlsorteChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Charge", DbType="VarChar(10)")]
-		public string Charge
-		{
-			get
-			{
-				return this._Charge;
-			}
-			set
-			{
-				if ((this._Charge != value))
-				{
-					this.OnChargeChanging(value);
-					this.SendPropertyChanging();
-					this._Charge = value;
-					this.SendPropertyChanged("Charge");
-					this.OnChargeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Anzahl", DbType="Int")]
-		public System.Nullable<int> Anzahl
-		{
-			get
-			{
-				return this._Anzahl;
-			}
-			set
-			{
-				if ((this._Anzahl != value))
-				{
-					this.OnAnzahlChanging(value);
-					this.SendPropertyChanging();
-					this._Anzahl = value;
-					this.SendPropertyChanged("Anzahl");
-					this.OnAnzahlChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Gewicht", DbType="Int")]
-		public System.Nullable<int> Gewicht
-		{
-			get
-			{
-				return this._Gewicht;
-			}
-			set
-			{
-				if ((this._Gewicht != value))
-				{
-					this.OnGewichtChanging(value);
-					this.SendPropertyChanging();
-					this._Gewicht = value;
-					this.SendPropertyChanged("Gewicht");
-					this.OnGewichtChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id_Glühung", DbType="Int")]
-		public System.Nullable<int> Id_Glühung
-		{
-			get
-			{
-				return this._Id_Glühung;
-			}
-			set
-			{
-				if ((this._Id_Glühung != value))
-				{
-					this.OnId_GlühungChanging(value);
-					this.SendPropertyChanging();
-					this._Id_Glühung = value;
-					this.SendPropertyChanged("Id_Glühung");
-					this.OnId_GlühungChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id_Auftrag", DbType="Int NOT NULL")]
-		public int Id_Auftrag
-		{
-			get
-			{
-				return this._Id_Auftrag;
-			}
-			set
-			{
-				if ((this._Id_Auftrag != value))
-				{
-					if (this._Auftrag.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnId_AuftragChanging(value);
-					this.SendPropertyChanging();
-					this._Id_Auftrag = value;
-					this.SendPropertyChanged("Id_Auftrag");
-					this.OnId_AuftragChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Auftrag_Material", Storage="_Auftrag", ThisKey="Id_Auftrag", OtherKey="Id", IsForeignKey=true)]
-		public Auftrag Auftrag
-		{
-			get
-			{
-				return this._Auftrag.Entity;
-			}
-			set
-			{
-				Auftrag previousValue = this._Auftrag.Entity;
-				if (((previousValue != value) 
-							|| (this._Auftrag.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Auftrag.Entity = null;
-						previousValue.Material.Remove(this);
-					}
-					this._Auftrag.Entity = value;
-					if ((value != null))
-					{
-						value.Material.Add(this);
-						this._Id_Auftrag = value.Id;
-					}
-					else
-					{
-						this._Id_Auftrag = default(int);
-					}
-					this.SendPropertyChanged("Auftrag");
-				}
-			}
-		}
-
-        public int Display_Position { get; internal set; }
-
-        public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Auftrag")]
 	public partial class Auftrag : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -2403,6 +2106,303 @@ namespace HOIA
 		{
 			this.SendPropertyChanging();
 			entity.Auftrag = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Material")]
+	public partial class Material : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private System.Nullable<System.DateTime> _Datum;
+		
+		private string _Bunde;
+		
+		private string _Stahlsorte;
+		
+		private string _Charge;
+		
+		private string _Status;
+		
+		private System.Nullable<int> _Anzahl;
+		
+		private System.Nullable<int> _Gewicht;
+		
+		private int _Id_Auftrag;
+		
+		private EntityRef<Auftrag> _Auftrag;
+		
+    #region Definitionen der Erweiterungsmethoden
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnDatumChanging(System.Nullable<System.DateTime> value);
+    partial void OnDatumChanged();
+    partial void OnBundeChanging(string value);
+    partial void OnBundeChanged();
+    partial void OnStahlsorteChanging(string value);
+    partial void OnStahlsorteChanged();
+    partial void OnChargeChanging(string value);
+    partial void OnChargeChanged();
+    partial void OnStatusChanging(string value);
+    partial void OnStatusChanged();
+    partial void OnAnzahlChanging(System.Nullable<int> value);
+    partial void OnAnzahlChanged();
+    partial void OnGewichtChanging(System.Nullable<int> value);
+    partial void OnGewichtChanged();
+    partial void OnId_AuftragChanging(int value);
+    partial void OnId_AuftragChanged();
+    #endregion
+		
+		public Material()
+		{
+			this._Auftrag = default(EntityRef<Auftrag>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Datum", DbType="DateTime")]
+		public System.Nullable<System.DateTime> Datum
+		{
+			get
+			{
+				return this._Datum;
+			}
+			set
+			{
+				if ((this._Datum != value))
+				{
+					this.OnDatumChanging(value);
+					this.SendPropertyChanging();
+					this._Datum = value;
+					this.SendPropertyChanged("Datum");
+					this.OnDatumChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Bunde", DbType="NChar(7)")]
+		public string Bunde
+		{
+			get
+			{
+				return this._Bunde;
+			}
+			set
+			{
+				if ((this._Bunde != value))
+				{
+					this.OnBundeChanging(value);
+					this.SendPropertyChanging();
+					this._Bunde = value;
+					this.SendPropertyChanged("Bunde");
+					this.OnBundeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Stahlsorte", DbType="VarChar(20)")]
+		public string Stahlsorte
+		{
+			get
+			{
+				return this._Stahlsorte;
+			}
+			set
+			{
+				if ((this._Stahlsorte != value))
+				{
+					this.OnStahlsorteChanging(value);
+					this.SendPropertyChanging();
+					this._Stahlsorte = value;
+					this.SendPropertyChanged("Stahlsorte");
+					this.OnStahlsorteChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Charge", DbType="VarChar(10)")]
+		public string Charge
+		{
+			get
+			{
+				return this._Charge;
+			}
+			set
+			{
+				if ((this._Charge != value))
+				{
+					this.OnChargeChanging(value);
+					this.SendPropertyChanging();
+					this._Charge = value;
+					this.SendPropertyChanged("Charge");
+					this.OnChargeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Status", DbType="VarChar(20)")]
+		public string Status
+		{
+			get
+			{
+				return this._Status;
+			}
+			set
+			{
+				if ((this._Status != value))
+				{
+					this.OnStatusChanging(value);
+					this.SendPropertyChanging();
+					this._Status = value;
+					this.SendPropertyChanged("Status");
+					this.OnStatusChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Anzahl", DbType="Int")]
+		public System.Nullable<int> Anzahl
+		{
+			get
+			{
+				return this._Anzahl;
+			}
+			set
+			{
+				if ((this._Anzahl != value))
+				{
+					this.OnAnzahlChanging(value);
+					this.SendPropertyChanging();
+					this._Anzahl = value;
+					this.SendPropertyChanged("Anzahl");
+					this.OnAnzahlChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Gewicht", DbType="Int")]
+		public System.Nullable<int> Gewicht
+		{
+			get
+			{
+				return this._Gewicht;
+			}
+			set
+			{
+				if ((this._Gewicht != value))
+				{
+					this.OnGewichtChanging(value);
+					this.SendPropertyChanging();
+					this._Gewicht = value;
+					this.SendPropertyChanged("Gewicht");
+					this.OnGewichtChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id_Auftrag", DbType="Int NOT NULL")]
+		public int Id_Auftrag
+		{
+			get
+			{
+				return this._Id_Auftrag;
+			}
+			set
+			{
+				if ((this._Id_Auftrag != value))
+				{
+					if (this._Auftrag.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnId_AuftragChanging(value);
+					this.SendPropertyChanging();
+					this._Id_Auftrag = value;
+					this.SendPropertyChanged("Id_Auftrag");
+					this.OnId_AuftragChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Auftrag_Material", Storage="_Auftrag", ThisKey="Id_Auftrag", OtherKey="Id", IsForeignKey=true)]
+		public Auftrag Auftrag
+		{
+			get
+			{
+				return this._Auftrag.Entity;
+			}
+			set
+			{
+				Auftrag previousValue = this._Auftrag.Entity;
+				if (((previousValue != value) 
+							|| (this._Auftrag.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Auftrag.Entity = null;
+						previousValue.Material.Remove(this);
+					}
+					this._Auftrag.Entity = value;
+					if ((value != null))
+					{
+						value.Material.Add(this);
+						this._Id_Auftrag = value.Id;
+					}
+					else
+					{
+						this._Id_Auftrag = default(int);
+					}
+					this.SendPropertyChanged("Auftrag");
+				}
+			}
+		}
+
+        public int Display_Position { get; internal set; }
+
+        public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 }

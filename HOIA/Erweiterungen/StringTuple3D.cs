@@ -9,36 +9,66 @@ namespace HOIA.Erweiterungen
 {
     public class StringTuple3D
     {
-        List<Tuple<string, string, string>> a = new List<Tuple<string, string, string>>();
+        List<Tuple<string, string, string>> items = new List<Tuple<string, string, string>>();
 
-        internal void Add(TreeViewItem i1, TreeViewItem i2, TreeViewItem i3) {
-            if (!a.Contains(new Tuple<string, string, string>((string)i1.Header, (string)i2.Header, (string)i3.Header)))
+        public List<Tuple<string, string, string>> Items
+        {
+            get
             {
-                a.Add(new Tuple<string, string, string>((string)i1.Header, (string)i2.Header, (string)i3.Header));
+                return items;
+            }
+
+            set
+            {
+                items = value;
+            }
+        }
+
+        internal void Add(string i1, string i2, string i3)
+        {
+            if (!Items.Contains(new Tuple<string, string,string>(i1, i2, i3)))
+            {
+                Items.Add(new Tuple<string, string, string>(i1, i2, i3));
+            }
+
+        }
+        internal void Add(TreeViewItem i1, TreeViewItem i2, TreeViewItem i3) {
+            if (!Items.Contains(new Tuple<string, string, string>((string)i1.Header, (string)i2.Header, (string)i3.Header)))
+            {
+                Items.Add(new Tuple<string, string, string>((string)i1.Header, (string)i2.Header, (string)i3.Header));
             }
 
         }
         internal void Add(TreeViewItem i1, TreeViewItem i2)
         {
-            if (!a.Contains(new Tuple<string, string, string>("",(string)i1.Header, (string)i2.Header)))
+            if (!Items.Contains(new Tuple<string, string, string>("",(string)i1.Header, (string)i2.Header)))
             {
-                a.Add(new Tuple<string, string, string>("", (string)i1.Header, (string)i2.Header));
+                Items.Add(new Tuple<string, string, string>("", (string)i1.Header, (string)i2.Header));
             }
         }
 
         internal void Remove(TreeViewItem i1)
         {
-            a.RemoveAll(item => item.Item3 == (string)i1.Header);
+            Items.RemoveAll(item => item.Item1 == (string)i1.Header);
         }
-
+        internal void Remove(string i1)
+        {
+            Items.RemoveAll(item => item.Item1 == i1);
+        }
         internal List<Tuple<string, string, string>> Get(TreeViewItem selected)
         {
             List<Tuple<string, string, string>> t = new List<Tuple<string, string, string>>();
-            t = a.GetRange(0, a.Count);
+            t = Items.GetRange(0, Items.Count);
 
             t.RemoveAll(item => item.Item2 != (string)selected.Header);
 
             return t;
+        }
+
+        internal void Refresh(Tuple<string, string, string> its)
+        {
+            this.Remove(its.Item1);
+            items.Add(its);
         }
     }
 }

@@ -10,7 +10,7 @@
       Title="Aufträge">
 
     <Grid Background="White">
-        <GroupBox  Header="Auftragszuordnung">
+        <GroupBox Header="Auftragszuordnung">
             <Grid >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="250" />
@@ -19,20 +19,31 @@
                 </Grid.ColumnDefinitions>
                 <src:Extended_TreeView  x:Name="treeView_H_Zuordnen_HOWerte" MouseUp="treeView_H_Zuordnen_HOWerte_MouseUp" MouseMove="treeView_H_Zuordnen_HOWerte_MouseMove"  Grid.Column="0" VerticalAlignment="Top"   BorderThickness="1,0,0,0"/>
 
+
+
                 <ListView Grid.Column="1" x:Name="ListView_Aufträge"  SelectionChanged="ListView_Aufträge_SelectionChanged" BorderThickness="1,0" >
                     <ListView.View>
                         <GridView>
                             <GridViewColumn Header="Auftrag"
 								DisplayMemberBinding="{Binding Item1}"
-								Width="150"/>
+								Width="125"/>
                             <GridViewColumn Header="Verarbeitung"
 								DisplayMemberBinding="{Binding Item2}"
-								Width="150"/>
-                            <!--<GridViewColumn Header="ODL"
-				    DisplayMemberBinding="{Binding Item3}"
-				    Width="100"/>-->
+								Width="125"/>
+                            <GridViewColumn Header="Wichtig"
+				                DisplayMemberBinding="{Binding Item3}"
+				                Width="50"/>
                         </GridView>
                     </ListView.View>
+                    <ListView.Resources>
+                        <!--<Style TargetType="{x:Type ListViewItem}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{ Binding RelativeSource={RelativeSource AncestorType= }} "  Value="true">
+                                    <Setter Property="FontWeight" Value="Bold"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>-->
+                    </ListView.Resources>
                 </ListView>
                 <GroupBox x:Name="groupBox" Header="Auftragsdetails" Grid.Column="2">
                     <Grid>
@@ -109,7 +120,7 @@
                                 <Label x:Name="label123" Content="W. Länge:" Grid.Column="2"  Grid.Row="2"/>
                                 <Label x:Name="label433" Content="F. Länge:" Grid.Column="0"  Grid.Row="2"/>
                                 <Label x:Name="label4" Content="Charge:" Grid.Column="0"  Grid.Row="3"/>
-                                <Label x:Name="label423" Content="Gesamtmenge:" Grid.Column="2"  Grid.Row="3"/>
+                                <Label x:Name="label423" Content="Bundanzahl:" Grid.Column="2"  Grid.Row="3"/>
                                 <Label x:Name="label42" Content="Gesamtgewicht:" Grid.Column="0"  Grid.Row="4"/>
 
                                 <TextBox x:Name="textBox_Abm1" Height="23" Grid.Column="1"  Grid.Row="0" IsReadOnly="True"/>
@@ -187,7 +198,7 @@
 											Width="100"/>
                                         <GridViewColumn Header="Stahlsorte"
 											DisplayMemberBinding="{Binding Stahlsorte}"
-											Width="190"/>
+											Width="140"/>
                                         <GridViewColumn Header="Gewicht"
 											DisplayMemberBinding="{Binding Gewicht, StringFormat=( \{0\} Kg )}"
 
@@ -244,17 +255,20 @@
                                 <ColumnDefinition />
                                 <ColumnDefinition />
                                 <ColumnDefinition />
+                                <ColumnDefinition />
                             </Grid.ColumnDefinitions>
 
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="34" />
+                                <RowDefinition Height="28" />
 
 
                             </Grid.RowDefinitions>
-                            <Button Grid.Row="5" Grid.Column="0" Width="150"  VerticalAlignment="Bottom" Content="Speichern" Click="Button_Speichern_Click"/>
-                            <Button Grid.Column="1" Width="150"  VerticalAlignment="Top" Content="Wichtig!" x:Name="button_Wichtig" Margin="10,12,11,0" Click="button_Wichtig_Click" />
-                            <Button Grid.Row="5" Grid.Column="2" Width="150"  VerticalAlignment="Bottom" Content="Kunde" x:Name="button_kunde" Click="button_kunde_Click" />
-                            <Button Grid.Row="5" Grid.Column="3" Width="150"  VerticalAlignment="Bottom" Content="Bestimmungsort" x:Name="button_Bestimmungsort" Click="button_Bestimmungsort_Click" />
+                            <Button Grid.Row="5" Grid.Column="0" Width="120"  VerticalAlignment="Bottom" Content="Speichern" Click="Button_Speichern_Click"/>
+                            <Button Grid.Row="5" Grid.Column="1" Width="120"  VerticalAlignment="Bottom" Content="Wichtig!" x:Name="button_Wichtig" Click="button_Wichtig_Click" />
+                            <Button Grid.Row="5" Grid.Column="2" Width="120"  VerticalAlignment="Bottom" Content="Kunde" x:Name="button_kunde" Click="button_kunde_Click" />
+                            <Button Grid.Row="5" Grid.Column="3" Width="120"  VerticalAlignment="Bottom" Content="Bestimmungsort" x:Name="button_Bestimmungsort" Click="button_Bestimmungsort_Click" />
+                            <Button Grid.Row="5" Grid.Column="4" Width="120"  VerticalAlignment="Bottom" Content="AS400 übergeben" x:Name="button_AS400" Click="button_AS400_Click" />
+
                         </Grid>
                     </Grid>
 
