@@ -159,15 +159,16 @@ namespace HOIA.Erweiterungen
         }
         internal static bool InDb(string j)
         {
-            string i = Helper.CleanUpString (j);
+            //string i = Helper.CleanUpString (j);
+            string i = Helper.CleanUpCatNumber(j);
             DDataContext d = new DDataContext();
 
-            var kjh = from l in d.Verfahren
+            var ver = from l in d.Verfahren
                       select l;
 
             if (i != null)
             {
-                foreach (var item in kjh)
+                foreach (var item in ver)
                 {
                     if (i == item.Name)
                     {
@@ -214,19 +215,31 @@ namespace HOIA.Erweiterungen
             return ti;
 
         }
-        internal static void CloseAll(TreeView t, TreeViewItem i, int v)
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="tVw">TreeView</param>
+        /// <param name="tVi">TreeViewItem</param>
+        /// <param name="level">Level auf dem das Element geöffnet oder geschlossen werden soll</param>
+        internal static void OpenOrCloseAllOnLevel(TreeView tVw, TreeViewItem tVi, int level)
         {
-            if (GetNodeLevel(t, i) != v)
+            if (GetNodeLevel(tVw, tVi) != level)
             {
-                foreach (TreeViewItem item in t.Items)
+                foreach (TreeViewItem tVi_l1 in tVw.Items)
                 {
-                    if (item.Header != i.Header && (string)item.Header != Helper.FREIEAUFTRÄGE_STRING)
+                    if (tVi_l1.Header != tVi.Header) //&& (string)item.Header != Helper.FREIEAUFTRÄGE_STRING)
                     {
-                        item.IsExpanded = false;
+                        tVi_l1.IsExpanded = false;
                     }
                     else
                     {
-                        item.IsExpanded = true;
+                        tVi_l1.IsExpanded = true;
+                        //foreach (TreeViewItem tVi_l2 in tVi_l1.Items)
+                        //{
+                        //    if (tVi_l2.Header == tVi.Header)
+                        //        tVi_l2.IsExpanded = true;
+                        //}
                     }
                 }
             }

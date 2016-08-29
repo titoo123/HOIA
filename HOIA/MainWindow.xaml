@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HOIA"
         mc:Ignorable="d"
-        Title="MainWindow" Height="1000" Width="1500">
+        Title="MainWindow" Height="900" Width="1500">
 
     <Grid>
         <DockPanel>
@@ -13,8 +13,10 @@
                 <MenuItem Header="Stammdaten">
                     <!--<MenuItem Header="HO Werte" Click="MenuItem_HOWerte_Click" />-->
 
-
-                    <MenuItem Header="IA Werte" Click="MenuItem_IAWerte_Click" />
+                    <MenuItem Header="Maschinen" Click="MenuItem_Maschinen_Click" />
+                    <MenuItem Header="Maschinenarten" Click="MenuItem_Maschinenarten_Click" />
+                    
+                    <MenuItem Header="Maschinenkategorien" Click="MenuItem_Maschinenkategorie_Click" />
                     <Separator />
 
                 </MenuItem>

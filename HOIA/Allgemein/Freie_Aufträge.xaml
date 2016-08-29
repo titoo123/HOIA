@@ -1,54 +1,110 @@
-﻿<Page
+﻿<Page x:Class="HOIA.Allgemein.Freie_Aufträge"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:HOIA.Allgemein"
-      xmlns:src="clr-namespace:HOIA.Erweiterungen"
-      xmlns:HOIA="clr-namespace:HOIA" x:Class="HOIA.Allgemein.Aufträge_Zuordnen"
-      mc:Ignorable="d" d:DesignWidth="1280"
-      Title="Aufträge">
+      mc:Ignorable="d" 
+      VerticalAlignment="Top"
+      Title="Freie_Aufträge">
 
-    <Grid Background="White">
-        <GroupBox Header="Auftragszuordnung">
+    <Grid Background="White" >
+        <GroupBox Header="Neue Aufträge" >
             <Grid >
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="250" />
-                    <ColumnDefinition Width="320"/>
-                    <ColumnDefinition />
+                    <ColumnDefinition Width="5*" />
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="5*" />
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="5*" />
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="5*"/>
+                    <ColumnDefinition Width="20*"/>
                 </Grid.ColumnDefinitions>
-                <src:Extended_TreeView  x:Name="treeView_H_Zuordnen_HOWerte" MouseUp="treeView_H_Zuordnen_HOWerte_MouseUp" MouseMove="treeView_H_Zuordnen_HOWerte_MouseMove"  Grid.Column="0" VerticalAlignment="Top"   BorderThickness="1,0,0,0"/>
+
+             
+                <GroupBox Grid.Column="0" Header="Aufträge">
+                    <ListBox x:Name="listBox_Aufträge" HorizontalAlignment="Stretch"   VerticalAlignment="Stretch" />
+                </GroupBox>
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="5*"></RowDefinition>
+                        <RowDefinition Height="1*"></RowDefinition>
+                        <RowDefinition Height="1*"></RowDefinition>
+                        <RowDefinition Height="30*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Button Grid.Row="1" Content=">>" Click="Button_Von_Auftrag_Zu_Maschine_Click" Height="22" VerticalAlignment="Bottom"></Button>
+                    <Button Grid.Row="2" Content="&lt;&lt;" Click="Button_Von_Maschine_Zu_Auftrag_Click"></Button>
+                </Grid>
+                <GroupBox Grid.Column="2" Header="Maschinen">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*"></RowDefinition>
+                            <RowDefinition Height="8*"></RowDefinition>
+                            <RowDefinition Height="1*"></RowDefinition>
+                            <RowDefinition Height="20*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <!--<Label Content="Maschine" Grid.Row="0"></Label>-->
+                        <Button Content="Verwalten" Click="Button_Maschinen_Verwalten_Click" Grid.Row="0"></Button>
+                        <ListBox x:Name="listBox_Maschine" Grid.Row="1" SelectionChanged="listBox_Maschine_SelectionChanged"/>
+                        <Label Content="Aufträge in Maschine" Grid.Row="2"></Label>
+                        <ListBox x:Name="listBox_Aufträge_in_Maschine" Grid.Row="3"/>
+                    </Grid>
+
+                </GroupBox>
+                <Grid Grid.Column="3">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="5*"></RowDefinition>
+                        <RowDefinition Height="1*"></RowDefinition>
+                        <RowDefinition Height="1*"></RowDefinition>
+                        <RowDefinition Height="30*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Button Grid.Row="1" Content=">>" Click="Button_Von_Maschine_Zu_Kategorie_Click"></Button>
+                    <Button Grid.Row="2" Content="&lt;&lt;" Click="Button_Von_Kategorie_Zu_Maschine_Click"></Button>
+                </Grid>
+                <GroupBox Grid.Column="4" Header="Kategorie">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*"></RowDefinition>
+                            <RowDefinition Height="8*"></RowDefinition>
+                            <RowDefinition Height="1*"></RowDefinition>
+                            <RowDefinition Height="20*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Button Content="Verwalten" Grid.Row="0" Click="Button_Kategorie_Verwalten_Click"></Button>
+                        <ListBox x:Name="listBox_Kategorie" HorizontalAlignment="Stretch"   VerticalAlignment="Stretch" Grid.Row="1"/>
+                        <Label Content="Aufträge in Kategorie" Grid.Row="2"></Label>
+                        <ListBox x:Name="listBox_Aufträge_in_Kategorie" HorizontalAlignment="Stretch"   VerticalAlignment="Stretch"  Grid.Row="3"/>
+                    </Grid>
 
 
+                </GroupBox>
+                <Grid Grid.Column="5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="5*"></RowDefinition>
+                        <RowDefinition Height="1*"></RowDefinition>
+                        <RowDefinition Height="1*"></RowDefinition>
+                        <RowDefinition Height="30*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Button Grid.Row="1" Content=">>"  Click="Button_Von_Kategorie_Zu_Verfahren_Click"></Button>
+                    <Button Grid.Row="2" Content="&lt;&lt;"  Click="Button_Von_Verfahren_Zu_Kategorie_Click"></Button>
+                </Grid>
+                
+                <GroupBox Grid.Column="6" Header="Verfahren">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*"></RowDefinition>
+                            <RowDefinition Height="8*"></RowDefinition>
+                            <RowDefinition Height="1*"></RowDefinition>
+                            <RowDefinition Height="20*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Button Content="Verwalten" Click="Button_Verfahren_Verwalten_Click" Grid.Row="0"></Button>
+                        <ListBox x:Name="listBox_Verfahren" HorizontalAlignment="Stretch"   VerticalAlignment="Stretch" Grid.Row="1"/>
+                        <Label Content="Aufträge in Verfahren" Grid.Row="2"></Label>
+                        <ListBox x:Name="listBox_Aufträge_in_Verfahren" HorizontalAlignment="Stretch"   VerticalAlignment="Stretch" Grid.Row="3"/>
+                    </Grid>
 
-                <ListView Grid.Column="1" x:Name="ListView_Aufträge"  SelectionChanged="ListView_Aufträge_SelectionChanged" BorderThickness="1,0" Margin="0,0,0,41" >
-                    <ListView.View>
-                        <GridView>
-                            <GridViewColumn Header="Auftrag"
-								DisplayMemberBinding="{Binding Item1}"
-								Width="100"/>
-                            <GridViewColumn Header="Verarbeitung"
-								DisplayMemberBinding="{Binding Item2}"
-								Width="110"/>
-                            <GridViewColumn Header="Wichtig"
-				                DisplayMemberBinding="{Binding Item3}"
-				                Width="50"/>
-                            <GridViewColumn Header="Status"
-				               
-				                Width="50"/>
-                        </GridView>
-                    </ListView.View>
-                    <ListView.Resources>
-                        <!--<Style TargetType="{x:Type ListViewItem}">
-                            <Style.Triggers>
-                                <DataTrigger Binding="{ Binding RelativeSource={RelativeSource AncestorType= }} "  Value="true">
-                                    <Setter Property="FontWeight" Value="Bold"/>
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>-->
-                    </ListView.Resources>
-                </ListView>
-                <GroupBox x:Name="groupBox" Header="Auftragsdetails" Grid.Column="2">
+                </GroupBox>
+                <GroupBox x:Name="groupBox" Header="Auftragsdetails" Grid.Column="7">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition />
@@ -56,6 +112,7 @@
                         </Grid.ColumnDefinitions>
 
                         <Grid.RowDefinitions>
+
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
@@ -213,10 +270,10 @@
                         <GroupBox x:Name="groupBox6" Header="Ergänzungen" Grid.Row="5"  VerticalAlignment="Top" Grid.ColumnSpan="2" >
                             <Grid>
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="60"/>
-                                    <RowDefinition Height="60"/>
-                                    <RowDefinition Height="60"/>
-                                    <RowDefinition Height="60" />
+                                    <RowDefinition Height="30"/>
+                                    <RowDefinition Height="30"/>
+                                    <RowDefinition Height="30"/>
+                                    <RowDefinition Height="30" />
                                     <RowDefinition/>
                                     <RowDefinition/>
                                     <RowDefinition/>
@@ -266,11 +323,11 @@
 
 
                             </Grid.RowDefinitions>
-                            <Button Grid.Row="5" Grid.Column="0" Width="120"  VerticalAlignment="Bottom" Content="Speichern" Click="Button_Speichern_Click"/>
-                            <Button Grid.Row="5" Grid.Column="1" Width="120"  VerticalAlignment="Bottom" Content="Wichtig!" x:Name="button_Wichtig" Click="button_Wichtig_Click" />
-                            <Button Grid.Row="5" Grid.Column="2" Width="120"  VerticalAlignment="Bottom" Content="Kunde" x:Name="button_kunde" Click="button_kunde_Click" />
-                            <Button Grid.Row="5" Grid.Column="3" Width="120"  VerticalAlignment="Bottom" Content="Bestimmungsort" x:Name="button_Bestimmungsort" Click="button_Bestimmungsort_Click" />
-                            <Button Grid.Row="5" Grid.Column="4" Width="120"  VerticalAlignment="Bottom" Content="AS400 übergeben" x:Name="button_AS400" Click="button_AS400_Click" />
+                            <Button Grid.Row="5" Grid.Column="0"  VerticalAlignment="Bottom" Content="Speichern" Click="Button_Speichern_Click"/>
+                            <Button Grid.Row="5" Grid.Column="1"  VerticalAlignment="Bottom" Content="Wichtig!" x:Name="button_Wichtig" Click="button_Wichtig_Click" />
+                            <Button Grid.Row="5" Grid.Column="2"  VerticalAlignment="Bottom" Content="Kunde" x:Name="button_kunde" Click="button_kunde_Click" />
+                            <Button Grid.Row="5" Grid.Column="3"  VerticalAlignment="Bottom" Content="Bestimmungsort" x:Name="button_Bestimmungsort" Click="button_Bestimmungsort_Click" />
+                            <Button Grid.Row="5" Grid.Column="4"  VerticalAlignment="Bottom" Content="AS400 übergeben" x:Name="button_AS400" Click="button_AS400_Click" />
 
                         </Grid>
                     </Grid>

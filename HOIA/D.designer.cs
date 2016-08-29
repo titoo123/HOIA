@@ -39,18 +39,27 @@ namespace HOIA
     partial void InsertTeilschritt(Teilschritt instance);
     partial void UpdateTeilschritt(Teilschritt instance);
     partial void DeleteTeilschritt(Teilschritt instance);
-    partial void InsertMN_VerfahrenAuftrag(MN_VerfahrenAuftrag instance);
-    partial void UpdateMN_VerfahrenAuftrag(MN_VerfahrenAuftrag instance);
-    partial void DeleteMN_VerfahrenAuftrag(MN_VerfahrenAuftrag instance);
-    partial void InsertVerfahren(Verfahren instance);
-    partial void UpdateVerfahren(Verfahren instance);
-    partial void DeleteVerfahren(Verfahren instance);
     partial void InsertAuftrag(Auftrag instance);
     partial void UpdateAuftrag(Auftrag instance);
     partial void DeleteAuftrag(Auftrag instance);
     partial void InsertMaterial(Material instance);
     partial void UpdateMaterial(Material instance);
     partial void DeleteMaterial(Material instance);
+    partial void InsertMaschinenart(Maschinenart instance);
+    partial void UpdateMaschinenart(Maschinenart instance);
+    partial void DeleteMaschinenart(Maschinenart instance);
+    partial void InsertAuftrags_Zuordnung(Auftrags_Zuordnung instance);
+    partial void UpdateAuftrags_Zuordnung(Auftrags_Zuordnung instance);
+    partial void DeleteAuftrags_Zuordnung(Auftrags_Zuordnung instance);
+    partial void InsertMaschine(Maschine instance);
+    partial void UpdateMaschine(Maschine instance);
+    partial void DeleteMaschine(Maschine instance);
+    partial void InsertKategorie(Kategorie instance);
+    partial void UpdateKategorie(Kategorie instance);
+    partial void DeleteKategorie(Kategorie instance);
+    partial void InsertVerfahren(Verfahren instance);
+    partial void UpdateVerfahren(Verfahren instance);
+    partial void DeleteVerfahren(Verfahren instance);
     #endregion
 		
 		public DDataContext() : 
@@ -107,22 +116,6 @@ namespace HOIA
 			}
 		}
 		
-		public System.Data.Linq.Table<MN_VerfahrenAuftrag> MN_VerfahrenAuftrag
-		{
-			get
-			{
-				return this.GetTable<MN_VerfahrenAuftrag>();
-			}
-		}
-		
-		public System.Data.Linq.Table<Verfahren> Verfahren
-		{
-			get
-			{
-				return this.GetTable<Verfahren>();
-			}
-		}
-		
 		public System.Data.Linq.Table<Auftrag> Auftrag
 		{
 			get
@@ -136,6 +129,46 @@ namespace HOIA
 			get
 			{
 				return this.GetTable<Material>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Maschinenart> Maschinenart
+		{
+			get
+			{
+				return this.GetTable<Maschinenart>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Auftrags_Zuordnung> Auftrags_Zuordnung
+		{
+			get
+			{
+				return this.GetTable<Auftrags_Zuordnung>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Maschine> Maschine
+		{
+			get
+			{
+				return this.GetTable<Maschine>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Kategorie> Kategorie
+		{
+			get
+			{
+				return this.GetTable<Kategorie>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Verfahren> Verfahren
+		{
+			get
+			{
+				return this.GetTable<Verfahren>();
 			}
 		}
 	}
@@ -759,412 +792,6 @@ namespace HOIA
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.MN_VerfahrenAuftrag")]
-	public partial class MN_VerfahrenAuftrag : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Id;
-		
-		private System.Nullable<int> _Id_Verfahren;
-		
-		private System.Nullable<int> _Id_Auftrag;
-		
-		private System.Nullable<int> _Schritt;
-		
-		private EntityRef<Verfahren> _Verfahren;
-		
-		private EntityRef<Auftrag> _Auftrag;
-		
-    #region Definitionen der Erweiterungsmethoden
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdChanging(int value);
-    partial void OnIdChanged();
-    partial void OnId_VerfahrenChanging(System.Nullable<int> value);
-    partial void OnId_VerfahrenChanged();
-    partial void OnId_AuftragChanging(System.Nullable<int> value);
-    partial void OnId_AuftragChanged();
-    partial void OnSchrittChanging(System.Nullable<int> value);
-    partial void OnSchrittChanged();
-    #endregion
-		
-		public MN_VerfahrenAuftrag()
-		{
-			this._Verfahren = default(EntityRef<Verfahren>);
-			this._Auftrag = default(EntityRef<Auftrag>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Id
-		{
-			get
-			{
-				return this._Id;
-			}
-			set
-			{
-				if ((this._Id != value))
-				{
-					this.OnIdChanging(value);
-					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id_Verfahren", DbType="Int")]
-		public System.Nullable<int> Id_Verfahren
-		{
-			get
-			{
-				return this._Id_Verfahren;
-			}
-			set
-			{
-				if ((this._Id_Verfahren != value))
-				{
-					if (this._Verfahren.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnId_VerfahrenChanging(value);
-					this.SendPropertyChanging();
-					this._Id_Verfahren = value;
-					this.SendPropertyChanged("Id_Verfahren");
-					this.OnId_VerfahrenChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id_Auftrag", DbType="Int")]
-		public System.Nullable<int> Id_Auftrag
-		{
-			get
-			{
-				return this._Id_Auftrag;
-			}
-			set
-			{
-				if ((this._Id_Auftrag != value))
-				{
-					if (this._Auftrag.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnId_AuftragChanging(value);
-					this.SendPropertyChanging();
-					this._Id_Auftrag = value;
-					this.SendPropertyChanged("Id_Auftrag");
-					this.OnId_AuftragChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Schritt", DbType="Int")]
-		public System.Nullable<int> Schritt
-		{
-			get
-			{
-				return this._Schritt;
-			}
-			set
-			{
-				if ((this._Schritt != value))
-				{
-					this.OnSchrittChanging(value);
-					this.SendPropertyChanging();
-					this._Schritt = value;
-					this.SendPropertyChanged("Schritt");
-					this.OnSchrittChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Verfahren_MN_VerfahrenAuftrag", Storage="_Verfahren", ThisKey="Id_Verfahren", OtherKey="Id", IsForeignKey=true)]
-		public Verfahren Verfahren
-		{
-			get
-			{
-				return this._Verfahren.Entity;
-			}
-			set
-			{
-				Verfahren previousValue = this._Verfahren.Entity;
-				if (((previousValue != value) 
-							|| (this._Verfahren.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Verfahren.Entity = null;
-						previousValue.MN_VerfahrenAuftrag.Remove(this);
-					}
-					this._Verfahren.Entity = value;
-					if ((value != null))
-					{
-						value.MN_VerfahrenAuftrag.Add(this);
-						this._Id_Verfahren = value.Id;
-					}
-					else
-					{
-						this._Id_Verfahren = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("Verfahren");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Auftrag_MN_VerfahrenAuftrag", Storage="_Auftrag", ThisKey="Id_Auftrag", OtherKey="Id", IsForeignKey=true)]
-		public Auftrag Auftrag
-		{
-			get
-			{
-				return this._Auftrag.Entity;
-			}
-			set
-			{
-				Auftrag previousValue = this._Auftrag.Entity;
-				if (((previousValue != value) 
-							|| (this._Auftrag.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Auftrag.Entity = null;
-						previousValue.MN_VerfahrenAuftrag.Remove(this);
-					}
-					this._Auftrag.Entity = value;
-					if ((value != null))
-					{
-						value.MN_VerfahrenAuftrag.Add(this);
-						this._Id_Auftrag = value.Id;
-					}
-					else
-					{
-						this._Id_Auftrag = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("Auftrag");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Verfahren")]
-	public partial class Verfahren : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Id;
-		
-		private string _Name;
-		
-		private string _Beschreibung;
-		
-		private string _Art;
-		
-		private EntitySet<Teilschritt> _Teilschritt;
-		
-		private EntitySet<MN_VerfahrenAuftrag> _MN_VerfahrenAuftrag;
-		
-    #region Definitionen der Erweiterungsmethoden
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdChanging(int value);
-    partial void OnIdChanged();
-    partial void OnNameChanging(string value);
-    partial void OnNameChanged();
-    partial void OnBeschreibungChanging(string value);
-    partial void OnBeschreibungChanged();
-    partial void OnArtChanging(string value);
-    partial void OnArtChanged();
-    #endregion
-		
-		public Verfahren()
-		{
-			this._Teilschritt = new EntitySet<Teilschritt>(new Action<Teilschritt>(this.attach_Teilschritt), new Action<Teilschritt>(this.detach_Teilschritt));
-			this._MN_VerfahrenAuftrag = new EntitySet<MN_VerfahrenAuftrag>(new Action<MN_VerfahrenAuftrag>(this.attach_MN_VerfahrenAuftrag), new Action<MN_VerfahrenAuftrag>(this.detach_MN_VerfahrenAuftrag));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Id
-		{
-			get
-			{
-				return this._Id;
-			}
-			set
-			{
-				if ((this._Id != value))
-				{
-					this.OnIdChanging(value);
-					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="VarChar(50)")]
-		public string Name
-		{
-			get
-			{
-				return this._Name;
-			}
-			set
-			{
-				if ((this._Name != value))
-				{
-					this.OnNameChanging(value);
-					this.SendPropertyChanging();
-					this._Name = value;
-					this.SendPropertyChanged("Name");
-					this.OnNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Beschreibung", DbType="VarChar(MAX)")]
-		public string Beschreibung
-		{
-			get
-			{
-				return this._Beschreibung;
-			}
-			set
-			{
-				if ((this._Beschreibung != value))
-				{
-					this.OnBeschreibungChanging(value);
-					this.SendPropertyChanging();
-					this._Beschreibung = value;
-					this.SendPropertyChanged("Beschreibung");
-					this.OnBeschreibungChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Art", DbType="VarChar(20)")]
-		public string Art
-		{
-			get
-			{
-				return this._Art;
-			}
-			set
-			{
-				if ((this._Art != value))
-				{
-					this.OnArtChanging(value);
-					this.SendPropertyChanging();
-					this._Art = value;
-					this.SendPropertyChanged("Art");
-					this.OnArtChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Verfahren_Teilschritt", Storage="_Teilschritt", ThisKey="Id", OtherKey="Id_Verfahren")]
-		public EntitySet<Teilschritt> Teilschritt
-		{
-			get
-			{
-				return this._Teilschritt;
-			}
-			set
-			{
-				this._Teilschritt.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Verfahren_MN_VerfahrenAuftrag", Storage="_MN_VerfahrenAuftrag", ThisKey="Id", OtherKey="Id_Verfahren")]
-		public EntitySet<MN_VerfahrenAuftrag> MN_VerfahrenAuftrag
-		{
-			get
-			{
-				return this._MN_VerfahrenAuftrag;
-			}
-			set
-			{
-				this._MN_VerfahrenAuftrag.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Teilschritt(Teilschritt entity)
-		{
-			this.SendPropertyChanging();
-			entity.Verfahren = this;
-		}
-		
-		private void detach_Teilschritt(Teilschritt entity)
-		{
-			this.SendPropertyChanging();
-			entity.Verfahren = null;
-		}
-		
-		private void attach_MN_VerfahrenAuftrag(MN_VerfahrenAuftrag entity)
-		{
-			this.SendPropertyChanging();
-			entity.Verfahren = this;
-		}
-		
-		private void detach_MN_VerfahrenAuftrag(MN_VerfahrenAuftrag entity)
-		{
-			this.SendPropertyChanging();
-			entity.Verfahren = null;
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Auftrag")]
 	public partial class Auftrag : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -1235,9 +862,9 @@ namespace HOIA
 		
 		private System.Nullable<double> _Mo;
 		
-		private EntitySet<MN_VerfahrenAuftrag> _MN_VerfahrenAuftrag;
-		
 		private EntitySet<Material> _Material;
+		
+		private EntitySet<Auftrags_Zuordnung> _Auftrags_Zuordnung;
 		
 		private EntityRef<Bestimmungsort> _Bestimmungsort;
 		
@@ -1315,8 +942,8 @@ namespace HOIA
 		
 		public Auftrag()
 		{
-			this._MN_VerfahrenAuftrag = new EntitySet<MN_VerfahrenAuftrag>(new Action<MN_VerfahrenAuftrag>(this.attach_MN_VerfahrenAuftrag), new Action<MN_VerfahrenAuftrag>(this.detach_MN_VerfahrenAuftrag));
 			this._Material = new EntitySet<Material>(new Action<Material>(this.attach_Material), new Action<Material>(this.detach_Material));
+			this._Auftrags_Zuordnung = new EntitySet<Auftrags_Zuordnung>(new Action<Auftrags_Zuordnung>(this.attach_Auftrags_Zuordnung), new Action<Auftrags_Zuordnung>(this.detach_Auftrags_Zuordnung));
 			this._Bestimmungsort = default(EntityRef<Bestimmungsort>);
 			this._Kunde = default(EntityRef<Kunde>);
 			OnCreated();
@@ -1970,19 +1597,6 @@ namespace HOIA
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Auftrag_MN_VerfahrenAuftrag", Storage="_MN_VerfahrenAuftrag", ThisKey="Id", OtherKey="Id_Auftrag")]
-		public EntitySet<MN_VerfahrenAuftrag> MN_VerfahrenAuftrag
-		{
-			get
-			{
-				return this._MN_VerfahrenAuftrag;
-			}
-			set
-			{
-				this._MN_VerfahrenAuftrag.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Auftrag_Material", Storage="_Material", ThisKey="Id", OtherKey="Id_Auftrag")]
 		public EntitySet<Material> Material
 		{
@@ -1993,6 +1607,19 @@ namespace HOIA
 			set
 			{
 				this._Material.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Auftrag_Auftrags_Zuordnung", Storage="_Auftrags_Zuordnung", ThisKey="Id", OtherKey="Id_Auftrag")]
+		public EntitySet<Auftrags_Zuordnung> Auftrags_Zuordnung
+		{
+			get
+			{
+				return this._Auftrags_Zuordnung;
+			}
+			set
+			{
+				this._Auftrags_Zuordnung.Assign(value);
 			}
 		}
 		
@@ -2084,18 +1711,6 @@ namespace HOIA
 			}
 		}
 		
-		private void attach_MN_VerfahrenAuftrag(MN_VerfahrenAuftrag entity)
-		{
-			this.SendPropertyChanging();
-			entity.Auftrag = this;
-		}
-		
-		private void detach_MN_VerfahrenAuftrag(MN_VerfahrenAuftrag entity)
-		{
-			this.SendPropertyChanging();
-			entity.Auftrag = null;
-		}
-		
 		private void attach_Material(Material entity)
 		{
 			this.SendPropertyChanging();
@@ -2103,6 +1718,18 @@ namespace HOIA
 		}
 		
 		private void detach_Material(Material entity)
+		{
+			this.SendPropertyChanging();
+			entity.Auftrag = null;
+		}
+		
+		private void attach_Auftrags_Zuordnung(Auftrags_Zuordnung entity)
+		{
+			this.SendPropertyChanging();
+			entity.Auftrag = this;
+		}
+		
+		private void detach_Auftrags_Zuordnung(Auftrags_Zuordnung entity)
 		{
 			this.SendPropertyChanging();
 			entity.Auftrag = null;
@@ -2382,10 +2009,8 @@ namespace HOIA
 				}
 			}
 		}
-
-        public int Display_Position { get; internal set; }
-
-        public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
 		
@@ -2403,6 +2028,1087 @@ namespace HOIA
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Maschinenart")]
+	public partial class Maschinenart : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private string _Name;
+		
+		private EntitySet<Maschine> _Maschine;
+		
+		private EntitySet<Verfahren> _Verfahren;
+		
+    #region Definitionen der Erweiterungsmethoden
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnNameChanging(string value);
+    partial void OnNameChanged();
+    #endregion
+		
+		public Maschinenart()
+		{
+			this._Maschine = new EntitySet<Maschine>(new Action<Maschine>(this.attach_Maschine), new Action<Maschine>(this.detach_Maschine));
+			this._Verfahren = new EntitySet<Verfahren>(new Action<Verfahren>(this.attach_Verfahren), new Action<Verfahren>(this.detach_Verfahren));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="VarChar(50)")]
+		public string Name
+		{
+			get
+			{
+				return this._Name;
+			}
+			set
+			{
+				if ((this._Name != value))
+				{
+					this.OnNameChanging(value);
+					this.SendPropertyChanging();
+					this._Name = value;
+					this.SendPropertyChanged("Name");
+					this.OnNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Maschinenart_Maschine", Storage="_Maschine", ThisKey="Id", OtherKey="Id_Maschinenart")]
+		public EntitySet<Maschine> Maschine
+		{
+			get
+			{
+				return this._Maschine;
+			}
+			set
+			{
+				this._Maschine.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Maschinenart_Verfahren", Storage="_Verfahren", ThisKey="Id", OtherKey="Id_Maschinenart")]
+		public EntitySet<Verfahren> Verfahren
+		{
+			get
+			{
+				return this._Verfahren;
+			}
+			set
+			{
+				this._Verfahren.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Maschine(Maschine entity)
+		{
+			this.SendPropertyChanging();
+			entity.Maschinenart = this;
+		}
+		
+		private void detach_Maschine(Maschine entity)
+		{
+			this.SendPropertyChanging();
+			entity.Maschinenart = null;
+		}
+		
+		private void attach_Verfahren(Verfahren entity)
+		{
+			this.SendPropertyChanging();
+			entity.Maschinenart = this;
+		}
+		
+		private void detach_Verfahren(Verfahren entity)
+		{
+			this.SendPropertyChanging();
+			entity.Maschinenart = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Auftrags_Zuordnung")]
+	public partial class Auftrags_Zuordnung : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private System.Nullable<int> _Id_Auftrag;
+		
+		private System.Nullable<int> _Id_Maschine;
+		
+		private System.Nullable<int> _Id_Kategorie;
+		
+		private System.Nullable<int> _Id_Verfahren;
+		
+		private EntityRef<Auftrag> _Auftrag;
+		
+		private EntityRef<Maschine> _Maschine;
+		
+		private EntityRef<Kategorie> _Kategorie;
+		
+		private EntityRef<Verfahren> _Verfahren;
+		
+    #region Definitionen der Erweiterungsmethoden
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnId_AuftragChanging(System.Nullable<int> value);
+    partial void OnId_AuftragChanged();
+    partial void OnId_MaschineChanging(System.Nullable<int> value);
+    partial void OnId_MaschineChanged();
+    partial void OnId_KategorieChanging(System.Nullable<int> value);
+    partial void OnId_KategorieChanged();
+    partial void OnId_VerfahrenChanging(System.Nullable<int> value);
+    partial void OnId_VerfahrenChanged();
+    #endregion
+		
+		public Auftrags_Zuordnung()
+		{
+			this._Auftrag = default(EntityRef<Auftrag>);
+			this._Maschine = default(EntityRef<Maschine>);
+			this._Kategorie = default(EntityRef<Kategorie>);
+			this._Verfahren = default(EntityRef<Verfahren>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id_Auftrag", DbType="Int")]
+		public System.Nullable<int> Id_Auftrag
+		{
+			get
+			{
+				return this._Id_Auftrag;
+			}
+			set
+			{
+				if ((this._Id_Auftrag != value))
+				{
+					if (this._Auftrag.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnId_AuftragChanging(value);
+					this.SendPropertyChanging();
+					this._Id_Auftrag = value;
+					this.SendPropertyChanged("Id_Auftrag");
+					this.OnId_AuftragChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id_Maschine", DbType="Int")]
+		public System.Nullable<int> Id_Maschine
+		{
+			get
+			{
+				return this._Id_Maschine;
+			}
+			set
+			{
+				if ((this._Id_Maschine != value))
+				{
+					if (this._Maschine.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnId_MaschineChanging(value);
+					this.SendPropertyChanging();
+					this._Id_Maschine = value;
+					this.SendPropertyChanged("Id_Maschine");
+					this.OnId_MaschineChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id_Kategorie", DbType="Int")]
+		public System.Nullable<int> Id_Kategorie
+		{
+			get
+			{
+				return this._Id_Kategorie;
+			}
+			set
+			{
+				if ((this._Id_Kategorie != value))
+				{
+					if (this._Kategorie.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnId_KategorieChanging(value);
+					this.SendPropertyChanging();
+					this._Id_Kategorie = value;
+					this.SendPropertyChanged("Id_Kategorie");
+					this.OnId_KategorieChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id_Verfahren", DbType="Int")]
+		public System.Nullable<int> Id_Verfahren
+		{
+			get
+			{
+				return this._Id_Verfahren;
+			}
+			set
+			{
+				if ((this._Id_Verfahren != value))
+				{
+					if (this._Verfahren.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnId_VerfahrenChanging(value);
+					this.SendPropertyChanging();
+					this._Id_Verfahren = value;
+					this.SendPropertyChanged("Id_Verfahren");
+					this.OnId_VerfahrenChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Auftrag_Auftrags_Zuordnung", Storage="_Auftrag", ThisKey="Id_Auftrag", OtherKey="Id", IsForeignKey=true)]
+		public Auftrag Auftrag
+		{
+			get
+			{
+				return this._Auftrag.Entity;
+			}
+			set
+			{
+				Auftrag previousValue = this._Auftrag.Entity;
+				if (((previousValue != value) 
+							|| (this._Auftrag.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Auftrag.Entity = null;
+						previousValue.Auftrags_Zuordnung.Remove(this);
+					}
+					this._Auftrag.Entity = value;
+					if ((value != null))
+					{
+						value.Auftrags_Zuordnung.Add(this);
+						this._Id_Auftrag = value.Id;
+					}
+					else
+					{
+						this._Id_Auftrag = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Auftrag");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Maschine_Auftrags_Zuordnung", Storage="_Maschine", ThisKey="Id_Maschine", OtherKey="Id", IsForeignKey=true)]
+		public Maschine Maschine
+		{
+			get
+			{
+				return this._Maschine.Entity;
+			}
+			set
+			{
+				Maschine previousValue = this._Maschine.Entity;
+				if (((previousValue != value) 
+							|| (this._Maschine.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Maschine.Entity = null;
+						previousValue.Auftrags_Zuordnung.Remove(this);
+					}
+					this._Maschine.Entity = value;
+					if ((value != null))
+					{
+						value.Auftrags_Zuordnung.Add(this);
+						this._Id_Maschine = value.Id;
+					}
+					else
+					{
+						this._Id_Maschine = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Maschine");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Kategorie_Auftrags_Zuordnung", Storage="_Kategorie", ThisKey="Id_Kategorie", OtherKey="Id", IsForeignKey=true)]
+		public Kategorie Kategorie
+		{
+			get
+			{
+				return this._Kategorie.Entity;
+			}
+			set
+			{
+				Kategorie previousValue = this._Kategorie.Entity;
+				if (((previousValue != value) 
+							|| (this._Kategorie.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Kategorie.Entity = null;
+						previousValue.Auftrags_Zuordnung.Remove(this);
+					}
+					this._Kategorie.Entity = value;
+					if ((value != null))
+					{
+						value.Auftrags_Zuordnung.Add(this);
+						this._Id_Kategorie = value.Id;
+					}
+					else
+					{
+						this._Id_Kategorie = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Kategorie");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Verfahren_Auftrags_Zuordnung", Storage="_Verfahren", ThisKey="Id_Verfahren", OtherKey="Id", IsForeignKey=true)]
+		public Verfahren Verfahren
+		{
+			get
+			{
+				return this._Verfahren.Entity;
+			}
+			set
+			{
+				Verfahren previousValue = this._Verfahren.Entity;
+				if (((previousValue != value) 
+							|| (this._Verfahren.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Verfahren.Entity = null;
+						previousValue.Auftrags_Zuordnung.Remove(this);
+					}
+					this._Verfahren.Entity = value;
+					if ((value != null))
+					{
+						value.Auftrags_Zuordnung.Add(this);
+						this._Id_Verfahren = value.Id;
+					}
+					else
+					{
+						this._Id_Verfahren = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Verfahren");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Maschine")]
+	public partial class Maschine : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private string _Name;
+		
+		private System.Nullable<int> _Id_Maschinenart;
+		
+		private EntitySet<Auftrags_Zuordnung> _Auftrags_Zuordnung;
+		
+		private EntitySet<Kategorie> _Kategorie;
+		
+		private EntityRef<Maschinenart> _Maschinenart;
+		
+    #region Definitionen der Erweiterungsmethoden
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnNameChanging(string value);
+    partial void OnNameChanged();
+    partial void OnId_MaschinenartChanging(System.Nullable<int> value);
+    partial void OnId_MaschinenartChanged();
+    #endregion
+		
+		public Maschine()
+		{
+			this._Auftrags_Zuordnung = new EntitySet<Auftrags_Zuordnung>(new Action<Auftrags_Zuordnung>(this.attach_Auftrags_Zuordnung), new Action<Auftrags_Zuordnung>(this.detach_Auftrags_Zuordnung));
+			this._Kategorie = new EntitySet<Kategorie>(new Action<Kategorie>(this.attach_Kategorie), new Action<Kategorie>(this.detach_Kategorie));
+			this._Maschinenart = default(EntityRef<Maschinenart>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string Name
+		{
+			get
+			{
+				return this._Name;
+			}
+			set
+			{
+				if ((this._Name != value))
+				{
+					this.OnNameChanging(value);
+					this.SendPropertyChanging();
+					this._Name = value;
+					this.SendPropertyChanged("Name");
+					this.OnNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id_Maschinenart", DbType="Int")]
+		public System.Nullable<int> Id_Maschinenart
+		{
+			get
+			{
+				return this._Id_Maschinenart;
+			}
+			set
+			{
+				if ((this._Id_Maschinenart != value))
+				{
+					if (this._Maschinenart.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnId_MaschinenartChanging(value);
+					this.SendPropertyChanging();
+					this._Id_Maschinenart = value;
+					this.SendPropertyChanged("Id_Maschinenart");
+					this.OnId_MaschinenartChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Maschine_Auftrags_Zuordnung", Storage="_Auftrags_Zuordnung", ThisKey="Id", OtherKey="Id_Maschine")]
+		public EntitySet<Auftrags_Zuordnung> Auftrags_Zuordnung
+		{
+			get
+			{
+				return this._Auftrags_Zuordnung;
+			}
+			set
+			{
+				this._Auftrags_Zuordnung.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Maschine_Kategorie", Storage="_Kategorie", ThisKey="Id", OtherKey="Id_Maschine")]
+		public EntitySet<Kategorie> Kategorie
+		{
+			get
+			{
+				return this._Kategorie;
+			}
+			set
+			{
+				this._Kategorie.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Maschinenart_Maschine", Storage="_Maschinenart", ThisKey="Id_Maschinenart", OtherKey="Id", IsForeignKey=true)]
+		public Maschinenart Maschinenart
+		{
+			get
+			{
+				return this._Maschinenart.Entity;
+			}
+			set
+			{
+				Maschinenart previousValue = this._Maschinenart.Entity;
+				if (((previousValue != value) 
+							|| (this._Maschinenart.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Maschinenart.Entity = null;
+						previousValue.Maschine.Remove(this);
+					}
+					this._Maschinenart.Entity = value;
+					if ((value != null))
+					{
+						value.Maschine.Add(this);
+						this._Id_Maschinenart = value.Id;
+					}
+					else
+					{
+						this._Id_Maschinenart = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Maschinenart");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Auftrags_Zuordnung(Auftrags_Zuordnung entity)
+		{
+			this.SendPropertyChanging();
+			entity.Maschine = this;
+		}
+		
+		private void detach_Auftrags_Zuordnung(Auftrags_Zuordnung entity)
+		{
+			this.SendPropertyChanging();
+			entity.Maschine = null;
+		}
+		
+		private void attach_Kategorie(Kategorie entity)
+		{
+			this.SendPropertyChanging();
+			entity.Maschine = this;
+		}
+		
+		private void detach_Kategorie(Kategorie entity)
+		{
+			this.SendPropertyChanging();
+			entity.Maschine = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Kategorie")]
+	public partial class Kategorie : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private string _Name;
+		
+		private int _Id_Maschine;
+		
+		private EntitySet<Auftrags_Zuordnung> _Auftrags_Zuordnung;
+		
+		private EntityRef<Maschine> _Maschine;
+		
+    #region Definitionen der Erweiterungsmethoden
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnNameChanging(string value);
+    partial void OnNameChanged();
+    partial void OnId_MaschineChanging(int value);
+    partial void OnId_MaschineChanged();
+    #endregion
+		
+		public Kategorie()
+		{
+			this._Auftrags_Zuordnung = new EntitySet<Auftrags_Zuordnung>(new Action<Auftrags_Zuordnung>(this.attach_Auftrags_Zuordnung), new Action<Auftrags_Zuordnung>(this.detach_Auftrags_Zuordnung));
+			this._Maschine = default(EntityRef<Maschine>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="VarChar(50)")]
+		public string Name
+		{
+			get
+			{
+				return this._Name;
+			}
+			set
+			{
+				if ((this._Name != value))
+				{
+					this.OnNameChanging(value);
+					this.SendPropertyChanging();
+					this._Name = value;
+					this.SendPropertyChanged("Name");
+					this.OnNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id_Maschine", DbType="Int NOT NULL")]
+		public int Id_Maschine
+		{
+			get
+			{
+				return this._Id_Maschine;
+			}
+			set
+			{
+				if ((this._Id_Maschine != value))
+				{
+					if (this._Maschine.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnId_MaschineChanging(value);
+					this.SendPropertyChanging();
+					this._Id_Maschine = value;
+					this.SendPropertyChanged("Id_Maschine");
+					this.OnId_MaschineChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Kategorie_Auftrags_Zuordnung", Storage="_Auftrags_Zuordnung", ThisKey="Id", OtherKey="Id_Kategorie")]
+		public EntitySet<Auftrags_Zuordnung> Auftrags_Zuordnung
+		{
+			get
+			{
+				return this._Auftrags_Zuordnung;
+			}
+			set
+			{
+				this._Auftrags_Zuordnung.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Maschine_Kategorie", Storage="_Maschine", ThisKey="Id_Maschine", OtherKey="Id", IsForeignKey=true)]
+		public Maschine Maschine
+		{
+			get
+			{
+				return this._Maschine.Entity;
+			}
+			set
+			{
+				Maschine previousValue = this._Maschine.Entity;
+				if (((previousValue != value) 
+							|| (this._Maschine.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Maschine.Entity = null;
+						previousValue.Kategorie.Remove(this);
+					}
+					this._Maschine.Entity = value;
+					if ((value != null))
+					{
+						value.Kategorie.Add(this);
+						this._Id_Maschine = value.Id;
+					}
+					else
+					{
+						this._Id_Maschine = default(int);
+					}
+					this.SendPropertyChanged("Maschine");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Auftrags_Zuordnung(Auftrags_Zuordnung entity)
+		{
+			this.SendPropertyChanging();
+			entity.Kategorie = this;
+		}
+		
+		private void detach_Auftrags_Zuordnung(Auftrags_Zuordnung entity)
+		{
+			this.SendPropertyChanging();
+			entity.Kategorie = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Verfahren")]
+	public partial class Verfahren : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private string _Name;
+		
+		private string _Beschreibung;
+		
+		private System.Nullable<int> _Id_Maschinenart;
+		
+		private EntitySet<Teilschritt> _Teilschritt;
+		
+		private EntitySet<Auftrags_Zuordnung> _Auftrags_Zuordnung;
+		
+		private EntityRef<Maschinenart> _Maschinenart;
+		
+    #region Definitionen der Erweiterungsmethoden
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnNameChanging(string value);
+    partial void OnNameChanged();
+    partial void OnBeschreibungChanging(string value);
+    partial void OnBeschreibungChanged();
+    partial void OnId_MaschinenartChanging(System.Nullable<int> value);
+    partial void OnId_MaschinenartChanged();
+    #endregion
+		
+		public Verfahren()
+		{
+			this._Teilschritt = new EntitySet<Teilschritt>(new Action<Teilschritt>(this.attach_Teilschritt), new Action<Teilschritt>(this.detach_Teilschritt));
+			this._Auftrags_Zuordnung = new EntitySet<Auftrags_Zuordnung>(new Action<Auftrags_Zuordnung>(this.attach_Auftrags_Zuordnung), new Action<Auftrags_Zuordnung>(this.detach_Auftrags_Zuordnung));
+			this._Maschinenart = default(EntityRef<Maschinenart>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="VarChar(50)")]
+		public string Name
+		{
+			get
+			{
+				return this._Name;
+			}
+			set
+			{
+				if ((this._Name != value))
+				{
+					this.OnNameChanging(value);
+					this.SendPropertyChanging();
+					this._Name = value;
+					this.SendPropertyChanged("Name");
+					this.OnNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Beschreibung", DbType="VarChar(MAX)")]
+		public string Beschreibung
+		{
+			get
+			{
+				return this._Beschreibung;
+			}
+			set
+			{
+				if ((this._Beschreibung != value))
+				{
+					this.OnBeschreibungChanging(value);
+					this.SendPropertyChanging();
+					this._Beschreibung = value;
+					this.SendPropertyChanged("Beschreibung");
+					this.OnBeschreibungChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id_Maschinenart", DbType="Int")]
+		public System.Nullable<int> Id_Maschinenart
+		{
+			get
+			{
+				return this._Id_Maschinenart;
+			}
+			set
+			{
+				if ((this._Id_Maschinenart != value))
+				{
+					if (this._Maschinenart.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnId_MaschinenartChanging(value);
+					this.SendPropertyChanging();
+					this._Id_Maschinenart = value;
+					this.SendPropertyChanged("Id_Maschinenart");
+					this.OnId_MaschinenartChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Verfahren_Teilschritt", Storage="_Teilschritt", ThisKey="Id", OtherKey="Id_Verfahren")]
+		public EntitySet<Teilschritt> Teilschritt
+		{
+			get
+			{
+				return this._Teilschritt;
+			}
+			set
+			{
+				this._Teilschritt.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Verfahren_Auftrags_Zuordnung", Storage="_Auftrags_Zuordnung", ThisKey="Id", OtherKey="Id_Verfahren")]
+		public EntitySet<Auftrags_Zuordnung> Auftrags_Zuordnung
+		{
+			get
+			{
+				return this._Auftrags_Zuordnung;
+			}
+			set
+			{
+				this._Auftrags_Zuordnung.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Maschinenart_Verfahren", Storage="_Maschinenart", ThisKey="Id_Maschinenart", OtherKey="Id", IsForeignKey=true)]
+		public Maschinenart Maschinenart
+		{
+			get
+			{
+				return this._Maschinenart.Entity;
+			}
+			set
+			{
+				Maschinenart previousValue = this._Maschinenart.Entity;
+				if (((previousValue != value) 
+							|| (this._Maschinenart.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Maschinenart.Entity = null;
+						previousValue.Verfahren.Remove(this);
+					}
+					this._Maschinenart.Entity = value;
+					if ((value != null))
+					{
+						value.Verfahren.Add(this);
+						this._Id_Maschinenart = value.Id;
+					}
+					else
+					{
+						this._Id_Maschinenart = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Maschinenart");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Teilschritt(Teilschritt entity)
+		{
+			this.SendPropertyChanging();
+			entity.Verfahren = this;
+		}
+		
+		private void detach_Teilschritt(Teilschritt entity)
+		{
+			this.SendPropertyChanging();
+			entity.Verfahren = null;
+		}
+		
+		private void attach_Auftrags_Zuordnung(Auftrags_Zuordnung entity)
+		{
+			this.SendPropertyChanging();
+			entity.Verfahren = this;
+		}
+		
+		private void detach_Auftrags_Zuordnung(Auftrags_Zuordnung entity)
+		{
+			this.SendPropertyChanging();
+			entity.Verfahren = null;
 		}
 	}
 }

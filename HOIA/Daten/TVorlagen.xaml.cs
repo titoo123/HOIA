@@ -39,17 +39,17 @@ namespace HOIA.Haubenofen
 
         private void treeView_TVorlagen_Load()
         {
-            DDataContext d = new DDataContext();
-            var glv = from l in d.Verfahren
-                      where l.Art == Erweiterungen.Helper.HAUBENOFEN_ART
-                      select new { l.Name };
+            //DDataContext d = new DDataContext();
+            //var glv = from l in d.Verfahren
+            //          where l.Art == Erweiterungen.Helper.HAUBENOFEN_ART
+            //          select new { l.Name };
 
-            List<TreeViewItem> t = new List<TreeViewItem>();
-            foreach (var item in glv)
-            {
-                t.Add(new TreeViewItem() { Header = item.Name });
-            }
-            treeView_TVorlagen.ItemsSource = t;
+            //List<TreeViewItem> t = new List<TreeViewItem>();
+            //foreach (var item in glv)
+            //{
+            //    t.Add(new TreeViewItem() { Header = item.Name });
+            //}
+            //treeView_TVorlagen.ItemsSource = t;
         }
         private void dataGrid_Funktionen_Load(Verfahren v)
         {
@@ -127,60 +127,60 @@ namespace HOIA.Haubenofen
 
         private void button_TV_Speichern_Click(object sender, RoutedEventArgs e)
         {
-            DDataContext d = new DDataContext();
-            var sol = from l in d.Verfahren
-                      where l.Name == textBox_Name.Text
-                      select l;
+            //DDataContext d = new DDataContext();
+            //var sol = from l in d.Verfahren
+            //          where l.Name == textBox_Name.Text
+            //          select l;
 
-            if (sol.Count() == 0 || !tv_neu)
-            {
+            //if (sol.Count() == 0 || !tv_neu)
+            //{
 
-                if (tv_neu)
-                {
-                    Verfahren v = new Verfahren() { Name = textBox_Name.Text, Beschreibung = textBox_Beschreibung.Text, Art = Erweiterungen.Helper.HAUBENOFEN_ART };
+            //    if (tv_neu)
+            //    {
+            //        Verfahren v = new Verfahren() { Name = textBox_Name.Text, Beschreibung = textBox_Beschreibung.Text, Art = Erweiterungen.Helper.HAUBENOFEN_ART };
 
-                    d.Verfahren.InsertOnSubmit(v);
+            //        d.Verfahren.InsertOnSubmit(v);
 
-                }
-                else
-                {
-                    var sel = from j in d.Verfahren
-                              where j.Name == textBox_Name.Text
-                              select j;
+            //    }
+            //    else
+            //    {
+            //        var sel = from j in d.Verfahren
+            //                  where j.Name == textBox_Name.Text
+            //                  select j;
 
-                    if (sel.Count() > 0)
-                    {
-                        Verfahren v = sel.First();
-                        v.Name = textBox_Name.Text;
-                        v.Beschreibung = textBox_Beschreibung.Text;
+            //        if (sel.Count() > 0)
+            //        {
+            //            Verfahren v = sel.First();
+            //            v.Name = textBox_Name.Text;
+            //            v.Beschreibung = textBox_Beschreibung.Text;
 
-                    }
-                }
+            //        }
+            //    }
 
-                try
-                {
-                    d.SubmitChanges();
-                }
-                catch (Exception)
-                {
-                    MessageBox.Show("Keine Verbindung zur Datenbank!", "Nee!");
-                }
+            //    try
+            //    {
+            //        d.SubmitChanges();
+            //    }
+            //    catch (Exception)
+            //    {
+            //        MessageBox.Show("Keine Verbindung zur Datenbank!", "Nee!");
+            //    }
 
 
-                treeView_TVorlagen_Load();
+            //    treeView_TVorlagen_Load();
 
-                button_TV_Speichern.IsEnabled = false;
-                button_TV_Bearbeiten.IsEnabled = false;
-                button_TV_Löschen.IsEnabled = false;
+            //    button_TV_Speichern.IsEnabled = false;
+            //    button_TV_Bearbeiten.IsEnabled = false;
+            //    button_TV_Löschen.IsEnabled = false;
 
-                textBox_Beschreibung.IsEnabled = false;
-                textBox_Name.IsEnabled = false;
-                tv_neu = false;
-            }
-            else
-            {
-                MessageBox.Show("Technologie Name bereits vergeben!", "Nee!");
-            }
+            //    textBox_Beschreibung.IsEnabled = false;
+            //    textBox_Name.IsEnabled = false;
+            //    tv_neu = false;
+            //}
+            //else
+            //{
+            //    MessageBox.Show("Technologie Name bereits vergeben!", "Nee!");
+            //}
 
         }
 

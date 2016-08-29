@@ -24,16 +24,16 @@ namespace HOIA.Daten
         public IA_Verfahren()
         {
             InitializeComponent();
-            Datagrid_IA_Werte_Refresh();
+            //Datagrid_IA_Werte_Refresh();
         }
        
         private void Datagrid_IA_Werte_Refresh()
         {
-            DDataContext d = new DDataContext();
-            var zuo = from r in d.Verfahren
-                      where r.Art == Erweiterungen.Helper.INDUKTIONSANLAGEN_ART
-                      select new { r.Id, r.Name };
-            dataGrid_hoWerte.ItemsSource = zuo;
+            //DDataContext d = new DDataContext();
+            //var zuo = from r in d.Verfahren
+            //          where r.Art == Erweiterungen.Helper.INDUKTIONSANLAGEN_ART
+            //          select new { r.Id, r.Name };
+            //dataGrid_hoWerte.ItemsSource = zuo;
         }
 
         private void button_Neu_Name_Click(object sender, RoutedEventArgs e)
@@ -56,37 +56,37 @@ namespace HOIA.Daten
 
         private void button_Speichern_Name_Click(object sender, RoutedEventArgs e)
         {
-            DDataContext d = new DDataContext();
+            //DDataContext d = new DDataContext();
 
-            if (neu)
-            {
-                Verfahren s = new Verfahren() { Art = Erweiterungen.Helper.INDUKTIONSANLAGEN_ART, Name = textBox_Name.Text };
-                d.Verfahren.InsertOnSubmit(s);
-            }
-            else
-            {
-                var k = from t in d.Verfahren
-                        where t.Id == Erweiterungen.Helper.GetIntFromDataGrid(0, dataGrid_hoWerte)
-                        select t;
-                k.First().Name = textBox_Name.Text;
+            //if (neu)
+            //{
+            //    Verfahren s = new Verfahren() { Art = Erweiterungen.Helper.INDUKTIONSANLAGEN_ART, Name = textBox_Name.Text };
+            //    d.Verfahren.InsertOnSubmit(s);
+            //}
+            //else
+            //{
+            //    var k = from t in d.Verfahren
+            //            where t.Id == Erweiterungen.Helper.GetIntFromDataGrid(0, dataGrid_hoWerte)
+            //            select t;
+            //    k.First().Name = textBox_Name.Text;
 
 
-            }
-            try
-            {
-                d.SubmitChanges();
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Datenübermittlung fehlgeschlagen!", "Nee!!!");
-            }
-            button_Bearbeiten_Name.IsEnabled = false;
-            button_Speichern_Name.IsEnabled = false;
-            button_Löschen_Name.IsEnabled = false;
+            //}
+            //try
+            //{
+            //    d.SubmitChanges();
+            //}
+            //catch (Exception)
+            //{
+            //    MessageBox.Show("Datenübermittlung fehlgeschlagen!", "Nee!!!");
+            //}
+            //button_Bearbeiten_Name.IsEnabled = false;
+            //button_Speichern_Name.IsEnabled = false;
+            //button_Löschen_Name.IsEnabled = false;
 
-            textBox_Name.IsEnabled = false;
-            textBox_Name.Text = String.Empty;
-            Datagrid_IA_Werte_Refresh();
+            //textBox_Name.IsEnabled = false;
+            //textBox_Name.Text = String.Empty;
+            //Datagrid_IA_Werte_Refresh();
         }
 
         private void button_Löschen_Name_Click(object sender, RoutedEventArgs e)

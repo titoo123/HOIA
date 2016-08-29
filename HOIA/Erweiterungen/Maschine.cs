@@ -20,14 +20,13 @@ namespace HOIA.Erweiterungen
 
         string name;
         string tag;
+        string auftragskategorie;
 
         int katAnzahl;
-        //int jobWeight;
-
         bool sublevel;
 
         TreeViewItem item;
-        Extended_TreeView t;
+        Extended_TreeView exT;
 
         StringTuple3D processingJobList = new StringTuple3D();
 
@@ -63,10 +62,29 @@ namespace HOIA.Erweiterungen
         /// <param name="t">Parent Treeview</param>
         /// <param name="name">Name</param>
         /// <param name="sublevel">Ob noch Unterkategorien existieren</param>
-        public Maschine(Extended_TreeView t, string name, bool sublevel)
+        public Maschine(Extended_TreeView exT, string name)
         {
 
-            this.t = t;
+
+            this.exT = exT;
+            this.tag = name;
+            this.name = name;
+            this.sublevel = sublevel;
+
+            this.katAnzahl = 0;
+
+            exT.Items.Add(new TreeViewItem() { Header = name, Tag = name });
+
+            Item = exT.TreeViewGetNode_ByText(name);
+            RefreshValue();
+            exT.TreeViewGetNode_ByText(Helper.FREIEAUFTRÄGE_STRING).IsExpanded = true;
+        }
+
+        public Maschine(TreeViewItem t, Extended_TreeView exT, string auftragskategorie, string name, bool sublevel)
+        {
+
+            this.auftragskategorie = auftragskategorie;
+            this.exT = exT;
             this.tag = name;
             this.name = name;
             this.sublevel = sublevel;
@@ -74,11 +92,12 @@ namespace HOIA.Erweiterungen
             this.katAnzahl = 0;
 
             t.Items.Add(new TreeViewItem() { Header = name, Tag = name });
-            maschines.Add(name);
+            item = exT.TreeViewGetNode_ByTextAndByKategorie(name, auftragskategorie);
+            // maschines.Add(name);
 
-            Item = t.TreeViewGetNode_ByText(name);
+            //Item = t.TreeViewGetNode_ByText(name);
             RefreshValue();
-
+            exT.TreeViewGetNode_ByText(Helper.FREIEAUFTRÄGE_STRING).IsExpanded = true;
         }
 
         /// <summary>
@@ -89,20 +108,22 @@ namespace HOIA.Erweiterungen
         /// <param name="sublevel">Bestitzt der Hauptknoten Unterkategorien?</param>
         /// <param name="fre">Liste der Namen der Unterknoten</param>
         /// <param name="katAnzahl">Anzahl der Unterkategorien die die Unterknoten haben</param>
-        public Maschine(Extended_TreeView t, string name, bool sublevel, IQueryable<string> fre, int katAnzahl)
+        public Maschine(TreeViewItem t, Extended_TreeView exT, string auftragskategorie, string name, bool sublevel, IQueryable<string> fre, int katAnzahl)
         {
-
-            this.t = t;
+            this.auftragskategorie = auftragskategorie;
+            this.exT = exT;
             this.tag = name;
             this.name = name;
             this.sublevel = sublevel;
             this.katAnzahl = katAnzahl;
 
             t.Items.Add(new TreeViewItem() { Header = name, Tag = name });
-            maschines.Add(name);
+            //maschines.Add(name);
+            item = exT.TreeViewGetNode_ByTextAndByKategorie(name, auftragskategorie);
+            //item = exT.TreeViewGetNode_ByText(name);
 
-            Item = t.TreeViewGetNode_ByText(name);
 
+            //Fügt Kategorien hinzu. Zum Beispiel +QT 1
             if (katAnzahl > 1)
             {
                 List<string> einträge = new List<string>();
@@ -116,16 +137,29 @@ namespace HOIA.Erweiterungen
 
                     }
                 }
-                t.CreateChilds(einträge, name);
+                foreach (string e in einträge)
+                {
+                    item.Items.Add(new TreeViewItem() { Header = e, Tag = e });
+                }
+
+
             }
             else
             {
-                t.CreateChilds(fre, name);
+                foreach (string e in fre)
+                {
+                    item.Items.Add(new TreeViewItem() { Header = e, Tag = e });
+                }
+
             }
 
-
             RefreshValue();
-            t.TreeViewGetNode_ByText(Helper.FREIEAUFTRÄGE_STRING).IsExpanded = true;
+            exT.TreeViewGetNode_ByText(Helper.FREIEAUFTRÄGE_STRING).IsExpanded = true;
+        }
+
+        private void RefreshValue(TreeViewItem item)
+        {
+            TreeViewItem ti = item;
         }
 
         internal void RefreshValue()
@@ -159,11 +193,14 @@ namespace HOIA.Erweiterungen
 
             }
             else
-            {   //Anzahl freie Aufträge
-                if ((string)Item.Tag == Helper.FREIEAUFTRÄGE_STRING)
-                {
-                    Item.Header = Helper.CleanUpString((string)Item.Header) + " ( " + Item.Items.Count + " )";
-                }else if ((string)Item.Tag == Helper.RM_STRING)
+            {
+                ////Anzahl freie Aufträge
+                //if ((string)Item.Tag == Helper.FREIEAUFTRÄGE_STRING)
+                //{
+                //    Item.Header = Helper.CleanUpString((string)Item.Header) + " ( " + Item.Items.Count + " )";
+                //}
+                //else
+                if ((string)Item.Tag == Helper.RM_STRING)
                 {
                     int? gewicht = 0;
                     DDataContext d = new DDataContext();
@@ -185,13 +222,8 @@ namespace HOIA.Erweiterungen
                     Item.Header = Helper.CleanUpString((string)Item.Header) + " ( " + gewicht + " Kg )";
                 }
 
-
-
-
-
-
-
             }
+
         }
 
         /// <summary>
@@ -199,7 +231,7 @@ namespace HOIA.Erweiterungen
         /// </summary>
         /// <param name="s">ODL</param>
         /// <param name="z">Prozess</param>
-        internal void AddJobToList(string s,string z, bool wichtig)
+        internal void AddJobToList(string s, string z, bool wichtig)
         {
             if (wichtig)
             {
@@ -233,11 +265,13 @@ namespace HOIA.Erweiterungen
             item.Header = Helper.CleanUpString((string)item.Header) + " ( " + gewicht + " Kg )";
         }
 
-        internal void DeleteJobFormList(string s) {
+        internal void DeleteJobFormList(string s)
+        {
             processingJobList.Remove(s);
         }
 
-        internal void RefreshJobInList(string s) {
+        internal void RefreshJobInList(string s)
+        {
             Tuple<string, string, string> items = null;
 
             foreach (var i in processingJobList.Items)
@@ -256,7 +290,7 @@ namespace HOIA.Erweiterungen
                     {
                         items = Tuple.Create(i.Item1, i.Item2, " ");
                     }
-                    
+
                 }
             }
             if (items != null)
@@ -278,7 +312,7 @@ namespace HOIA.Erweiterungen
             {
                 //Leert Liste 
                 //l.Items.Clear();
-                foreach (TreeViewItem i in t.Items)
+                foreach (TreeViewItem i in exT.Items)
                 {
                     //Level 1
                     //Fügt Maschinenjobs/Aufträge in Liste
@@ -301,7 +335,7 @@ namespace HOIA.Erweiterungen
 
                         }
                     }
-                    
+
                 }
             }
 

@@ -18,9 +18,9 @@ namespace HOIA.Erweiterungen
     {
         public static string HAUBENOFEN_ART = "ho";
         public static string INDUKTIONSANLAGEN_ART = "ia";
+
         public static string FREIEAUFTRÄGE_STRING = "Freie Aufträge";
         public static string FERTIGEAUFTRÄGE_STRING = "Bearbeitete Aufträge";
-
         public static string WARTENDEAUFTRÄGE_STRING = "Wartende Aufträge";
         public static string GESPERRTEAUFTRÄGE_STRING = "Gesperrte Aufträge";
 
@@ -33,6 +33,8 @@ namespace HOIA.Erweiterungen
         public static string HGO1_STRING = "HGO1";
         public static string HGO2_STRING = "HGO2";
         public static string RM_STRING = "RM";
+
+        public static string PLATZHALTER_STRING = "----------------------";
 
         public static string GetStringFromDataGrid(int l, DataGrid g)
         {
@@ -49,6 +51,25 @@ namespace HOIA.Erweiterungen
 
         public static string AddString(string s,string k,int a) {
             return s + "( "+ k +": " + a + " ) ";
+        }
+        public static string CleanUpCatNumber(string s)
+        {
+            if (s.Contains(" 1"))
+            {
+                return CutFreeString(s.Split('1').First());
+            }
+            else if (s.Contains(" 2"))
+            {
+                return CutFreeString(s.Split('2').First());
+            }
+            else if (s.Contains(" 3"))
+            {
+                return CutFreeString(s.Split('3').First());
+            }
+            else
+            {
+                return s;
+            }
         }
         public static string CleanUpString(string s)
         {

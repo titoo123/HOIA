@@ -59,8 +59,20 @@
     <Compile Include="Allgemein\Bestimmungsort.xaml.cs">
       <DependentUpon>Bestimmungsort.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Allgemein\Freie_Aufträge.xaml.cs">
+      <DependentUpon>Freie_Aufträge.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Daten\Kategorie_Window.xaml.cs">
+      <DependentUpon>Kategorie_Window.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Allgemein\Kunde.xaml.cs">
       <DependentUpon>Kunde.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Daten\Maschinen_Window.xaml.cs">
+      <DependentUpon>Maschinen_Window.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Daten\Verfahren_Window.xaml.cs">
+      <DependentUpon>Verfahren_Window.xaml</DependentUpon>
     </Compile>
     <Compile Include="D.designer.cs">
       <AutoGen>True</AutoGen>
@@ -71,7 +83,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Allgemein\Freie_Aufträge.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Daten\Kategorie_Window.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Allgemein\Kunde.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Daten\Maschinen_Window.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Daten\Verfahren_Window.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -84,6 +112,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Allgemein\Aufträge_Zuordnen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Daten\Maschinenarten_Window.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -105,6 +137,10 @@
     <Compile Include="Daten\Induktionsanlagenwerte.xaml.cs">
       <DependentUpon>Induktionsanlagenwerte.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Daten\Maschinenarten_Window.xaml.cs">
+      <DependentUpon>Maschinenarten_Window.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Erweiterungen\Auftragskategorie.cs" />
     <Compile Include="Erweiterungen\Helper.cs" />
     <Compile Include="Allgemein\Aufträge_Zuordnen.xaml.cs">
       <DependentUpon>Aufträge_Zuordnen.xaml</DependentUpon>

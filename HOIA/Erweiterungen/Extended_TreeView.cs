@@ -12,19 +12,7 @@ namespace HOIA.Erweiterungen
 {
     public class Extended_TreeView : TreeView
     {
-        public static void CreateChild(TreeViewItem t, string s)
-        {
-            t.Items.Add(new TreeViewItem() { Header = s, Tag = s });
-        }
-        public static List<TreeViewItem> CreateChilds(List<string> l)
-        {
-            List<TreeViewItem> t = new List<TreeViewItem>();
-            foreach (var i in l)
-            {
-                t.Add(new TreeViewItem() { Header = i, Tag = i });
-            }
-            return t;
-        }
+
         public TreeViewItem TreeViewGetNode_ByText( string s)
         {
             foreach (TreeViewItem tre in this.Items)
@@ -73,22 +61,7 @@ namespace HOIA.Erweiterungen
             }
             return null;
         }
-        internal static void CreateChilds(TreeViewItem i, IQueryable<object> hoa)
-        {
-            foreach (var item in hoa)
-            {
-                CreateChild(i, TreeViewHelper.CleanUp4List(item.ToString()));
-            }
-        }
-        internal void CreateChilds( IQueryable<object> hoa, string v)
-        {
-            TreeViewItem i = TreeViewGetNode_ByText(v);
-            if (i != null)
-            {
-                CreateChilds(i, hoa);
-            }
 
-        }
         internal static bool InDb(TreeViewItem i)
         {
             DDataContext d = new DDataContext();
@@ -108,23 +81,6 @@ namespace HOIA.Erweiterungen
             }
 
             return false;
-        }
-
-        internal void CreateChilds(List<string> einträge, string name)
-        {
-            TreeViewItem i = TreeViewGetNode_ByText(name);
-            if (i != null)
-            {
-                CreateChilds(i, einträge);
-            }
-        }
-
-        private void CreateChilds(TreeViewItem i, List<string> einträge)
-        {
-            foreach (var item in einträge)
-            {
-                CreateChild(i, TreeViewHelper.CleanUp4List(item.ToString()));
-            }
         }
 
         internal string HitTreeView( MouseButtonEventArgs e)
@@ -183,6 +139,25 @@ namespace HOIA.Erweiterungen
             }
 
         }
+
+        internal TreeViewItem TreeViewGetNode_ByTextAndByKategorie(string name_s_item, string auftragskategorie)
+        {
+            foreach (TreeViewItem exTi in this.Items)
+            {
+                foreach (TreeViewItem tvI_1 in exTi.Items)
+                {
+                    if (    
+                        (tvI_1.Header.ToString().Contains(name_s_item)) &&  
+                        (auftragskategorie == ((TreeViewItem)tvI_1.Parent).Header.ToString())
+                        )
+                    {
+                        return tvI_1;
+                    }
+                }
+            }
+            return null; 
+        }
+
         /// <summary>
         /// 
         /// </summary>
@@ -318,5 +293,52 @@ namespace HOIA.Erweiterungen
 
             //}
         }
+        
+        internal void CreateChilds(List<string> einträge, string name)
+        {
+            TreeViewItem root = TreeViewGetNode_ByText(name);
+            if (root != null)
+            {
+                CreateChilds(root, einträge);
+            }
+        }
+
+        private void CreateChilds(TreeViewItem root, List<string> einträge)
+        {
+            foreach (var item in einträge)
+            {
+                CreateChild(root, TreeViewHelper.CleanUp4List(item.ToString()));
+            }
+        }
+        internal static void CreateChilds(TreeViewItem i, IQueryable<object> hoa)
+        {
+            foreach (var item in hoa)
+            {
+                CreateChild(i, TreeViewHelper.CleanUp4List(item.ToString()));
+            }
+        }
+        internal void CreateChilds(IQueryable<object> hoa, string v)
+        {
+            TreeViewItem i = TreeViewGetNode_ByText(v);
+            if (i != null)
+            {
+                CreateChilds(i, hoa);
+            }
+
+        }
+        public static List<TreeViewItem> CreateChilds(List<string> l)
+        {
+            List<TreeViewItem> t = new List<TreeViewItem>();
+            foreach (var i in l)
+            {
+                t.Add(new TreeViewItem() { Header = i, Tag = i });
+            }
+            return t;
+        }
+        public static void CreateChild(TreeViewItem t, string s)
+        {
+            t.Items.Add(new TreeViewItem() { Header = s, Tag = s });
+        }
+
     }
 }
