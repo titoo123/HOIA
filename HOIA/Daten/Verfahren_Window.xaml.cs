@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using HOIA.Allgemein;
 
 namespace HOIA.Daten
 {
@@ -19,13 +20,16 @@ namespace HOIA.Daten
     /// </summary>
     public partial class Verfahren_Window : Window
     {
-        bool v_neu; 
-        public Verfahren_Window()
+        bool v_neu;
+        private Verwaltung_Aufträge verwaltung_Aufträge;
+
+        public Verfahren_Window(Verwaltung_Aufträge verwaltung_Aufträge)
         {
             InitializeComponent();
-
+            this.verwaltung_Aufträge = verwaltung_Aufträge;
             RefreshDataGrid();
         }
+
         private void RefreshDataGrid() {
 
             DDataContext d = new DDataContext();
@@ -46,7 +50,6 @@ namespace HOIA.Daten
                 comboBox_Maschinenart.ItemsSource = m_List;
             }
         }
-
         private void button_Neu_Name_Click(object sender, RoutedEventArgs e)
         {
             textBox_Verfahren_Name.IsEnabled = true;
@@ -59,7 +62,6 @@ namespace HOIA.Daten
             button_Verfahren_Speichern.IsEnabled = true;
             v_neu = true;
         }
-
         private void button_Bearbeiten_Name_Click(object sender, RoutedEventArgs e)
         {
             if (dataGrid_Verfahren.SelectedIndex != -1)
@@ -78,7 +80,6 @@ namespace HOIA.Daten
                 MessageBox.Show("Bitte wählen sie ein Verfahren aus der Liste!","Achtung!");
             }
         }
-
         private void button_Speichern_Name_Click(object sender, RoutedEventArgs e)
         {
             if (v_neu)
@@ -182,7 +183,6 @@ namespace HOIA.Daten
             }
             RefreshDataGrid();
         }
-
         private void button_Löschen_Name_Click(object sender, RoutedEventArgs e)
         {
             if (dataGrid_Verfahren.SelectedIndex != -1)
@@ -208,7 +208,6 @@ namespace HOIA.Daten
                 MessageBox.Show("Bitte wählen sie ein zu löschendes Verfahren aus!","Achtung!");
             }
         }
-
         private void dataGrid_Verfahren_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (dataGrid_Verfahren.SelectedIndex != -1)

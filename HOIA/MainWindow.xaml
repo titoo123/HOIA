@@ -8,25 +8,37 @@
         Title="MainWindow" Height="900" Width="1500">
 
     <Grid>
-        <DockPanel>
-            <Menu DockPanel.Dock="Top">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+            <ColumnDefinition Width="9*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="40*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <!--<DockPanel>-->
+            <Menu Grid.Column="0" Grid.ColumnSpan="2" >
                 <MenuItem Header="Stammdaten">
                     <!--<MenuItem Header="HO Werte" Click="MenuItem_HOWerte_Click" />-->
 
                     <MenuItem Header="Maschinen" Click="MenuItem_Maschinen_Click" />
                     <MenuItem Header="Maschinenarten" Click="MenuItem_Maschinenarten_Click" />
-                    
                     <MenuItem Header="Maschinenkategorien" Click="MenuItem_Maschinenkategorie_Click" />
                     <Separator />
 
                 </MenuItem>
             </Menu>
-            <TextBox AcceptsReturn="True" />
-        </DockPanel>
-
-        <TreeView x:Name="treeView" HorizontalAlignment="Left" Margin="14,30,0,0" VerticalAlignment="Top" Width="179" BorderThickness="1,0,0,0">
-            <TreeViewItem Header="Aufträge" Selected="Auftrags_Zuordnung_Selected"></TreeViewItem>
-            <TreeViewItem Header="Haubenofen" >
+        
+        <!--</DockPanel>-->
+        <TreeView x:Name="treeView" BorderThickness="1,0,0,0" Grid.Column="0" Grid.Row="1">
+            <TreeViewItem Header="Aufträge" Selected="Auftrags_Zuordnung_Selected">
+                <!--<TreeViewItem Header="Neu"></TreeViewItem>
+                <TreeViewItem Header="Bearbeitet"></TreeViewItem>
+                <TreeViewItem Header="Wartet"></TreeViewItem>
+                <TreeViewItem Header="Gesperrt"></TreeViewItem>-->
+            </TreeViewItem>
+            
+            <!--<TreeViewItem Header="Haubenofen" >
                 <TreeViewItem Header="Technologie Vorlage" Selected="TechnologieVorlage_Selected" >
 
                 </TreeViewItem>
@@ -49,9 +61,9 @@
                 </TreeViewItem>
                 <TreeViewItem Header="Glühungen"></TreeViewItem>
                 <TreeViewItem Header="Technische Werte"></TreeViewItem>
-            </TreeViewItem>
+            </TreeViewItem>-->
 
-            <TreeViewItem Header="Induktionsanlage">
+            <!--<TreeViewItem Header="Induktionsanlage">
                 <TreeViewItem Header="Verfahren" Selected="IA_Verfahren_Selected" >
 
                 </TreeViewItem>
@@ -75,9 +87,8 @@
                 <TreeViewItem Header="Glühungen"></TreeViewItem>
                 <TreeViewItem Header="Technische Werte"></TreeViewItem>
 
-            </TreeViewItem>
+            </TreeViewItem>-->
         </TreeView>
-        <Frame x:Name="frame" Content="" HorizontalAlignment="Left" Height="1300" Margin="197,30,0,0" VerticalAlignment="Top" Width="1280" NavigationUIVisibility="Hidden" />
-
+        <Frame x:Name="frame" Grid.Column="1" NavigationUIVisibility="Hidden" Grid.Row="1"/>
     </Grid>
 </Window>

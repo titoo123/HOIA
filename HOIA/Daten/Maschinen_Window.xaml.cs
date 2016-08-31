@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using HOIA.Allgemein;
 
 namespace HOIA.Daten
 {
@@ -20,6 +21,8 @@ namespace HOIA.Daten
     public partial class Maschinen_Window : Window
     {
         bool neu;
+        private Verwaltung_Aufträge verwaltung_Aufträge;
+
         public Maschinen_Window()
         {
             InitializeComponent();
@@ -42,6 +45,28 @@ namespace HOIA.Daten
             }
 
         }
+        public Maschinen_Window(Verwaltung_Aufträge verwaltung_Aufträge)
+        {
+            InitializeComponent();
+            Datagrid_Maschinen_Refresh();
+
+            if (comboBox_Maschinen_Art.Items.Count < 1)
+            {
+
+                comboBox_Maschinen_Art.Items.Add(new ComboBoxItem() { Content = "Art" });
+                comboBox_Maschinen_Art.SelectedIndex = 0;
+                DDataContext d = new DDataContext();
+
+                var k = from t in d.Maschinenart
+                        select new { t.Name };
+                foreach (var i in k)
+                {
+                    comboBox_Maschinen_Art.Items.Add(new ComboBoxItem() { Content = i.Name });
+                }
+
+            }
+            this.verwaltung_Aufträge = verwaltung_Aufträge;
+        }
 
         private void button_Neu_Name_Click(object sender, RoutedEventArgs e)
         {
@@ -52,7 +77,6 @@ namespace HOIA.Daten
             comboBox_Maschinen_Art.IsEnabled = true;
             button_Speichern_Name.IsEnabled = true;
         }
-
         private void button_Bearbeiten_Name_Click(object sender, RoutedEventArgs e)
         {
             textBox_Name.IsEnabled = true;
@@ -62,7 +86,6 @@ namespace HOIA.Daten
            
 
         }
-
         private void button_Speichern_Name_Click(object sender, RoutedEventArgs e)
         {
             string m_art = ((ComboBoxItem)comboBox_Maschinen_Art.SelectedItem).Content.ToString();
@@ -79,6 +102,20 @@ namespace HOIA.Daten
                 {
                     Maschine s = new Maschine() { Name = textBox_Name.Text, Id_Maschinenart = a };
                     d.Maschine.InsertOnSubmit(s);
+                    try
+                    {
+                        d.SubmitChanges();
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show("Datenübermittlung fehlgeschlagen!", "Nee!!!");
+                    }
+                    //Fügt jeder neuen Maschine automatisch eine Standard-Kategorie hinzu
+                    int? mid = (from x in d.Maschine
+                                where x.Name == textBox_Name.Text && x.Id_Maschinenart == a
+                                select x).First().Id;
+
+                    d.Kategorie.InsertOnSubmit(new Kategorie { Name = "Standard", Id_Maschine = (int)mid });
                 }
                 else
                 {
@@ -118,7 +155,6 @@ namespace HOIA.Daten
             }
            
         }
-
         private void button_Löschen_Name_Click(object sender, RoutedEventArgs e)
         {
             if (MessageBox.Show("Soll diese Maschine wirklich gelöscht werden?", "Echt?", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
@@ -153,7 +189,6 @@ namespace HOIA.Daten
 
             Datagrid_Maschinen_Refresh();
         }
-
         private void dataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             textBox_Name.Text = String.Empty;

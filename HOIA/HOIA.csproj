@@ -59,8 +59,11 @@
     <Compile Include="Allgemein\Bestimmungsort.xaml.cs">
       <DependentUpon>Bestimmungsort.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Allgemein\Freie_Aufträge.xaml.cs">
-      <DependentUpon>Freie_Aufträge.xaml</DependentUpon>
+    <Compile Include="Allgemein\Details_Auftrag.xaml.cs">
+      <DependentUpon>Details_Auftrag.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Allgemein\Verwaltung_Aufträge.xaml.cs">
+      <DependentUpon>Verwaltung_Aufträge.xaml</DependentUpon>
     </Compile>
     <Compile Include="Daten\Kategorie_Window.xaml.cs">
       <DependentUpon>Kategorie_Window.xaml</DependentUpon>
@@ -83,7 +86,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Allgemein\Freie_Aufträge.xaml">
+    <Page Include="Allgemein\Details_Auftrag.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Allgemein\Verwaltung_Aufträge.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -103,23 +110,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Daten\IA_Verfahren.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Daten\Induktionsanlagenwerte.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Allgemein\Aufträge_Zuordnen.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Daten\Maschinenarten_Window.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Daten\TVorlagen.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -131,29 +122,17 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Daten\IA_Verfahren.xaml.cs">
-      <DependentUpon>IA_Verfahren.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Daten\Induktionsanlagenwerte.xaml.cs">
-      <DependentUpon>Induktionsanlagenwerte.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Daten\Maschinenarten_Window.xaml.cs">
       <DependentUpon>Maschinenarten_Window.xaml</DependentUpon>
     </Compile>
     <Compile Include="Erweiterungen\Auftragskategorie.cs" />
     <Compile Include="Erweiterungen\Helper.cs" />
-    <Compile Include="Allgemein\Aufträge_Zuordnen.xaml.cs">
-      <DependentUpon>Aufträge_Zuordnen.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Daten\TVorlagen.xaml.cs">
-      <DependentUpon>TVorlagen.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Erweiterungen\Extended_TreeView.cs" />
     <Compile Include="Erweiterungen\BindingHelper.cs" />
     <Compile Include="Erweiterungen\Maschine.cs" />
     <Compile Include="Erweiterungen\TreeViewHelper.cs" />
     <Compile Include="Erweiterungen\StringTuple2D.cs" />
-    <Compile Include="Erweiterungen\StringTuple3D.cs" />
+    <Compile Include="Erweiterungen\StringTuple4D.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -194,10 +173,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Haubenofen\" />
-    <Folder Include="Induktionsanlage\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
   </ItemGroup>

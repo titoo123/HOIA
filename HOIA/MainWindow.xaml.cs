@@ -25,43 +25,35 @@ namespace HOIA
             InitializeComponent();
             Erweiterungen.TreeViewHelper.ExpandAll(treeView, true);
         }
-
-        private void H_Zuordnen_Selected(object sender, RoutedEventArgs e)
+        
+        private void Auftrags_Zuordnung_Selected(object sender, RoutedEventArgs e)
         {
-            frame.Source = new Uri(@"Haubenofen\Freie_Aufträge.xaml", UriKind.Relative);
+            try
+            {
+                frame.Source = new Uri(@"Allgemein\Verwaltung_Aufträge.xaml", UriKind.Relative);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Programm-Modul nicht gefunden!","Fehler!");
+            }
+
         }
         
+        private void MenuItem_Maschinen_Click(object sender, RoutedEventArgs e)
+        {
+            Daten.Maschinen_Window mwi = new Daten.Maschinen_Window();
+            mwi.Show();
+        }
+        private void MenuItem_Maschinenkategorie_Click(object sender, RoutedEventArgs e)
+        {
+            Daten.Kategorie_Window kwi = new Daten.Kategorie_Window();
+            kwi.Show();
+        }
         private void MenuItem_Maschinenarten_Click(object sender, RoutedEventArgs e)
         {
             Daten.Maschinenarten_Window maWerte = new Daten.Maschinenarten_Window();
             maWerte.Show();
         }
 
-        private void TechnologieVorlage_Selected(object sender, RoutedEventArgs e)
-        {
-            frame.Source = new Uri(@"Daten\TVorlagen.xaml", UriKind.Relative);
-        }
-
-        private void Auftrags_Zuordnung_Selected(object sender, RoutedEventArgs e)
-        {
-            frame.Source = new Uri(@"Allgemein\Freie_Aufträge.xaml", UriKind.Relative);
-        }
-
-        private void IA_Verfahren_Selected(object sender, RoutedEventArgs e)
-        {
-            frame.Source = new Uri(@"Daten\IA_Verfahren.xaml", UriKind.Relative);
-        }
-
-        private void MenuItem_Maschinen_Click(object sender, RoutedEventArgs e)
-        {
-            Daten.Maschinen_Window mwi = new Daten.Maschinen_Window();
-            mwi.Show();
-        }
-
-        private void MenuItem_Maschinenkategorie_Click(object sender, RoutedEventArgs e)
-        {
-            Daten.Kategorie_Window kwi = new Daten.Kategorie_Window();
-            kwi.Show();
-        }
     }
 }

@@ -28,7 +28,7 @@ namespace HOIA.Erweiterungen
         TreeViewItem item;
         Extended_TreeView exT;
 
-        StringTuple3D processingJobList = new StringTuple3D();
+        StringTuple4D processingJobList = new StringTuple4D();
 
         public string Tag
         {
@@ -69,7 +69,7 @@ namespace HOIA.Erweiterungen
             this.exT = exT;
             this.tag = name;
             this.name = name;
-            this.sublevel = sublevel;
+            //this.sublevel = sublevel;
 
             this.katAnzahl = 0;
 
@@ -233,14 +233,14 @@ namespace HOIA.Erweiterungen
         /// <param name="z">Prozess</param>
         internal void AddJobToList(string s, string z, bool wichtig)
         {
-            if (wichtig)
-            {
-                processingJobList.Add(s, z, "!");
-            }
-            else
-            {
-                processingJobList.Add(s, z, " ");
-            }
+            //if (wichtig)
+            //{
+            //    processingJobList.Add(s, z, "!");
+            //}
+            //else
+            //{
+            //    processingJobList.Add(s, z, " ");
+            //}
 
 
             //Added Gewicht auf Hauptknoten
@@ -267,7 +267,7 @@ namespace HOIA.Erweiterungen
 
         internal void DeleteJobFormList(string s)
         {
-            processingJobList.Remove(s);
+            processingJobList.RemoveByFirst(s);
         }
 
         internal void RefreshJobInList(string s)
@@ -295,7 +295,7 @@ namespace HOIA.Erweiterungen
             }
             if (items != null)
             {
-                processingJobList.Refresh(items);
+                //processingJobList.Refresh(items);
             }
 
         }

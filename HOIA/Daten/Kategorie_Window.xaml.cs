@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using HOIA.Allgemein;
 
 namespace HOIA.Daten
 {
@@ -20,6 +21,8 @@ namespace HOIA.Daten
     public partial class Kategorie_Window : Window
     {
         bool neu;
+        private Verwaltung_Aufträge verwaltung_Aufträge;
+
         public Kategorie_Window()
         {
             InitializeComponent();
@@ -68,6 +71,56 @@ namespace HOIA.Daten
      
             }
         }
+        public Kategorie_Window(string maschine, Verwaltung_Aufträge verwaltung_Aufträge)
+        {
+            InitializeComponent();
+            if (comboBox_Maschine.Items.Count < 1)
+            {
+
+                comboBox_Maschine.Items.Add(new ComboBoxItem() { Content = "Maschine" });
+                comboBox_Maschine.SelectedIndex = 0;
+                DDataContext d = new DDataContext();
+
+                var k = from t in d.Maschine
+                        select new { t.Name };
+                foreach (var i in k)
+                {
+                    comboBox_Maschine.Items.Add(new ComboBoxItem() { Content = i.Name });
+                }
+
+                if (maschine.Length > 0)
+                {
+                    foreach (var c in comboBox_Maschine.Items)
+                    {
+                        if (((ComboBoxItem)c).Content.ToString() == maschine)
+                        {
+                            comboBox_Maschine.SelectedItem = c;
+                        }
+                    }
+                }
+
+            }
+            this.verwaltung_Aufträge = verwaltung_Aufträge;
+        }
+        public Kategorie_Window(Verwaltung_Aufträge verwaltung_Aufträge)
+        {
+            InitializeComponent();
+            if (comboBox_Maschine.Items.Count < 1)
+            {
+
+                comboBox_Maschine.Items.Add(new ComboBoxItem() { Content = "Maschine" });
+                comboBox_Maschine.SelectedIndex = 0;
+                DDataContext d = new DDataContext();
+
+                var k = from t in d.Maschine
+                        select new { t.Name };
+                foreach (var i in k)
+                {
+                    comboBox_Maschine.Items.Add(new ComboBoxItem() { Content = i.Name });
+                }
+            }
+            this.verwaltung_Aufträge = verwaltung_Aufträge;
+        }
 
         private void button_Neu_Name_Click(object sender, RoutedEventArgs e)
         {
@@ -78,7 +131,6 @@ namespace HOIA.Daten
             comboBox_Maschine.IsEnabled = true;
             button_Speichern_Name.IsEnabled = true;
         }
-
         private void button_Bearbeiten_Name_Click(object sender, RoutedEventArgs e)
         {
             textBox_Name.IsEnabled = true;
@@ -86,7 +138,6 @@ namespace HOIA.Daten
             comboBox_Maschine.IsEnabled = true;
             neu = false;
         }
-
         private void button_Speichern_Name_Click(object sender, RoutedEventArgs e)
         {
             string m_art = ((ComboBoxItem)comboBox_Maschine.SelectedItem).Content.ToString();
@@ -130,7 +181,7 @@ namespace HOIA.Daten
 
                 textBox_Name.IsEnabled = false;
                 textBox_Name.Text = String.Empty;
-                Datagrid_Kategorien_Refresh();
+                dataGrid_Kategorien_Refresh();
             }
             else if (textBox_Name.Text.Length < 1)
             {
@@ -142,7 +193,6 @@ namespace HOIA.Daten
             }
 
         }
-
         private void button_Löschen_Name_Click(object sender, RoutedEventArgs e)
         {
             if (MessageBox.Show("Soll diese Maschine wirklich gelöscht werden?", "Echt?", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
@@ -175,17 +225,16 @@ namespace HOIA.Daten
 
 
 
-            Datagrid_Kategorien_Refresh();
+            dataGrid_Kategorien_Refresh();
         }
-
         private void comboBox_Maschine_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             textBox_Name.Text = String.Empty;
             
-            Datagrid_Kategorien_Refresh();
+            dataGrid_Kategorien_Refresh();
            
         }
-        private void Datagrid_Kategorien_Refresh()
+        private void dataGrid_Kategorien_Refresh()
         {
             DDataContext d = new DDataContext();
             var zuo = from r in d.Kategorie
@@ -193,7 +242,6 @@ namespace HOIA.Daten
                       select new { r.Id, r.Name };
             dataGrid_Kategorien.ItemsSource = zuo;
         }
-
         private void dataGrid_Kategorien_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             textBox_Name.Text = String.Empty;

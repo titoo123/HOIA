@@ -11,10 +11,10 @@ namespace HOIA.Erweiterungen
     {
         public static List<Auftragskategorie> auftragskategorien = new List<Erweiterungen.Auftragskategorie>();
 
-        Extended_TreeView t;
+        //Extended_TreeView t;
         List<Maschine> m = new List<Maschine>();
-        string name;
-        TreeViewItem item;
+        //string name;
+        //TreeViewItem item;
 
         public Auftragskategorie(Extended_TreeView t, string name)
         {

@@ -23,7 +23,7 @@ namespace HOIA.Daten
         public Maschinenarten_Window()
         {
             InitializeComponent();
-            Datagrid_Maschinenart_Refresh();
+            dataGrid_Maschinenart_Refresh();
         }
 
         private void button_Neu_Name_Click(object sender, RoutedEventArgs e)
@@ -34,7 +34,6 @@ namespace HOIA.Daten
 
             button_Speichern_Name.IsEnabled = true;
         }
-
         private void button_Bearbeiten_Name_Click(object sender, RoutedEventArgs e)
         {
             textBox_Name.IsEnabled = true;
@@ -42,7 +41,6 @@ namespace HOIA.Daten
             neu = false;
 
         }
-
         private void button_Speichern_Name_Click(object sender, RoutedEventArgs e)
         {
             DDataContext d = new DDataContext();
@@ -75,9 +73,8 @@ namespace HOIA.Daten
 
             textBox_Name.IsEnabled = false;
             textBox_Name.Text = String.Empty;
-            Datagrid_Maschinenart_Refresh();
+            dataGrid_Maschinenart_Refresh();
         }
-
         private void button_Löschen_Name_Click(object sender, RoutedEventArgs e)
         {
             if (MessageBox.Show("Soll dieses Maschinenart wirklich gelöscht werden?", "Echt?", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
@@ -102,17 +99,15 @@ namespace HOIA.Daten
 
 
 
-            Datagrid_Maschinenart_Refresh();
+            dataGrid_Maschinenart_Refresh();
         }
-
-        private void Datagrid_Maschinenart_Refresh()
+        private void dataGrid_Maschinenart_Refresh()
         {
             DDataContext d = new DDataContext();
             var zuo = from r in d.Maschinenart
                       select new { r.Id, r.Name };
             dataGrid_Maschinenart.ItemsSource = zuo;
         }
-
         private void dataGrid_Maschinenart_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             textBox_Name.Text = String.Empty;
