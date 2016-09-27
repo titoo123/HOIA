@@ -25,41 +25,56 @@
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="1*"></RowDefinition>
-                            <RowDefinition Height="30*"></RowDefinition>
+                            <RowDefinition Height="1*"></RowDefinition>
+                            <RowDefinition Height="1*"></RowDefinition>
+                            <RowDefinition Height="1*"></RowDefinition>
+                            <RowDefinition Height="26*"></RowDefinition>
                         </Grid.RowDefinitions>
-                        <ComboBox x:Name="comboBox_Status" Grid.Row="0" SelectionChanged="comboBox_Status_SelectionChanged">
-                            <ComboBoxItem Content="Frei" IsSelected="True"></ComboBoxItem>
+                        <ComboBox x:Name="comboBox_Status_Suche" Grid.Row="0" SelectionChanged="comboBox_Status_Suche_SelectionChanged">
+                            <ComboBoxItem Content="Status" IsSelected="True"></ComboBoxItem>
+                            <ComboBoxItem Content="Frei" ></ComboBoxItem>
                             <ComboBoxItem Content="Bearbeitet"></ComboBoxItem>
                             <ComboBoxItem Content="Wartet"></ComboBoxItem>
                             <ComboBoxItem Content="Gesperrt"></ComboBoxItem>
                         </ComboBox>
-                        <ListBox x:Name="listBox_Aufträge" PreviewMouseUp="listBox_Aufträge_PreviewMouseUp" Grid.Row="1" />
+                        <ComboBox x:Name="comboBox_Kategorien_Suche" Grid.Row="1" SelectionChanged="comboBox_Kategorien_Suche_SelectionChanged">
+                            <ComboBoxItem Content="Kategorie" IsSelected="True"></ComboBoxItem>
+                        </ComboBox>
+                        <ComboBox x:Name="comboBox_Verfahren_Suche" Grid.Row="2" SelectionChanged="comboBox_Verfahren_Suche_SelectionChanged">
+                            <ComboBoxItem Content="Verfahren" IsSelected="True"></ComboBoxItem>
+                        </ComboBox>
+                        <ComboBox x:Name="comboBox_Maschine_Suche" Grid.Row="3" SelectionChanged="comboBox_Maschine_Suche_SelectionChanged">
+                            <ComboBoxItem Content="Maschine" IsSelected="True"></ComboBoxItem>
+                        </ComboBox>
+                        <ListBox x:Name="listBox_Aufträge" PreviewMouseUp="listBox_Aufträge_PreviewMouseUp" Grid.Row="4" />
                     </Grid>
                 </GroupBox>
                 
                 <Grid Grid.Column="1">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="5*"></RowDefinition>
-                        <RowDefinition Height="1*"></RowDefinition>
-                        <RowDefinition Height="1*"></RowDefinition>
-                        <RowDefinition Height="30*"></RowDefinition>
-                    </Grid.RowDefinitions>
-                    <Button Grid.Row="1" Content=">>" Click="Button_Von_Auftrag_Zu_Maschine_Click"></Button>
-                    <Button Grid.Row="2" Content="&lt;&lt;" Click="Button_Von_Maschine_Zu_Auftrag_Click"></Button>
+
                 </Grid>
-                <GroupBox Grid.Column="2" Header="Maschinen">
+                <GroupBox Grid.Column="2" Header="Einstellungen">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="1*"></RowDefinition>
-                            <RowDefinition Height="8*"></RowDefinition>
                             <RowDefinition Height="1*"></RowDefinition>
-                            <RowDefinition Height="20*"></RowDefinition>
+                            <RowDefinition Height="1*"></RowDefinition>
+                            <RowDefinition Height="1*"></RowDefinition>
+                            <RowDefinition Height="1*"></RowDefinition>
+                            <RowDefinition Height="24*"></RowDefinition>
+                            <RowDefinition Height="1*"></RowDefinition>
                         </Grid.RowDefinitions>
-                        <!--<Label Content="Maschine" Grid.Row="0"></Label>-->
-                        <Button Content="Verwalten" Click="Button_Maschinen_Verwalten_Click" Grid.Row="0"></Button>
-                        <ListBox x:Name="listBox_Maschine" Grid.Row="1" SelectionChanged="listBox_Maschine_SelectionChanged"/>
-                        <Label Content="Aufträge in Maschine" Grid.Row="2"></Label>
-                        <ListBox x:Name="listBox_Aufträge_in_Maschine" Grid.Row="3" PreviewMouseUp="listBox_Aufträge_in_Maschine_PreviewMouseUp"/>
+                        <ComboBox x:Name="comboBox_Maschine_Einstellungen" Grid.Row="0">
+                            <ComboBoxItem Content="Maschine" IsSelected="True" />
+                        </ComboBox>
+                        <ComboBox x:Name="comboBox_Verfahren_Einstellungen" Grid.Row="1">
+                            <ComboBoxItem Content="Verfahren" IsSelected="True"/>
+                        </ComboBox>
+                        <ComboBox x:Name="comboBox_Status_Einstellungen" Grid.Row="2">
+                            <ComboBoxItem Content="Status" IsSelected="True"/>
+                        </ComboBox>
+
+                        <Button x:Name="button_Senden_AS400" Grid.Row="6" Content="Zu AS400"></Button>
                     </Grid>
 
                 </GroupBox>
@@ -71,10 +86,9 @@
                         <RowDefinition Height="1*"></RowDefinition>
                         <RowDefinition Height="30*"></RowDefinition>
                     </Grid.RowDefinitions>
-                    <Button Grid.Row="1" Content=">>" Click="Button_Von_Maschine_Zu_Kategorie_Click"></Button>
-                    <Button Grid.Row="2" Content="&lt;&lt;" Click="Button_Von_Kategorie_Zu_Maschine_Click"></Button>
+ 
                 </Grid>
-                <GroupBox Grid.Column="4" Header="Kategorie">
+                <GroupBox Grid.Column="4" Header="Optionen">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="1*"></RowDefinition>
@@ -82,10 +96,7 @@
                             <RowDefinition Height="1*"></RowDefinition>
                             <RowDefinition Height="20*"></RowDefinition>
                         </Grid.RowDefinitions>
-                        <Button Content="Verwalten" Grid.Row="0" Click="Button_Kategorie_Verwalten_Click"></Button>
-                        <ListBox x:Name="listBox_Kategorie" HorizontalAlignment="Stretch" Grid.Row="1" SelectionChanged="listBox_Kategorie_SelectionChanged"/>
-                        <Label Content="Aufträge in Kategorie" Grid.Row="2"></Label>
-                        <ListBox x:Name="listBox_Aufträge_in_Kategorie" Grid.Row="3" PreviewMouseUp="listBox_Aufträge_in_Kategorie_PreviewMouseUp"/>
+                   
                     </Grid>
 
 
@@ -98,21 +109,21 @@
                         <RowDefinition Height="1*"></RowDefinition>
                         <RowDefinition Height="30*"></RowDefinition>
                     </Grid.RowDefinitions>
-                    <Button Grid.Row="1" Content=">>"  Click="Button_Von_Kategorie_Zu_Verfahren_Click" />
-                    <Button Grid.Row="2" Content="&lt;&lt;"  Click="Button_Von_Verfahren_Zu_Kategorie_Click"></Button>
+            
                 </Grid>
-                <GroupBox Grid.Column="6" Header="Verfahren">
+                <GroupBox Grid.Column="6" Header="Kategorien">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="1*"></RowDefinition>
-                            <RowDefinition Height="8*"></RowDefinition>
                             <RowDefinition Height="1*"></RowDefinition>
-                            <RowDefinition Height="20*"></RowDefinition>
+                            <RowDefinition Height="1*"></RowDefinition>
+                            <RowDefinition Height="1*"></RowDefinition>
+                            <RowDefinition Height="26*"></RowDefinition>
                         </Grid.RowDefinitions>
-                        <Button Content="Verwalten" Click="Button_Verfahren_Verwalten_Click" Grid.Row="0"></Button>
-                        <ListBox x:Name="listBox_Verfahren" Grid.Row="1" SelectionChanged="listBox_Verfahren_SelectionChanged"/>
-                        <Label Content="Aufträge in Verfahren" Grid.Row="2"></Label>
-                        <ListBox x:Name="listBox_Aufträge_in_Verfahren" Grid.Row="3" PreviewMouseUp="listBox_Aufträge_in_Verfahren_PreviewMouseUp"/>
+                        <ComboBox x:Name="comboBox_Kategorie_Wählen" Grid.Row="0"></ComboBox>
+                        <Button x:Name="button_Kategorie_Hinzufügen" Content="Hinzufügen" Grid.Row="1"></Button>
+                        <Button x:Name="button_Kategorie_Entfernen" Content="Entfernen" Grid.Row="2"></Button>
+                        <DataGrid x:Name="dataGrid_Kategorien" Grid.Row="4"></DataGrid>
                     </Grid>
 
                 </GroupBox>

@@ -144,6 +144,7 @@ namespace HOIA.Daten
                 textBox_Name.IsEnabled = false;
                 textBox_Name.Text = String.Empty;
                 Datagrid_Maschinen_Refresh();
+
             }
             else if (textBox_Name.Text.Length < 1)
             {
@@ -153,6 +154,7 @@ namespace HOIA.Daten
             {
                 MessageBox.Show("Bitte wählen sie eine Art von Maschine aus!","Achtung!");
             }
+            //verwaltung_Aufträge.RefreshValues();
            
         }
         private void button_Löschen_Name_Click(object sender, RoutedEventArgs e)
@@ -162,6 +164,19 @@ namespace HOIA.Daten
                 DDataContext d = new DDataContext();
                 if (!neu)
                 {
+                    var l = from f in d.Kategorie
+                            where f.Id_Maschine == Erweiterungen.Helper.GetIntFromDataGrid(0, dataGrid_maschinen)
+                            select f;
+                    d.Kategorie.DeleteAllOnSubmit(l);
+                    try
+                    {
+                        d.SubmitChanges();
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show("Datenübermittlung fehlgeschlagen!", "Nee!!!");
+                    }
+
                     var k = from t in d.Maschine
                             where t.Id == Erweiterungen.Helper.GetIntFromDataGrid(0, dataGrid_maschinen)
                             select t;
@@ -188,6 +203,7 @@ namespace HOIA.Daten
 
 
             Datagrid_Maschinen_Refresh();
+            //verwaltung_Aufträge.RefreshValues();
         }
         private void dataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {

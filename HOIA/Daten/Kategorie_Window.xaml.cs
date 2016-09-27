@@ -20,7 +20,7 @@ namespace HOIA.Daten
     /// </summary>
     public partial class Kategorie_Window : Window
     {
-        bool neu;
+        bool neu = false;
         private Verwaltung_Aufträge verwaltung_Aufträge;
 
         public Kategorie_Window()
@@ -191,19 +191,20 @@ namespace HOIA.Daten
             {
                 MessageBox.Show("Bitte wählen sie eine Art von Maschine aus!", "Achtung!");
             }
+            //verwaltung_Aufträge.RefreshValues();
 
         }
         private void button_Löschen_Name_Click(object sender, RoutedEventArgs e)
         {
-            if (MessageBox.Show("Soll diese Maschine wirklich gelöscht werden?", "Echt?", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            if (MessageBox.Show("Soll diese Kategorie wirklich gelöscht werden?", "Echt?", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
                 DDataContext d = new DDataContext();
                 if (!neu)
                 {
-                    var k = from t in d.Maschine
+                    var k = from t in d.Kategorie
                             where t.Id == Erweiterungen.Helper.GetIntFromDataGrid(0, dataGrid_Kategorien)
                             select t;
-                    d.Maschine.DeleteAllOnSubmit(k);
+                    d.Kategorie.DeleteAllOnSubmit(k);
                     try
                     {
                         d.SubmitChanges();
@@ -226,6 +227,7 @@ namespace HOIA.Daten
 
 
             dataGrid_Kategorien_Refresh();
+            //verwaltung_Aufträge.RefreshValues();
         }
         private void comboBox_Maschine_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {

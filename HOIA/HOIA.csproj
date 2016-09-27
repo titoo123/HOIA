@@ -65,6 +65,11 @@
     <Compile Include="Allgemein\Verwaltung_Aufträge.xaml.cs">
       <DependentUpon>Verwaltung_Aufträge.xaml</DependentUpon>
     </Compile>
+    <Compile Include="D.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>D.dbml</DependentUpon>
+    </Compile>
     <Compile Include="Daten\Kategorie_Window.xaml.cs">
       <DependentUpon>Kategorie_Window.xaml</DependentUpon>
     </Compile>
@@ -76,11 +81,6 @@
     </Compile>
     <Compile Include="Daten\Verfahren_Window.xaml.cs">
       <DependentUpon>Verfahren_Window.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="D.designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>D.dbml</DependentUpon>
     </Compile>
     <Page Include="Allgemein\Bestimmungsort.xaml">
       <SubType>Designer</SubType>
