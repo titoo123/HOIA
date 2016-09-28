@@ -139,7 +139,7 @@
                     </Grid>
                 </GroupBox>
                 <GroupBox Header="Material" Grid.Row="4" Grid.ColumnSpan="2">
-                    <ListView Grid.Column="1"  x:Name="ListView_Material" Margin="0,-1,0,0" SelectionChanged="ListView_Aufträge_SelectionChanged" Height="160" AlternationCount="1000" >
+                    <ListView Grid.Column="1"  x:Name="ListView_Material" Margin="0,-1,0,0" SelectionChanged="ListView_Aufträge_SelectionChanged" Height="230" AlternationCount="1000" >
                         <ListView.View >
                             <GridView >
 
@@ -194,7 +194,7 @@
                         <Label x:Name="label_technischeAnmerkungen" Content="Tech. Anmerkungen:" Grid.Column="0"  Grid.Row="0"/>
                         <TextBox x:Name="textBox_IntAnmerkungen" Grid.Column="1" Grid.RowSpan="2" Grid.ColumnSpan="3"  Grid.Row="2" HorizontalAlignment="Stretch"  AcceptsReturn="True" VerticalScrollBarVisibility="Auto"/>
                         <Label x:Name="label7" Content="Int. Anmerkungen:" Grid.Column="0"  Grid.Row="2" />
-                        <Label x:Name="label9" Content="Anlasstemperatur:" Grid.Column="2"  Grid.Row="4" />
+                        <!--<Label x:Name="label9" Content="Anlasstemperatur:" Grid.Column="2"  Grid.Row="4" />
                         <TextBox x:Name="textBox_Sägeprogramm" Grid.Column="1"  Grid.Row="4" />
                         <Label x:Name="label8" Content="Sägeprogramm:" Grid.Column="0"  Grid.Row="4"/>
                         <TextBox x:Name="textBox_Anlasstemp"  Grid.Column="3"  Grid.Row="4"/>
@@ -209,7 +209,7 @@
                             <RadioButton x:Name="radiobutton_Gesperrt" GroupName="status" Foreground="Red" Checked="RadioButton_Checked" Content="Gesperrt"/>
 
 
-                        </StackPanel>
+                        </StackPanel>-->
 
 
                     </Grid>

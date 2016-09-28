@@ -25,14 +25,19 @@ namespace HOIA.Allgemein
         public static string ODL = String.Empty;
 
         StringTuple4D sT4D = new StringTuple4D();
-        
+
         public Verwaltung_Aufträge()
         {
             InitializeComponent();
 
             Load_ODLs(listBox_Aufträge);
+
+            comboBox_Maschine_Einstellungen.IsEnabled = false;
+            comboBox_Status_Einstellungen.IsEnabled = false;
+            comboBox_Verfahren_Einstellungen.IsEnabled = false;
+            comboBox_Kategorie_Wählen.IsEnabled = false;
             //Load_Maschinen(listBox_Maschine);
-            
+
         }
 
         ////ComboBox Funktionen
@@ -362,8 +367,27 @@ namespace HOIA.Allgemein
         //MouseUp Events
         private void listBox_Aufträge_PreviewMouseUp(object sender, MouseButtonEventArgs e)
         {
-            ChangeValues(sender);
+            if (listBox_Aufträge.SelectedIndex != -1)
+            {
+                //Lade Auftragsdaten aus Datenbank
+                Load_Auftragsdaten_From_DB(sender);
+
+                comboBox_Maschine_Einstellungen.IsEnabled = true;
+                comboBox_Status_Einstellungen.IsEnabled = true;
+
+                comboBox_Maschine_Load();
+                comboBox_Verfahren_Load();
+
+            }
+            else
+            {
+                comboBox_Maschine_Einstellungen.IsEnabled = false;
+                comboBox_Status_Einstellungen.IsEnabled = false;
+            }
+
         }
+
+
 
 
         //Sonstige Funktionen
@@ -378,53 +402,32 @@ namespace HOIA.Allgemein
 
             try
             {
-                status = comboBox_Status_Suche.Text;
+                status = Helper.GetComboBoxText(comboBox_Status_Suche);
             }
             catch (Exception)
             {
             }
             try
             {
-                kategorie = comboBox_Kategorien_Suche.Text;
+                kategorie = Helper.GetComboBoxText(comboBox_Kategorien_Suche);
             }
             catch (Exception)
             {
             }
             try
             {
-                verfahren = comboBox_Verfahren_Suche.Text;
+                verfahren = Helper.GetComboBoxText(comboBox_Verfahren_Suche);
             }
             catch (Exception)
             {
             }
             try
             {
-                maschine = comboBox_Maschine_Suche.Text;
+                maschine = Helper.GetComboBoxText(comboBox_Maschine_Suche);
             }
             catch (Exception)
             {
             }
-            
-
-            //if (status == "Status")
-            //{
-            //    status = null;
-            //}
-            //if (kategorie == "Kategorie")
-            //{
-            //    kategorie = null;
-            //}
-            //if (verfahren == "Verfahren")
-            //{
-            //    verfahren = null;
-            //}
-            //if (maschine == "Maschine")
-            //{
-            //    maschine = null;
-            //}
-            //((n % 2 == 0) ? "Fizz" : string.Empty)
-
-
 
             var query =
                 from a in d.Auftrag
@@ -449,37 +452,37 @@ namespace HOIA.Allgemein
                 into vGroup
                 from vG in vGroup.DefaultIfEmpty()
 
-               // where kG.Name == kategorie && a.Status == status && vG.Name == verfahren && mG.Name == maschine
+                    // where kG.Name == kategorie && a.Status == status && vG.Name == verfahren && mG.Name == maschine
 
-                select new { a.ODL, a.Status, Kategorie = kG.Name , Verfahren = vG.Name, Maschine = mG.Name };
+                select new { a.ODL, a.Status, Kategorie = kG.Name, Verfahren = vG.Name, Maschine = mG.Name };
 
-            //if (status != "Status")
-            //{
-            //    query = from q in query
-            //            where q.Status == status
-            //            select q;
-            //}
-            //if (kategorie == "Kategorie")
-            //{
-            //    query = from w in query
-            //            where w.Kategorie == kategorie
-            //            select w;
-            //}
-            //if (verfahren == "Verfahren")
-            //{
-            //    query = from r in query
-            //            where r.Verfahren == verfahren
-            //            select r;
-            //}
-            //if (maschine == "Maschine")
-            //{
-            //    query = from t in query
-            //            where t.Maschine == maschine
-            //            select t;
-            //}
+            if (status != "Status")
+            {
+                query = from q in query
+                        where q.Status == status
+                        select q;
+            }
+            if (kategorie != "Kategorie")
+            {
+                query = from w in query
+                        where w.Kategorie == kategorie
+                        select w;
+            }
+            if (verfahren != "Verfahren")
+            {
+                query = from r in query
+                        where r.Verfahren == verfahren
+                        select r;
+            }
+            if (maschine != "Maschine")
+            {
+                query = from t in query
+                        where t.Maschine == maschine
+                        select t;
+            }
 
 
-            MessageBox.Show(""+ query.Count());
+            // MessageBox.Show(""+ query.Count());
             try
             {
                 lBox.Items.Clear();
@@ -498,55 +501,9 @@ namespace HOIA.Allgemein
 
 
         }
-        //private void Load_Maschinen(ListBox lBox) {
-
-        //    DDataContext d = new DDataContext();
-        //    //Maschinen
-        //    var e = from m in d.Maschine
-        //            select new { m.Name };
-        //    List<string> l_m = new List<string>();
-        //    foreach (var item in e)
-        //    {
-        //        l_m.Add(item.Name);
-        //    }
 
 
-        //    //lBox.Items.Clear();
-        //    lBox.ItemsSource = l_m;
-        //}
-        //private void Load_Kategorien(ListBox lBox) {
-        //    DDataContext d = new DDataContext();
-
-        //    var s = from m in d.Kategorie
-        //            where m.Maschine.Name == lBox.SelectedValue.ToString()
-        //            select m;
-        //    List<string> l_s = new List<string>();
-        //    foreach (var item in s)
-        //    {
-        //        l_s.Add(item.Name);
-        //    }
-
-        //    listBox_Kategorie.ItemsSource = l_s;
-        //}
-        //private void Load_Verfahren(ListBox lBox) {
-        //    DDataContext d = new DDataContext();
-
-        //    //Sucht Maschine
-        //    Maschine mas = (from k in d.Maschine
-        //                    where k.Name == lBox.SelectedValue.ToString()
-        //                    select k).First();
-        //    //Sucht Maschinenart
-        //    Maschinenart mar = (from a in d.Maschinenart
-        //                        where a.Id == mas.Id_Maschinenart
-        //                        select a).First();
-        //    //Sucht passende Verfahren
-        //    listBox_Verfahren.ItemsSource = (from f in d.Verfahren
-        //                                     where f.Id_Maschinenart == mar.Id
-        //                                     select f.Name).ToList();
-        //}
-
-
-        private void ChangeValues(object sender)
+        private void Load_Auftragsdaten_From_DB(object sender)
         {
             //Lädt Daten in den Detailbereich
             if (((ListBox)sender).SelectedIndex != -1)
@@ -554,10 +511,245 @@ namespace HOIA.Allgemein
                 ODL = (string)((ListBox)sender).SelectedItem;
                 frame.Refresh();
 
+                DDataContext d = new DDataContext();
+
+                var auf = from x in d.Auftrag
+                          where x.ODL == ODL
+                          select x;
+                if (auf.Count() > 0)
+                {
+                    foreach (ComboBoxItem cItem in comboBox_Status_Einstellungen.Items)
+                    {
+                        if (cItem.Content.ToString() == auf.First().Status)
+                        {
+                            comboBox_Status_Einstellungen.SelectedItem = cItem;
+                            break;
+                        }
+                    }
+                    var azu = from y in d.Auftrags_Zuordnung
+                              where y.Id_Auftrag == auf.First().Id
+                              select y;
+                    if (azu.Count() > 0)
+                    {
+                        var vef = from z in d.Verfahren
+                                  where z.Id == azu.First().Id_Verfahren
+                                  select z;
+                        var mas = from g in d.Maschine
+                                  where g.Id == azu.First().Id_Maschine
+                                  select g;
+                        if (vef.Count() > 0)
+                        {
+                            foreach (ComboBoxItem cItem in comboBox_Verfahren_Einstellungen.Items)
+                            {
+                                if (cItem.Content.ToString() == vef.First().Name)
+                                {
+                                    comboBox_Verfahren_Einstellungen.SelectedItem = cItem;
+                                    break;
+                                }
+                            }
+                        }
+
+                        if (mas.Count() > 0)
+                        {
+                            foreach (ComboBoxItem cItem in comboBox_Maschine_Einstellungen.Items)
+                            {
+                                if (cItem.Content.ToString() == mas.First().Name)
+                                {
+                                    comboBox_Maschine_Einstellungen.SelectedItem = cItem;
+                                    break;
+                                }
+                            }
+                        }
+
+                    }
+                }
+
+
+
             }
         }
 
+        private void comboBox_Maschine_Einstellungen_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            //comboBox_Verfahren_Load();
+            try
+            {
+                //ComboBox Maschine Einstellungen - Nichts gewählt?
+                //Etwas
+                if (comboBox_Maschine_Einstellungen.SelectedIndex != -1)
+                {
+                    //ComboBox Maschine Einstellungen - Standardwert gewählt?
+                    //Nein
+                    if (comboBox_Maschine_Einstellungen.SelectedIndex != 0)
+                    {
+                        //ComboBox Verfahren Einstellungen - Nichts gewählt?
+                        //Ja
+                        if (comboBox_Verfahren_Einstellungen.SelectedIndex == -1)
+                        {
+                            //Setze Wert auf Standard
+                            comboBox_Verfahren_Einstellungen.SelectedIndex = 0;
+                            //comboBox_Verfahren_Load();
+                        }
 
+                        comboBox_Verfahren_Einstellungen.IsEnabled = true;
+
+                        DDataContext d = new DDataContext();
+                        var auf = from x in d.Auftrag
+                                  where x.ODL == ODL
+                                  select x;
+                        var azu = from y in d.Auftrags_Zuordnung
+                                  where y.Id_Auftrag == auf.First().Id
+                                  select y;
+                        if (azu.Count() > 0)
+                        {
+                            azu.First().Id_Maschine = (from n in d.Maschine where n.Name == Helper.GetComboBoxText(comboBox_Maschine_Einstellungen) select n).First().Id;
+                        }
+                        else
+                        {
+                            Auftrags_Zuordnung a = new Auftrags_Zuordnung()
+                            {
+                                Id_Maschine =
+                                (from n in d.Maschine where n.Name == Helper.GetComboBoxText(comboBox_Maschine_Einstellungen) select n).First().Id
+                            };
+                            d.Auftrags_Zuordnung.InsertOnSubmit(a);
+                        }
+
+                        try
+                        {
+                            d.SubmitChanges();
+                        }
+                        catch (Exception)
+                        {
+                        }
+                    }
+                    //ComboBox Maschine Einstellungen - Standardwert gewählt?
+                    //Ja          
+                    else
+                    {
+                        // comboBox_Verfahren_Load();
+                        comboBox_Verfahren_Einstellungen.IsEnabled = false;
+                    }
+                }
+                //ComboBox Maschine Einstellungen - Nichts gewählt?
+                //Nichts
+                else
+                {
+                    comboBox_Maschine_Einstellungen.SelectedIndex = 0;
+                    //comboBox_Verfahren_Einstellungen.SelectedIndex = 0;
+
+                }
+
+            }
+            catch (Exception)
+            {
+
+            }
+
+        }
+
+        private void comboBox_Verfahren_Einstellungen_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (((ComboBox)sender).SelectedIndex != 0 && ((ComboBox)sender).SelectedIndex != -1)
+            {
+                DDataContext d = new DDataContext();
+                var auf = from x in d.Auftrag
+                          where x.ODL == ODL
+                          select x;
+                var azu = from y in d.Auftrags_Zuordnung
+                          where y.Id_Auftrag == auf.First().Id
+                          select y;
+                if (azu.Count() > 0)
+                {
+                    azu.First().Id_Verfahren = (from n in d.Verfahren where n.Name == Helper.GetComboBoxText(comboBox_Verfahren_Einstellungen) select n).First().Id;
+                }
+                else
+                {
+                    Auftrags_Zuordnung a = new Auftrags_Zuordnung()
+                    {
+                        Id_Maschine =
+                        (from n in d.Maschine where n.Name == Helper.GetComboBoxText(comboBox_Maschine_Einstellungen) select n).First().Id
+                    };
+                    d.Auftrags_Zuordnung.InsertOnSubmit(a);
+                }
+
+                try
+                {
+                    d.SubmitChanges();
+                }
+                catch (Exception)
+                {
+                }
+            }
+        }
+
+        private void comboBox_Status_Einstellungen_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (((ComboBox)sender).SelectedIndex != 0 && ((ComboBox)sender).SelectedIndex != -1)
+            {
+                //Erstelle Datenbankverbindung
+                DDataContext d = new DDataContext();
+                var auf = from x in d.Auftrag
+                          where x.ODL == ODL
+                          select x;
+                auf.First().Status = Helper.GetComboBoxText(comboBox_Status_Einstellungen);
+
+                try
+                {
+                    d.SubmitChanges();
+                }
+                catch (Exception)
+                {
+                }
+            }
+
+        }
+
+        private void comboBox_Maschine_Load()
+        {
+            try
+            {
+                //Erstelle Datenbankverbindung
+                DDataContext d = new DDataContext();
+
+                //Fülle Maschinen ComboBox
+                var mas = from x in d.Maschine
+                          select x;
+
+                comboBox_Maschine_Einstellungen.Items.Clear();
+                comboBox_Maschine_Einstellungen.Items.Add("Maschine");
+                foreach (var item in mas)
+                {
+                    comboBox_Maschine_Einstellungen.Items.Add(item.Name);
+                }
+            }
+            catch (Exception)
+            {
+            }
+
+        }
+
+        private void comboBox_Verfahren_Load()
+        {
+            try
+            {
+                //Erstelle Datenbankverbindung
+                DDataContext d = new DDataContext();
+                //Fülle Verfahren
+                var ver = from y in d.Verfahren
+                          where y.Maschine == null || y.Id_Maschine == (int?)(from b in d.Maschine where b.Name == Helper.GetComboBoxText(comboBox_Maschine_Einstellungen) select b).First().Id
+                          select y;
+                comboBox_Verfahren_Einstellungen.Items.Clear();
+                comboBox_Verfahren_Einstellungen.Items.Add("Verfahren");
+                foreach (var item in ver)
+                {
+                    comboBox_Verfahren_Einstellungen.Items.Add(item.Name);
+                }
+            }
+            catch (Exception)
+            {
+            }
+
+        }
 
         //public void RefreshValues() {
         //    Load_ODLs(listBox_Aufträge);

@@ -127,23 +127,23 @@ namespace HOIA.Allgemein
                 //Ergänzungen
                 textBox_TecAnmerkungen.Text = a.TechnischeAnmerkungen;
                 textBox_IntAnmerkungen.Text = a.Bemerkungen;
-                textBox_Sägeprogramm.Text = a.SägeProgramm.ToString();
-                textBox_Anlasstemp.Text = a.Anlasstemparartur.ToString();
-                //Status aktualisieren
-                switch (textBox_Status.Text)
-                {
-                    case "Frei":
-                        radiobutton_Frei.IsChecked = true;
-                        break;
-                    case "Warten":
-                        radiobutton_Warten.IsChecked = true;
-                        break;
-                    case "Gesperrt":
-                        radiobutton_Gesperrt.IsChecked = true;
-                        break;
-                    default:
-                        break;
-                }
+                //textBox_Sägeprogramm.Text = a.SägeProgramm.ToString();
+                //textBox_Anlasstemp.Text = a.Anlasstemparartur.ToString();
+                ////Status aktualisieren
+                //switch (textBox_Status.Text)
+                //{
+                //    case "Frei":
+                //        radiobutton_Frei.IsChecked = true;
+                //        break;
+                //    case "Warten":
+                //        radiobutton_Warten.IsChecked = true;
+                //        break;
+                //    case "Gesperrt":
+                //        radiobutton_Gesperrt.IsChecked = true;
+                //        break;
+                //    default:
+                //        break;
+                //}
 
             }
         }

@@ -64,14 +64,18 @@
                             <RowDefinition Height="24*"></RowDefinition>
                             <RowDefinition Height="1*"></RowDefinition>
                         </Grid.RowDefinitions>
-                        <ComboBox x:Name="comboBox_Maschine_Einstellungen" Grid.Row="0">
+                        <ComboBox x:Name="comboBox_Maschine_Einstellungen" Grid.Row="0" SelectionChanged="comboBox_Maschine_Einstellungen_SelectionChanged">
                             <ComboBoxItem Content="Maschine" IsSelected="True" />
                         </ComboBox>
-                        <ComboBox x:Name="comboBox_Verfahren_Einstellungen" Grid.Row="1">
+                        <ComboBox x:Name="comboBox_Verfahren_Einstellungen" Grid.Row="1" SelectionChanged="comboBox_Verfahren_Einstellungen_SelectionChanged">
                             <ComboBoxItem Content="Verfahren" IsSelected="True"/>
                         </ComboBox>
-                        <ComboBox x:Name="comboBox_Status_Einstellungen" Grid.Row="2">
-                            <ComboBoxItem Content="Status" IsSelected="True"/>
+                        <ComboBox x:Name="comboBox_Status_Einstellungen" Grid.Row="2" SelectionChanged="comboBox_Status_Einstellungen_SelectionChanged">
+                            <ComboBoxItem Content="Status" IsSelected="True"></ComboBoxItem>
+                            <ComboBoxItem Content="Frei" ></ComboBoxItem>
+                            <ComboBoxItem Content="Bearbeitet"></ComboBoxItem>
+                            <ComboBoxItem Content="Wartet"></ComboBoxItem>
+                            <ComboBoxItem Content="Gesperrt"></ComboBoxItem>
                         </ComboBox>
 
                         <Button x:Name="button_Senden_AS400" Grid.Row="6" Content="Zu AS400"></Button>

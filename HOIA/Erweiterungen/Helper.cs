@@ -26,7 +26,7 @@ namespace HOIA.Erweiterungen
 
         public static string AUFTRAG_OFFEN_STRING = "Frei";
         public static string AUFTRAG_WARTEN_STRING = "Warte";
-        public static string AUFTRAG_GESPERRT_STRING = "Gesprrt";
+        public static string AUFTRAG_GESPERRT_STRING = "Gesperrt";
 
         public static string EL1_STRING = "EL1";
         public static string EL2_STRING = "EL2";
@@ -117,5 +117,19 @@ namespace HOIA.Erweiterungen
         {
             return s + " ( " + k + ": " + a + " "+ n + " ) ";
         }
+
+        public static string GetComboBoxText(ComboBox x) {
+            try
+            {
+                return ((ComboBoxItem)x.SelectedItem).Content.ToString();
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+
+        }
+
+
     }
 }
