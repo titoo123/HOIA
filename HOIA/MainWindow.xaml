@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HOIA"
         mc:Ignorable="d"
-        Title="MainWindow" Height="900" Width="1500">
+        Title="HOIA" Height="900" Width="1500">
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -23,7 +23,8 @@
 
                     <MenuItem Header="Maschinen" Click="MenuItem_Maschinen_Click" />
                     <MenuItem Header="Maschinenarten" Click="MenuItem_Maschinenarten_Click" />
-                    <MenuItem Header="Maschinenkategorien" Click="MenuItem_Maschinenkategorie_Click" />
+                    <MenuItem Header="Kategorien" Click="MenuItem_Maschinenkategorie_Click" />
+                    <MenuItem Header="Verfahren" Click="MenuItem_Verfahren_Click"></MenuItem>
                     <Separator />
 
                 </MenuItem>
@@ -31,12 +32,9 @@
         
         <!--</DockPanel>-->
         <TreeView x:Name="treeView" BorderThickness="1,0,0,0" Grid.Column="0" Grid.Row="1">
-            <TreeViewItem Header="Aufträge" Selected="Auftrags_Zuordnung_Selected">
-                <!--<TreeViewItem Header="Neu"></TreeViewItem>
-                <TreeViewItem Header="Bearbeitet"></TreeViewItem>
-                <TreeViewItem Header="Wartet"></TreeViewItem>
-                <TreeViewItem Header="Gesperrt"></TreeViewItem>-->
-            </TreeViewItem>
+            <TreeViewItem Header="Aufträge" Selected="Auftrags_Zuordnung_Selected"></TreeViewItem>
+            <!--<TreeViewItem Header="Verarbeitung" Selected="Verarbeitung_Selected"></TreeViewItem>-->
+            <TreeViewItem Header="Materialverteilung" Selected="Verteilung_Selected"></TreeViewItem>
             
             <!--<TreeViewItem Header="Haubenofen" >
                 <TreeViewItem Header="Technologie Vorlage" Selected="TechnologieVorlage_Selected" >

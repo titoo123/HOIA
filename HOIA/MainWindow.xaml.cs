@@ -38,7 +38,28 @@ namespace HOIA
             }
 
         }
-        
+        private void Verarbeitung_Selected(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                frame.Source = new Uri(@"Daten\Verfahren_Window.xaml", UriKind.Relative);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Programm-Modul nicht gefunden!", "Fehler!");
+            }
+        }
+        private void Verteilung_Selected(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                frame.Source = new Uri(@"Daten\Materialverteilung_Window.xaml", UriKind.Relative);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Programm-Modul nicht gefunden!", "Fehler!");
+            }
+        }
         private void MenuItem_Maschinen_Click(object sender, RoutedEventArgs e)
         {
             Daten.Maschinen_Window mwi = new Daten.Maschinen_Window();
@@ -54,6 +75,12 @@ namespace HOIA
             Daten.Maschinenarten_Window maWerte = new Daten.Maschinenarten_Window();
             maWerte.Show();
         }
+        private void MenuItem_Verfahren_Click(object sender, RoutedEventArgs e)
+        {
+            Daten.Verfahren_Window vwi = new Daten.Verfahren_Window();
+            vwi.Show();
+        }
+
 
     }
 }

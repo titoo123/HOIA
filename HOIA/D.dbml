@@ -49,18 +49,8 @@
       <Column Name="Schritt" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="Auftrags_Zuordnung_MN_Auftrag_Kategorie" Member="MN_Auftrag_Kategorie" ThisKey="Id" OtherKey="Id_Auftrags_Zuorndung" Type="MN_Auftrag_Kategorie" />
       <Association Name="Auftrag_Auftrags_Zuordnung" Member="Auftrag" ThisKey="Id_Auftrag" OtherKey="Id" Type="Auftrag" IsForeignKey="true" />
-      <Association Name="Verfahren_Auftrags_Zuordnung" Member="Verfahren" ThisKey="Id_Verfahren" OtherKey="Id" Type="Verfahren" IsForeignKey="true" />
       <Association Name="Maschine_Auftrags_Zuordnung" Member="Maschine" ThisKey="Id_Maschine" OtherKey="Id" Type="Maschine" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Verfahren" Member="Verfahren">
-    <Type Name="Verfahren">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="Beschreibung" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
-      <Column Name="Id_Maschine" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="Verfahren_Auftrags_Zuordnung" Member="Auftrags_Zuordnung" ThisKey="Id" OtherKey="Id_Verfahren" Type="Auftrags_Zuordnung" />
-      <Association Name="Maschine_Verfahren" Member="Maschine" ThisKey="Id_Maschine" OtherKey="Id" Type="Maschine" IsForeignKey="true" />
+      <Association Name="Verfahren_Auftrags_Zuordnung" Member="Verfahren" ThisKey="Id_Verfahren" OtherKey="Id" Type="Verfahren" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.MN_Auftrag_Kategorie" Member="MN_Auftrag_Kategorie">
@@ -70,26 +60,6 @@
       <Column Name="Id_Kategorie" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="Auftrags_Zuordnung_MN_Auftrag_Kategorie" Member="Auftrags_Zuordnung" ThisKey="Id_Auftrags_Zuorndung" OtherKey="Id" Type="Auftrags_Zuordnung" IsForeignKey="true" />
       <Association Name="Kategorie_MN_Auftrag_Kategorie" Member="Kategorie" ThisKey="Id_Kategorie" OtherKey="Id" Type="Kategorie" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Kategorie" Member="Kategorie">
-    <Type Name="Kategorie">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="Id_Maschine" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="Kategorie_MN_Auftrag_Kategorie" Member="MN_Auftrag_Kategorie" ThisKey="Id" OtherKey="Id_Kategorie" Type="MN_Auftrag_Kategorie" />
-      <Association Name="Maschine_Kategorie" Member="Maschine" ThisKey="Id_Maschine" OtherKey="Id" Type="Maschine" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Maschine" Member="Maschine">
-    <Type Name="Maschine">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="Id_Maschinenart" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="Maschine_Auftrags_Zuordnung" Member="Auftrags_Zuordnung" ThisKey="Id" OtherKey="Id_Maschine" Type="Auftrags_Zuordnung" />
-      <Association Name="Maschine_Verfahren" Member="Verfahren" ThisKey="Id" OtherKey="Id_Maschine" Type="Verfahren" />
-      <Association Name="Maschine_Kategorie" Member="Kategorie" ThisKey="Id" OtherKey="Id_Maschine" Type="Kategorie" />
-      <Association Name="Maschinenart_Maschine" Member="Maschinenart" ThisKey="Id_Maschinenart" OtherKey="Id" Type="Maschinenart" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Maschinenart" Member="Maschinenart">
@@ -110,6 +80,39 @@
       <Association Name="Kunde_Auftrag" Member="Auftrag" ThisKey="Id" OtherKey="Id_Kunde" Type="Auftrag" />
     </Type>
   </Table>
+  <Table Name="dbo.Bestimmungsort" Member="Bestimmungsort">
+    <Type Name="Bestimmungsort">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Anschrift" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="PLZ" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Stadt" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Land" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Association Name="Bestimmungsort_Auftrag" Member="Auftrag" ThisKey="Id" OtherKey="Id_Bestimmungsort" Type="Auftrag" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Kategorie" Member="Kategorie">
+    <Type Name="Kategorie">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Id_Maschine" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Kategorie_MN_Auftrag_Kategorie" Member="MN_Auftrag_Kategorie" ThisKey="Id" OtherKey="Id_Kategorie" Type="MN_Auftrag_Kategorie" />
+      <Association Name="Maschine_Kategorie" Member="Maschine" ThisKey="Id_Maschine" OtherKey="Id" Type="Maschine" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Maschine" Member="Maschine">
+    <Type Name="Maschine">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Temperatur" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Programm" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Id_Maschinenart" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Maschine_Auftrags_Zuordnung" Member="Auftrags_Zuordnung" ThisKey="Id" OtherKey="Id_Maschine" Type="Auftrags_Zuordnung" />
+      <Association Name="Maschine_Kategorie" Member="Kategorie" ThisKey="Id" OtherKey="Id_Maschine" Type="Kategorie" />
+      <Association Name="Maschine_Verfahren" Member="Verfahren" ThisKey="Id" OtherKey="Id_Maschine" Type="Verfahren" />
+      <Association Name="Maschinenart_Maschine" Member="Maschinenart" ThisKey="Id_Maschinenart" OtherKey="Id" Type="Maschinenart" IsForeignKey="true" />
+    </Type>
+  </Table>
   <Table Name="dbo.Material" Member="Material">
     <Type Name="Material">
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -120,19 +123,81 @@
       <Column Name="Status" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
       <Column Name="Anzahl" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Gewicht" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Zugeordnet" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Column Name="Id_Auftrag" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Material_MN_Verfahren_Prozess_Material" Member="MN_Verfahren_Prozess_Material" ThisKey="Id" OtherKey="Id_Material" Type="MN_Verfahren_Prozess_Material" />
       <Association Name="Auftrag_Material" Member="Auftrag" ThisKey="Id_Auftrag" OtherKey="Id" Type="Auftrag" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.Bestimmungsort" Member="Bestimmungsort">
-    <Type Name="Bestimmungsort">
+  <Table Name="dbo.View_Verfahren_der_Maschinen" Member="View_Verfahren_der_Maschinen">
+    <Type Name="View_Verfahren_der_Maschinen">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Id_Maschine" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Name_Verfahren" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.View_Auftrag_AZU_Verfahren" Member="View_Auftrag_AZU_Verfahren">
+    <Type Name="View_Auftrag_AZU_Verfahren">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ODL" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="Id_Auftrag" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Id_Maschine" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Id_Verfahren" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Verfahren_Id_Org" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Status" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Verfahren" Member="Verfahren">
+    <Type Name="Verfahren">
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="Anschrift" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="PLZ" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="Stadt" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="Land" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Association Name="Bestimmungsort_Auftrag" Member="Auftrag" ThisKey="Id" OtherKey="Id_Bestimmungsort" Type="Auftrag" />
+      <Column Name="Beschreibung" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Id_Maschine" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Verfahren_Auftrags_Zuordnung" Member="Auftrags_Zuordnung" ThisKey="Id" OtherKey="Id_Verfahren" Type="Auftrags_Zuordnung" />
+      <Association Name="Verfahren_Verfahren_Prozess_Anwendung" Member="Verfahren_Prozess_Anwendung" ThisKey="Id" OtherKey="Id_Verfahren" Type="Verfahren_Prozess_Anwendung" />
+      <Association Name="Maschine_Verfahren" Member="Maschine" ThisKey="Id_Maschine" OtherKey="Id" Type="Maschine" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MN_Verfahren_Prozess_Material" Member="MN_Verfahren_Prozess_Material">
+    <Type Name="MN_Verfahren_Prozess_Material">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Id_Material" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Id_Verfahren_Prozess" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Material_MN_Verfahren_Prozess_Material" Member="Material" ThisKey="Id_Material" OtherKey="Id" Type="Material" IsForeignKey="true" />
+      <Association Name="Verfahren_Prozess_Anwendung_MN_Verfahren_Prozess_Material" Member="Verfahren_Prozess_Anwendung" ThisKey="Id_Verfahren_Prozess" OtherKey="Id" Type="Verfahren_Prozess_Anwendung" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Verfahren_Prozess_Anwendung" Member="Verfahren_Prozess_Anwendung">
+    <Type Name="Verfahren_Prozess_Anwendung">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Id_Verfahren" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Schritt" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Erstellungsdatum" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Status" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Start" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Stop" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="Verfahren_Prozess_Anwendung_MN_Verfahren_Prozess_Material" Member="MN_Verfahren_Prozess_Material" ThisKey="Id" OtherKey="Id_Verfahren_Prozess" Type="MN_Verfahren_Prozess_Material" />
+      <Association Name="Verfahren_Verfahren_Prozess_Anwendung" Member="Verfahren" ThisKey="Id_Verfahren" OtherKey="Id" Type="Verfahren" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.View_Prozess_Anwendung_Material" Member="View_Prozess_Anwendung_Material">
+    <Type Name="View_Prozess_Anwendung_Material">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Erstellungsdatum" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Id_Verfahren_Prozess" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Id_Material" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Id_Material_OTab" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Status" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.View_Auftrag_Gesamtgewicht" Member="View_Auftrag_Gesamtgewicht">
+    <Type Name="View_Auftrag_Gesamtgewicht">
+      <Column Name="ODL" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="Gesamtgewicht" Type="System.Int32" DbType="Int" CanBeNull="true" />
     </Type>
   </Table>
 </Database>

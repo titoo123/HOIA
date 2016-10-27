@@ -10,7 +10,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition ></ColumnDefinition>
             <ColumnDefinition ></ColumnDefinition>
-            <ColumnDefinition ></ColumnDefinition>
+            <ColumnDefinition Width="0" ></ColumnDefinition>
             <ColumnDefinition ></ColumnDefinition>
             <ColumnDefinition ></ColumnDefinition>
             <ColumnDefinition ></ColumnDefinition>
@@ -19,7 +19,6 @@
             <ColumnDefinition ></ColumnDefinition>
             <ColumnDefinition ></ColumnDefinition>
         </Grid.ColumnDefinitions>
-
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"></RowDefinition>
             <RowDefinition Height="1*"></RowDefinition>
@@ -59,13 +58,12 @@
 
                 </Grid.ColumnDefinitions>
                 <Label Content="Name" ></Label>
-                <TextBox x:Name="textBox_Verfahren_Name"   TextWrapping="Wrap" IsEnabled="False" Grid.Row="1" Grid.ColumnSpan="2"/>
+                <TextBox x:Name="textBox_Verfahren_Name"  IsEnabled="False" Grid.Row="1" Grid.ColumnSpan="2"/>
                 <Label Content="Beschreibung" Grid.Row="2"></Label>
                 <TextBox x:Name="textBox_Verfahren_Beschreibung" Grid.RowSpan="2" TextWrapping="Wrap"  IsEnabled="False" Grid.Row="3" Grid.ColumnSpan="5"/>
 
-                <Label Content="Maschinenart" Grid.Row="0" Grid.Column="3"></Label>
-                <ComboBox x:Name="comboBox_Maschinenart"  Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="2"  IsEnabled="False" />
-                
+                <Label Content="Maschine" Grid.Row="0" Grid.Column="3"></Label>
+                <ComboBox x:Name="comboBox_Maschine"  Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="2"  IsEnabled="False" />
                 <Button x:Name="button_Verfahren_Neu" Content="Neu" Click="button_Neu_Name_Click" Grid.Row="6" Grid.Column="0"/>
                 <Button x:Name="button_Verfahren_Bearbeiten" Content="Bearbeiten" Grid.Column="1" Click="button_Bearbeiten_Name_Click" IsEnabled="False" Grid.Row="6"/>
                 <Button x:Name="button_Verfahren_Speichern" Content="Speichern"  Click="button_Speichern_Name_Click" Grid.Column="2" IsEnabled="False" Grid.Row="6"/>

@@ -28,7 +28,8 @@
                             <RowDefinition Height="1*"></RowDefinition>
                             <RowDefinition Height="1*"></RowDefinition>
                             <RowDefinition Height="1*"></RowDefinition>
-                            <RowDefinition Height="26*"></RowDefinition>
+                            <RowDefinition Height="22*"></RowDefinition>
+                            <RowDefinition Height="4*"></RowDefinition>
                         </Grid.RowDefinitions>
                         <ComboBox x:Name="comboBox_Status_Suche" Grid.Row="0" SelectionChanged="comboBox_Status_Suche_SelectionChanged">
                             <ComboBoxItem Content="Status" IsSelected="True"></ComboBoxItem>
@@ -47,6 +48,12 @@
                             <ComboBoxItem Content="Maschine" IsSelected="True"></ComboBoxItem>
                         </ComboBox>
                         <ListBox x:Name="listBox_Aufträge" PreviewMouseUp="listBox_Aufträge_PreviewMouseUp" Grid.Row="4" />
+                        <Label x:Name="label_Statistik" Grid.Column="0" Grid.Row="5"></Label>
+                        <!--<ListBox x:Name="listBox_Aufträge_Werte" Grid.Row="5" IsEnabled="False" >
+                            <ListBoxItem Content="Total: .../..."/>
+                            <ListBoxItem Content="QT: .../..."/>
+                            <ListBoxItem Content="N: .../..."/>
+                        </ListBox>-->
                     </Grid>
                 </GroupBox>
                 
@@ -61,7 +68,10 @@
                             <RowDefinition Height="1*"></RowDefinition>
                             <RowDefinition Height="1*"></RowDefinition>
                             <RowDefinition Height="1*"></RowDefinition>
-                            <RowDefinition Height="24*"></RowDefinition>
+                            <RowDefinition Height="21*"></RowDefinition>
+                            <RowDefinition Height="1*"></RowDefinition>
+                            <RowDefinition Height="1*"></RowDefinition>
+                            <RowDefinition Height="1*"></RowDefinition>
                             <RowDefinition Height="1*"></RowDefinition>
                         </Grid.RowDefinitions>
                         <ComboBox x:Name="comboBox_Maschine_Einstellungen" Grid.Row="0" SelectionChanged="comboBox_Maschine_Einstellungen_SelectionChanged">
@@ -73,12 +83,17 @@
                         <ComboBox x:Name="comboBox_Status_Einstellungen" Grid.Row="2" SelectionChanged="comboBox_Status_Einstellungen_SelectionChanged">
                             <ComboBoxItem Content="Status" IsSelected="True"></ComboBoxItem>
                             <ComboBoxItem Content="Frei" ></ComboBoxItem>
+                            <ComboBoxItem Content="Zugeordnet" ></ComboBoxItem>
                             <ComboBoxItem Content="Bearbeitet"></ComboBoxItem>
                             <ComboBoxItem Content="Wartet"></ComboBoxItem>
                             <ComboBoxItem Content="Gesperrt"></ComboBoxItem>
                         </ComboBox>
 
-                        <Button x:Name="button_Senden_AS400" Grid.Row="6" Content="Zu AS400"></Button>
+                        <Label x:Name="label_SProgramm" Grid.Row="6" Content="Sägeprogramm" Visibility="Hidden"></Label>
+                        <TextBox x:Name="textBox_SProgramm" Grid.Row="7" Visibility="Hidden" TextChanged="textBox_SProgramm_TextChanged"></TextBox>
+                        <Label x:Name="label_Anlasstemp" Grid.Row="8" Content="Anlasstemp." Visibility="Hidden" ></Label>
+                        <TextBox x:Name="textBox_Anlasstemp" Grid.Row="9" Visibility="Hidden" TextChanged="textBox_Anlasstemp_TextChanged"></TextBox>
+                        <!--<Button x:Name="button_Senden_AS400" Grid.Row="6" Content="Zu AS400"></Button>-->
                     </Grid>
 
                 </GroupBox>
@@ -124,10 +139,12 @@
                             <RowDefinition Height="1*"></RowDefinition>
                             <RowDefinition Height="26*"></RowDefinition>
                         </Grid.RowDefinitions>
-                        <ComboBox x:Name="comboBox_Kategorie_Wählen" Grid.Row="0"></ComboBox>
-                        <Button x:Name="button_Kategorie_Hinzufügen" Content="Hinzufügen" Grid.Row="1"></Button>
-                        <Button x:Name="button_Kategorie_Entfernen" Content="Entfernen" Grid.Row="2"></Button>
-                        <DataGrid x:Name="dataGrid_Kategorien" Grid.Row="4"></DataGrid>
+                        <ComboBox x:Name="comboBox_Kategorie_Einstellungen" Grid.Row="0" SelectionChanged="comboBox_Kategorie_Einstellungen_SelectionChanged">
+                            <ComboBoxItem Content="Kategorie" IsSelected="True"/>
+                        </ComboBox>
+                        <Button x:Name="button_Kategorie_Hinzufügen" Content="Hinzufügen" Grid.Row="1" Click="button_Kategorie_Hinzufügen_Click"></Button>
+                        <Button x:Name="button_Kategorie_Entfernen" Content="Entfernen" Grid.Row="2" Click="button_Kategorie_Entfernen_Click"></Button>
+                        <DataGrid x:Name="dataGrid_Kategorien" Grid.Row="4" SelectionChanged="dataGrid_Kategorien_SelectionChanged"></DataGrid>
                     </Grid>
 
                 </GroupBox>

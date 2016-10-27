@@ -247,15 +247,15 @@ namespace HOIA.Erweiterungen
         }
         public static void ExpandAll(TreeView t, bool expand)
         {
-            foreach (TreeViewItem i in t.Items)
-            {
-                if ((string)i.Header != Helper.FREIEAUFTRÄGE_STRING)
-                {
-                    i.IsExpanded = expand;
-                }
+            //foreach (TreeViewItem i in t.Items)
+            //{
+            //    if ((string)i.Header != Helper.FREIEAUFTRÄGE_STRING)
+            //    {
+            //        i.IsExpanded = expand;
+            //    }
 
 
-            }
+            //}
         }
         public static void ExpandAll(TreeViewItem t, bool expand)
         {

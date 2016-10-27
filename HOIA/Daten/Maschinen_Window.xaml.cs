@@ -72,16 +72,24 @@ namespace HOIA.Daten
         {
             neu = true;
             textBox_Name.IsEnabled = true;
+            checkBox_Programm.IsEnabled = true;
+            checkBox_Temperatur.IsEnabled = true;
 
             textBox_Name.Text = String.Empty;
-            comboBox_Maschinen_Art.IsEnabled = true;
-            button_Speichern_Name.IsEnabled = true;
+            checkBox_Programm.IsChecked = false;
+            checkBox_Temperatur.IsChecked = false;
+            
+            checkBox_Programm.IsEnabled = true;
+            checkBox_Temperatur.IsEnabled = true;
         }
         private void button_Bearbeiten_Name_Click(object sender, RoutedEventArgs e)
         {
             textBox_Name.IsEnabled = true;
             button_Speichern_Name.IsEnabled = true;
             comboBox_Maschinen_Art.IsEnabled = true;
+            checkBox_Programm.IsEnabled = true;
+            checkBox_Temperatur.IsEnabled = true;
+
             neu = false;
            
 
@@ -100,7 +108,7 @@ namespace HOIA.Daten
 
                 if (neu)
                 {
-                    Maschine s = new Maschine() { Name = textBox_Name.Text, Id_Maschinenart = a };
+                    Maschine s = new Maschine() { Name = textBox_Name.Text, Id_Maschinenart = a, Programm = checkBox_Programm.IsChecked, Temperatur = checkBox_Temperatur.IsChecked };
                     d.Maschine.InsertOnSubmit(s);
                     try
                     {
@@ -110,12 +118,12 @@ namespace HOIA.Daten
                     {
                         MessageBox.Show("Datenübermittlung fehlgeschlagen!", "Nee!!!");
                     }
-                    //Fügt jeder neuen Maschine automatisch eine Standard-Kategorie hinzu
-                    int? mid = (from x in d.Maschine
-                                where x.Name == textBox_Name.Text && x.Id_Maschinenart == a
-                                select x).First().Id;
+                    ////Fügt jeder neuen Maschine automatisch eine Standard-Kategorie hinzu
+                    //int? mid = (from x in d.Maschine
+                    //            where x.Name == textBox_Name.Text && x.Id_Maschinenart == a
+                    //            select x).First().Id;
 
-                    d.Kategorie.InsertOnSubmit(new Kategorie { Name = "Standard", Id_Maschine = (int)mid });
+                    //d.Kategorie.InsertOnSubmit(new Kategorie { Name = "Standard", Id_Maschine = (int)mid });
                 }
                 else
                 {
@@ -124,7 +132,8 @@ namespace HOIA.Daten
                             select t;
                     k.First().Name = textBox_Name.Text;
                     k.First().Id_Maschinenart = a;
-
+                    k.First().Temperatur = checkBox_Temperatur.IsChecked;
+                    k.First().Programm = checkBox_Programm.IsChecked;
 
                 }
                 try
@@ -143,6 +152,11 @@ namespace HOIA.Daten
 
                 textBox_Name.IsEnabled = false;
                 textBox_Name.Text = String.Empty;
+                checkBox_Programm.IsChecked = false;
+                checkBox_Temperatur.IsChecked = false;
+                checkBox_Programm.IsEnabled = false;
+                checkBox_Temperatur.IsEnabled = false;
+
                 Datagrid_Maschinen_Refresh();
 
             }
@@ -196,6 +210,11 @@ namespace HOIA.Daten
 
                 comboBox_Maschinen_Art.IsEnabled = false;
 
+                checkBox_Programm.IsChecked = false;
+                checkBox_Temperatur.IsChecked = false;
+                checkBox_Programm.IsEnabled = false;
+                checkBox_Temperatur.IsEnabled = false;
+
                 textBox_Name.IsEnabled = false;
                 textBox_Name.Text = String.Empty;
             }
@@ -211,21 +230,41 @@ namespace HOIA.Daten
 
             if (dataGrid_maschinen.SelectedIndex != -1)
             {
-                textBox_Name.Text = Erweiterungen.Helper.GetStringFromDataGrid(1, dataGrid_maschinen);
+                DDataContext d = new DDataContext();
+
+                var x = from y in d.Maschine
+                        where y.Name == Erweiterungen.Helper.GetStringFromDataGrid(1, dataGrid_maschinen)
+                        select y;
+                
+                textBox_Name.Text = x.First().Name;
+                checkBox_Programm.IsChecked = x.First().Programm;
+                checkBox_Temperatur.IsChecked = x.First().Temperatur;
+
+                string t = x.First().Maschinenart.Name;
+                foreach (ComboBoxItem item in comboBox_Maschinen_Art.Items)
+                {
+                    if (item.Content.ToString() == t)
+                    {
+                        comboBox_Maschinen_Art.SelectedItem = item;
+                        break;
+                    }
+                }
+
                 button_Bearbeiten_Name.IsEnabled = true;
                 button_Löschen_Name.IsEnabled = true;
 
             }
             else
             {
-                button_Bearbeiten_Name.IsEnabled = false;
+                button_Bearbeiten_Name.IsEnabled = true;
+                button_Löschen_Name.IsEnabled = true;
             }
         }
         private void Datagrid_Maschinen_Refresh()
         {
             DDataContext d = new DDataContext();
             var zuo = from r in d.Maschine
-                      select new { r.Id, r.Name, Art = r.Maschinenart.Name };
+                      select new { r.Id, r.Name, Art = r.Maschinenart.Name/*, r.Programm, r.Temperatur*/ };
             dataGrid_maschinen.ItemsSource = zuo;
         }
     }

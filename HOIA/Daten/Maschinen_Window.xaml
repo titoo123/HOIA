@@ -5,14 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HOIA.Daten"
         mc:Ignorable="d"
-        Title="Verwaltung der Maschinen" Height="311" Width="284">
+        Title="Verwaltung der Maschinen" Height="250" Width="389">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <!--<RowDefinition></RowDefinition>-->
+        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition ></ColumnDefinition>
-            <ColumnDefinition ></ColumnDefinition>
+            <ColumnDefinition Width="2*" ></ColumnDefinition>
+            <ColumnDefinition Width="1*" ></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <DataGrid x:Name="dataGrid_maschinen" HorizontalAlignment="Left" VerticalAlignment="Top" Height="280" Width="260" SelectionChanged="dataGrid_SelectionChanged"/>
-        <GroupBox x:Name="groupBox" Header="Maschine"  HorizontalAlignment="Stretch"   VerticalAlignment="Stretch" Grid.Column="1">
+        <DataGrid x:Name="dataGrid_maschinen" SelectionChanged="dataGrid_SelectionChanged"/>
+        <GroupBox x:Name="groupBox" Header="Maschine"  Grid.Column="1">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="1*"></RowDefinition>
@@ -21,16 +25,22 @@
                     <RowDefinition Height="1*"></RowDefinition>
                     <RowDefinition Height="1*"></RowDefinition>
                     <RowDefinition Height="1*"></RowDefinition>
+                    <RowDefinition Height="1*"></RowDefinition>
+                    <RowDefinition Height="1*"></RowDefinition>
                 </Grid.RowDefinitions>
-                <TextBox x:Name="textBox_Name" HorizontalAlignment="Left" Height="23"  TextWrapping="Wrap" Text="Name" VerticalAlignment="Top" Width="120" IsEnabled="False" Grid.Row="0"/>
-                <ComboBox Grid.Row="1" x:Name="comboBox_Maschinen_Art" Width="120" Height="27"  HorizontalAlignment="Left"  VerticalAlignment="Top" IsEnabled="False" />
-                <Button x:Name="button_Neu_Name" Content="Neu" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="120" Height="27" Click="button_Neu_Name_Click" Grid.Row="2"/>
-                <Button x:Name="button_Bearbeiten_Name" Content="Bearbeiten" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.533,0.682" Height="27" Click="button_Bearbeiten_Name_Click" IsEnabled="False" Grid.Row="3"/>
-                <Button x:Name="button_Speichern_Name" Content="Speichern" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Height="25" Click="button_Speichern_Name_Click" IsEnabled="False" Grid.Row="4"/>
-                <Button x:Name="button_Löschen_Name" Content="Löschen" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="120" Height="25" Click="button_Löschen_Name_Click" IsEnabled="False" Grid.Row="5"/>
+                <TextBox x:Name="textBox_Name" Text="Name" IsEnabled="False" Grid.Row="0"/>
+                <ComboBox  x:Name="comboBox_Maschinen_Art" IsEnabled="False" Grid.Row="1"/>
+
+                <CheckBox x:Name="checkBox_Programm" Grid.Row="2" Content="Sägeprogramm" IsEnabled="False"></CheckBox>
+                <CheckBox x:Name="checkBox_Temperatur" Grid.Row="3" Content="Anlasstemperatur" IsEnabled="False"></CheckBox>
+                
+                <Button x:Name="button_Neu_Name" Content="Neu" Click="button_Neu_Name_Click" Grid.Row="4"/>
+                <Button x:Name="button_Bearbeiten_Name" Content="Bearbeiten" Click="button_Bearbeiten_Name_Click" IsEnabled="False" Grid.Row="5"/>
+                <Button x:Name="button_Speichern_Name" Content="Speichern" Click="button_Speichern_Name_Click" IsEnabled="False" Grid.Row="6"/>
+                <Button x:Name="button_Löschen_Name" Content="Löschen" Click="button_Löschen_Name_Click" IsEnabled="False" Grid.Row="7"/>
 
             </Grid>
-
         </GroupBox>
+        <Frame x:Name="Frame_Maschineneigenschaften" Grid.Row="1" Grid.ColumnSpan="2" NavigationUIVisibility="Hidden"></Frame>
     </Grid>
 </Window>

@@ -30,6 +30,7 @@ namespace HOIA.Daten
             {
 
                 comboBox_Maschine.Items.Add(new ComboBoxItem() { Content = "Maschine" });
+                comboBox_Maschine.Items.Add(new ComboBoxItem() { Content = "Allgemein" });
                 comboBox_Maschine.SelectedIndex = 0;
                 DDataContext d = new DDataContext();
 
@@ -144,15 +145,28 @@ namespace HOIA.Daten
             if (m_art != "Maschine")
             {
                 DDataContext d = new DDataContext();
+                int? a = null;
+                if (m_art != "Allgemein")
+                {
+                    a =
+                    (   from m in d.Maschine
+                        where m.Name == m_art
+                        select new { m.Id }).First().Id;
+                }
 
-                int a =
-                    (from m in d.Maschine
-                     where m.Name == m_art
-                     select new { m.Id }).First().Id;
 
                 if (neu)
                 {
-                    Kategorie s = new Kategorie() { Name = textBox_Name.Text, Id_Maschine = a };
+                    Kategorie s;
+                    if (a == null)
+                    {
+                        s = new Kategorie() { Name = textBox_Name.Text };
+                    }
+                    else
+                    {
+                        s = new Kategorie() { Name = textBox_Name.Text, Id_Maschine = (int)a };
+                    }
+
                     d.Kategorie.InsertOnSubmit(s);
                 }
                 else
@@ -161,7 +175,11 @@ namespace HOIA.Daten
                             where t.Id == Erweiterungen.Helper.GetIntFromDataGrid(0, dataGrid_Kategorien)
                             select t;
                     k.First().Name = textBox_Name.Text;
-                    k.First().Id_Maschine = a;
+                    if (a != null)
+                    {
+                        k.First().Id_Maschine = (int)a;
+                    }
+
 
 
                 }
@@ -239,10 +257,28 @@ namespace HOIA.Daten
         private void dataGrid_Kategorien_Refresh()
         {
             DDataContext d = new DDataContext();
-            var zuo = from r in d.Kategorie
-                      where r.Maschine.Name == ((ComboBoxItem)comboBox_Maschine.SelectedItem).Content.ToString()
-                      select new { r.Id, r.Name };
-            dataGrid_Kategorien.ItemsSource = zuo;
+            if (((ComboBoxItem)comboBox_Maschine.SelectedItem).Content.ToString() == Erweiterungen.Helper.STRING_MASCHINE)
+            {
+                var zuo = from r in d.Kategorie
+                          select new { r.Id, r.Name, Maschine = r.Maschine.Name };
+                dataGrid_Kategorien.ItemsSource = zuo;
+            }
+
+            else if (((ComboBoxItem)comboBox_Maschine.SelectedItem).Content.ToString() != Erweiterungen.Helper.STRING_ALLGEMEIN)
+            {
+                var zuo = from r in d.Kategorie
+                          where r.Maschine.Name == ((ComboBoxItem)comboBox_Maschine.SelectedItem).Content.ToString()
+                          select new { r.Id, r.Name, Maschine = r.Maschine.Name };
+                dataGrid_Kategorien.ItemsSource = zuo;
+            }
+            else
+            {
+                var zuo = from r in d.Kategorie
+                          where r.Id_Maschine == null
+                          select new { r.Id, r.Name, Maschine = r.Maschine.Name };
+                dataGrid_Kategorien.ItemsSource = zuo;
+            }
+
         }
         private void dataGrid_Kategorien_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {

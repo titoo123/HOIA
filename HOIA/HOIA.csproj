@@ -62,6 +62,9 @@
     <Compile Include="Allgemein\Details_Auftrag.xaml.cs">
       <DependentUpon>Details_Auftrag.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Allgemein\Details_Technologie.xaml.cs">
+      <DependentUpon>Details_Technologie.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Allgemein\Verwaltung_Aufträge.xaml.cs">
       <DependentUpon>Verwaltung_Aufträge.xaml</DependentUpon>
     </Compile>
@@ -76,8 +79,14 @@
     <Compile Include="Allgemein\Kunde.xaml.cs">
       <DependentUpon>Kunde.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Daten\Maschineneigenschaften_Window.xaml.cs">
+      <DependentUpon>Maschineneigenschaften_Window.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Daten\Maschinen_Window.xaml.cs">
       <DependentUpon>Maschinen_Window.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Daten\Materialverteilung_Window.xaml.cs">
+      <DependentUpon>Materialverteilung_Window.xaml</DependentUpon>
     </Compile>
     <Compile Include="Daten\Verfahren_Window.xaml.cs">
       <DependentUpon>Verfahren_Window.xaml</DependentUpon>
@@ -87,6 +96,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Allgemein\Details_Auftrag.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Allgemein\Details_Technologie.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -102,7 +115,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Daten\Maschineneigenschaften_Window.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Daten\Maschinen_Window.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Daten\Materialverteilung_Window.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -129,7 +150,6 @@
     <Compile Include="Erweiterungen\Helper.cs" />
     <Compile Include="Erweiterungen\Extended_TreeView.cs" />
     <Compile Include="Erweiterungen\BindingHelper.cs" />
-    <Compile Include="Erweiterungen\Maschine.cs" />
     <Compile Include="Erweiterungen\TreeViewHelper.cs" />
     <Compile Include="Erweiterungen\StringTuple2D.cs" />
     <Compile Include="Erweiterungen\StringTuple4D.cs" />

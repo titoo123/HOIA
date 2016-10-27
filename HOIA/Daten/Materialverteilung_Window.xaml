@@ -1,0 +1,93 @@
+﻿<Page x:Class="HOIA.Daten.Materialverteilung_Window"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:HOIA.Daten"
+      mc:Ignorable="d" 
+
+      Title="Materialverteilung_Window">
+
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="19*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="5*"></ColumnDefinition>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+            <ColumnDefinition Width="5*"></ColumnDefinition>
+            <ColumnDefinition Width="5*"></ColumnDefinition>
+            <ColumnDefinition Width="20*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <ComboBox x:Name="comboBox_Verfahren_Von" Grid.Row="0" Grid.Column="0" SelectionChanged="comboBox_Verfahren_Von_SelectionChanged">
+            <ComboBoxItem Content="Verfahren" IsSelected="True"/>
+        </ComboBox>
+        <ComboBox x:Name="comboBox_Auftrag" Grid.Row="1" Grid.Column="0" SelectionChanged="comboBox_Auftrag_SelectionChanged">
+            <ComboBoxItem Content="Auftrag" IsSelected="True"/>
+        </ComboBox>
+        <DataGrid x:Name="dataGrid_Material_Von" Grid.Row="2" Grid.Column="0">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Nr" Binding="{Binding Id}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Charge" Binding="{Binding Charge}"></DataGridTextColumn>
+                <DataGridTextColumn Header="BundNr" Binding="{Binding Bunde}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Gewicht" Binding="{Binding Gewicht}" ></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Label x:Name="label_Material_von_Statistik" Grid.Row="3" Grid.Column="0" Content="Total: 0 Kg"></Label>
+
+        <Grid Grid.RowSpan="9" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="3*"></RowDefinition>
+                <RowDefinition Height="3*"></RowDefinition>
+                <RowDefinition Height="1*"></RowDefinition>
+                <RowDefinition Height="1*"></RowDefinition>
+                <RowDefinition Height="3*"></RowDefinition>
+                <RowDefinition Height="1*"></RowDefinition>
+                <RowDefinition Height="1*"></RowDefinition>
+                <RowDefinition Height="3*"></RowDefinition>
+                <RowDefinition Height="3*"></RowDefinition>
+
+            </Grid.RowDefinitions>
+            <Button x:Name="button_Sende_Einen" Grid.Row="2" Content=">" Click="button_Sende_Einen_Click" IsEnabled="False"></Button>
+            <Button x:Name="button_Sende_Alle" Grid.Row="3" Content=">>" Click="button_Sende_Alle_Click" IsEnabled="False"></Button>
+
+            <Button x:Name="button_Zurück_Einen" Grid.Row="5" Content="&lt;&lt;" Click="button_Zurück_Alle_Click" IsEnabled="False" ></Button>
+            <Button x:Name="button_Zurück_Alle" Grid.Row="6" Content="&lt;" Click="button_Zurück_Einen_Click" IsEnabled="False" ></Button>
+        </Grid>
+
+        <ComboBox x:Name="comboBox_Gespeicherte_Verfahren" Grid.Row="0" Grid.Column="2" SelectionChanged="comboBox_Gespeicherte_Verfahren_SelectionChanged">
+            <ComboBoxItem Content="Gespeicherte Verfahren" />
+
+        </ComboBox>
+        <DataGrid x:Name="dataGrid_Material_Zu" Grid.Row="2" Grid.Column="2" IsEnabled="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Nr" Binding="{Binding Id}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Charge" Binding="{Binding Charge}"></DataGridTextColumn>
+                <DataGridTextColumn Header="BundNr" Binding="{Binding Bunde}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Gewicht" Binding="{Binding Gewicht}" ></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Label x:Name="label_Material_zu_Statistik" Grid.Row="3" Grid.Column="2" Content="Total: 0 Kg"></Label>
+
+
+        <Button x:Name="button_Neu" Grid.Row="0" Grid.Column="3" Content="Neu" Click="button_Neu_Click" ></Button>
+        <Button x:Name="button_Speichern" Grid.Row="1" Grid.Column="3"  Content="Speichern" Click="button_Speichern_Click" IsEnabled="False"></Button>
+        <Grid Grid.Row="2" Grid.Column="3" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"></RowDefinition>
+                <RowDefinition Height="1*"></RowDefinition>
+                <RowDefinition Height="1*"></RowDefinition>
+                <RowDefinition Height="17*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Button x:Name="button_Freigeben" Grid.Row="0" Grid.Column="3" Content="Freigeben" Click="button_Freigeben_Click" IsEnabled="False"></Button>
+            <Button x:Name="button_Löschen" Grid.Row="1" Grid.Column="3" Content="Löschen" Click="button_Löschen_Click" IsEnabled="False"></Button>
+        </Grid>
+
+        <Frame x:Name="frame" Grid.Column="4" Grid.RowSpan="4" NavigationUIVisibility="Hidden" Source="/HOIA;component/Allgemein/Details_Technologie.xaml"/>
+    </Grid>
+</Page>
