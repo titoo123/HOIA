@@ -30,12 +30,6 @@ namespace HOIA
 		
     #region Definitionen der Erweiterungsmethoden
     partial void OnCreated();
-    partial void InsertAuftrag(Auftrag instance);
-    partial void UpdateAuftrag(Auftrag instance);
-    partial void DeleteAuftrag(Auftrag instance);
-    partial void InsertAuftrags_Zuordnung(Auftrags_Zuordnung instance);
-    partial void UpdateAuftrags_Zuordnung(Auftrags_Zuordnung instance);
-    partial void DeleteAuftrags_Zuordnung(Auftrags_Zuordnung instance);
     partial void InsertMN_Auftrag_Kategorie(MN_Auftrag_Kategorie instance);
     partial void UpdateMN_Auftrag_Kategorie(MN_Auftrag_Kategorie instance);
     partial void DeleteMN_Auftrag_Kategorie(MN_Auftrag_Kategorie instance);
@@ -66,6 +60,12 @@ namespace HOIA
     partial void InsertVerfahren_Prozess_Anwendung(Verfahren_Prozess_Anwendung instance);
     partial void UpdateVerfahren_Prozess_Anwendung(Verfahren_Prozess_Anwendung instance);
     partial void DeleteVerfahren_Prozess_Anwendung(Verfahren_Prozess_Anwendung instance);
+    partial void InsertAuftrag(Auftrag instance);
+    partial void UpdateAuftrag(Auftrag instance);
+    partial void DeleteAuftrag(Auftrag instance);
+    partial void InsertAuftrags_Zuordnung(Auftrags_Zuordnung instance);
+    partial void UpdateAuftrags_Zuordnung(Auftrags_Zuordnung instance);
+    partial void DeleteAuftrags_Zuordnung(Auftrags_Zuordnung instance);
     #endregion
 		
 		public DDataContext() : 
@@ -96,22 +96,6 @@ namespace HOIA
 				base(connection, mappingSource)
 		{
 			OnCreated();
-		}
-		
-		public System.Data.Linq.Table<Auftrag> Auftrag
-		{
-			get
-			{
-				return this.GetTable<Auftrag>();
-			}
-		}
-		
-		public System.Data.Linq.Table<Auftrags_Zuordnung> Auftrags_Zuordnung
-		{
-			get
-			{
-				return this.GetTable<Auftrags_Zuordnung>();
-			}
 		}
 		
 		public System.Data.Linq.Table<MN_Auftrag_Kategorie> MN_Auftrag_Kategorie
@@ -225,1258 +209,29 @@ namespace HOIA
 				return this.GetTable<View_Auftrag_Gesamtgewicht>();
 			}
 		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Auftrag")]
-	public partial class Auftrag : INotifyPropertyChanging, INotifyPropertyChanged
-	{
 		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Id;
-		
-		private string _AuftragsNr;
-		
-		private string _ODL;
-		
-		private string _Art;
-		
-		private string _Verarbeitung;
-		
-		private string _Lagerort;
-		
-		private string _Position;
-		
-		private string _Status;
-		
-		private System.Nullable<double> _Abmessung1;
-		
-		private System.Nullable<double> _Abmessung2;
-		
-		private System.Nullable<double> _FLänge;
-		
-		private System.Nullable<double> _WLänge;
-		
-		private string _Charge;
-		
-		private string _Stahlsorte;
-		
-		private string _Walzung;
-		
-		private System.Nullable<System.DateTime> _Auftragsdatum;
-		
-		private System.Nullable<System.DateTime> _Liefertermin;
-		
-		private string _TechnischeAnmerkungen;
-		
-		private string _Bemerkungen;
-		
-		private System.Nullable<int> _SägeProgramm;
-		
-		private System.Nullable<double> _Anlasstemparartur;
-		
-		private System.Nullable<bool> _Wichtig;
-		
-		private System.Nullable<int> _Id_Kunde;
-		
-		private System.Nullable<int> _Id_Bestimmungsort;
-		
-		private System.Nullable<double> _C;
-		
-		private System.Nullable<double> _Mn;
-		
-		private System.Nullable<double> _Si;
-		
-		private System.Nullable<double> _P;
-		
-		private System.Nullable<double> _S;
-		
-		private System.Nullable<double> _Cr;
-		
-		private System.Nullable<double> _Ni;
-		
-		private System.Nullable<double> _Mo;
-		
-		private EntitySet<Auftrags_Zuordnung> _Auftrags_Zuordnung;
-		
-		private EntitySet<Material> _Material;
-		
-		private EntityRef<Kunde> _Kunde;
-		
-		private EntityRef<Bestimmungsort> _Bestimmungsort;
-		
-    #region Definitionen der Erweiterungsmethoden
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdChanging(int value);
-    partial void OnIdChanged();
-    partial void OnAuftragsNrChanging(string value);
-    partial void OnAuftragsNrChanged();
-    partial void OnODLChanging(string value);
-    partial void OnODLChanged();
-    partial void OnArtChanging(string value);
-    partial void OnArtChanged();
-    partial void OnVerarbeitungChanging(string value);
-    partial void OnVerarbeitungChanged();
-    partial void OnLagerortChanging(string value);
-    partial void OnLagerortChanged();
-    partial void OnPositionChanging(string value);
-    partial void OnPositionChanged();
-    partial void OnStatusChanging(string value);
-    partial void OnStatusChanged();
-    partial void OnAbmessung1Changing(System.Nullable<double> value);
-    partial void OnAbmessung1Changed();
-    partial void OnAbmessung2Changing(System.Nullable<double> value);
-    partial void OnAbmessung2Changed();
-    partial void OnFLängeChanging(System.Nullable<double> value);
-    partial void OnFLängeChanged();
-    partial void OnWLängeChanging(System.Nullable<double> value);
-    partial void OnWLängeChanged();
-    partial void OnChargeChanging(string value);
-    partial void OnChargeChanged();
-    partial void OnStahlsorteChanging(string value);
-    partial void OnStahlsorteChanged();
-    partial void OnWalzungChanging(string value);
-    partial void OnWalzungChanged();
-    partial void OnAuftragsdatumChanging(System.Nullable<System.DateTime> value);
-    partial void OnAuftragsdatumChanged();
-    partial void OnLieferterminChanging(System.Nullable<System.DateTime> value);
-    partial void OnLieferterminChanged();
-    partial void OnTechnischeAnmerkungenChanging(string value);
-    partial void OnTechnischeAnmerkungenChanged();
-    partial void OnBemerkungenChanging(string value);
-    partial void OnBemerkungenChanged();
-    partial void OnSägeProgrammChanging(System.Nullable<int> value);
-    partial void OnSägeProgrammChanged();
-    partial void OnAnlasstempararturChanging(System.Nullable<double> value);
-    partial void OnAnlasstempararturChanged();
-    partial void OnWichtigChanging(System.Nullable<bool> value);
-    partial void OnWichtigChanged();
-    partial void OnId_KundeChanging(System.Nullable<int> value);
-    partial void OnId_KundeChanged();
-    partial void OnId_BestimmungsortChanging(System.Nullable<int> value);
-    partial void OnId_BestimmungsortChanged();
-    partial void OnCChanging(System.Nullable<double> value);
-    partial void OnCChanged();
-    partial void OnMnChanging(System.Nullable<double> value);
-    partial void OnMnChanged();
-    partial void OnSiChanging(System.Nullable<double> value);
-    partial void OnSiChanged();
-    partial void OnPChanging(System.Nullable<double> value);
-    partial void OnPChanged();
-    partial void OnSChanging(System.Nullable<double> value);
-    partial void OnSChanged();
-    partial void OnCrChanging(System.Nullable<double> value);
-    partial void OnCrChanged();
-    partial void OnNiChanging(System.Nullable<double> value);
-    partial void OnNiChanged();
-    partial void OnMoChanging(System.Nullable<double> value);
-    partial void OnMoChanged();
-    #endregion
-		
-		public Auftrag()
-		{
-			this._Auftrags_Zuordnung = new EntitySet<Auftrags_Zuordnung>(new Action<Auftrags_Zuordnung>(this.attach_Auftrags_Zuordnung), new Action<Auftrags_Zuordnung>(this.detach_Auftrags_Zuordnung));
-			this._Material = new EntitySet<Material>(new Action<Material>(this.attach_Material), new Action<Material>(this.detach_Material));
-			this._Kunde = default(EntityRef<Kunde>);
-			this._Bestimmungsort = default(EntityRef<Bestimmungsort>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Id
+		public System.Data.Linq.Table<View_Verwaltung_Aufträge_Suche> View_Verwaltung_Aufträge_Suche
 		{
 			get
 			{
-				return this._Id;
-			}
-			set
-			{
-				if ((this._Id != value))
-				{
-					this.OnIdChanging(value);
-					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
-				}
+				return this.GetTable<View_Verwaltung_Aufträge_Suche>();
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AuftragsNr", DbType="VarChar(10)")]
-		public string AuftragsNr
+		public System.Data.Linq.Table<Auftrag> Auftrag
 		{
 			get
 			{
-				return this._AuftragsNr;
-			}
-			set
-			{
-				if ((this._AuftragsNr != value))
-				{
-					this.OnAuftragsNrChanging(value);
-					this.SendPropertyChanging();
-					this._AuftragsNr = value;
-					this.SendPropertyChanged("AuftragsNr");
-					this.OnAuftragsNrChanged();
-				}
+				return this.GetTable<Auftrag>();
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ODL", DbType="VarChar(10)")]
-		public string ODL
+		public System.Data.Linq.Table<Auftrags_Zuordnung> Auftrags_Zuordnung
 		{
 			get
 			{
-				return this._ODL;
+				return this.GetTable<Auftrags_Zuordnung>();
 			}
-			set
-			{
-				if ((this._ODL != value))
-				{
-					this.OnODLChanging(value);
-					this.SendPropertyChanging();
-					this._ODL = value;
-					this.SendPropertyChanged("ODL");
-					this.OnODLChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Art", DbType="VarChar(50)")]
-		public string Art
-		{
-			get
-			{
-				return this._Art;
-			}
-			set
-			{
-				if ((this._Art != value))
-				{
-					this.OnArtChanging(value);
-					this.SendPropertyChanging();
-					this._Art = value;
-					this.SendPropertyChanged("Art");
-					this.OnArtChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Verarbeitung", DbType="VarChar(50)")]
-		public string Verarbeitung
-		{
-			get
-			{
-				return this._Verarbeitung;
-			}
-			set
-			{
-				if ((this._Verarbeitung != value))
-				{
-					this.OnVerarbeitungChanging(value);
-					this.SendPropertyChanging();
-					this._Verarbeitung = value;
-					this.SendPropertyChanged("Verarbeitung");
-					this.OnVerarbeitungChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Lagerort", DbType="VarChar(20)")]
-		public string Lagerort
-		{
-			get
-			{
-				return this._Lagerort;
-			}
-			set
-			{
-				if ((this._Lagerort != value))
-				{
-					this.OnLagerortChanging(value);
-					this.SendPropertyChanging();
-					this._Lagerort = value;
-					this.SendPropertyChanged("Lagerort");
-					this.OnLagerortChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Position", DbType="VarChar(5)")]
-		public string Position
-		{
-			get
-			{
-				return this._Position;
-			}
-			set
-			{
-				if ((this._Position != value))
-				{
-					this.OnPositionChanging(value);
-					this.SendPropertyChanging();
-					this._Position = value;
-					this.SendPropertyChanged("Position");
-					this.OnPositionChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Status", DbType="VarChar(20)")]
-		public string Status
-		{
-			get
-			{
-				return this._Status;
-			}
-			set
-			{
-				if ((this._Status != value))
-				{
-					this.OnStatusChanging(value);
-					this.SendPropertyChanging();
-					this._Status = value;
-					this.SendPropertyChanged("Status");
-					this.OnStatusChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Abmessung1", DbType="Float")]
-		public System.Nullable<double> Abmessung1
-		{
-			get
-			{
-				return this._Abmessung1;
-			}
-			set
-			{
-				if ((this._Abmessung1 != value))
-				{
-					this.OnAbmessung1Changing(value);
-					this.SendPropertyChanging();
-					this._Abmessung1 = value;
-					this.SendPropertyChanged("Abmessung1");
-					this.OnAbmessung1Changed();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Abmessung2", DbType="Float")]
-		public System.Nullable<double> Abmessung2
-		{
-			get
-			{
-				return this._Abmessung2;
-			}
-			set
-			{
-				if ((this._Abmessung2 != value))
-				{
-					this.OnAbmessung2Changing(value);
-					this.SendPropertyChanging();
-					this._Abmessung2 = value;
-					this.SendPropertyChanged("Abmessung2");
-					this.OnAbmessung2Changed();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FLänge", DbType="Float")]
-		public System.Nullable<double> FLänge
-		{
-			get
-			{
-				return this._FLänge;
-			}
-			set
-			{
-				if ((this._FLänge != value))
-				{
-					this.OnFLängeChanging(value);
-					this.SendPropertyChanging();
-					this._FLänge = value;
-					this.SendPropertyChanged("FLänge");
-					this.OnFLängeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_WLänge", DbType="Float")]
-		public System.Nullable<double> WLänge
-		{
-			get
-			{
-				return this._WLänge;
-			}
-			set
-			{
-				if ((this._WLänge != value))
-				{
-					this.OnWLängeChanging(value);
-					this.SendPropertyChanging();
-					this._WLänge = value;
-					this.SendPropertyChanged("WLänge");
-					this.OnWLängeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Charge", DbType="VarChar(5)")]
-		public string Charge
-		{
-			get
-			{
-				return this._Charge;
-			}
-			set
-			{
-				if ((this._Charge != value))
-				{
-					this.OnChargeChanging(value);
-					this.SendPropertyChanging();
-					this._Charge = value;
-					this.SendPropertyChanged("Charge");
-					this.OnChargeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Stahlsorte", DbType="VarChar(20)")]
-		public string Stahlsorte
-		{
-			get
-			{
-				return this._Stahlsorte;
-			}
-			set
-			{
-				if ((this._Stahlsorte != value))
-				{
-					this.OnStahlsorteChanging(value);
-					this.SendPropertyChanging();
-					this._Stahlsorte = value;
-					this.SendPropertyChanged("Stahlsorte");
-					this.OnStahlsorteChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Walzung", DbType="VarChar(20)")]
-		public string Walzung
-		{
-			get
-			{
-				return this._Walzung;
-			}
-			set
-			{
-				if ((this._Walzung != value))
-				{
-					this.OnWalzungChanging(value);
-					this.SendPropertyChanging();
-					this._Walzung = value;
-					this.SendPropertyChanged("Walzung");
-					this.OnWalzungChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Auftragsdatum", DbType="Date")]
-		public System.Nullable<System.DateTime> Auftragsdatum
-		{
-			get
-			{
-				return this._Auftragsdatum;
-			}
-			set
-			{
-				if ((this._Auftragsdatum != value))
-				{
-					this.OnAuftragsdatumChanging(value);
-					this.SendPropertyChanging();
-					this._Auftragsdatum = value;
-					this.SendPropertyChanged("Auftragsdatum");
-					this.OnAuftragsdatumChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Liefertermin", DbType="Date")]
-		public System.Nullable<System.DateTime> Liefertermin
-		{
-			get
-			{
-				return this._Liefertermin;
-			}
-			set
-			{
-				if ((this._Liefertermin != value))
-				{
-					this.OnLieferterminChanging(value);
-					this.SendPropertyChanging();
-					this._Liefertermin = value;
-					this.SendPropertyChanged("Liefertermin");
-					this.OnLieferterminChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TechnischeAnmerkungen", DbType="VarChar(MAX)")]
-		public string TechnischeAnmerkungen
-		{
-			get
-			{
-				return this._TechnischeAnmerkungen;
-			}
-			set
-			{
-				if ((this._TechnischeAnmerkungen != value))
-				{
-					this.OnTechnischeAnmerkungenChanging(value);
-					this.SendPropertyChanging();
-					this._TechnischeAnmerkungen = value;
-					this.SendPropertyChanged("TechnischeAnmerkungen");
-					this.OnTechnischeAnmerkungenChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Bemerkungen", DbType="VarChar(MAX)")]
-		public string Bemerkungen
-		{
-			get
-			{
-				return this._Bemerkungen;
-			}
-			set
-			{
-				if ((this._Bemerkungen != value))
-				{
-					this.OnBemerkungenChanging(value);
-					this.SendPropertyChanging();
-					this._Bemerkungen = value;
-					this.SendPropertyChanged("Bemerkungen");
-					this.OnBemerkungenChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SägeProgramm", DbType="Int")]
-		public System.Nullable<int> SägeProgramm
-		{
-			get
-			{
-				return this._SägeProgramm;
-			}
-			set
-			{
-				if ((this._SägeProgramm != value))
-				{
-					this.OnSägeProgrammChanging(value);
-					this.SendPropertyChanging();
-					this._SägeProgramm = value;
-					this.SendPropertyChanged("SägeProgramm");
-					this.OnSägeProgrammChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Anlasstemparartur", DbType="Float")]
-		public System.Nullable<double> Anlasstemparartur
-		{
-			get
-			{
-				return this._Anlasstemparartur;
-			}
-			set
-			{
-				if ((this._Anlasstemparartur != value))
-				{
-					this.OnAnlasstempararturChanging(value);
-					this.SendPropertyChanging();
-					this._Anlasstemparartur = value;
-					this.SendPropertyChanged("Anlasstemparartur");
-					this.OnAnlasstempararturChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Wichtig", DbType="Bit")]
-		public System.Nullable<bool> Wichtig
-		{
-			get
-			{
-				return this._Wichtig;
-			}
-			set
-			{
-				if ((this._Wichtig != value))
-				{
-					this.OnWichtigChanging(value);
-					this.SendPropertyChanging();
-					this._Wichtig = value;
-					this.SendPropertyChanged("Wichtig");
-					this.OnWichtigChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id_Kunde", DbType="Int")]
-		public System.Nullable<int> Id_Kunde
-		{
-			get
-			{
-				return this._Id_Kunde;
-			}
-			set
-			{
-				if ((this._Id_Kunde != value))
-				{
-					if (this._Kunde.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnId_KundeChanging(value);
-					this.SendPropertyChanging();
-					this._Id_Kunde = value;
-					this.SendPropertyChanged("Id_Kunde");
-					this.OnId_KundeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id_Bestimmungsort", DbType="Int")]
-		public System.Nullable<int> Id_Bestimmungsort
-		{
-			get
-			{
-				return this._Id_Bestimmungsort;
-			}
-			set
-			{
-				if ((this._Id_Bestimmungsort != value))
-				{
-					if (this._Bestimmungsort.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnId_BestimmungsortChanging(value);
-					this.SendPropertyChanging();
-					this._Id_Bestimmungsort = value;
-					this.SendPropertyChanged("Id_Bestimmungsort");
-					this.OnId_BestimmungsortChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_C", DbType="Float")]
-		public System.Nullable<double> C
-		{
-			get
-			{
-				return this._C;
-			}
-			set
-			{
-				if ((this._C != value))
-				{
-					this.OnCChanging(value);
-					this.SendPropertyChanging();
-					this._C = value;
-					this.SendPropertyChanged("C");
-					this.OnCChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Mn", DbType="Float")]
-		public System.Nullable<double> Mn
-		{
-			get
-			{
-				return this._Mn;
-			}
-			set
-			{
-				if ((this._Mn != value))
-				{
-					this.OnMnChanging(value);
-					this.SendPropertyChanging();
-					this._Mn = value;
-					this.SendPropertyChanged("Mn");
-					this.OnMnChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Si", DbType="Float")]
-		public System.Nullable<double> Si
-		{
-			get
-			{
-				return this._Si;
-			}
-			set
-			{
-				if ((this._Si != value))
-				{
-					this.OnSiChanging(value);
-					this.SendPropertyChanging();
-					this._Si = value;
-					this.SendPropertyChanged("Si");
-					this.OnSiChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_P", DbType="Float")]
-		public System.Nullable<double> P
-		{
-			get
-			{
-				return this._P;
-			}
-			set
-			{
-				if ((this._P != value))
-				{
-					this.OnPChanging(value);
-					this.SendPropertyChanging();
-					this._P = value;
-					this.SendPropertyChanged("P");
-					this.OnPChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_S", DbType="Float")]
-		public System.Nullable<double> S
-		{
-			get
-			{
-				return this._S;
-			}
-			set
-			{
-				if ((this._S != value))
-				{
-					this.OnSChanging(value);
-					this.SendPropertyChanging();
-					this._S = value;
-					this.SendPropertyChanged("S");
-					this.OnSChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Cr", DbType="Float")]
-		public System.Nullable<double> Cr
-		{
-			get
-			{
-				return this._Cr;
-			}
-			set
-			{
-				if ((this._Cr != value))
-				{
-					this.OnCrChanging(value);
-					this.SendPropertyChanging();
-					this._Cr = value;
-					this.SendPropertyChanged("Cr");
-					this.OnCrChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Ni", DbType="Float")]
-		public System.Nullable<double> Ni
-		{
-			get
-			{
-				return this._Ni;
-			}
-			set
-			{
-				if ((this._Ni != value))
-				{
-					this.OnNiChanging(value);
-					this.SendPropertyChanging();
-					this._Ni = value;
-					this.SendPropertyChanged("Ni");
-					this.OnNiChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Mo", DbType="Float")]
-		public System.Nullable<double> Mo
-		{
-			get
-			{
-				return this._Mo;
-			}
-			set
-			{
-				if ((this._Mo != value))
-				{
-					this.OnMoChanging(value);
-					this.SendPropertyChanging();
-					this._Mo = value;
-					this.SendPropertyChanged("Mo");
-					this.OnMoChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Auftrag_Auftrags_Zuordnung", Storage="_Auftrags_Zuordnung", ThisKey="Id", OtherKey="Id_Auftrag")]
-		public EntitySet<Auftrags_Zuordnung> Auftrags_Zuordnung
-		{
-			get
-			{
-				return this._Auftrags_Zuordnung;
-			}
-			set
-			{
-				this._Auftrags_Zuordnung.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Auftrag_Material", Storage="_Material", ThisKey="Id", OtherKey="Id_Auftrag")]
-		public EntitySet<Material> Material
-		{
-			get
-			{
-				return this._Material;
-			}
-			set
-			{
-				this._Material.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Kunde_Auftrag", Storage="_Kunde", ThisKey="Id_Kunde", OtherKey="Id", IsForeignKey=true)]
-		public Kunde Kunde
-		{
-			get
-			{
-				return this._Kunde.Entity;
-			}
-			set
-			{
-				Kunde previousValue = this._Kunde.Entity;
-				if (((previousValue != value) 
-							|| (this._Kunde.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Kunde.Entity = null;
-						previousValue.Auftrag.Remove(this);
-					}
-					this._Kunde.Entity = value;
-					if ((value != null))
-					{
-						value.Auftrag.Add(this);
-						this._Id_Kunde = value.Id;
-					}
-					else
-					{
-						this._Id_Kunde = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("Kunde");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Bestimmungsort_Auftrag", Storage="_Bestimmungsort", ThisKey="Id_Bestimmungsort", OtherKey="Id", IsForeignKey=true)]
-		public Bestimmungsort Bestimmungsort
-		{
-			get
-			{
-				return this._Bestimmungsort.Entity;
-			}
-			set
-			{
-				Bestimmungsort previousValue = this._Bestimmungsort.Entity;
-				if (((previousValue != value) 
-							|| (this._Bestimmungsort.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Bestimmungsort.Entity = null;
-						previousValue.Auftrag.Remove(this);
-					}
-					this._Bestimmungsort.Entity = value;
-					if ((value != null))
-					{
-						value.Auftrag.Add(this);
-						this._Id_Bestimmungsort = value.Id;
-					}
-					else
-					{
-						this._Id_Bestimmungsort = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("Bestimmungsort");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Auftrags_Zuordnung(Auftrags_Zuordnung entity)
-		{
-			this.SendPropertyChanging();
-			entity.Auftrag = this;
-		}
-		
-		private void detach_Auftrags_Zuordnung(Auftrags_Zuordnung entity)
-		{
-			this.SendPropertyChanging();
-			entity.Auftrag = null;
-		}
-		
-		private void attach_Material(Material entity)
-		{
-			this.SendPropertyChanging();
-			entity.Auftrag = this;
-		}
-		
-		private void detach_Material(Material entity)
-		{
-			this.SendPropertyChanging();
-			entity.Auftrag = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Auftrags_Zuordnung")]
-	public partial class Auftrags_Zuordnung : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Id;
-		
-		private System.Nullable<int> _Id_Auftrag;
-		
-		private System.Nullable<int> _Id_Maschine;
-		
-		private System.Nullable<int> _Id_Verfahren;
-		
-		private System.Nullable<int> _Schritt;
-		
-		private EntitySet<MN_Auftrag_Kategorie> _MN_Auftrag_Kategorie;
-		
-		private EntityRef<Auftrag> _Auftrag;
-		
-		private EntityRef<Maschine> _Maschine;
-		
-		private EntityRef<Verfahren> _Verfahren;
-		
-    #region Definitionen der Erweiterungsmethoden
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdChanging(int value);
-    partial void OnIdChanged();
-    partial void OnId_AuftragChanging(System.Nullable<int> value);
-    partial void OnId_AuftragChanged();
-    partial void OnId_MaschineChanging(System.Nullable<int> value);
-    partial void OnId_MaschineChanged();
-    partial void OnId_VerfahrenChanging(System.Nullable<int> value);
-    partial void OnId_VerfahrenChanged();
-    partial void OnSchrittChanging(System.Nullable<int> value);
-    partial void OnSchrittChanged();
-    #endregion
-		
-		public Auftrags_Zuordnung()
-		{
-			this._MN_Auftrag_Kategorie = new EntitySet<MN_Auftrag_Kategorie>(new Action<MN_Auftrag_Kategorie>(this.attach_MN_Auftrag_Kategorie), new Action<MN_Auftrag_Kategorie>(this.detach_MN_Auftrag_Kategorie));
-			this._Auftrag = default(EntityRef<Auftrag>);
-			this._Maschine = default(EntityRef<Maschine>);
-			this._Verfahren = default(EntityRef<Verfahren>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Id
-		{
-			get
-			{
-				return this._Id;
-			}
-			set
-			{
-				if ((this._Id != value))
-				{
-					this.OnIdChanging(value);
-					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id_Auftrag", DbType="Int")]
-		public System.Nullable<int> Id_Auftrag
-		{
-			get
-			{
-				return this._Id_Auftrag;
-			}
-			set
-			{
-				if ((this._Id_Auftrag != value))
-				{
-					if (this._Auftrag.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnId_AuftragChanging(value);
-					this.SendPropertyChanging();
-					this._Id_Auftrag = value;
-					this.SendPropertyChanged("Id_Auftrag");
-					this.OnId_AuftragChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id_Maschine", DbType="Int")]
-		public System.Nullable<int> Id_Maschine
-		{
-			get
-			{
-				return this._Id_Maschine;
-			}
-			set
-			{
-				if ((this._Id_Maschine != value))
-				{
-					if (this._Maschine.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnId_MaschineChanging(value);
-					this.SendPropertyChanging();
-					this._Id_Maschine = value;
-					this.SendPropertyChanged("Id_Maschine");
-					this.OnId_MaschineChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id_Verfahren", DbType="Int")]
-		public System.Nullable<int> Id_Verfahren
-		{
-			get
-			{
-				return this._Id_Verfahren;
-			}
-			set
-			{
-				if ((this._Id_Verfahren != value))
-				{
-					if (this._Verfahren.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnId_VerfahrenChanging(value);
-					this.SendPropertyChanging();
-					this._Id_Verfahren = value;
-					this.SendPropertyChanged("Id_Verfahren");
-					this.OnId_VerfahrenChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Schritt", DbType="Int")]
-		public System.Nullable<int> Schritt
-		{
-			get
-			{
-				return this._Schritt;
-			}
-			set
-			{
-				if ((this._Schritt != value))
-				{
-					this.OnSchrittChanging(value);
-					this.SendPropertyChanging();
-					this._Schritt = value;
-					this.SendPropertyChanged("Schritt");
-					this.OnSchrittChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Auftrags_Zuordnung_MN_Auftrag_Kategorie", Storage="_MN_Auftrag_Kategorie", ThisKey="Id", OtherKey="Id_Auftrags_Zuorndung")]
-		public EntitySet<MN_Auftrag_Kategorie> MN_Auftrag_Kategorie
-		{
-			get
-			{
-				return this._MN_Auftrag_Kategorie;
-			}
-			set
-			{
-				this._MN_Auftrag_Kategorie.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Auftrag_Auftrags_Zuordnung", Storage="_Auftrag", ThisKey="Id_Auftrag", OtherKey="Id", IsForeignKey=true)]
-		public Auftrag Auftrag
-		{
-			get
-			{
-				return this._Auftrag.Entity;
-			}
-			set
-			{
-				Auftrag previousValue = this._Auftrag.Entity;
-				if (((previousValue != value) 
-							|| (this._Auftrag.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Auftrag.Entity = null;
-						previousValue.Auftrags_Zuordnung.Remove(this);
-					}
-					this._Auftrag.Entity = value;
-					if ((value != null))
-					{
-						value.Auftrags_Zuordnung.Add(this);
-						this._Id_Auftrag = value.Id;
-					}
-					else
-					{
-						this._Id_Auftrag = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("Auftrag");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Maschine_Auftrags_Zuordnung", Storage="_Maschine", ThisKey="Id_Maschine", OtherKey="Id", IsForeignKey=true)]
-		public Maschine Maschine
-		{
-			get
-			{
-				return this._Maschine.Entity;
-			}
-			set
-			{
-				Maschine previousValue = this._Maschine.Entity;
-				if (((previousValue != value) 
-							|| (this._Maschine.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Maschine.Entity = null;
-						previousValue.Auftrags_Zuordnung.Remove(this);
-					}
-					this._Maschine.Entity = value;
-					if ((value != null))
-					{
-						value.Auftrags_Zuordnung.Add(this);
-						this._Id_Maschine = value.Id;
-					}
-					else
-					{
-						this._Id_Maschine = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("Maschine");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Verfahren_Auftrags_Zuordnung", Storage="_Verfahren", ThisKey="Id_Verfahren", OtherKey="Id", IsForeignKey=true)]
-		public Verfahren Verfahren
-		{
-			get
-			{
-				return this._Verfahren.Entity;
-			}
-			set
-			{
-				Verfahren previousValue = this._Verfahren.Entity;
-				if (((previousValue != value) 
-							|| (this._Verfahren.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Verfahren.Entity = null;
-						previousValue.Auftrags_Zuordnung.Remove(this);
-					}
-					this._Verfahren.Entity = value;
-					if ((value != null))
-					{
-						value.Auftrags_Zuordnung.Add(this);
-						this._Id_Verfahren = value.Id;
-					}
-					else
-					{
-						this._Id_Verfahren = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("Verfahren");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_MN_Auftrag_Kategorie(MN_Auftrag_Kategorie entity)
-		{
-			this.SendPropertyChanging();
-			entity.Auftrags_Zuordnung = this;
-		}
-		
-		private void detach_MN_Auftrag_Kategorie(MN_Auftrag_Kategorie entity)
-		{
-			this.SendPropertyChanging();
-			entity.Auftrags_Zuordnung = null;
 		}
 	}
 	
@@ -1492,9 +247,9 @@ namespace HOIA
 		
 		private System.Nullable<int> _Id_Kategorie;
 		
-		private EntityRef<Auftrags_Zuordnung> _Auftrags_Zuordnung;
-		
 		private EntityRef<Kategorie> _Kategorie;
+		
+		private EntityRef<Auftrags_Zuordnung> _Auftrags_Zuordnung;
 		
     #region Definitionen der Erweiterungsmethoden
     partial void OnLoaded();
@@ -1510,8 +265,8 @@ namespace HOIA
 		
 		public MN_Auftrag_Kategorie()
 		{
-			this._Auftrags_Zuordnung = default(EntityRef<Auftrags_Zuordnung>);
 			this._Kategorie = default(EntityRef<Kategorie>);
+			this._Auftrags_Zuordnung = default(EntityRef<Auftrags_Zuordnung>);
 			OnCreated();
 		}
 		
@@ -1583,40 +338,6 @@ namespace HOIA
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Auftrags_Zuordnung_MN_Auftrag_Kategorie", Storage="_Auftrags_Zuordnung", ThisKey="Id_Auftrags_Zuorndung", OtherKey="Id", IsForeignKey=true)]
-		public Auftrags_Zuordnung Auftrags_Zuordnung
-		{
-			get
-			{
-				return this._Auftrags_Zuordnung.Entity;
-			}
-			set
-			{
-				Auftrags_Zuordnung previousValue = this._Auftrags_Zuordnung.Entity;
-				if (((previousValue != value) 
-							|| (this._Auftrags_Zuordnung.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Auftrags_Zuordnung.Entity = null;
-						previousValue.MN_Auftrag_Kategorie.Remove(this);
-					}
-					this._Auftrags_Zuordnung.Entity = value;
-					if ((value != null))
-					{
-						value.MN_Auftrag_Kategorie.Add(this);
-						this._Id_Auftrags_Zuorndung = value.Id;
-					}
-					else
-					{
-						this._Id_Auftrags_Zuorndung = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("Auftrags_Zuordnung");
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Kategorie_MN_Auftrag_Kategorie", Storage="_Kategorie", ThisKey="Id_Kategorie", OtherKey="Id", IsForeignKey=true)]
 		public Kategorie Kategorie
 		{
@@ -1647,6 +368,40 @@ namespace HOIA
 						this._Id_Kategorie = default(Nullable<int>);
 					}
 					this.SendPropertyChanged("Kategorie");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Auftrags_Zuordnung_MN_Auftrag_Kategorie", Storage="_Auftrags_Zuordnung", ThisKey="Id_Auftrags_Zuorndung", OtherKey="Id", IsForeignKey=true)]
+		public Auftrags_Zuordnung Auftrags_Zuordnung
+		{
+			get
+			{
+				return this._Auftrags_Zuordnung.Entity;
+			}
+			set
+			{
+				Auftrags_Zuordnung previousValue = this._Auftrags_Zuordnung.Entity;
+				if (((previousValue != value) 
+							|| (this._Auftrags_Zuordnung.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Auftrags_Zuordnung.Entity = null;
+						previousValue.MN_Auftrag_Kategorie.Remove(this);
+					}
+					this._Auftrags_Zuordnung.Entity = value;
+					if ((value != null))
+					{
+						value.MN_Auftrag_Kategorie.Add(this);
+						this._Id_Auftrags_Zuorndung = value.Id;
+					}
+					else
+					{
+						this._Id_Auftrags_Zuorndung = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Auftrags_Zuordnung");
 				}
 			}
 		}
@@ -2401,11 +1156,11 @@ namespace HOIA
 		
 		private System.Nullable<int> _Id_Maschinenart;
 		
-		private EntitySet<Auftrags_Zuordnung> _Auftrags_Zuordnung;
-		
 		private EntitySet<Kategorie> _Kategorie;
 		
 		private EntitySet<Verfahren> _Verfahren;
+		
+		private EntitySet<Auftrags_Zuordnung> _Auftrags_Zuordnung;
 		
 		private EntityRef<Maschinenart> _Maschinenart;
 		
@@ -2427,9 +1182,9 @@ namespace HOIA
 		
 		public Maschine()
 		{
-			this._Auftrags_Zuordnung = new EntitySet<Auftrags_Zuordnung>(new Action<Auftrags_Zuordnung>(this.attach_Auftrags_Zuordnung), new Action<Auftrags_Zuordnung>(this.detach_Auftrags_Zuordnung));
 			this._Kategorie = new EntitySet<Kategorie>(new Action<Kategorie>(this.attach_Kategorie), new Action<Kategorie>(this.detach_Kategorie));
 			this._Verfahren = new EntitySet<Verfahren>(new Action<Verfahren>(this.attach_Verfahren), new Action<Verfahren>(this.detach_Verfahren));
+			this._Auftrags_Zuordnung = new EntitySet<Auftrags_Zuordnung>(new Action<Auftrags_Zuordnung>(this.attach_Auftrags_Zuordnung), new Action<Auftrags_Zuordnung>(this.detach_Auftrags_Zuordnung));
 			this._Maschinenart = default(EntityRef<Maschinenart>);
 			OnCreated();
 		}
@@ -2538,19 +1293,6 @@ namespace HOIA
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Maschine_Auftrags_Zuordnung", Storage="_Auftrags_Zuordnung", ThisKey="Id", OtherKey="Id_Maschine")]
-		public EntitySet<Auftrags_Zuordnung> Auftrags_Zuordnung
-		{
-			get
-			{
-				return this._Auftrags_Zuordnung;
-			}
-			set
-			{
-				this._Auftrags_Zuordnung.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Maschine_Kategorie", Storage="_Kategorie", ThisKey="Id", OtherKey="Id_Maschine")]
 		public EntitySet<Kategorie> Kategorie
 		{
@@ -2574,6 +1316,19 @@ namespace HOIA
 			set
 			{
 				this._Verfahren.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Maschine_Auftrags_Zuordnung", Storage="_Auftrags_Zuordnung", ThisKey="Id", OtherKey="Id_Maschine")]
+		public EntitySet<Auftrags_Zuordnung> Auftrags_Zuordnung
+		{
+			get
+			{
+				return this._Auftrags_Zuordnung;
+			}
+			set
+			{
+				this._Auftrags_Zuordnung.Assign(value);
 			}
 		}
 		
@@ -2631,18 +1386,6 @@ namespace HOIA
 			}
 		}
 		
-		private void attach_Auftrags_Zuordnung(Auftrags_Zuordnung entity)
-		{
-			this.SendPropertyChanging();
-			entity.Maschine = this;
-		}
-		
-		private void detach_Auftrags_Zuordnung(Auftrags_Zuordnung entity)
-		{
-			this.SendPropertyChanging();
-			entity.Maschine = null;
-		}
-		
 		private void attach_Kategorie(Kategorie entity)
 		{
 			this.SendPropertyChanging();
@@ -2662,6 +1405,18 @@ namespace HOIA
 		}
 		
 		private void detach_Verfahren(Verfahren entity)
+		{
+			this.SendPropertyChanging();
+			entity.Maschine = null;
+		}
+		
+		private void attach_Auftrags_Zuordnung(Auftrags_Zuordnung entity)
+		{
+			this.SendPropertyChanging();
+			entity.Maschine = this;
+		}
+		
+		private void detach_Auftrags_Zuordnung(Auftrags_Zuordnung entity)
 		{
 			this.SendPropertyChanging();
 			entity.Maschine = null;
@@ -2981,8 +1736,10 @@ namespace HOIA
 				}
 			}
 		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
+
+        public int Display_Position { get; internal set; }
+
+        public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
 		
@@ -3263,9 +2020,9 @@ namespace HOIA
 		
 		private System.Nullable<int> _Id_Maschine;
 		
-		private EntitySet<Auftrags_Zuordnung> _Auftrags_Zuordnung;
-		
 		private EntitySet<Verfahren_Prozess_Anwendung> _Verfahren_Prozess_Anwendung;
+		
+		private EntitySet<Auftrags_Zuordnung> _Auftrags_Zuordnung;
 		
 		private EntityRef<Maschine> _Maschine;
 		
@@ -3285,8 +2042,8 @@ namespace HOIA
 		
 		public Verfahren()
 		{
-			this._Auftrags_Zuordnung = new EntitySet<Auftrags_Zuordnung>(new Action<Auftrags_Zuordnung>(this.attach_Auftrags_Zuordnung), new Action<Auftrags_Zuordnung>(this.detach_Auftrags_Zuordnung));
 			this._Verfahren_Prozess_Anwendung = new EntitySet<Verfahren_Prozess_Anwendung>(new Action<Verfahren_Prozess_Anwendung>(this.attach_Verfahren_Prozess_Anwendung), new Action<Verfahren_Prozess_Anwendung>(this.detach_Verfahren_Prozess_Anwendung));
+			this._Auftrags_Zuordnung = new EntitySet<Auftrags_Zuordnung>(new Action<Auftrags_Zuordnung>(this.attach_Auftrags_Zuordnung), new Action<Auftrags_Zuordnung>(this.detach_Auftrags_Zuordnung));
 			this._Maschine = default(EntityRef<Maschine>);
 			OnCreated();
 		}
@@ -3375,19 +2132,6 @@ namespace HOIA
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Verfahren_Auftrags_Zuordnung", Storage="_Auftrags_Zuordnung", ThisKey="Id", OtherKey="Id_Verfahren")]
-		public EntitySet<Auftrags_Zuordnung> Auftrags_Zuordnung
-		{
-			get
-			{
-				return this._Auftrags_Zuordnung;
-			}
-			set
-			{
-				this._Auftrags_Zuordnung.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Verfahren_Verfahren_Prozess_Anwendung", Storage="_Verfahren_Prozess_Anwendung", ThisKey="Id", OtherKey="Id_Verfahren")]
 		public EntitySet<Verfahren_Prozess_Anwendung> Verfahren_Prozess_Anwendung
 		{
@@ -3398,6 +2142,19 @@ namespace HOIA
 			set
 			{
 				this._Verfahren_Prozess_Anwendung.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Verfahren_Auftrags_Zuordnung", Storage="_Auftrags_Zuordnung", ThisKey="Id", OtherKey="Id_Verfahren")]
+		public EntitySet<Auftrags_Zuordnung> Auftrags_Zuordnung
+		{
+			get
+			{
+				return this._Auftrags_Zuordnung;
+			}
+			set
+			{
+				this._Auftrags_Zuordnung.Assign(value);
 			}
 		}
 		
@@ -3455,18 +2212,6 @@ namespace HOIA
 			}
 		}
 		
-		private void attach_Auftrags_Zuordnung(Auftrags_Zuordnung entity)
-		{
-			this.SendPropertyChanging();
-			entity.Verfahren = this;
-		}
-		
-		private void detach_Auftrags_Zuordnung(Auftrags_Zuordnung entity)
-		{
-			this.SendPropertyChanging();
-			entity.Verfahren = null;
-		}
-		
 		private void attach_Verfahren_Prozess_Anwendung(Verfahren_Prozess_Anwendung entity)
 		{
 			this.SendPropertyChanging();
@@ -3474,6 +2219,18 @@ namespace HOIA
 		}
 		
 		private void detach_Verfahren_Prozess_Anwendung(Verfahren_Prozess_Anwendung entity)
+		{
+			this.SendPropertyChanging();
+			entity.Verfahren = null;
+		}
+		
+		private void attach_Auftrags_Zuordnung(Auftrags_Zuordnung entity)
+		{
+			this.SendPropertyChanging();
+			entity.Verfahren = this;
+		}
+		
+		private void detach_Auftrags_Zuordnung(Auftrags_Zuordnung entity)
 		{
 			this.SendPropertyChanging();
 			entity.Verfahren = null;
@@ -4148,6 +2905,1418 @@ namespace HOIA
 					this._Gesamtgewicht = value;
 				}
 			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.View_Verwaltung_Aufträge_Suche")]
+	public partial class View_Verwaltung_Aufträge_Suche
+	{
+		
+		private System.Nullable<int> _Id;
+		
+		private string _ODL;
+		
+		private string _Status;
+		
+		private System.Nullable<int> _Schritt;
+		
+		private string _Verfahren;
+		
+		private string _Maschine;
+		
+		private string _Kategorie;
+		
+		public View_Verwaltung_Aufträge_Suche()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", DbType="Int")]
+		public System.Nullable<int> Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this._Id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ODL", DbType="VarChar(10)")]
+		public string ODL
+		{
+			get
+			{
+				return this._ODL;
+			}
+			set
+			{
+				if ((this._ODL != value))
+				{
+					this._ODL = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Status", DbType="VarChar(20)")]
+		public string Status
+		{
+			get
+			{
+				return this._Status;
+			}
+			set
+			{
+				if ((this._Status != value))
+				{
+					this._Status = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Schritt", DbType="Int")]
+		public System.Nullable<int> Schritt
+		{
+			get
+			{
+				return this._Schritt;
+			}
+			set
+			{
+				if ((this._Schritt != value))
+				{
+					this._Schritt = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Verfahren", DbType="VarChar(50)")]
+		public string Verfahren
+		{
+			get
+			{
+				return this._Verfahren;
+			}
+			set
+			{
+				if ((this._Verfahren != value))
+				{
+					this._Verfahren = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Maschine", DbType="VarChar(50)")]
+		public string Maschine
+		{
+			get
+			{
+				return this._Maschine;
+			}
+			set
+			{
+				if ((this._Maschine != value))
+				{
+					this._Maschine = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Kategorie", DbType="VarChar(50)")]
+		public string Kategorie
+		{
+			get
+			{
+				return this._Kategorie;
+			}
+			set
+			{
+				if ((this._Kategorie != value))
+				{
+					this._Kategorie = value;
+				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Auftrag")]
+	public partial class Auftrag : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private string _AuftragsNr;
+		
+		private string _ODL;
+		
+		private string _Art;
+		
+		private string _Verarbeitung;
+		
+		private string _Lagerort;
+		
+		private string _Position;
+		
+		private string _Status;
+		
+		private System.Nullable<double> _Abmessung1;
+		
+		private System.Nullable<double> _Abmessung2;
+		
+		private System.Nullable<double> _FLänge;
+		
+		private System.Nullable<double> _WLänge;
+		
+		private string _Charge;
+		
+		private string _Stahlsorte;
+		
+		private string _Walzung;
+		
+		private System.Nullable<System.DateTime> _Auftragsdatum;
+		
+		private System.Nullable<System.DateTime> _Liefertermin;
+		
+		private string _TechnischeAnmerkungen;
+		
+		private string _Bemerkungen;
+		
+		private System.Nullable<bool> _Wichtig;
+		
+		private System.Nullable<int> _Id_Kunde;
+		
+		private System.Nullable<int> _Id_Bestimmungsort;
+		
+		private System.Nullable<double> _C;
+		
+		private System.Nullable<double> _Mn;
+		
+		private System.Nullable<double> _Si;
+		
+		private System.Nullable<double> _P;
+		
+		private System.Nullable<double> _S;
+		
+		private System.Nullable<double> _Cr;
+		
+		private System.Nullable<double> _Ni;
+		
+		private System.Nullable<double> _Mo;
+		
+		private EntitySet<Material> _Material;
+		
+		private EntitySet<Auftrags_Zuordnung> _Auftrags_Zuordnung;
+		
+		private EntityRef<Bestimmungsort> _Bestimmungsort;
+		
+		private EntityRef<Kunde> _Kunde;
+		
+    #region Definitionen der Erweiterungsmethoden
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnAuftragsNrChanging(string value);
+    partial void OnAuftragsNrChanged();
+    partial void OnODLChanging(string value);
+    partial void OnODLChanged();
+    partial void OnArtChanging(string value);
+    partial void OnArtChanged();
+    partial void OnVerarbeitungChanging(string value);
+    partial void OnVerarbeitungChanged();
+    partial void OnLagerortChanging(string value);
+    partial void OnLagerortChanged();
+    partial void OnPositionChanging(string value);
+    partial void OnPositionChanged();
+    partial void OnStatusChanging(string value);
+    partial void OnStatusChanged();
+    partial void OnAbmessung1Changing(System.Nullable<double> value);
+    partial void OnAbmessung1Changed();
+    partial void OnAbmessung2Changing(System.Nullable<double> value);
+    partial void OnAbmessung2Changed();
+    partial void OnFLängeChanging(System.Nullable<double> value);
+    partial void OnFLängeChanged();
+    partial void OnWLängeChanging(System.Nullable<double> value);
+    partial void OnWLängeChanged();
+    partial void OnChargeChanging(string value);
+    partial void OnChargeChanged();
+    partial void OnStahlsorteChanging(string value);
+    partial void OnStahlsorteChanged();
+    partial void OnWalzungChanging(string value);
+    partial void OnWalzungChanged();
+    partial void OnAuftragsdatumChanging(System.Nullable<System.DateTime> value);
+    partial void OnAuftragsdatumChanged();
+    partial void OnLieferterminChanging(System.Nullable<System.DateTime> value);
+    partial void OnLieferterminChanged();
+    partial void OnTechnischeAnmerkungenChanging(string value);
+    partial void OnTechnischeAnmerkungenChanged();
+    partial void OnBemerkungenChanging(string value);
+    partial void OnBemerkungenChanged();
+    partial void OnWichtigChanging(System.Nullable<bool> value);
+    partial void OnWichtigChanged();
+    partial void OnId_KundeChanging(System.Nullable<int> value);
+    partial void OnId_KundeChanged();
+    partial void OnId_BestimmungsortChanging(System.Nullable<int> value);
+    partial void OnId_BestimmungsortChanged();
+    partial void OnCChanging(System.Nullable<double> value);
+    partial void OnCChanged();
+    partial void OnMnChanging(System.Nullable<double> value);
+    partial void OnMnChanged();
+    partial void OnSiChanging(System.Nullable<double> value);
+    partial void OnSiChanged();
+    partial void OnPChanging(System.Nullable<double> value);
+    partial void OnPChanged();
+    partial void OnSChanging(System.Nullable<double> value);
+    partial void OnSChanged();
+    partial void OnCrChanging(System.Nullable<double> value);
+    partial void OnCrChanged();
+    partial void OnNiChanging(System.Nullable<double> value);
+    partial void OnNiChanged();
+    partial void OnMoChanging(System.Nullable<double> value);
+    partial void OnMoChanged();
+    #endregion
+		
+		public Auftrag()
+		{
+			this._Material = new EntitySet<Material>(new Action<Material>(this.attach_Material), new Action<Material>(this.detach_Material));
+			this._Auftrags_Zuordnung = new EntitySet<Auftrags_Zuordnung>(new Action<Auftrags_Zuordnung>(this.attach_Auftrags_Zuordnung), new Action<Auftrags_Zuordnung>(this.detach_Auftrags_Zuordnung));
+			this._Bestimmungsort = default(EntityRef<Bestimmungsort>);
+			this._Kunde = default(EntityRef<Kunde>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AuftragsNr", DbType="VarChar(10)")]
+		public string AuftragsNr
+		{
+			get
+			{
+				return this._AuftragsNr;
+			}
+			set
+			{
+				if ((this._AuftragsNr != value))
+				{
+					this.OnAuftragsNrChanging(value);
+					this.SendPropertyChanging();
+					this._AuftragsNr = value;
+					this.SendPropertyChanged("AuftragsNr");
+					this.OnAuftragsNrChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ODL", DbType="VarChar(10)")]
+		public string ODL
+		{
+			get
+			{
+				return this._ODL;
+			}
+			set
+			{
+				if ((this._ODL != value))
+				{
+					this.OnODLChanging(value);
+					this.SendPropertyChanging();
+					this._ODL = value;
+					this.SendPropertyChanged("ODL");
+					this.OnODLChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Art", DbType="VarChar(50)")]
+		public string Art
+		{
+			get
+			{
+				return this._Art;
+			}
+			set
+			{
+				if ((this._Art != value))
+				{
+					this.OnArtChanging(value);
+					this.SendPropertyChanging();
+					this._Art = value;
+					this.SendPropertyChanged("Art");
+					this.OnArtChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Verarbeitung", DbType="VarChar(50)")]
+		public string Verarbeitung
+		{
+			get
+			{
+				return this._Verarbeitung;
+			}
+			set
+			{
+				if ((this._Verarbeitung != value))
+				{
+					this.OnVerarbeitungChanging(value);
+					this.SendPropertyChanging();
+					this._Verarbeitung = value;
+					this.SendPropertyChanged("Verarbeitung");
+					this.OnVerarbeitungChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Lagerort", DbType="VarChar(20)")]
+		public string Lagerort
+		{
+			get
+			{
+				return this._Lagerort;
+			}
+			set
+			{
+				if ((this._Lagerort != value))
+				{
+					this.OnLagerortChanging(value);
+					this.SendPropertyChanging();
+					this._Lagerort = value;
+					this.SendPropertyChanged("Lagerort");
+					this.OnLagerortChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Position", DbType="VarChar(5)")]
+		public string Position
+		{
+			get
+			{
+				return this._Position;
+			}
+			set
+			{
+				if ((this._Position != value))
+				{
+					this.OnPositionChanging(value);
+					this.SendPropertyChanging();
+					this._Position = value;
+					this.SendPropertyChanged("Position");
+					this.OnPositionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Status", DbType="VarChar(20)")]
+		public string Status
+		{
+			get
+			{
+				return this._Status;
+			}
+			set
+			{
+				if ((this._Status != value))
+				{
+					this.OnStatusChanging(value);
+					this.SendPropertyChanging();
+					this._Status = value;
+					this.SendPropertyChanged("Status");
+					this.OnStatusChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Abmessung1", DbType="Float")]
+		public System.Nullable<double> Abmessung1
+		{
+			get
+			{
+				return this._Abmessung1;
+			}
+			set
+			{
+				if ((this._Abmessung1 != value))
+				{
+					this.OnAbmessung1Changing(value);
+					this.SendPropertyChanging();
+					this._Abmessung1 = value;
+					this.SendPropertyChanged("Abmessung1");
+					this.OnAbmessung1Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Abmessung2", DbType="Float")]
+		public System.Nullable<double> Abmessung2
+		{
+			get
+			{
+				return this._Abmessung2;
+			}
+			set
+			{
+				if ((this._Abmessung2 != value))
+				{
+					this.OnAbmessung2Changing(value);
+					this.SendPropertyChanging();
+					this._Abmessung2 = value;
+					this.SendPropertyChanged("Abmessung2");
+					this.OnAbmessung2Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FLänge", DbType="Float")]
+		public System.Nullable<double> FLänge
+		{
+			get
+			{
+				return this._FLänge;
+			}
+			set
+			{
+				if ((this._FLänge != value))
+				{
+					this.OnFLängeChanging(value);
+					this.SendPropertyChanging();
+					this._FLänge = value;
+					this.SendPropertyChanged("FLänge");
+					this.OnFLängeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_WLänge", DbType="Float")]
+		public System.Nullable<double> WLänge
+		{
+			get
+			{
+				return this._WLänge;
+			}
+			set
+			{
+				if ((this._WLänge != value))
+				{
+					this.OnWLängeChanging(value);
+					this.SendPropertyChanging();
+					this._WLänge = value;
+					this.SendPropertyChanged("WLänge");
+					this.OnWLängeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Charge", DbType="VarChar(5)")]
+		public string Charge
+		{
+			get
+			{
+				return this._Charge;
+			}
+			set
+			{
+				if ((this._Charge != value))
+				{
+					this.OnChargeChanging(value);
+					this.SendPropertyChanging();
+					this._Charge = value;
+					this.SendPropertyChanged("Charge");
+					this.OnChargeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Stahlsorte", DbType="VarChar(20)")]
+		public string Stahlsorte
+		{
+			get
+			{
+				return this._Stahlsorte;
+			}
+			set
+			{
+				if ((this._Stahlsorte != value))
+				{
+					this.OnStahlsorteChanging(value);
+					this.SendPropertyChanging();
+					this._Stahlsorte = value;
+					this.SendPropertyChanged("Stahlsorte");
+					this.OnStahlsorteChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Walzung", DbType="VarChar(20)")]
+		public string Walzung
+		{
+			get
+			{
+				return this._Walzung;
+			}
+			set
+			{
+				if ((this._Walzung != value))
+				{
+					this.OnWalzungChanging(value);
+					this.SendPropertyChanging();
+					this._Walzung = value;
+					this.SendPropertyChanged("Walzung");
+					this.OnWalzungChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Auftragsdatum", DbType="Date")]
+		public System.Nullable<System.DateTime> Auftragsdatum
+		{
+			get
+			{
+				return this._Auftragsdatum;
+			}
+			set
+			{
+				if ((this._Auftragsdatum != value))
+				{
+					this.OnAuftragsdatumChanging(value);
+					this.SendPropertyChanging();
+					this._Auftragsdatum = value;
+					this.SendPropertyChanged("Auftragsdatum");
+					this.OnAuftragsdatumChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Liefertermin", DbType="Date")]
+		public System.Nullable<System.DateTime> Liefertermin
+		{
+			get
+			{
+				return this._Liefertermin;
+			}
+			set
+			{
+				if ((this._Liefertermin != value))
+				{
+					this.OnLieferterminChanging(value);
+					this.SendPropertyChanging();
+					this._Liefertermin = value;
+					this.SendPropertyChanged("Liefertermin");
+					this.OnLieferterminChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TechnischeAnmerkungen", DbType="VarChar(MAX)")]
+		public string TechnischeAnmerkungen
+		{
+			get
+			{
+				return this._TechnischeAnmerkungen;
+			}
+			set
+			{
+				if ((this._TechnischeAnmerkungen != value))
+				{
+					this.OnTechnischeAnmerkungenChanging(value);
+					this.SendPropertyChanging();
+					this._TechnischeAnmerkungen = value;
+					this.SendPropertyChanged("TechnischeAnmerkungen");
+					this.OnTechnischeAnmerkungenChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Bemerkungen", DbType="VarChar(MAX)")]
+		public string Bemerkungen
+		{
+			get
+			{
+				return this._Bemerkungen;
+			}
+			set
+			{
+				if ((this._Bemerkungen != value))
+				{
+					this.OnBemerkungenChanging(value);
+					this.SendPropertyChanging();
+					this._Bemerkungen = value;
+					this.SendPropertyChanged("Bemerkungen");
+					this.OnBemerkungenChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Wichtig", DbType="Bit")]
+		public System.Nullable<bool> Wichtig
+		{
+			get
+			{
+				return this._Wichtig;
+			}
+			set
+			{
+				if ((this._Wichtig != value))
+				{
+					this.OnWichtigChanging(value);
+					this.SendPropertyChanging();
+					this._Wichtig = value;
+					this.SendPropertyChanged("Wichtig");
+					this.OnWichtigChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id_Kunde", DbType="Int")]
+		public System.Nullable<int> Id_Kunde
+		{
+			get
+			{
+				return this._Id_Kunde;
+			}
+			set
+			{
+				if ((this._Id_Kunde != value))
+				{
+					if (this._Kunde.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnId_KundeChanging(value);
+					this.SendPropertyChanging();
+					this._Id_Kunde = value;
+					this.SendPropertyChanged("Id_Kunde");
+					this.OnId_KundeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id_Bestimmungsort", DbType="Int")]
+		public System.Nullable<int> Id_Bestimmungsort
+		{
+			get
+			{
+				return this._Id_Bestimmungsort;
+			}
+			set
+			{
+				if ((this._Id_Bestimmungsort != value))
+				{
+					if (this._Bestimmungsort.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnId_BestimmungsortChanging(value);
+					this.SendPropertyChanging();
+					this._Id_Bestimmungsort = value;
+					this.SendPropertyChanged("Id_Bestimmungsort");
+					this.OnId_BestimmungsortChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_C", DbType="Float")]
+		public System.Nullable<double> C
+		{
+			get
+			{
+				return this._C;
+			}
+			set
+			{
+				if ((this._C != value))
+				{
+					this.OnCChanging(value);
+					this.SendPropertyChanging();
+					this._C = value;
+					this.SendPropertyChanged("C");
+					this.OnCChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Mn", DbType="Float")]
+		public System.Nullable<double> Mn
+		{
+			get
+			{
+				return this._Mn;
+			}
+			set
+			{
+				if ((this._Mn != value))
+				{
+					this.OnMnChanging(value);
+					this.SendPropertyChanging();
+					this._Mn = value;
+					this.SendPropertyChanged("Mn");
+					this.OnMnChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Si", DbType="Float")]
+		public System.Nullable<double> Si
+		{
+			get
+			{
+				return this._Si;
+			}
+			set
+			{
+				if ((this._Si != value))
+				{
+					this.OnSiChanging(value);
+					this.SendPropertyChanging();
+					this._Si = value;
+					this.SendPropertyChanged("Si");
+					this.OnSiChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_P", DbType="Float")]
+		public System.Nullable<double> P
+		{
+			get
+			{
+				return this._P;
+			}
+			set
+			{
+				if ((this._P != value))
+				{
+					this.OnPChanging(value);
+					this.SendPropertyChanging();
+					this._P = value;
+					this.SendPropertyChanged("P");
+					this.OnPChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_S", DbType="Float")]
+		public System.Nullable<double> S
+		{
+			get
+			{
+				return this._S;
+			}
+			set
+			{
+				if ((this._S != value))
+				{
+					this.OnSChanging(value);
+					this.SendPropertyChanging();
+					this._S = value;
+					this.SendPropertyChanged("S");
+					this.OnSChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Cr", DbType="Float")]
+		public System.Nullable<double> Cr
+		{
+			get
+			{
+				return this._Cr;
+			}
+			set
+			{
+				if ((this._Cr != value))
+				{
+					this.OnCrChanging(value);
+					this.SendPropertyChanging();
+					this._Cr = value;
+					this.SendPropertyChanged("Cr");
+					this.OnCrChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Ni", DbType="Float")]
+		public System.Nullable<double> Ni
+		{
+			get
+			{
+				return this._Ni;
+			}
+			set
+			{
+				if ((this._Ni != value))
+				{
+					this.OnNiChanging(value);
+					this.SendPropertyChanging();
+					this._Ni = value;
+					this.SendPropertyChanged("Ni");
+					this.OnNiChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Mo", DbType="Float")]
+		public System.Nullable<double> Mo
+		{
+			get
+			{
+				return this._Mo;
+			}
+			set
+			{
+				if ((this._Mo != value))
+				{
+					this.OnMoChanging(value);
+					this.SendPropertyChanging();
+					this._Mo = value;
+					this.SendPropertyChanged("Mo");
+					this.OnMoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Auftrag_Material", Storage="_Material", ThisKey="Id", OtherKey="Id_Auftrag")]
+		public EntitySet<Material> Material
+		{
+			get
+			{
+				return this._Material;
+			}
+			set
+			{
+				this._Material.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Auftrag_Auftrags_Zuordnung", Storage="_Auftrags_Zuordnung", ThisKey="Id", OtherKey="Id_Auftrag")]
+		public EntitySet<Auftrags_Zuordnung> Auftrags_Zuordnung
+		{
+			get
+			{
+				return this._Auftrags_Zuordnung;
+			}
+			set
+			{
+				this._Auftrags_Zuordnung.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Bestimmungsort_Auftrag", Storage="_Bestimmungsort", ThisKey="Id_Bestimmungsort", OtherKey="Id", IsForeignKey=true)]
+		public Bestimmungsort Bestimmungsort
+		{
+			get
+			{
+				return this._Bestimmungsort.Entity;
+			}
+			set
+			{
+				Bestimmungsort previousValue = this._Bestimmungsort.Entity;
+				if (((previousValue != value) 
+							|| (this._Bestimmungsort.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Bestimmungsort.Entity = null;
+						previousValue.Auftrag.Remove(this);
+					}
+					this._Bestimmungsort.Entity = value;
+					if ((value != null))
+					{
+						value.Auftrag.Add(this);
+						this._Id_Bestimmungsort = value.Id;
+					}
+					else
+					{
+						this._Id_Bestimmungsort = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Bestimmungsort");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Kunde_Auftrag", Storage="_Kunde", ThisKey="Id_Kunde", OtherKey="Id", IsForeignKey=true)]
+		public Kunde Kunde
+		{
+			get
+			{
+				return this._Kunde.Entity;
+			}
+			set
+			{
+				Kunde previousValue = this._Kunde.Entity;
+				if (((previousValue != value) 
+							|| (this._Kunde.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Kunde.Entity = null;
+						previousValue.Auftrag.Remove(this);
+					}
+					this._Kunde.Entity = value;
+					if ((value != null))
+					{
+						value.Auftrag.Add(this);
+						this._Id_Kunde = value.Id;
+					}
+					else
+					{
+						this._Id_Kunde = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Kunde");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Material(Material entity)
+		{
+			this.SendPropertyChanging();
+			entity.Auftrag = this;
+		}
+		
+		private void detach_Material(Material entity)
+		{
+			this.SendPropertyChanging();
+			entity.Auftrag = null;
+		}
+		
+		private void attach_Auftrags_Zuordnung(Auftrags_Zuordnung entity)
+		{
+			this.SendPropertyChanging();
+			entity.Auftrag = this;
+		}
+		
+		private void detach_Auftrags_Zuordnung(Auftrags_Zuordnung entity)
+		{
+			this.SendPropertyChanging();
+			entity.Auftrag = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Auftrags_Zuordnung")]
+	public partial class Auftrags_Zuordnung : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private System.Nullable<int> _Id_Auftrag;
+		
+		private System.Nullable<int> _Id_Maschine;
+		
+		private System.Nullable<int> _Id_Verfahren;
+		
+		private System.Nullable<int> _Schritt;
+		
+		private string _Status;
+		
+		private System.Nullable<int> _Temperatur;
+		
+		private System.Nullable<int> _Programm;
+		
+		private EntitySet<MN_Auftrag_Kategorie> _MN_Auftrag_Kategorie;
+		
+		private EntityRef<Auftrag> _Auftrag;
+		
+		private EntityRef<Maschine> _Maschine;
+		
+		private EntityRef<Verfahren> _Verfahren;
+		
+    #region Definitionen der Erweiterungsmethoden
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnId_AuftragChanging(System.Nullable<int> value);
+    partial void OnId_AuftragChanged();
+    partial void OnId_MaschineChanging(System.Nullable<int> value);
+    partial void OnId_MaschineChanged();
+    partial void OnId_VerfahrenChanging(System.Nullable<int> value);
+    partial void OnId_VerfahrenChanged();
+    partial void OnSchrittChanging(System.Nullable<int> value);
+    partial void OnSchrittChanged();
+    partial void OnStatusChanging(string value);
+    partial void OnStatusChanged();
+    partial void OnTemperaturChanging(System.Nullable<int> value);
+    partial void OnTemperaturChanged();
+    partial void OnProgrammChanging(System.Nullable<int> value);
+    partial void OnProgrammChanged();
+    #endregion
+		
+		public Auftrags_Zuordnung()
+		{
+			this._MN_Auftrag_Kategorie = new EntitySet<MN_Auftrag_Kategorie>(new Action<MN_Auftrag_Kategorie>(this.attach_MN_Auftrag_Kategorie), new Action<MN_Auftrag_Kategorie>(this.detach_MN_Auftrag_Kategorie));
+			this._Auftrag = default(EntityRef<Auftrag>);
+			this._Maschine = default(EntityRef<Maschine>);
+			this._Verfahren = default(EntityRef<Verfahren>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id_Auftrag", DbType="Int")]
+		public System.Nullable<int> Id_Auftrag
+		{
+			get
+			{
+				return this._Id_Auftrag;
+			}
+			set
+			{
+				if ((this._Id_Auftrag != value))
+				{
+					if (this._Auftrag.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnId_AuftragChanging(value);
+					this.SendPropertyChanging();
+					this._Id_Auftrag = value;
+					this.SendPropertyChanged("Id_Auftrag");
+					this.OnId_AuftragChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id_Maschine", DbType="Int")]
+		public System.Nullable<int> Id_Maschine
+		{
+			get
+			{
+				return this._Id_Maschine;
+			}
+			set
+			{
+				if ((this._Id_Maschine != value))
+				{
+					if (this._Maschine.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnId_MaschineChanging(value);
+					this.SendPropertyChanging();
+					this._Id_Maschine = value;
+					this.SendPropertyChanged("Id_Maschine");
+					this.OnId_MaschineChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id_Verfahren", DbType="Int")]
+		public System.Nullable<int> Id_Verfahren
+		{
+			get
+			{
+				return this._Id_Verfahren;
+			}
+			set
+			{
+				if ((this._Id_Verfahren != value))
+				{
+					if (this._Verfahren.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnId_VerfahrenChanging(value);
+					this.SendPropertyChanging();
+					this._Id_Verfahren = value;
+					this.SendPropertyChanged("Id_Verfahren");
+					this.OnId_VerfahrenChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Schritt", DbType="Int")]
+		public System.Nullable<int> Schritt
+		{
+			get
+			{
+				return this._Schritt;
+			}
+			set
+			{
+				if ((this._Schritt != value))
+				{
+					this.OnSchrittChanging(value);
+					this.SendPropertyChanging();
+					this._Schritt = value;
+					this.SendPropertyChanged("Schritt");
+					this.OnSchrittChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Status", DbType="VarChar(50)")]
+		public string Status
+		{
+			get
+			{
+				return this._Status;
+			}
+			set
+			{
+				if ((this._Status != value))
+				{
+					this.OnStatusChanging(value);
+					this.SendPropertyChanging();
+					this._Status = value;
+					this.SendPropertyChanged("Status");
+					this.OnStatusChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Temperatur", DbType="Int")]
+		public System.Nullable<int> Temperatur
+		{
+			get
+			{
+				return this._Temperatur;
+			}
+			set
+			{
+				if ((this._Temperatur != value))
+				{
+					this.OnTemperaturChanging(value);
+					this.SendPropertyChanging();
+					this._Temperatur = value;
+					this.SendPropertyChanged("Temperatur");
+					this.OnTemperaturChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Programm", DbType="Int")]
+		public System.Nullable<int> Programm
+		{
+			get
+			{
+				return this._Programm;
+			}
+			set
+			{
+				if ((this._Programm != value))
+				{
+					this.OnProgrammChanging(value);
+					this.SendPropertyChanging();
+					this._Programm = value;
+					this.SendPropertyChanged("Programm");
+					this.OnProgrammChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Auftrags_Zuordnung_MN_Auftrag_Kategorie", Storage="_MN_Auftrag_Kategorie", ThisKey="Id", OtherKey="Id_Auftrags_Zuorndung")]
+		public EntitySet<MN_Auftrag_Kategorie> MN_Auftrag_Kategorie
+		{
+			get
+			{
+				return this._MN_Auftrag_Kategorie;
+			}
+			set
+			{
+				this._MN_Auftrag_Kategorie.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Auftrag_Auftrags_Zuordnung", Storage="_Auftrag", ThisKey="Id_Auftrag", OtherKey="Id", IsForeignKey=true)]
+		public Auftrag Auftrag
+		{
+			get
+			{
+				return this._Auftrag.Entity;
+			}
+			set
+			{
+				Auftrag previousValue = this._Auftrag.Entity;
+				if (((previousValue != value) 
+							|| (this._Auftrag.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Auftrag.Entity = null;
+						previousValue.Auftrags_Zuordnung.Remove(this);
+					}
+					this._Auftrag.Entity = value;
+					if ((value != null))
+					{
+						value.Auftrags_Zuordnung.Add(this);
+						this._Id_Auftrag = value.Id;
+					}
+					else
+					{
+						this._Id_Auftrag = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Auftrag");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Maschine_Auftrags_Zuordnung", Storage="_Maschine", ThisKey="Id_Maschine", OtherKey="Id", IsForeignKey=true)]
+		public Maschine Maschine
+		{
+			get
+			{
+				return this._Maschine.Entity;
+			}
+			set
+			{
+				Maschine previousValue = this._Maschine.Entity;
+				if (((previousValue != value) 
+							|| (this._Maschine.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Maschine.Entity = null;
+						previousValue.Auftrags_Zuordnung.Remove(this);
+					}
+					this._Maschine.Entity = value;
+					if ((value != null))
+					{
+						value.Auftrags_Zuordnung.Add(this);
+						this._Id_Maschine = value.Id;
+					}
+					else
+					{
+						this._Id_Maschine = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Maschine");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Verfahren_Auftrags_Zuordnung", Storage="_Verfahren", ThisKey="Id_Verfahren", OtherKey="Id", IsForeignKey=true)]
+		public Verfahren Verfahren
+		{
+			get
+			{
+				return this._Verfahren.Entity;
+			}
+			set
+			{
+				Verfahren previousValue = this._Verfahren.Entity;
+				if (((previousValue != value) 
+							|| (this._Verfahren.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Verfahren.Entity = null;
+						previousValue.Auftrags_Zuordnung.Remove(this);
+					}
+					this._Verfahren.Entity = value;
+					if ((value != null))
+					{
+						value.Auftrags_Zuordnung.Add(this);
+						this._Id_Verfahren = value.Id;
+					}
+					else
+					{
+						this._Id_Verfahren = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Verfahren");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_MN_Auftrag_Kategorie(MN_Auftrag_Kategorie entity)
+		{
+			this.SendPropertyChanging();
+			entity.Auftrags_Zuordnung = this;
+		}
+		
+		private void detach_MN_Auftrag_Kategorie(MN_Auftrag_Kategorie entity)
+		{
+			this.SendPropertyChanging();
+			entity.Auftrags_Zuordnung = null;
 		}
 	}
 }

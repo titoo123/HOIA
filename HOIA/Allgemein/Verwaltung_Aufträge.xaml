@@ -47,20 +47,46 @@
                         <ComboBox x:Name="comboBox_Maschine_Suche" Grid.Row="3" SelectionChanged="comboBox_Maschine_Suche_SelectionChanged">
                             <ComboBoxItem Content="Maschine" IsSelected="True"></ComboBoxItem>
                         </ComboBox>
-                        <ListBox x:Name="listBox_Aufträge" PreviewMouseUp="listBox_Aufträge_PreviewMouseUp" Grid.Row="4" />
+                        <ListBox x:Name="listBox_Aufträge" PreviewMouseUp="listBox_Aufträge_PreviewMouseUp" Grid.Row="4"  />
                         <Label x:Name="label_Statistik" Grid.Column="0" Grid.Row="5"></Label>
-                        <!--<ListBox x:Name="listBox_Aufträge_Werte" Grid.Row="5" IsEnabled="False" >
-                            <ListBoxItem Content="Total: .../..."/>
-                            <ListBoxItem Content="QT: .../..."/>
-                            <ListBoxItem Content="N: .../..."/>
-                        </ListBox>-->
+                        <ListBox x:Name="listBox_Aufträge_Werte" Grid.Row="5" IsEnabled="False" >
+                            <ListBoxItem x:Name="ListBoxItem_TotalWeight" Content="Total: 0 Kg"/>
+                        </ListBox>
                     </Grid>
                 </GroupBox>
                 
                 <Grid Grid.Column="1">
 
                 </Grid>
-                <GroupBox Grid.Column="2" Header="Einstellungen">
+                <GroupBox Grid.Column="2" Header="Prozess-Schritt">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*"></RowDefinition>
+                            <RowDefinition Height="1*"></RowDefinition>
+                            <RowDefinition Height="1*"></RowDefinition>
+                            <!--<RowDefinition Height="7*"></RowDefinition>-->
+                            <RowDefinition Height="1*"></RowDefinition>
+                            <RowDefinition Height="26*"></RowDefinition>
+                        </Grid.RowDefinitions>
+
+                        <Button Name="button_Prozess_Schritt_Neu" Grid.Row="0" Content="Neu" IsEnabled="False" Click="button_Prozess_Schritt_Neu_Click"></Button>
+                        <Button Name="button_Prozess_Schritt_Bearbeiten" Grid.Row="1" Content="Bearbeiten" IsEnabled="False" Click="button_Prozess_Schritt_Bearbeiten_Click"></Button>
+                        <!--<Button Name="button_Prozess_Schritt_Speichern" Grid.Row="2" Content="Speichern" IsEnabled="False" Click="button_Prozess_Schritt_Speichern_Click"></Button>-->
+
+                        <DataGrid Grid.Row="4" x:Name="dataGrid_Prozess_Schritt" SelectionChanged="dataGrid_Prozess_Schritt_SelectionChanged">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Nr" Binding="{Binding Id}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="Maschine" Binding="{Binding Id_Maschine}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="Verfahren" Binding="{Binding Id_Verfahren}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="Schritt" Binding="{Binding Schritt}"></DataGridTextColumn>
+                                <!--<DataGridTextColumn Header="Gewicht" Binding="{Binding Gewicht}" ></DataGridTextColumn>-->
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
+
+
+                </GroupBox>
+                <GroupBox Grid.Column="4" Header="Einstellungen">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="1*"></RowDefinition>
@@ -74,13 +100,13 @@
                             <RowDefinition Height="1*"></RowDefinition>
                             <RowDefinition Height="1*"></RowDefinition>
                         </Grid.RowDefinitions>
-                        <ComboBox x:Name="comboBox_Maschine_Einstellungen" Grid.Row="0" SelectionChanged="comboBox_Maschine_Einstellungen_SelectionChanged">
+                        <ComboBox x:Name="comboBox_Maschine_Einstellungen" Grid.Row="0" SelectionChanged="comboBox_Maschine_Einstellungen_SelectionChanged" IsEnabled="False">
                             <ComboBoxItem Content="Maschine" IsSelected="True" />
                         </ComboBox>
-                        <ComboBox x:Name="comboBox_Verfahren_Einstellungen" Grid.Row="1" SelectionChanged="comboBox_Verfahren_Einstellungen_SelectionChanged">
+                        <ComboBox x:Name="comboBox_Verfahren_Einstellungen" Grid.Row="1" SelectionChanged="comboBox_Verfahren_Einstellungen_SelectionChanged" IsEnabled="False">
                             <ComboBoxItem Content="Verfahren" IsSelected="True"/>
                         </ComboBox>
-                        <ComboBox x:Name="comboBox_Status_Einstellungen" Grid.Row="2" SelectionChanged="comboBox_Status_Einstellungen_SelectionChanged">
+                        <ComboBox x:Name="comboBox_Status_Einstellungen" Grid.Row="2" SelectionChanged="comboBox_Status_Einstellungen_SelectionChanged" IsEnabled="False">
                             <ComboBoxItem Content="Status" IsSelected="True"></ComboBoxItem>
                             <ComboBoxItem Content="Frei" ></ComboBoxItem>
                             <ComboBoxItem Content="Zugeordnet" ></ComboBoxItem>
@@ -107,19 +133,7 @@
                     </Grid.RowDefinitions>
  
                 </Grid>
-                <GroupBox Grid.Column="4" Header="Optionen">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="1*"></RowDefinition>
-                            <RowDefinition Height="8*"></RowDefinition>
-                            <RowDefinition Height="1*"></RowDefinition>
-                            <RowDefinition Height="20*"></RowDefinition>
-                        </Grid.RowDefinitions>
-                   
-                    </Grid>
 
-
-                </GroupBox>
                 
                 <Grid Grid.Column="5">
                     <Grid.RowDefinitions>
@@ -139,12 +153,12 @@
                             <RowDefinition Height="1*"></RowDefinition>
                             <RowDefinition Height="26*"></RowDefinition>
                         </Grid.RowDefinitions>
-                        <ComboBox x:Name="comboBox_Kategorie_Einstellungen" Grid.Row="0" SelectionChanged="comboBox_Kategorie_Einstellungen_SelectionChanged">
+                        <ComboBox x:Name="comboBox_Kategorie_Einstellungen" Grid.Row="0" SelectionChanged="comboBox_Kategorie_Einstellungen_SelectionChanged" IsEnabled="False">
                             <ComboBoxItem Content="Kategorie" IsSelected="True"/>
                         </ComboBox>
-                        <Button x:Name="button_Kategorie_Hinzufügen" Content="Hinzufügen" Grid.Row="1" Click="button_Kategorie_Hinzufügen_Click"></Button>
-                        <Button x:Name="button_Kategorie_Entfernen" Content="Entfernen" Grid.Row="2" Click="button_Kategorie_Entfernen_Click"></Button>
-                        <DataGrid x:Name="dataGrid_Kategorien" Grid.Row="4" SelectionChanged="dataGrid_Kategorien_SelectionChanged"></DataGrid>
+                        <Button x:Name="button_Kategorie_Hinzufügen" Content="Hinzufügen" Grid.Row="1" Click="button_Kategorie_Hinzufügen_Click" IsEnabled="False"></Button>
+                        <Button x:Name="button_Kategorie_Entfernen" Content="Entfernen" Grid.Row="2" Click="button_Kategorie_Entfernen_Click" IsEnabled="False"></Button>
+                        <DataGrid x:Name="dataGrid_Kategorien" Grid.Row="4" SelectionChanged="dataGrid_Kategorien_SelectionChanged" IsEnabled="False"></DataGrid>
                     </Grid>
 
                 </GroupBox>

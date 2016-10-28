@@ -21,7 +21,6 @@ namespace HOIA.Daten
     /// </summary>
     public partial class Materialverteilung_Window : Page
     {
-        //Erweiterungen.StringTuple2D t2D = new Erweiterungen.StringTuple2D();
         List<int> idList = new List<int>();
 
         public Materialverteilung_Window()
@@ -91,6 +90,7 @@ namespace HOIA.Daten
                 button_Löschen.IsEnabled = true;
 
 
+
             }
             else
             {
@@ -100,10 +100,7 @@ namespace HOIA.Daten
             }
             Refresh_DataGrid_zu();
         }
-
-
-
-
+        
         private void Refresh_Datagrid_von()
         {
             //Wenn kein Auftrag gewählt wurde, aber ein Verfahren
@@ -135,7 +132,6 @@ namespace HOIA.Daten
 
         private void Refresh_DataGrid_zu()
         {
-
             DDataContext d = new DDataContext();
 
             try
@@ -156,7 +152,8 @@ namespace HOIA.Daten
             catch (Exception)
             {
             }
-            //Label_Zu_Set_Total_Gewicht();
+
+            label_Set_Weight_By_DataGrid(idList, label_Material_zu_Statistik);
         }
 
 
@@ -232,34 +229,53 @@ namespace HOIA.Daten
 
         private void button_Zurück_Einen_Click(object sender, RoutedEventArgs e)
         {
-            //try
-            //{
-            //    t2D.Remove(Erweiterungen.Helper.GetIntFromDataGrid(0, dataGrid_Material_Zu));
-            //}
-            //catch (Exception)
-            //{
-            //}
-            //comboBox_Auftrag_Do();
-            //comboBox_Verfahren_Zu_Do();
-            //button_Speichern_IsEnabled();
+            DDataContext d = new DDataContext();
+            int i = Convert.ToInt32( Erweiterungen.Helper.GetStringFromDataGrid(0,dataGrid_Material_Zu.SelectedIndex,dataGrid_Material_Zu));
+
+            Material m = (from x in d.Material
+                          where x.Id == i
+                          select x).First();
+            m.Status = Erweiterungen.Helper.STRING_FREI_STATUS;
+
+            try
+            {
+                d.SubmitChanges();
+                idList.Remove(i);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Fehler! Material konnte nicht entfernt werden!");
+            }
+
+            Refresh_Datagrid_von();
+            Refresh_DataGrid_zu();
+
         }
 
         private void button_Zurück_Alle_Click(object sender, RoutedEventArgs e)
         {
-            //for (int i = 0; i < dataGrid_Material_Zu.Items.Count; i++)
-            //{
-            //    try
-            //    {
-            //        t2D.Remove(Erweiterungen.Helper.GetIntFromDataGrid(0, i, dataGrid_Material_Zu));
-            //    }
-            //    catch (Exception)
-            //    {
-            //    }
+            DDataContext d = new DDataContext();
 
-            //}
-            //comboBox_Auftrag_Do();
-            //comboBox_Verfahren_Zu_Do();
-            //button_Speichern_IsEnabled();
+            var m = from x in d.Material
+                    where idList.Contains(x.Id)
+                    select x;
+            foreach (Material item in m)
+            {
+                item.Status = Erweiterungen.Helper.STRING_FREI_STATUS;
+            }
+
+            try
+            {
+                d.SubmitChanges();
+                idList.Clear();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Fehler! Material konnte nicht entfernt werden!");
+            }
+
+            Refresh_Datagrid_von();
+            Refresh_DataGrid_zu();
         }
 
 
@@ -340,71 +356,61 @@ namespace HOIA.Daten
         }
 
 
-        private void Label_Von_Set_Total_Gewicht(string odl)
+        /// <summary>
+        /// Berechnet das Gewicht der in der Liste verbleibenden Materialen
+        /// </summary>
+        /// 
+        private void label_Set_Weight_By_DataGrid(DataGrid dg, Label lb) {
+            try
+            {
+                DDataContext d = new DDataContext();
+
+                int w = 0;
+                for (int i = 0; i < dg.Items.Count; i++)
+                {
+                    int z = Erweiterungen.Helper.GetIntFromDataGrid(0, i, dg);
+                    //Bildet Summe des Gewichts
+                    w = w + Convert.ToInt32((from x in d.Material
+                                             where x.Id == z
+                                             select x.Gewicht).Sum());
+                }
+
+
+                lb.Content = "Total: " + w + " Kg";
+
+        }
+            catch (Exception)
+            {
+                lb.Content = "Total: 0 Kg";
+            }
+}
+        private void label_Set_Weight_By_DataGrid(List<int> dg, Label lb)
         {
             try
             {
                 DDataContext d = new DDataContext();
-                if (odl == string.Empty)
+
+                int w = 0;
+                for (int i = 0; i < dg.Count; i++)
                 {
-                    int w = 0;
-                    for (int i = 0; i < dataGrid_Material_Von.Items.Count; i++)
-                    {
-                        int z = Erweiterungen.Helper.GetIntFromDataGrid(0, i, dataGrid_Material_Von);
-                        //Bildet Summe des Gewichts
-                        w = w + Convert.ToInt32((from x in d.Material
-                                                 where x.Id == z
-                                                 select x.Gewicht).Sum());
-                    }
-
-
-                    label_Material_von_Statistik.Content = "Total: " + w + " Kg";
+                   // int z = Erweiterungen.Helper.GetIntFromDataGrid(0, i, dg);
+                    //Bildet Summe des Gewichts
+                    w = w + Convert.ToInt32((from x in d.Material
+                                             where x.Id == dg[i]
+                                             select x.Gewicht).Sum());
                 }
-                else
-                {
-                    int? a = (from y in d.Auftrag
-                              where y.ODL == odl
-                              select y).First().Id;
 
-                    int? w = (from x in d.Material
-                              where x.Id_Auftrag == a
-                              select x.Gewicht).Sum();
 
-                    label_Material_von_Statistik.Content = "Total: " + w + " Kg";
-                }
+                lb.Content = "Total: " + w + " Kg";
 
             }
             catch (Exception)
             {
-                label_Material_von_Statistik.Content = "Total: 0 Kg";
+                lb.Content = "Total: 0 Kg";
             }
-
         }
-        private void Label_Zu_Set_Total_Gewicht()
-        {
-            //try
-            //{
-            //    DDataContext d = new DDataContext();
-
-            //    int? hsv = (from x in d.Verfahren
-            //                where x.Name == Erweiterungen.Helper.GetComboBoxTextMK2(comboBox_Verfahren_Zu)
-            //                select x).First().Id;
-
-            //    int w = 0;
-            //    foreach (int item in t2D.GetPartners( Convert.ToInt32(hsv)) )
-            //    {
-            //        w = w + Convert.ToInt32( (from z in d.Material where z.Id == item select z ).First().Gewicht);
-            //    }
 
 
-
-            //    label_Material_zu_Statistik.Content = "Total: " + w + " Kg";
-            //}
-            //catch (Exception)
-            //{
-            //}
-
-        }
         private void dataGrid_Hinzufügen_Material(string odl)
         {
 
@@ -478,9 +484,11 @@ namespace HOIA.Daten
 
 
                     }
-                    Label_Von_Set_Total_Gewicht((string)comboBox_Auftrag.SelectedItem);
-                    //Label_Zu_Set_Total_Gewicht((string)comboBox_Auftrag.SelectedItem);
+                    
+                    
                 }
+                label_Set_Weight_By_DataGrid(dataGrid_Material_Von, label_Material_von_Statistik);
+
             }
             catch (Exception)
             {
@@ -520,7 +528,7 @@ namespace HOIA.Daten
 
             //Finde Prozess - und lösche den
             var fps = from x in d.Verfahren_Prozess_Anwendung
-                      where x.Name == Erweiterungen.Helper.GetComboBoxTextMK2(comboBox_Gespeicherte_Verfahren)
+                      where x.Name == Erweiterungen.Helper.GetComboBoxTextComplete(comboBox_Gespeicherte_Verfahren)
                       select x;
             d.Verfahren_Prozess_Anwendung.DeleteAllOnSubmit(fps);
 
