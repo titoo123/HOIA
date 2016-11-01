@@ -29,6 +29,7 @@ namespace HOIA.Erweiterungen
         public const string STRING_FERTIG_STATUS = "Fertig";
         public const string STRING_ZUGEORDNET_STATUS = "Zugeordnet";
         public const string STRING_GESPEICHERT_STATUS = "Gespeichert";
+        public const string STRING_EINGEREIHT_STATUS = "Eingereiht";
         public const string STRING_STATUS = "Status";
 
         //public static string FREIEAUFTRÄGE_STRING = "Freie Aufträge";

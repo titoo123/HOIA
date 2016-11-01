@@ -84,18 +84,6 @@
       <Column Name="Name_Verfahren" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
     </Type>
   </Table>
-  <Table Name="dbo.View_Auftrag_AZU_Verfahren" Member="View_Auftrag_AZU_Verfahren">
-    <Type Name="View_Auftrag_AZU_Verfahren">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="ODL" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
-      <Column Name="Id_Auftrag" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Id_Maschine" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Id_Verfahren" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Verfahren_Id_Org" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="Status" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.Verfahren" Member="Verfahren">
     <Type Name="Verfahren">
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -210,6 +198,20 @@
       <Association Name="Auftrag_Auftrags_Zuordnung" Member="Auftrag" ThisKey="Id_Auftrag" OtherKey="Id" Type="Auftrag" IsForeignKey="true" />
       <Association Name="Maschine_Auftrags_Zuordnung" Member="Maschine" ThisKey="Id_Maschine" OtherKey="Id" Type="Maschine" IsForeignKey="true" />
       <Association Name="Verfahren_Auftrags_Zuordnung" Member="Verfahren" ThisKey="Id_Verfahren" OtherKey="Id" Type="Verfahren" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.View_Auftrag_AZU_Verfahren" Member="View_Auftrag_AZU_Verfahren">
+    <Type Name="View_Auftrag_AZU_Verfahren">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ODL" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="Id_Auftrag" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Id_Maschine" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Id_Verfahren" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Verfahren_Id_Org" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Status_Auftrag" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="Status_AZU" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Schritt" Type="System.Int32" DbType="Int" CanBeNull="true" />
     </Type>
   </Table>
 </Database>

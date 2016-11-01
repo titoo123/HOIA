@@ -162,14 +162,6 @@ namespace HOIA
 			}
 		}
 		
-		public System.Data.Linq.Table<View_Auftrag_AZU_Verfahren> View_Auftrag_AZU_Verfahren
-		{
-			get
-			{
-				return this.GetTable<View_Auftrag_AZU_Verfahren>();
-			}
-		}
-		
 		public System.Data.Linq.Table<Verfahren> Verfahren
 		{
 			get
@@ -231,6 +223,14 @@ namespace HOIA
 			get
 			{
 				return this.GetTable<Auftrags_Zuordnung>();
+			}
+		}
+		
+		public System.Data.Linq.Table<View_Auftrag_AZU_Verfahren> View_Auftrag_AZU_Verfahren
+		{
+			get
+			{
+				return this.GetTable<View_Auftrag_AZU_Verfahren>();
 			}
 		}
 	}
@@ -1848,159 +1848,6 @@ namespace HOIA
 				if ((this._Name_Verfahren != value))
 				{
 					this._Name_Verfahren = value;
-				}
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.View_Auftrag_AZU_Verfahren")]
-	public partial class View_Auftrag_AZU_Verfahren
-	{
-		
-		private int _Id;
-		
-		private string _ODL;
-		
-		private System.Nullable<int> _Id_Auftrag;
-		
-		private System.Nullable<int> _Id_Maschine;
-		
-		private System.Nullable<int> _Id_Verfahren;
-		
-		private int _Verfahren_Id_Org;
-		
-		private string _Name;
-		
-		private string _Status;
-		
-		public View_Auftrag_AZU_Verfahren()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", DbType="Int NOT NULL")]
-		public int Id
-		{
-			get
-			{
-				return this._Id;
-			}
-			set
-			{
-				if ((this._Id != value))
-				{
-					this._Id = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ODL", DbType="VarChar(10)")]
-		public string ODL
-		{
-			get
-			{
-				return this._ODL;
-			}
-			set
-			{
-				if ((this._ODL != value))
-				{
-					this._ODL = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id_Auftrag", DbType="Int")]
-		public System.Nullable<int> Id_Auftrag
-		{
-			get
-			{
-				return this._Id_Auftrag;
-			}
-			set
-			{
-				if ((this._Id_Auftrag != value))
-				{
-					this._Id_Auftrag = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id_Maschine", DbType="Int")]
-		public System.Nullable<int> Id_Maschine
-		{
-			get
-			{
-				return this._Id_Maschine;
-			}
-			set
-			{
-				if ((this._Id_Maschine != value))
-				{
-					this._Id_Maschine = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id_Verfahren", DbType="Int")]
-		public System.Nullable<int> Id_Verfahren
-		{
-			get
-			{
-				return this._Id_Verfahren;
-			}
-			set
-			{
-				if ((this._Id_Verfahren != value))
-				{
-					this._Id_Verfahren = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Verfahren_Id_Org", DbType="Int NOT NULL")]
-		public int Verfahren_Id_Org
-		{
-			get
-			{
-				return this._Verfahren_Id_Org;
-			}
-			set
-			{
-				if ((this._Verfahren_Id_Org != value))
-				{
-					this._Verfahren_Id_Org = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="VarChar(50)")]
-		public string Name
-		{
-			get
-			{
-				return this._Name;
-			}
-			set
-			{
-				if ((this._Name != value))
-				{
-					this._Name = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Status", DbType="VarChar(20)")]
-		public string Status
-		{
-			get
-			{
-				return this._Status;
-			}
-			set
-			{
-				if ((this._Status != value))
-				{
-					this._Status = value;
 				}
 			}
 		}
@@ -4317,6 +4164,195 @@ namespace HOIA
 		{
 			this.SendPropertyChanging();
 			entity.Auftrags_Zuordnung = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.View_Auftrag_AZU_Verfahren")]
+	public partial class View_Auftrag_AZU_Verfahren
+	{
+		
+		private int _Id;
+		
+		private string _ODL;
+		
+		private System.Nullable<int> _Id_Auftrag;
+		
+		private System.Nullable<int> _Id_Maschine;
+		
+		private System.Nullable<int> _Id_Verfahren;
+		
+		private int _Verfahren_Id_Org;
+		
+		private string _Name;
+		
+		private string _Status_Auftrag;
+		
+		private string _Status_AZU;
+		
+		private System.Nullable<int> _Schritt;
+		
+		public View_Auftrag_AZU_Verfahren()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", DbType="Int NOT NULL")]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this._Id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ODL", DbType="VarChar(10)")]
+		public string ODL
+		{
+			get
+			{
+				return this._ODL;
+			}
+			set
+			{
+				if ((this._ODL != value))
+				{
+					this._ODL = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id_Auftrag", DbType="Int")]
+		public System.Nullable<int> Id_Auftrag
+		{
+			get
+			{
+				return this._Id_Auftrag;
+			}
+			set
+			{
+				if ((this._Id_Auftrag != value))
+				{
+					this._Id_Auftrag = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id_Maschine", DbType="Int")]
+		public System.Nullable<int> Id_Maschine
+		{
+			get
+			{
+				return this._Id_Maschine;
+			}
+			set
+			{
+				if ((this._Id_Maschine != value))
+				{
+					this._Id_Maschine = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id_Verfahren", DbType="Int")]
+		public System.Nullable<int> Id_Verfahren
+		{
+			get
+			{
+				return this._Id_Verfahren;
+			}
+			set
+			{
+				if ((this._Id_Verfahren != value))
+				{
+					this._Id_Verfahren = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Verfahren_Id_Org", DbType="Int NOT NULL")]
+		public int Verfahren_Id_Org
+		{
+			get
+			{
+				return this._Verfahren_Id_Org;
+			}
+			set
+			{
+				if ((this._Verfahren_Id_Org != value))
+				{
+					this._Verfahren_Id_Org = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string Name
+		{
+			get
+			{
+				return this._Name;
+			}
+			set
+			{
+				if ((this._Name != value))
+				{
+					this._Name = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Status_Auftrag", DbType="VarChar(20)")]
+		public string Status_Auftrag
+		{
+			get
+			{
+				return this._Status_Auftrag;
+			}
+			set
+			{
+				if ((this._Status_Auftrag != value))
+				{
+					this._Status_Auftrag = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Status_AZU", DbType="VarChar(50)")]
+		public string Status_AZU
+		{
+			get
+			{
+				return this._Status_AZU;
+			}
+			set
+			{
+				if ((this._Status_AZU != value))
+				{
+					this._Status_AZU = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Schritt", DbType="Int")]
+		public System.Nullable<int> Schritt
+		{
+			get
+			{
+				return this._Schritt;
+			}
+			set
+			{
+				if ((this._Schritt != value))
+				{
+					this._Schritt = value;
+				}
+			}
 		}
 	}
 }

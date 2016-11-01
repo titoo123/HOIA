@@ -317,7 +317,7 @@ namespace HOIA.Daten
             DDataContext d = new DDataContext();
 
             var amv = from x in d.View_Auftrag_AZU_Verfahren
-                      where x.Status == Erweiterungen.Helper.STRING_ZUGEORDNET_STATUS && x.Name == Erweiterungen.Helper.GetComboBoxTextMK2(comboBox_Verfahren_Von)
+                      where x.Status_AZU == Erweiterungen.Helper.STRING_ZUGEORDNET_STATUS && x.Name == Erweiterungen.Helper.GetComboBoxTextMK2(comboBox_Verfahren_Von)
                       select x;
 
             comboBox_Auftrag_Von.Items.Clear();
@@ -422,7 +422,7 @@ namespace HOIA.Daten
                     var aft = from y in d.View_Auftrag_AZU_Verfahren
                               where
 
-                              y.Status == Erweiterungen.Helper.STRING_ZUGEORDNET_STATUS &&
+                              y.Status_AZU == Erweiterungen.Helper.STRING_ZUGEORDNET_STATUS &&
                               y.Name == Erweiterungen.Helper.GetComboBoxTextMK2(comboBox_Verfahren_Von)
 
                               select y;
@@ -440,7 +440,7 @@ namespace HOIA.Daten
                                 where
 
                                 y.ODL == odl &&
-                                y.Status == Erweiterungen.Helper.STRING_ZUGEORDNET_STATUS &&
+                                y.Status_AZU == Erweiterungen.Helper.STRING_ZUGEORDNET_STATUS &&
                                 y.Name == Erweiterungen.Helper.GetComboBoxTextMK2(comboBox_Verfahren_Von)
 
                                 select y).First().Id;

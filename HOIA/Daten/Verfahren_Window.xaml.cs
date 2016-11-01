@@ -21,7 +21,7 @@ namespace HOIA.Daten
     public partial class Verfahren_Window : Window
     {
         bool v_neu;
-        private Verwaltung_Aufträge verwaltung_Aufträge;
+        //private Verwaltung_Aufträge verwaltung_Aufträge;
 
         //public Verfahren_Window(Verwaltung_Aufträge verwaltung_Aufträge)
         //{

@@ -42,7 +42,7 @@ namespace HOIA.Allgemein
 
             button_Kategorie_Entfernen.IsEnabled = false;
             button_Kategorie_Hinzufügen.IsEnabled = false;
-
+            
         }
 
         private void Load_CBI()
@@ -947,14 +947,21 @@ namespace HOIA.Allgemein
 
                 for (int j = 0; j < listBox_Aufträge.Items.Count; j++)
                 {
-                    string s = listBox_Aufträge.Items.GetItemAt(j).ToString();
-                    var tes = from x in d.View_Auftrag_Gesamtgewicht
-                              where x.ODL == s
-                              select x;
-                    if (tes.Count() > 0)
+                    try
                     {
-                        i = i + Convert.ToInt32(tes.First().Gesamtgewicht);
+                        string s = listBox_Aufträge.Items.GetItemAt(j).ToString();
+                        var tes = from x in d.View_Auftrag_Gesamtgewicht
+                                  where x.ODL == s
+                                  select x;
+                        if (tes.Count() > 0)
+                        {
+                            i = i + Convert.ToInt32(tes.First().Gesamtgewicht);
+                        }
                     }
+                    catch (Exception)
+                    {
+                    }
+
 
                 }
 
